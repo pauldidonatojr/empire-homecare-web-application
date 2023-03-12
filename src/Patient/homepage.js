@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import Card from "@mui/material/Card";
 
 const homepage =()=>{
     return(
@@ -24,6 +25,8 @@ const homepage =()=>{
                 
                </div>
 
+               <></>
+
 
 
                <div className='footer'>
@@ -32,7 +35,7 @@ const homepage =()=>{
                         <h6 style={{color:"grey"}}>COMPANY</h6>
                         <h5 style={{color:"white"}}>About Us</h5>
                         <h5 style={{color:"white"}}>Contact Us</h5>
-                        <h5 style={{color:"white"}}>Careers</h5>
+                        <h5 style={{color:"white"}}>Careegggrs</h5>
                         <h5 style={{color:"white"}}>Press</h5>
                     </div>
                     <div className='socials'>
