@@ -5,7 +5,7 @@ import AdminHomePage from './Admin/homepage'
 import CareGiverHomePage from './CareGiver/Homepage'
 import PatientHomePage from './Patient/homepage'
 import VisitDetails from './CareGiver/VisitDetails'
-
+import PatientDetails from "./CareGiver/PatientDetails";
 
 function App() {
   return (
@@ -15,6 +15,8 @@ function App() {
       <Route path="/CareGiverHome" element={<CareGiverHomePage />}></Route>
       <Route path="/PatientHome" element={<PatientHomePage />}></Route>
       <Route path="/visitdetails/:id" element={<VisitDetails />}></Route> 
+      <Route path="/patientdetails/:id" element={<PatientDetails />}></Route> 
+   
     </Routes>
 
   );

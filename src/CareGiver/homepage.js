@@ -291,8 +291,11 @@ function Homepage() {
     return (
       <List style={{ maxHeight: "100%", overflow: "auto" }}>
         {jsonData2.map((item) => (
-          <ListItem key={item.id}
-          className="ListItem">
+          <ListItem className="ListItem"
+          key={item.id}
+          button
+          component={Link}
+          to={`/patientdetails/${item.id}`}>
             <ListItemText  className="ListText" primary={<p style={{ fontSize:  "25px" }}>{item.name}</p> } />
             <ListItemText  className="ListText" primary={<p style={{ fontSize: "20px" }}>{item.address}</p> } />
           </ListItem>
@@ -433,7 +436,7 @@ function Homepage() {
 export default Homepage;
 
 const Wrapper = styled.section`
-height: 100vh;
+height: 100vh;%
 width: 100%;
 
 .CardHolder{

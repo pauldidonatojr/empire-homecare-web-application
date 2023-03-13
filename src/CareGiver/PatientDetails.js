@@ -13,7 +13,8 @@ import { List, ListItem, ListItemText } from "@material-ui/core";
 import { display } from "@mui/system";
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-//
+const Link = require("react-router-dom").Link;
+//HELLO I HAVE BEEN PUSHED
 const jsonData = [
   {
     id: 1,
@@ -21,7 +22,7 @@ const jsonData = [
     address: "Upper tooting Road, SW14SW",
     expectedClockOn: "07:11 AM",
     expectedClockOut: "11:30 AM",
-    date: "03/12/2023",
+    date:"03/12/2023",
   },
   {
     id: 2,
@@ -29,7 +30,7 @@ const jsonData = [
     address: "Upper tooting Road, SW14SW",
     expectedClockOn: "07:11 AM",
     expectedClockOut: "11:30 AM",
-    date: "03/12/2023",
+    date:"03/12/2023",
   },
   {
     id: 3,
@@ -37,7 +38,7 @@ const jsonData = [
     address: "Upper tooting Road, SW14SW",
     expectedClockOn: "07:11 AM",
     expectedClockOut: "11:30 AM",
-    date: "03/12/2023",
+    date:"03/12/2023",
   },
   {
     id: 4,
@@ -45,208 +46,36 @@ const jsonData = [
     address: "Upper tooting Road, SW14SW",
     expectedClockOn: "07:11 AM",
     expectedClockOut: "11:30 AM",
-    date: "03/12/2023",
+    date:"03/12/2023",
   },
 ];
 
-const PlanOfCareList = [
-    {
-      id: 1,
-      name: "Clothes Washing",
-    },
-    {
-      id: 2,
-      name: "Bath",
-    },
-    {
-      id: 3,
-      name: "House Clean",
-    },
-    {
-      id: 4,
-      name: "House Clean",
-    },
-    {
-      id: 5,
-      name: "House Clean",
-    },
-    {
-      id: 6,
-      name: "House Clean",
-    },
-    {
-      id: 7,
-      name: "House Clean",
-    },
-    {
-      id: 8,
-      name: "House Clean",
-    },
-    {
-      id: 9,
-      name: "House Clean",
-    },
-    {
-      id: 10,
-      name: "House Clean",
-    },
+const PatientDetails =()=>{
 
-  ];
-  const OtherTaskList = [
-    {
-      id: 1,
-      name: "Bath",
-    },
-    {
-      id: 2,
-      name: "Hair Care",
-    },
-    {
-      id: 3,
-      name: "Park Visit",
-    },
-    {
-      id: 3,
-      name: "Park Visit",
-    },
-    {
-      id: 3,
-      name: "Park Visit",
-    },
-    {
-      id: 3,
-      name: "Park Visit",
-    },
-  ];
-
-const VisitDetails = () => {
-  const { id } = useParams();
-  const selectedItem = jsonData.find((item) => item.id === parseInt(id));
   const [ViewSelected, setViewSelected] = useState(0);
 
-  if (!selectedItem) {
-    return <div>Item not found</div>;
-  }
+  const PatientInfoPressed = () => {
+    setViewSelected(1);
+  };
 
+  const VisitsPressed = () => {
+    setViewSelected(2);
+  };
   function RenderViews() {
     switch (ViewSelected) {
       case 1:
-        return ClockInOutView();
+        return PatientInfoView();
 
       case 2:
-        return DirectionView();
-
-      case 3:
-        return PatientView();
+        return VisitView();
 
       default:
         break;
     }
   }
 
-  const PatientInfoPressed = () => {
-    setViewSelected(3);
-  };
-  const DirectionPressed = () => {
-    setViewSelected(2);
-  };
-  const ClockInOutPressed = () => {
-    setViewSelected(1);
-  };
 
-  const ClockInOutView = () => {
-    return (
-        <div>
-      <div className="ClockCardHolder">
-        <Card className="clockInCard">
-          <div className="DateHolder">
-            <CalendarMonthIcon className="dateIcon" />
-            <p style={{ color: "white", fontWeight: "bold" }}>
-              {selectedItem.date}
-            </p>
-          </div>
-          <Button className="clockBtn">Clock In</Button>
-          <div className="DateHolder">
-            <QueryBuilderIcon className="ClockIcon" />
-            <p style={{ color: "white", fontWeight: "bold" }}>
-              {selectedItem.expectedClockOn}
-            </p>
-          </div>
-        </Card>
-
-        <Card className="clockOutCard">
-          <div className="DateHolder">
-            <CalendarMonthIcon className="dateIcon" />
-            <p style={{ color: "white", fontWeight: "bold" }}>
-              {selectedItem.date}
-            </p>
-          </div>
-          <Button className="clockBtn">Clock Out</Button>
-          <div className="DateHolder">
-            <QueryBuilderIcon className="ClockIcon" />
-            <p style={{ color: "white", fontWeight: "bold" }}>
-              {selectedItem.expectedClockOut}
-            </p>
-          </div>
-        </Card>
-      </div>
-      <div className="ListHolder">
-
-        <div className="PlanofCareList">
-          <p style ={{color:"grey",fontWeight:"bold",fontSize:"20px",marginLeft:"30%"}}>Plan Of Care</p>
-        <List style={{maxHeight: "75%", overflow: "auto" }}>
-        {PlanOfCareList.map((item) => (
-          <ListItem
-            className="ListItem"
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "20px",fontWeight:"bold",color:"white"}}> {item.id}- {item.name}</p>}
-              className="ListText"
-            />
-            
-          </ListItem>
-        ))}
-      </List>
-        </div>
-        <div className="OtherList">
-          <p style ={{color:"grey",fontSize:"20px",fontWeight:"bold",marginLeft:"30%"}}>Other Task</p>
-        <List style={{ maxHeight: "75%", overflow: "auto" }}>
-        {OtherTaskList.map((item) => (
-          <ListItem
-            className="ListItem"
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "20px",fontWeight:"bold",color:"white" }}> {item.id}- {item.name}</p>}
-              className="ListText"
-            />
-            
-          </ListItem>
-        ))}
-      </List>
-        </div>
-
-      </div>
-      </div>
-    );
-  };
-  const DirectionView = () => {
-    return (
-      <div>
-        <Card className="DirectionCard">
-         <div style={{textAlign:"center"}}>
-         <p style={{fontSize:"15px",color:"grey",fontWeight:"bold"}}>Primary Address</p>
-         </div>
-         <div>
-         <p style={{fontSize:"25px",fontWeight:"bold",color:"white"}}>{" 262A Upper Tooting Road South West London, SW15DR"}</p>
-         </div>
-        </Card>
-        <div className="mapholder">
-            <h2>**Map Here**</h2>
-         </div>
-      </div>
-    );
-  };
-  const PatientView = () => {
+  const PatientInfoView=()=>{
     return (
       <div className="PatientViewHolder" >
 
@@ -285,12 +114,68 @@ const VisitDetails = () => {
          
         </Card>
       </div>
+    )
+  }
+  const VisitView =()=> {
+    return (
+      <List style={{ maxHeight: "100%", overflow: "auto" }}>
+      {jsonData.map((item) => (
+        <ListItem
+          className="ListItem"
+          key={item.id}
+          button
+          component={Link}
+          to={`/visitdetails/${item.id}`}
+        >
+          <ListItemText
+            primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
+            className="ListText"
+          />
+          <ListItemText
+            primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
+            className="ListText"
+          />
+          <ListItemText
+            primary={
+              <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
+            }
+            className="ListText"
+          />
+          <ListItemText
+            primary={
+              <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
+            }
+            className="ListText"
+          />
+        </ListItem>
+      ))}
+    </List>
+    )
+  }
+  const ColumnDiv = () => {
+    return (
+      <div className="columnName">
+        <p className="colume1">Name</p>
+        <p className="colume2">Address</p>
+        <p className="colume3">Clock In</p>
+        <p className="colume4">Clock Out</p>
+      </div>
     );
   };
+  function renderColumeName() {
+    switch (ViewSelected) {
+      case 2:
+        return <ColumnDiv />;
+      default:
+        break;
+    }
+  }
 
-  return (
-    <Wrapper>
-      <div className="Header">
+
+
+    return (
+        <Wrapper>
+             <div className="Header">
         <img className="headerImage" src="./assets/logo.jpg" />
         <button className="button">Page 1</button>
         <button className="button">Page 2</button>
@@ -335,7 +220,7 @@ const VisitDetails = () => {
             <Button
               className="navigationButton"
               onClick={() => {
-                ClockInOutPressed();
+                PatientInfoPressed();
               }}
             >
               <p
@@ -345,21 +230,14 @@ const VisitDetails = () => {
                   fontWeight: "bold",
                 }}
               >
-                Clock In / Out
-              </p>
-            </Button>
-            <Button onClick={DirectionPressed} className="navigationButton">
-              <p
-                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
-              >
-                Direction
-              </p>
-            </Button>
-            <Button onClick={PatientInfoPressed}>
-              <p
-                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
-              >
                 Patient Info
+              </p>
+            </Button>
+            <Button onClick={VisitsPressed} className="navigationButton">
+              <p
+                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
+              >
+                Visits
               </p>
             </Button>
           </div>
@@ -372,7 +250,9 @@ const VisitDetails = () => {
           </div>
         </Card>
 
-        <Card className="dataDisplay">{RenderViews()}</Card>
+        <Card className="dataDisplay">
+        {renderColumeName()}
+          {RenderViews()}</Card>
       </div>
 
       <div className="footer">
@@ -402,19 +282,29 @@ const VisitDetails = () => {
           </h5>
         </div>
       </div>
-    </Wrapper>
-  );
-};
-
-export default VisitDetails;
+        </Wrapper>
+    )
+}
+export default PatientDetails;
 const Wrapper = styled.section`
-height: 100vh%
+height: 100vh;%
 width: 100%;
 
-.CardHolder{
-    display:flex;
-    flex-direction:row;
+//
+.ListItem{
+  margin-top:1%;
+  margin-left:2%;
+  background-color:#0B2B40;
+  color:white;
+  border-radius:10px;
+  width: 95%;
 }
+.ListText{
+  width:300px;
+  text-align:center;
+
+}
+//
 //patient view start
 .PatientViewHolder{
   display:flex;
@@ -449,127 +339,67 @@ width: 100%;
 
 // patient view end
 
-
-.PlanofCareList{
-  height:325px;
-  width:400px;
-  margin-top:3.5%;
-  margin-left:5%;
-  border-radius:15px;
-  padding:1%;
-  background-color:#002333;
-}
-.OtherList{
-  height:325px;
-  width:400px;
-  margin-top:3.5%;
-  margin-left:12.5%;
-  border-radius:15px;
-  padding:1%;
-  background-color:#002333;
-}
-.ListItem{
-  margin-top:1%;
-  color:black;
-  margin-left:20%;
-  width:250px;
-}
-.ListHolder{
+.CardHolder{
   display:flex;
   flex-direction:row;
 }
-
-//direction start
-.mapholder{
-  
-  height: 450px;
-  width: 800px;
-  background-color: white;
-  margin-top: 1%;
-  margin-left: 12.5%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+//Header CSS FILES
+.Header{
+display:flex;
+flex-direction:row;
+margin-left:5.9%;
+margin-top:0.5%;
+width:93%;
+background-color:white;
 }
-.DirectionCard{
-  display:flex;
-  flex-direction:column;
-  background-color:#012E40;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.headerImage{
+width:15%;
+height:5%;
 }
-
-// direction end
-
-
-
-
-//Clock in/Out View
-.ClockCardHolder{
-    display:flex;
-    flex-direction:row;
+.headerImage:hover{
+animation: wave 1s infinite;
 
 }
-.clockInCard{
-    background-color:#002333;
-    width:50%;
-    display:flex;
-    align-items:center;
-    place-items:center;
-    justify-content:center;
-    flex-direction:column;
-    height:180px;
-    border-radius:15px;
+@keyframes wave {
+0% {
+transform: translateY(0);
 }
-.clockOutCard{
-    
-    background-color:#002333;
-    width:50%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    place-items:center;
-    justify-content:center;
-    margin-left:1%;
-    height:180px;
-    border-radius:15px;
+50% {
+transform: translateY(-5px);
 }
-.DateHolder{
-    display:flex;
-    flex-direction:row;
-    
+100% {
+transform: translateY(0);
 }
-.dateIcon{
-    margin-top:12%;
-    margin-right:5%;
-    color:white;
 }
-.ClockIcon{
-    margin-top:14%;
-    color:white;
+.button{
+background-color:white;
+border-width:0;
+margin-left:5.0%;
+margin-top:0.5%;
+width:08%;
+height:50px; 
+cursor: pointer;
+transition: box-shadow 0.2s ease-in-out;
+border-radius:10px;
 }
-.clockBtn{
-    color:white;
-    font-size:20px;
-    background-color:black;
-    border-radius:15px;
-    width:150px;
+.button:hover{
+box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+}
+.LogOutbutton{
+background-color:#F26E22;
+color:white;
+width:10%;
+height:150%;
+margin-top:1%;
+margin-left:15%;
+padding:0.5%;
+border-radius:10px;
+}
+.LogOutbutton:hover{
+color:black;
 }
 
-//Clock in/Out View
-
-
-//data display card
-.dataDisplay{
-    height:600px;
-    width:70%;
-    margin-left:2%;
-    margin-top:3%;
-    background-color:#F2F2F2;
-    padding:1.7%;
-}
-//data display card end
+//Header CSS FILES ENDING
 
 //UserInfo(TaskBar)
 .TaskBar{
@@ -620,6 +450,52 @@ width: 100%;
 
 //need help end
 
+
+//data display card
+.dataDisplay{
+    height:600px;
+    width:70%;
+    margin-left:2%;
+    margin-top:3%;
+    background-color:#F2F2F2;
+    padding:1.7%;
+}
+.columnName{
+  display:flex;
+  flex-direction:row;
+  height:5.8%;
+  border-radius:15px;
+  
+}
+.colume1{
+  margin-left:12%;
+  font-size:15px;
+  color:grey;
+  font-weight:bold;
+  margin-top:0.5%;
+}
+.colume2{
+  margin-left:19%;
+  font-size:15px;
+  color:grey;
+  font-weight:bold;
+  margin-top:0.5%;
+}
+.colume3{
+  margin-left:17.5%;
+  font-size:15px;
+  color:grey;
+  font-weight:bold;
+  margin-top:0.5%;
+}
+.colume4{
+  margin-left:17%;
+  font-size:15px;
+  color:grey;
+  font-weight:bold;
+  margin-top:0.5%;
+}
+//data display card end
 //Footer CSS Files
 .footer{
     display:flex;
@@ -643,60 +519,4 @@ width: 100%;
        margin-left:15%;
    }
    //Footer CSS Files end
-   //Header CSS FILES
-   .Header{
-   display:flex;
-   flex-direction:row;
-   margin-left:5.9%;
-   margin-top:0.5%;
-   width:93%;
-   background-color:white;
-   }
-   .headerImage{
-   width:15%;
-   height:5%;
-   }
-   .headerImage:hover{
-   animation: wave 1s infinite;
-   
-   }
-   @keyframes wave {
-   0% {
-   transform: translateY(0);
-   }
-   50% {
-   transform: translateY(-5px);
-   }
-   100% {
-   transform: translateY(0);
-   }
-   }
-   .button{
-   background-color:white;
-   border-width:0;
-   margin-left:5.0%;
-   margin-top:0.5%;
-   width:08%;
-   height:50px; 
-   cursor: pointer;
-   transition: box-shadow 0.2s ease-in-out;
-   border-radius:10px;
-   }
-   .button:hover{
-   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
-   }
-   .LogOutbutton{
-   background-color:#F26E22;
-   color:white;
-   width:10%;
-   height:150%;
-   margin-top:1%;
-   margin-left:15%;
-   padding:0.5%;
-   border-radius:10px;
-   }
-   .LogOutbutton:hover{
-   color:black;
-   }
-   //Header CSS FILES ENDING
-   `;
+`
