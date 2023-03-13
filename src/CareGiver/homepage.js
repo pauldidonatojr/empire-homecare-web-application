@@ -13,7 +13,7 @@ import TextField from "@mui/material/TextField";
 const Link = require("react-router-dom").Link;
 
 function Homepage() {
-  const [ViewSelected, setViewSelected] = useState(0);
+  const [ViewSelected, setViewSelected] = useState(1);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
@@ -307,7 +307,7 @@ function Homepage() {
   return (
     <Wrapper>
       <div className="Header">
-        <img className="headerImage" src="./assets/logo.jpg" />
+        <img className="headerImage" src="./EmpireHomeCareLogo.png" />
         <button className="button">Page 1</button>
         <button className="button">Page 2</button>
         <button className="button"> Page 3</button>
@@ -436,7 +436,7 @@ function Homepage() {
 export default Homepage;
 
 const Wrapper = styled.section`
-height: 100vh;%
+height: 100%;
 width: 100%;
 
 .CardHolder{
@@ -455,6 +455,10 @@ width: 100%;
     width:300px;
     text-align:center;
  
+}
+.ListItem:hover .ListText{
+  color:black;
+  font-weight:bold;
 }
 
 // overlay css end
@@ -620,7 +624,7 @@ width: 100%;
  width:100%;
  height:250px;
  background-color:#0A2740;
- margin-top:10%;
+ margin-top:0%;
 }
 .company{
  margin-left:50%;
@@ -646,8 +650,9 @@ width:93%;
 background-color:white;
 }
 .headerImage{
-width:15%;
-height:5%;
+width:7%;
+height:1%;
+border-radius:15px;
 }
 .headerImage:hover{
 animation: wave 1s infinite;

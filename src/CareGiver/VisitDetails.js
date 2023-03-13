@@ -122,7 +122,7 @@ const PlanOfCareList = [
 const VisitDetails = () => {
   const { id } = useParams();
   const selectedItem = jsonData.find((item) => item.id === parseInt(id));
-  const [ViewSelected, setViewSelected] = useState(0);
+  const [ViewSelected, setViewSelected] = useState(1);
 
   if (!selectedItem) {
     return <div>Item not found</div>;
@@ -291,7 +291,7 @@ const VisitDetails = () => {
   return (
     <Wrapper>
       <div className="Header">
-        <img className="headerImage" src="./assets/logo.jpg" />
+        <img className="headerImage" src="./EmpireHomeCareLogo.png"/>
         <button className="button">Page 1</button>
         <button className="button">Page 2</button>
         <button className="button"> Page 3</button>
@@ -408,7 +408,7 @@ const VisitDetails = () => {
 
 export default VisitDetails;
 const Wrapper = styled.section`
-height: 100vh%
+height: 100%;
 width: 100%;
 
 .CardHolder{
@@ -477,6 +477,10 @@ width: 100%;
 .ListHolder{
   display:flex;
   flex-direction:row;
+}
+.ListItem:hover .ListText{
+  color:black;
+  font-weight:bold;
 }
 
 //direction start
@@ -608,7 +612,7 @@ width: 100%;
 
 .NeedHelpDiv{
     margin-left:35%;
-    margin-top:30%;
+    margin-top:45%;
 }
 .needHelpText{
     color:white;
@@ -628,7 +632,6 @@ width: 100%;
     width:100%;
     height:250px;
     background-color:#0A2740;
-    margin-top:17%;
    }
    .company{
     margin-left:50%;

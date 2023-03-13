@@ -52,7 +52,7 @@ const jsonData = [
 
 const PatientDetails =()=>{
 
-  const [ViewSelected, setViewSelected] = useState(0);
+  const [ViewSelected, setViewSelected] = useState(2);
 
   const PatientInfoPressed = () => {
     setViewSelected(1);
@@ -176,7 +176,7 @@ const PatientDetails =()=>{
     return (
         <Wrapper>
              <div className="Header">
-        <img className="headerImage" src="./assets/logo.jpg" />
+        <img className="headerImage" src="./EmpireHomeCareLogo.png" />
         <button className="button">Page 1</button>
         <button className="button">Page 2</button>
         <button className="button"> Page 3</button>
@@ -287,7 +287,7 @@ const PatientDetails =()=>{
 }
 export default PatientDetails;
 const Wrapper = styled.section`
-height: 100vh;%
+height: 100%;
 width: 100%;
 
 //
@@ -303,6 +303,10 @@ width: 100%;
   width:300px;
   text-align:center;
 
+}
+.ListItem:hover .ListText{
+  color:black;
+  font-weight:bold;
 }
 //
 //patient view start
@@ -438,7 +442,7 @@ color:black;
 
 .NeedHelpDiv{
     margin-left:35%;
-    margin-top:30%;
+    margin-top:70%;
 }
 .needHelpText{
     color:white;
@@ -504,7 +508,6 @@ color:black;
     width:100%;
     height:250px;
     background-color:#0A2740;
-    margin-top:17%;
    }
    .company{
     margin-left:50%;

@@ -31,7 +31,7 @@ function Login () {
     <Wrapper>
       <Card className="ImageCard">
         <div className="LogoImageHolder">
-          <img className="logo" src="./assets/logo.jpg" alt="logoImageHere"></img>
+          <img className="logo" src="./EmpireHomeCareLogo.png" alt="logoImageHere"></img>
         </div>
       </Card>
       <div className="cardHolder">
@@ -108,9 +108,11 @@ const Wrapper = styled.section`
   width: 100%;
   background-color: #8ea3bf;
   .logo {
-    height: 20%;
-    width: 20%;
+    height: 5%;
+    width: 5%;
+    margin-left:1%;
   }
+
   .loginCard {
     align-items: center;
     justify-content: center;
