@@ -291,7 +291,7 @@ const VisitDetails = () => {
   return (
     <Wrapper>
       <div className="Header">
-        <img className="headerImage" src="./EmpireHomeCareLogo.png"/>
+        <img className="headerImage" src="/EmpireHomeCareLogo.png"/>
         <button className="button">Page 1</button>
         <button className="button">Page 2</button>
         <button className="button"> Page 3</button>
@@ -377,7 +377,7 @@ const VisitDetails = () => {
 
       <div className="footer">
         <div className="LogoHolder">
-          <img src="./empire-130x130(2).png"></img>
+          <img src="/LogoBK.png"></img>
         </div>
         <div className="company">
           <h6 style={{ color: "grey" }}>COMPANY</h6>
@@ -656,9 +656,10 @@ width: 100%;
    background-color:white;
    }
    .headerImage{
-   width:15%;
-   height:5%;
-   }
+    width:7%;
+    height:1%;
+    border-radius:15px;
+    }
    .headerImage:hover{
    animation: wave 1s infinite;
    

@@ -112,6 +112,9 @@ const Wrapper = styled.section`
     width: 5%;
     margin-left:1%;
   }
+  .ImageCard{
+    background-color:#2E0F59;
+  }
 
   .loginCard {
     align-items: center;
