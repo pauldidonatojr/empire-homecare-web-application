@@ -340,13 +340,14 @@ function Homepage() {
           <p
             style={{
               marginLeft: "45%",
-              fontSize: "13px",
+              fontSize: "20px",
               color: "white",
               fontWeight: "bold",
             }}
           >
             Files
           </p>
+          <hr style={{width:"50%",fontSize:"10px",opacity:"0.2"}}/>
           <div className="buttonHolder">
             <Button
               className="navigationButton"

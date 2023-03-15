@@ -12,6 +12,7 @@ import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import { List, ListItem, ListItemText } from "@material-ui/core";
 import { display } from "@mui/system";
 import PhoneIcon from '@mui/icons-material/Phone';
+import { useNavigate } from "react-router-dom";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 const Link = require("react-router-dom").Link;
 //HELLO I HAVE BEEN PUSHED
@@ -51,6 +52,7 @@ const jsonData = [
 ];
 
 const PatientDetails =()=>{
+  const navigate = useNavigate();
 
   const [ViewSelected, setViewSelected] = useState(2);
 
@@ -176,7 +178,8 @@ const PatientDetails =()=>{
     return (
         <Wrapper>
              <div className="Header">
-        <img className="headerImage" src="/EmpireHomeCareLogo.png" />
+        <img className="headerImage" src="/EmpireHomeCareLogo.png" 
+        onClick={() =>navigate("/CareGiverHome")}/>
         <button className="button">Page 1</button>
         <button className="button">Page 2</button>
         <button className="button"> Page 3</button>
@@ -209,13 +212,14 @@ const PatientDetails =()=>{
           <p
             style={{
               marginLeft: "45%",
-              fontSize: "13px",
+              fontSize: "20px",
               color: "white",
               fontWeight: "bold",
             }}
           >
             Files
           </p>
+          <hr style={{width:"50%",fontSize:"10px",opacity:"0.2"}}/>
           <div className="buttonHolder">
             <Button
               className="navigationButton"

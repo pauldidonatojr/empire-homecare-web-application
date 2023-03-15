@@ -51,6 +51,7 @@ function Login () {
             <h1 style={{ fontSize:"35px"}}>SIGN IN</h1>
           </div>
           <div className="radioHolder">
+            <div className="radioTextHolder" >
             <input
               className="radio"
               type="radio"
@@ -58,7 +59,10 @@ function Login () {
               name="LoginType"
               onChange={(e) => setSelectedRadio(e.target.value)}
             />{" "}
-            <h5 >Admin</h5>
+            <h5 style={{color:"#16232E",fontSize:"15px",marginLeft:"15%"}}>Admin</h5>
+            </div>
+            
+            <div className="radioTextHolder">
             <input
               className="radio"
               type="radio"
@@ -66,7 +70,9 @@ function Login () {
               name="LoginType"
               onChange={(e) => setSelectedRadio(e.target.value)}
             />{" "}
-            <h5>CareGiver</h5>
+            <h5 style={{color:"#16232E",fontSize:"15px",marginLeft:"10%"}}>CareGiver</h5>
+            </div>
+            <div className="radioTextHolder">
             <input
               className="radio"
               type="radio"
@@ -74,7 +80,8 @@ function Login () {
               name="LoginType"
               onChange={(e) => setSelectedRadio(e.target.value)}
             />{" "}
-            <h5>Patient</h5>
+            <h5 style={{color:"#16232E",fontSize:"15px",marginLeft:"10%"}}>Patient</h5>
+            </div>
           </div>
 
           <TextField
@@ -105,8 +112,24 @@ function Login () {
 
 const Wrapper = styled.section`
   height: 100vh;
-  width: 100%;
+  width: 100%
   background-color: #8ea3bf;
+  
+  .radioTextHolder{
+    
+      flex-direction:row;
+      padding:1;
+      width:120px;
+      background-color:#D9D9D9;
+      border: 1px solid grey;
+      display:flex;
+      height:100%;
+      border-radius:15px;
+      margin-right:1%;
+
+  }
+
+
   .logo {
     height: 5%;
     width: 5%;
@@ -131,6 +154,10 @@ const Wrapper = styled.section`
   .radioHolder {
     display: flex;
     flex-direction: row;
+    border-width: thin;
+  }
+  .radio{
+    margin-top:5%;
   }
   .cardHolder {
     display: flex;
@@ -158,7 +185,7 @@ const Wrapper = styled.section`
     width: 20%;
     margin-top: 5%;
     padding: 3%;
-    margin-left: 20%;
+    margin-left: 18%;
     margin-right: 0.2%;
     box-shadow: -1px 4px 19px 5px rgba(0, 0, 0, 0.43);
   }
