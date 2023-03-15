@@ -6,16 +6,32 @@ import CareGiverHomePage from './CareGiver/Homepage'
 import PatientHomePage from './Patient/homepage'
 import VisitDetails from './CareGiver/VisitDetails'
 import PatientDetails from "./CareGiver/PatientDetails";
+import CareGiver  from "./Admin/CareGiver";
+import Visits from "./Admin/Visit";
+import Action from './Admin/Action';
+import Billing from './Admin/Billing';
+import Report from "./Admin/Report";
+import Admin from "./Admin/Admin";
+import CallDashBoard from "./Admin/CallDashBoard";
 
 function App() {
   return (
     <Routes>
+
       <Route path="/" element={<Login />} />
       <Route path="/AdminHome" element={<AdminHomePage />}></Route>
       <Route path="/CareGiverHome" element={<CareGiverHomePage />}></Route>
       <Route path="/PatientHome" element={<PatientHomePage />}></Route>
       <Route path="/visitdetails/:id" element={<VisitDetails />}></Route> 
-      <Route path="/patientdetails/:id" element={<PatientDetails />}></Route> 
+      <Route path="/patientdetails/:id" element={<PatientDetails />}></Route>
+      <Route path="/CareGiver" element={<CareGiver />}></Route> 
+      <Route path="/Visit" element={<Visits />}></Route> 
+      <Route path="/Action" element={<Action />}></Route> 
+      <Route path="/Billing" element={<Billing />}></Route> 
+      <Route path="/Report" element={<Report />}></Route> 
+      <Route path="/Admin" element={<Admin />}></Route> 
+      <Route path="/CallDashBoard" element={<CallDashBoard />}></Route> 
+      
    
     </Routes>
 

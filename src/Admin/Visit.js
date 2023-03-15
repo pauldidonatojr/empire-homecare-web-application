@@ -10,44 +10,21 @@ import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Fade from "@mui/material/Fade";
+import CallDashBoard from "./CallDashBoard";
 import { useNavigate } from "react-router-dom";
 const Link = require("react-router-dom").Link;
 
-function Homepage() {
+
+function Visit() {
+  const navigate = useNavigate();
+  function  CallDashBoardPressed(){
+    navigate("/CallDashBoard");
+    
+   }
+
   const [ViewSelected, setViewSelected] = useState(1);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-  const navigate = useNavigate();
-
-
- function CareGiverPressed (){
-
-  navigate("/CareGiver");
- }
-
- function VisitPressed(){
-  navigate("/Visit");
-  
- }
- function ActionPressed (){
-  navigate("/Action");
-  
- }
- function BillingPressed (){
-  navigate("/Billing");
-  
- }
- function ReportPressed(){
-  navigate("/Report");
-  
- }
- function  AdminPressed(){
-  navigate("/Admin");
-  
- }
 
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
@@ -65,14 +42,14 @@ function Homepage() {
       </div>
     );
   };
-  const PatientViewColumDiv = () => {
-    return (
-      <div className="columnName">
+  const PatientViewColumDiv =() =>{
+    return(
+        <div className="columnName">
         <p className="colume5">Name</p>
         <p className="colume6">Address</p>
       </div>
-    );
-  };
+    )
+  }
   function renderColumeName() {
     switch (ViewSelected) {
       case 1:
@@ -82,7 +59,9 @@ function Homepage() {
       case 3:
         return <ColumnDiv />;
       case 4:
-        return <PatientViewColumDiv />;
+        return (
+          <PatientViewColumDiv/>
+        );
       default:
         break;
     }
@@ -126,7 +105,7 @@ function Homepage() {
     );
   }
 
-  const MembersPressed = () => {
+  const TodaySchedulePressed = () => {
     setViewSelected(1);
   };
   const unScheduledPressed = () => {
@@ -142,7 +121,7 @@ function Homepage() {
   function RenderViews() {
     switch (ViewSelected) {
       case 1:
-        return MembersView();
+        return TodayScheduleView();
 
       case 2:
         return UnScheduleView();
@@ -164,7 +143,7 @@ function Homepage() {
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date: "03/12/2023",
+      date:"03/12/2023",
     },
     {
       id: 2,
@@ -172,7 +151,7 @@ function Homepage() {
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date: "03/12/2023",
+      date:"03/12/2023",
     },
     {
       id: 3,
@@ -180,7 +159,7 @@ function Homepage() {
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date: "03/12/2023",
+      date:"03/12/2023",
     },
     {
       id: 4,
@@ -188,7 +167,7 @@ function Homepage() {
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date: "03/12/2023",
+      date:"03/12/2023",
     },
   ];
   const jsonData2 = [
@@ -209,7 +188,7 @@ function Homepage() {
     },
   ];
   //
-  const MembersView = () => {
+  const TodayScheduleView = () => {
     return (
       <List style={{ maxHeight: "100%", overflow: "auto" }}>
         {jsonData.map((item) => (
@@ -321,21 +300,13 @@ function Homepage() {
     return (
       <List style={{ maxHeight: "100%", overflow: "auto" }}>
         {jsonData2.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/patientdetails/${item.id}`}
-          >
-            <ListItemText
-              className="ListText"
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-            />
-            <ListItemText
-              className="ListText"
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-            />
+          <ListItem className="ListItem"
+          key={item.id}
+          button
+          component={Link}
+          to={`/patientdetails/${item.id}`}>
+            <ListItemText  className="ListText" primary={<p style={{ fontSize:  "25px" }}>{item.name}</p> } />
+            <ListItemText  className="ListText" primary={<p style={{ fontSize: "20px" }}>{item.address}</p> } />
           </ListItem>
         ))}
       </List>
@@ -353,11 +324,6 @@ function Homepage() {
         <Button className="LogOutbutton" variant="outlined">
           Log Out
         </Button>
-      </div>
-
-      <div className="NotificationHolder">
-        <Button className="LinkNotification"> Link Notification </Button>
-        <Button className="SystemNotification"> System Notification </Button>
       </div>
 
       <div className="CardHolder">
@@ -390,10 +356,14 @@ function Homepage() {
           >
             Files
           </p>
-          <hr style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
+          <hr style={{width:"50%",fontSize:"10px",opacity:"0.2"}}/>
           <div className="buttonHolder">
             <Button
-              className="navigationButton">
+              className="navigationButton"
+              onClick={() => {
+                CallDashBoardPressed();
+              }}
+            >
               <p
                 style={{
                   fontSize: "15px",
@@ -401,60 +371,29 @@ function Homepage() {
                   fontWeight: "bold",
                 }}
               >
-                Members
+                Call Dashboard
+              </p>
+            </Button>
+            <Button onClick={unScheduledPressed} className="navigationButton">
+              <p
+                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
+              >
+                Visit Search
               </p>
             </Button>
 
-            <Button
-            onClick={CareGiverPressed}
-              className="navigationButton"
-            >
+            
+            <Button onClick={unScheduledPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Care Givers
+                Visit Quick Search
               </p>
             </Button>
-
-            <Button  
-             onClick={VisitPressed}  
-             >
-              <p
-                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
-              >
-                Visits
-              </p>
-            </Button>
-
-            <Button onClick={ActionPressed} className="navigationButton">
-              <p
-                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
-              >
-               Action
-              </p>
-            </Button>
-            <Button onClick={BillingPressed} className="navigationButton">
-              <p
-                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
-              >
-                Billings
-              </p>
-            </Button>
-            <Button onClick={ReportPressed} className="navigationButton">
-              <p
-                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
-              >
-                Report
-              </p>
-            </Button>
-            <Button onClick={AdminPressed} className="navigationButton">
-              <p
-                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
-              >
-                Admin
-              </p>
-            </Button>
+           
           </div>
+
+          
         </Card>
 
         <Card className="dataDisplay">
@@ -495,305 +434,270 @@ function Homepage() {
     </Wrapper>
   );
 }
-export default Homepage;
+export default Visit;
 
 const Wrapper = styled.section`
-  height: 100%;
-  width: 100%;
+height: 100%;
+width: 100%;
 
-  .CardHolder {
-    display: flex;
-    flex-direction: row;
-  }
-  .ListItem {
-    margin-top: 1%;
-    margin-left: 2%;
-    background-color: #0b2b40;
-    color: white;
-    border-radius: 10px;
+.CardHolder{
+    display:flex;
+    flex-direction:row;
+}
+.ListItem{
+    margin-top:1%;
+    margin-left:2%;
+    background-color:#0B2B40;
+    color:white;
+    border-radius:10px;
     width: 95%;
-  }
-  .ListText {
-    width: 300px;
-    text-align: center;
-  }
-  .ListItem:hover .ListText {
-    color: black;
-    font-weight: bold;
-  }
+}
+.ListText{
+    width:300px;
+    text-align:center;
+ 
+}
+.ListItem:hover .ListText{
+  color:black;
+  font-weight:bold;
+}
 
-  //
-
-  .menu {
-    background-color: #0a3a40;
-  }
-  .MenuItem {
-    width: 400px;
-  }
-
-  //
-
-  //Notification Start
-
-  .NotificationHolder {
-    padding: 15px;
-    display: flex;
-    flex-direction: row-reverse;
-  }
-  .LinkNotification {
-    background-color: #0a3a40;
-    color: white;
-    padding: 15px;
-    font-weight: bold;
-    margin-left: 2%;
-    margin-right: 6%;
-    border-radius: 10px;
-  }
-  .LinkNotification:hover {
-    color: white;
-    background-color: #f26e22;
-  }
-  .SystemNotification {
-    background-color: #0a3a40;
-    color: white;
-    padding: 15px;
-    font-weight: bold;
-    border-radius: 10px;
-  }
-  .SystemNotification:hover {
-    color: white;
-    background-color: #f26e22;
-  }
-  //Notification End
-
-  // overlay css end
-  .overlay {
+// overlay css end
+.overlay{
     position: fixed;
-    margin-left: 09%;
+    margin-left:09%;
     width: 40%;
     height: 70%;
-    z-index: 1000;
-    background-color: white;
-    padding: 1%;
-  }
-  .crossIcon {
-    margin-left: 95%;
-    margin-top: 2%;
-  }
-  .searchFieldsDiv {
-    justify-content: center;
-    align-item: center;
-    display: flex;
-    flex-direction: column;
-    margin-left: 30%;
-  }
-  .Field {
-    width: 50%;
-    margin: 2%;
-  }
-  .searchButton {
-    margin-left: 40%;
-    margin-top: 5%;
-  }
+    z-index:1000;
+    background-color:white;
+    padding:1%;
+}
+.crossIcon{
+    margin-left:95%;
+    margin-top:2%;
+}
+.searchFieldsDiv{
+    justify-content:center;
+    align-item:center;
+    display:flex;
+    flex-direction:column;
+    margin-left:30%;
+}
+.Field{
+    width:50%;
+    margin:2%;
+}
+.searchButton{
+    margin-left:40%;
+    margin-top:5%;
+}
 
-  //overlay css end
+//overlay css end
 
-  //need help div start
 
-  .NeedHelpDiv {
-    margin-left: 35%;
-    margin-top: 30%;
-  }
-  .needHelpText {
-    color: white;
-  }
-  .NeedHelpTele {
-    color: white;
-    text-decoration: none;
-  }
+//need help div start
 
-  //need help end
+.NeedHelpDiv{
+    margin-left:35%;
+    margin-top:30%;
+}
+.needHelpText{
+    color:white;
+}
+.NeedHelpTele{
+    color:white;
+    text-decoration: none
+}
 
-  //data display card
-  .dataDisplay {
-    height: 700px;
-    width: 70%;
-    margin-left: 2%;
-    margin-top: 0.5%;
-    background-color: #f2f2f2;
-    padding: 1.7%;
-  }
-  .columnName {
-    display: flex;
-    flex-direction: row;
-    height: 5.8%;
-    border-radius: 15px;
-  }
-  .colume1 {
-    margin-left: 12%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
-  .colume2 {
-    margin-left: 19%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
-  .colume3 {
-    margin-left: 17.5%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
-  .colume4 {
-    margin-left: 17%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
-  .colume5 {
-    margin-left: 20%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
-  .colume6 {
-    margin-left: 45%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
-  .searchIcon {
-    position: absolute;
-    z-index: 999;
-    padding: 1%;
-    font-size: 50px;
-    color: white;
-    margin-left: 65%;
-    cursor: pointer;
-    background-color: grey;
-    border-radius: 500px;
+//need help end
+
+//data display card
+.dataDisplay{
+    height:600px;
+    width:70%;
+    margin-left:2%;
+    margin-top:3%;
+    background-color:#F2F2F2;
+    padding:1.7%;
+}
+.columnName{
+    display:flex;
+    flex-direction:row;
+    height:5.8%;
+    border-radius:15px;
+    
+}
+.colume1{
+    margin-left:12%;
+    font-size:15px;
+    color:grey;
+    font-weight:bold;
+    margin-top:0.5%;
+}
+.colume2{
+    margin-left:19%;
+    font-size:15px;
+    color:grey;
+    font-weight:bold;
+    margin-top:0.5%;
+}
+.colume3{
+    margin-left:17.5%;
+    font-size:15px;
+    color:grey;
+    font-weight:bold;
+    margin-top:0.5%;
+}
+.colume4{
+    margin-left:17%;
+    font-size:15px;
+    color:grey;
+    font-weight:bold;
+    margin-top:0.5%;
+}
+.colume5{
+    margin-left:20%;
+    font-size:15px;
+    color:grey;
+    font-weight:bold;
+    margin-top:0.5%;
+}
+.colume6{
+    margin-left:45%;
+    font-size:15px;
+    color:grey;
+    font-weight:bold;
+    margin-top:0.5%;
+}
+.searchIcon{
+    position:absolute;
+    z-index:999;
+    padding:1%;
+    font-size:50px;
+    color:white;
+    margin-left:65%;
+    cursor:pointer;
+    background-color:grey;
+    border-radius:500px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-  }
+}
 
-  //data display card end
+//data display card end
 
-  //UserInfo(TaskBar)
-  .TaskBar {
-    width: 20%;
-    height: 755px;
-    background-color: #2a558c;
-    margin-top: 0.5%;
-    margin-bottom: 10%;
-    margin-left: 2%;
-  }
 
-  .UserInfo {
-    display: flex;
-    flex-direction: row;
-    margin-top: 5%;
-    margin-left: 10%;
-  }
-  .avatar {
-    margin: 2%;
-    margin-top: 5%;
-  }
-  .buttonHolder {
-    display: flex;
-    flex-direction: column;
-  }
-  .navigationButton {
-    margin: 2%;
-  }
+//UserInfo(TaskBar)
+.TaskBar{
 
-  //UserInfo Ending
+    width:20%;
+    height:650px;
+    background-color:#2A558C;
+    margin-top:3%;
+    margin-bottom:10%;
+    margin-left:2%;
+}
 
-  //Footer CSS Files
-  .footer {
-    display: flex;
-    flex-direction: row;
-    bottom: 0;
-    width: 100%;
-    height: 250px;
-    background-color: #0a2740;
-    margin-top: 0%;
-  }
-  .company {
-    margin-left: 50%;
-    margin-top: 2%;
-  }
-  .socials {
-    margin-left: 5%;
-    margin-top: 2%;
-  }
-  .LogoHolder {
-    margin-top: 3%;
-    margin-left: 15%;
-  }
-  //Footer CSS Files end
+.UserInfo{
+    display:flex;
+    flex-direction:row;
+    margin-top:5%;
+    margin-left:10%;
+}
+.avatar{
+    margin:2%;
+    margin-top:5%;
+}
+.buttonHolder{
+    display:flex;
+    flex-direction:column;
 
-  //Header CSS FILES
-  .Header {
-    display: flex;
-    flex-direction: row;
-    margin-left: 5.9%;
-    margin-top: 0.5%;
-    width: 93%;
-    background-color: white;
+}
+.navigationButton{
+    margin:2%;
+}
+
+//UserInfo Ending
+
+//Footer CSS Files
+.footer{
+ display:flex;
+ flex-direction:row;
+ bottom:0;
+ width:100%;
+ height:250px;
+ background-color:#0A2740;
+ margin-top:0%;
+}
+.company{
+ margin-left:50%;
+ margin-top:2%;
+}
+.socials{
+ margin-left:5%;
+ margin-top:2%;
+}
+.LogoHolder{
+    margin-top:3%;
+    margin-left:15%;
+}
+//Footer CSS Files end
+
+//Header CSS FILES
+.Header{
+display:flex;
+flex-direction:row;
+margin-left:5.9%;
+margin-top:0.5%;
+width:93%;
+background-color:white;
+}
+.headerImage{
+  width:7%;
+  height:1%;
+  border-radius:15px;
   }
-  .headerImage {
-    width: 7%;
-    height: 1%;
-    border-radius: 15px;
-  }
-  .headerImage:hover {
-    animation: wave 1s infinite;
-  }
-  @keyframes wave {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-5px);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
-  .button {
-    background-color: white;
-    border-width: 0;
-    margin-left: 5%;
-    margin-top: 0.5%;
-    width: 08%;
-    height: 50px;
-    cursor: pointer;
-    transition: box-shadow 0.2s ease-in-out;
-    border-radius: 10px;
-  }
-  .button:hover {
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
-  }
-  .LogOutbutton {
-    background-color: #f26e22;
-    color: white;
-    width: 10%;
-    height: 150%;
-    margin-top: 1%;
-    margin-left: 15%;
-    padding: 0.5%;
-    border-radius: 10px;
-  }
-  .LogOutbutton:hover {
-    color: black;
-  }
-  //Header CSS FILES ENDING
+.headerImage:hover{
+animation: wave 1s infinite;
+
+}
+@keyframes wave {
+0% {
+transform: translateY(0);
+}
+50% {
+transform: translateY(-5px);
+}
+100% {
+transform: translateY(0);
+}
+}
+.button{
+background-color:white;
+border-width:0;
+margin-left:5.0%;
+margin-top:0.5%;
+width:08%;
+height:50px; 
+cursor: pointer;
+transition: box-shadow 0.2s ease-in-out;
+border-radius:10px;
+}
+.button:hover{
+box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+}
+.LogOutbutton{
+background-color:#F26E22;
+color:white;
+width:10%;
+height:150%;
+margin-top:1%;
+margin-left:15%;
+padding:0.5%;
+border-radius:10px;
+}
+.LogOutbutton:hover{
+color:black;
+}
+//Header CSS FILES ENDING
+
+
 `;
