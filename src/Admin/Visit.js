@@ -28,7 +28,7 @@ function Visit() {
 
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
-  };
+  }
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };

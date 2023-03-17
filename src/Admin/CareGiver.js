@@ -10,9 +10,26 @@ import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
-const Link = require("react-router-dom").Link;
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Grid from '@mui/material/Grid';
+
 
 function CareGiver() {
+
+
+
+  //
+
+  const [age, setAge] = React.useState('');
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
+  //
   const [ViewSelected, setViewSelected] = useState(1);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
@@ -26,102 +43,194 @@ function CareGiver() {
   const ColumnDiv = () => {
     return (
       <div className="columnName">
-        <p className="colume1">Name</p>
-        <p className="colume2">Address</p>
-        <p className="colume3">Clock In</p>
-        <p className="colume4">Clock Out</p>
+        <p className="colume">First Name</p>
+        <p className="colume">Last Name</p>
+        <p className="colume">Phone</p>
+        <p className="colume">CareGiver Code</p>
+        <p className="colume">Alt CG Code</p>
+        <p className="colume" >SSN</p>
+        <p className="colume">Status</p>
+        <p className="colume">Provider</p>
+        <p className="colume">Discipline</p>
       </div>
     );
   };
-  const PatientViewColumDiv =() =>{
-    return(
-        <div className="columnName">
-        <p className="colume5">Name</p>
-        <p className="colume6">Address</p>
-      </div>
-    )
-  }
   function renderColumeName() {
     switch (ViewSelected) {
       case 1:
-        return <ColumnDiv />;
+        return null;
       case 2:
         return <ColumnDiv />;
-      case 3:
-        return <ColumnDiv />;
-      case 4:
-        return (
-          <PatientViewColumDiv/>
-        );
+      
+      default:
+        break;
+    }
+  }
+
+  function RenderSearchIcon(){
+    switch (ViewSelected) {
+      case 1:
+        return null;
+      case 2:
+        return<SearchIcon className="searchIcon" onClick={handleClickIcon} />;
+      
       default:
         break;
     }
   }
 
   function Overlay() {
+    
     return (
+      
       <div className="overlay">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ marginLeft: "30%" }}>Set Filter from here !</h1>
+        <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
         <div className="searchFieldsDiv">
+        <Grid container spacing={3}>
+          
+        <Grid item xs="3">
           <TextField
-            className="Field"
+           
             id="outlined-basic"
-            label="Name"
+            label="First Name"
             variant="outlined"
           />
-          <TextField
-            className="Field"
+        </Grid>
+        <Grid item xs="3">
+        <TextField
             id="outlined-basic"
-            label="Address"
+            label="Last Name"
             variant="outlined"
           />
-          <TextField
-            className="Field"
+        </Grid>
+          
+        <Grid item xs="3">
+        
+        <TextField
+           
             id="outlined-basic"
-            label="Expected Time Out"
+            label="Phone Number"
             variant="outlined"
           />
-          <TextField
-            className="Field"
+        </Grid>
+        <Grid item xs="3">
+        
+        <TextField
             id="outlined-basic"
-            label="Expected Time In"
+            label="Care Giver Code"
             variant="outlined"
           />
+          
+        </Grid>
+
+        <Grid item xs="3">
+        
+        <TextField
+           
+            id="outlined-basic"
+            label="Alt Caregiver Code"
+            variant="outlined"
+          />
+          
+        </Grid>
+        <Grid item xs="3">
+        
+        <TextField
+           
+            id="outlined-basic"
+            label="SSN"
+            variant="outlined"
+          />
+          
+        </Grid>
+          
+
+        <Grid item xs="2.87">
+        
+        <Box >
+      <FormControl fullWidth>
+        <InputLabel >Status</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>  
+        </Grid>
+        <Grid item xs="2.87" style={{marginLeft:"1%"}}>
+        
+        <Box>
+      <FormControl fullWidth>
+        <InputLabel >Provider</InputLabel>
+        <Select
+        
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+         </Grid>
+         <Grid item xs="2.87">
+        
+        <Box >
+      <FormControl fullWidth>
+        <InputLabel >Discipline</InputLabel>
+        <Select
+        
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+         </Grid>
+         
+    </Grid>
         </div>
-        <Button className="searchButton" onClick={handleCloseOverlay}>
+        <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay}>
           Search
         </Button>
       </div>
+      
     );
   }
 
-  const TodaySchedulePressed = () => {
+  const NewCareGiverPressed = () => {
     setViewSelected(1);
   };
-  const unScheduledPressed = () => {
+  const SearchCareGiverPressed = () => {
     setViewSelected(2);
-  };
-  const AllVisitsPressed = () => {
-    setViewSelected(3);
-  };
-  const PatientListPressed = () => {
-    setViewSelected(4);
   };
 
   function RenderViews() {
     switch (ViewSelected) {
       case 1:
-        return TodayScheduleView();
+        return NewCareGiverView();
 
       case 2:
-        return UnScheduleView();
+        return SearchCareGiverView();
 
-      case 3:
-        return VisitView();
-
-      case 4:
-        return PatientView();
       default:
         break;
     }
@@ -161,143 +270,76 @@ function CareGiver() {
       date:"03/12/2023",
     },
   ];
-  const jsonData2 = [
-    {
-      id: 1,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
-    },
-    {
-      id: 2,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
-    },
-    {
-      id: 3,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
-    },
-  ];
-  //
-  const TodayScheduleView = () => {
+
+  const NewCareGiverView = () => {
+    return (
+     <div>
+      New Care Giver Fields Here
+     </div>
+    );
+  };
+  const SearchCareGiverView = () => {
     return (
       <List style={{ maxHeight: "100%", overflow: "auto" }}>
         {jsonData.map((item) => (
           <ListItem
             className="ListItem"
             key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
+           
           >
             <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
+              primary={<p style={{ fontSize: "15px" }}>{item.name}</p>}
+              className="ListText"
+            />
+           
+            <ListItemText
+              primary={<p style={{ fontSize: "15px" }}>{item.address}</p>}
               className="ListText"
             />
             <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
+              
               primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
+                <p style={{ fontSize: "15px" }}>{item.expectedClockOn}</p>
               }
               className="ListText"
             />
             <ListItemText
               primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
+                <p style={{ fontSize: "15px" }}>{item.expectedClockOut}</p>
               }
               className="ListText"
             />
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
-  const UnScheduleView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
+              <ListItemText
               primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
+                <p style={{ fontSize: "15px" }}>{item.expectedClockOut}</p>
               }
               className="ListText"
             />
-            <ListItemText
+              <ListItemText
               primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
+                <p style={{ fontSize: "15px" }}>{item.expectedClockOut}</p>
               }
               className="ListText"
             />
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
-  const VisitView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
+              <ListItemText
+              
               primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
+                <p style={{ fontSize: "15px" }}>{item.expectedClockOut}</p>
               }
               className="ListText"
             />
-            <ListItemText
+              <ListItemText
               primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
+                <p style={{ fontSize: "15px" }}>{item.expectedClockOut}</p>
               }
               className="ListText"
             />
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
-  const PatientView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData2.map((item) => (
-          <ListItem className="ListItem"
-          key={item.id}
-          button
-          component={Link}
-          to={`/patientdetails/${item.id}`}>
-            <ListItemText  className="ListText" primary={<p style={{ fontSize:  "25px" }}>{item.name}</p> } />
-            <ListItemText  className="ListText" primary={<p style={{ fontSize: "20px" }}>{item.address}</p> } />
+              <ListItemText
+              primary={
+                <p style={{ fontSize: "15px" }}>{item.expectedClockOut}</p>
+              }
+              className="ListText"
+            />
           </ListItem>
         ))}
       </List>
@@ -352,7 +394,7 @@ function CareGiver() {
             <Button
               className="navigationButton"
               onClick={() => {
-                TodaySchedulePressed();
+                NewCareGiverPressed();
               }}
             >
               <p
@@ -365,7 +407,7 @@ function CareGiver() {
                 New Care Giver
               </p>
             </Button>
-            <Button onClick={unScheduledPressed} className="navigationButton">
+            <Button onClick={SearchCareGiverPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
@@ -380,7 +422,7 @@ function CareGiver() {
 
         <Card className="dataDisplay">
           {renderColumeName()}
-          <SearchIcon className="searchIcon" onClick={handleClickIcon} />
+          {RenderSearchIcon()}
           {isOverlayOpen && <Overlay />}
           {RenderViews()}
         </Card>
@@ -428,53 +470,54 @@ width: 100%;
 }
 .ListItem{
     margin-top:1%;
-    margin-left:2%;
+    
     background-color:#0B2B40;
     color:white;
     border-radius:10px;
-    width: 95%;
+    width: 100%;
 }
 .ListText{
-    width:300px;
-    text-align:center;
- 
+    width:250px;
 }
-.ListItem:hover .ListText{
-  color:black;
-  font-weight:bold;
-}
+
 
 // overlay css end
-.overlay{
+  .overlay {
     position: fixed;
-    margin-left:09%;
-    width: 40%;
-    height: 70%;
-    z-index:1000;
-    background-color:white;
-    padding:1%;
-}
-.crossIcon{
-    margin-left:95%;
-    margin-top:2%;
-}
-.searchFieldsDiv{
-    justify-content:center;
-    align-item:center;
-    display:flex;
-    flex-direction:column;
-    margin-left:30%;
-}
-.Field{
-    width:50%;
-    margin:2%;
-}
-.searchButton{
-    margin-left:40%;
-    margin-top:5%;
-}
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  height: 60%;
+  z-index: 1000;
+  background-color: white;
+  padding: 1%;
+  }
+  .crossIcon {
+    margin-left: 95%;
+    margin-top: 2%;
+  }
+  .searchFieldsDiv {
+    display: flex; 
+    margin-top:2.5%;
+    width:85%;
+    margin-left:10%;
+  }
 
-//overlay css end
+  .searchButton {
+    margin-left: 35%;
+    margin-top: 5%;
+    width:30%;
+    background-color:#f26e22;
+    color:white;
+    font-weight:bold;
+  }
+  .searchButton:hover {
+    background-color:#2E0F59;
+    color:white;
+  }
+
+  //overlay css end
 
 
 //need help div start
@@ -503,61 +546,30 @@ width: 100%;
     padding:1.7%;
 }
 .columnName{
+    width:95%;
     display:flex;
     flex-direction:row;
     height:5.8%;
     border-radius:15px;
     
 }
-.colume1{
-    margin-left:12%;
+.colume{
+    text-align:center;
+    margin-left:2%;
     font-size:15px;
     color:grey;
     font-weight:bold;
     margin-top:0.5%;
+    width:250px;
 }
-.colume2{
-    margin-left:19%;
-    font-size:15px;
-    color:grey;
-    font-weight:bold;
-    margin-top:0.5%;
-}
-.colume3{
-    margin-left:17.5%;
-    font-size:15px;
-    color:grey;
-    font-weight:bold;
-    margin-top:0.5%;
-}
-.colume4{
-    margin-left:17%;
-    font-size:15px;
-    color:grey;
-    font-weight:bold;
-    margin-top:0.5%;
-}
-.colume5{
-    margin-left:20%;
-    font-size:15px;
-    color:grey;
-    font-weight:bold;
-    margin-top:0.5%;
-}
-.colume6{
-    margin-left:45%;
-    font-size:15px;
-    color:grey;
-    font-weight:bold;
-    margin-top:0.5%;
-}
+
 .searchIcon{
     position:absolute;
     z-index:999;
     padding:1%;
-    font-size:50px;
+    font-size:35px;
     color:white;
-    margin-left:65%;
+    margin-left:67%;
     cursor:pointer;
     background-color:grey;
     border-radius:500px;

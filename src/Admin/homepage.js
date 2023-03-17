@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -10,13 +10,24 @@ import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Fade from "@mui/material/Fade";
 import { useNavigate } from "react-router-dom";
-const Link = require("react-router-dom").Link;
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Grid from '@mui/material/Grid';
+
 
 function Homepage() {
+
+  const [age, setAge] = React.useState('');
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
+
+
   const [ViewSelected, setViewSelected] = useState(1);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
@@ -47,6 +58,9 @@ function Homepage() {
  function  AdminPressed(){
   navigate("/Admin");
   
+ }
+ function MemberPressed (){
+  setViewSelected(1);
  }
 
   const handleClickIcon = () => {
@@ -89,69 +103,166 @@ function Homepage() {
   }
 
   function Overlay() {
+    
     return (
+      
       <div className="overlay">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ marginLeft: "30%" }}>Set Filter from here !</h1>
+        <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
         <div className="searchFieldsDiv">
+        <Grid container spacing={3}>
+          
+        <Grid item xs="3">
           <TextField
-            className="Field"
+           
             id="outlined-basic"
-            label="Name"
+            label="Member ID"
             variant="outlined"
           />
-          <TextField
-            className="Field"
+        </Grid>
+        <Grid item xs="3">
+        <TextField
             id="outlined-basic"
-            label="Address"
+            label="Admission ID"
             variant="outlined"
           />
-          <TextField
-            className="Field"
+        </Grid>
+          
+        <Grid item xs="3">
+        
+        <TextField
+           
             id="outlined-basic"
-            label="Expected Time Out"
+            label="First Name"
             variant="outlined"
           />
-          <TextField
-            className="Field"
+        </Grid>
+        <Grid item xs="3">
+        
+        <TextField
             id="outlined-basic"
-            label="Expected Time In"
+            label="Last Name"
             variant="outlined"
           />
+          
+        </Grid>
+
+        <Grid item xs="3">
+        
+        <TextField
+           
+            id="outlined-basic"
+            label="Phone Number"
+            variant="outlined"
+          />
+          
+        </Grid>
+          
+
+        <Grid item xs="2.87">
+        
+        <Box >
+      <FormControl fullWidth>
+        <InputLabel >Status</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>  
+        </Grid>
+        <Grid item xs="2.87" style={{marginLeft:"1%"}}>
+        
+        <Box>
+      <FormControl fullWidth>
+        <InputLabel >Cordinator</InputLabel>
+        <Select
+        
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+         </Grid>
+         <Grid item xs="2.87" style={{marginLeft:"1%"}}>
+        
+        <Box >
+      <FormControl fullWidth>
+        <InputLabel >MCO</InputLabel>
+        <Select
+        
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+         </Grid>
+         <Grid item xs="2.87">
+        
+        <Box>
+      <FormControl fullWidth>
+        <InputLabel >Office</InputLabel>
+        <Select
+        
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+         </Grid>
+         <Grid item xs="3" style={{marginLeft:"1%"}}>
+         <TextField
+           
+            id="outlined-basic"
+            label="Vender Tax ID"
+            variant="outlined"
+          />
+         </Grid>
+    </Grid>
         </div>
-        <Button className="searchButton" onClick={handleCloseOverlay}>
+        <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay}>
           Search
         </Button>
       </div>
+      
     );
   }
 
-  const MembersPressed = () => {
-    setViewSelected(1);
-  };
-  const unScheduledPressed = () => {
-    setViewSelected(2);
-  };
-  const AllVisitsPressed = () => {
-    setViewSelected(3);
-  };
-  const PatientListPressed = () => {
-    setViewSelected(4);
-  };
+
 
   function RenderViews() {
     switch (ViewSelected) {
       case 1:
         return MembersView();
 
-      case 2:
-        return UnScheduleView();
-
-      case 3:
-        return VisitView();
-
-      case 4:
-        return PatientView();
       default:
         break;
     }
@@ -191,34 +302,13 @@ function Homepage() {
       date: "03/12/2023",
     },
   ];
-  const jsonData2 = [
-    {
-      id: 1,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
-    },
-    {
-      id: 2,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
-    },
-    {
-      id: 3,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
-    },
-  ];
-  //
   const MembersView = () => {
     return (
       <List style={{ maxHeight: "100%", overflow: "auto" }}>
         {jsonData.map((item) => (
           <ListItem
             className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
+           
           >
             <ListItemText
               primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
@@ -245,102 +335,8 @@ function Homepage() {
       </List>
     );
   };
-  const UnScheduleView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
-  const VisitView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
-  const PatientView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData2.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/patientdetails/${item.id}`}
-          >
-            <ListItemText
-              className="ListText"
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-            />
-            <ListItemText
-              className="ListText"
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-            />
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
+  
+  
 
   return (
     <Wrapper>
@@ -393,7 +389,9 @@ function Homepage() {
           <hr style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
           <div className="buttonHolder">
             <Button
-              className="navigationButton">
+              className="navigationButton"
+              onClick={MemberPressed}>
+           
               <p
                 style={{
                   fontSize: "15px",
@@ -517,11 +515,6 @@ const Wrapper = styled.section`
     width: 300px;
     text-align: center;
   }
-  .ListItem:hover .ListText {
-    color: black;
-    font-weight: bold;
-  }
-
   //
 
   .menu {
@@ -569,31 +562,37 @@ const Wrapper = styled.section`
   // overlay css end
   .overlay {
     position: fixed;
-    margin-left: 09%;
-    width: 40%;
-    height: 70%;
-    z-index: 1000;
-    background-color: white;
-    padding: 1%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  height: 60%;
+  z-index: 1000;
+  background-color: white;
+  padding: 1%;
   }
   .crossIcon {
     margin-left: 95%;
     margin-top: 2%;
   }
   .searchFieldsDiv {
-    justify-content: center;
-    align-item: center;
-    display: flex;
-    flex-direction: column;
-    margin-left: 30%;
+    display: flex; 
+    margin-top:2.5%;
+    width:85%;
+    margin-left:10%;
   }
-  .Field {
-    width: 50%;
-    margin: 2%;
-  }
+
   .searchButton {
-    margin-left: 40%;
+    margin-left: 35%;
     margin-top: 5%;
+    width:30%;
+    background-color:#f26e22;
+    color:white;
+    font-weight:bold;
+  }
+  .searchButton:hover {
+    background-color:#2E0F59;
+    color:white;
   }
 
   //overlay css end
@@ -616,7 +615,7 @@ const Wrapper = styled.section`
 
   //data display card
   .dataDisplay {
-    height: 700px;
+    height: 645px;
     width: 70%;
     margin-left: 2%;
     margin-top: 0.5%;
@@ -689,7 +688,7 @@ const Wrapper = styled.section`
   //UserInfo(TaskBar)
   .TaskBar {
     width: 20%;
-    height: 755px;
+    height: 700px;
     background-color: #2a558c;
     margin-top: 0.5%;
     margin-bottom: 10%;
