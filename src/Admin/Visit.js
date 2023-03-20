@@ -12,56 +12,100 @@ import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import CallDashBoard from "./CallDashBoard";
 import { useNavigate } from "react-router-dom";
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Grid from '@mui/material/Grid';
 const Link = require("react-router-dom").Link;
 
 
 function Visit() {
+
   const navigate = useNavigate();
   function  CallDashBoardPressed(){
     navigate("/CallDashBoard");
     
    }
 
+   //
+
+   const [age, setAge] = React.useState('');
+   const handleChange = (event) => {
+     setAge(event.target.value);
+   };
+
+   //
+
   const [ViewSelected, setViewSelected] = useState(1);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [isOverlayOpen2, setIsOverlayOpen2] = useState(false);
 
-  const handleClickIcon = () => {
-    setIsOverlayOpen(true);
-  }
+  
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
+  const handleCloseOverlay2 = () => {
+    setIsOverlayOpen2(false);
+  };
+  
+  const handleClickIcon = () => {
+    
+    switch (ViewSelected) {
+      case 2:
+        setIsOverlayOpen(true);
+        break;
+      case 3:
+        setIsOverlayOpen2(true);
+        break;
+      default:
+        break;
+    }
+
+  };
+
   const ColumnDiv = () => {
     return (
       <div className="columnName">
-        <p className="colume1">Name</p>
-        <p className="colume2">Address</p>
-        <p className="colume3">Clock In</p>
-        <p className="colume4">Clock Out</p>
+       <p className="colume1">Member Name</p>
+         <hr/>
+        <p className="colume1">Admission ID</p>
+        <hr/>
+        <p className="colume1">Care Giver IN</p>
+        <hr/>
+        <p className="colume1">Care Giver Name</p>
+        <hr/>
+        <p className="colume1">From Date DD/MM/YYYY</p>
+        <hr/>
+        <p className="colume1">To Date</p>
+        <hr/>
+        <p className="colume1">Assigment ID</p>
+        <hr/>
+        <p className="colume1">MCO</p>
+        <hr/>
+        <p className="colume1">Cordinator</p>
       </div>
     );
   };
-  const PatientViewColumDiv =() =>{
-    return(
-        <div className="columnName">
-        <p className="colume5">Name</p>
-        <p className="colume6">Address</p>
+  const ColumnDiv2 = () => {
+    return (
+      <div className="columnName">
+        <p className="colume1">MCO</p>
+        <hr/>
+        <p className="colume1">Member Search</p>
       </div>
-    )
-  }
+    );
+  };
+ 
   function renderColumeName() {
     switch (ViewSelected) {
-      case 1:
-        return <ColumnDiv />;
       case 2:
         return <ColumnDiv />;
       case 3:
-        return <ColumnDiv />;
-      case 4:
-        return (
-          <PatientViewColumDiv/>
-        );
+        return <ColumnDiv2 />;
+     
       default:
         break;
     }
@@ -73,10 +117,215 @@ function Visit() {
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
         <h1 style={{ marginLeft: "30%" }}>Set Filter from here !</h1>
         <div className="searchFieldsDiv">
+        <Grid container spacing={3}>
+        
+        <Grid item xs="3">
+          <TextField
+           
+            id="outlined-basic"
+            label="Care Giver First Name"
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item xs="3">
+        <TextField
+            id="outlined-basic"
+            label="Care Giver Last Name"
+            variant="outlined"
+          />
+        </Grid>
+          
+        <Grid item xs="3">
+        
+        <TextField
+           
+            id="outlined-basic"
+            label="Care Giver Code"
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item xs="3">
+        
+        <TextField
+            id="outlined-basic"
+            label="Assigment ID"
+            variant="outlined"
+          />
+          
+        </Grid>
+  
+        <Grid item xs="3">
+        
+        <TextField
+           
+            id="outlined-basic"
+            label="Admission ID"
+            variant="outlined"
+          />
+          
+        </Grid>
+        <Grid item xs="3">
+        
+        <TextField
+           
+            id="outlined-basic"
+            label="Member First Name"
+            variant="outlined"
+          />
+          
+        </Grid>
+        <Grid item xs="3">
+        
+        <TextField
+           
+            id="outlined-basic"
+            label="Member Last Name"
+            variant="outlined"
+          />
+          
+        </Grid>
+          
+  
+        <Grid item xs="2.87">
+        
+        <Box >
+      <FormControl fullWidth>
+        <InputLabel >Cordinator</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>  
+        </Grid>
+        <Grid item xs="2.87" style={{marginLeft:"1%"}}>
+        
+        <Box>
+      <FormControl fullWidth>
+        <InputLabel >Status</InputLabel>
+        <Select
+        
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+         </Grid>
+         <Grid item xs="2.87">
+        
+        <Box >
+      <FormControl fullWidth>
+        <InputLabel >Member Team</InputLabel>
+        <Select
+        
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+         </Grid>
+  
+         <Grid item xs="2.87">
+        
+        <Box >
+      <FormControl fullWidth>
+        <InputLabel >Member Location</InputLabel>
+        <Select
+        
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+         </Grid>
+         <Grid item xs="2.87">
+        
+        <Box >
+      <FormControl fullWidth>
+        <InputLabel >Member Branch</InputLabel>
+        <Select
+        
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+         </Grid>
+  
+         <Grid item xs="3">
+        
+        <TextField
+           
+            id="outlined-basic"
+            label="From Date dd/mm/yyyy"
+            variant="outlined"
+          />
+          
+        </Grid>
+        <Grid item xs="3">
+        
+        <TextField
+           
+            id="outlined-basic"
+            label="Till Date dd/mm/yyyy"
+            variant="outlined"
+          />
+          
+        </Grid>
+         
+    </Grid>
+        </div>
+        <Button className="searchButton" onClick={handleCloseOverlay}>
+          Search
+        </Button>
+      </div>
+    );
+  }
+  function Overlay2() {
+    return (
+      <div className="overlay">
+        <CloseIcon className="crossIcon" onClick={handleCloseOverlay2} />
+        <h1 style={{ marginLeft: "30%" }}>Set Filter from here !</h1>
+        <div className="searchFieldsDiv">
           <TextField
             className="Field"
             id="outlined-basic"
-            label="Name"
+            label="Name Hi there"
             variant="outlined"
           />
           <TextField
@@ -98,39 +347,30 @@ function Visit() {
             variant="outlined"
           />
         </div>
-        <Button className="searchButton" onClick={handleCloseOverlay}>
+        <Button className="searchButton" onClick={handleCloseOverlay2}>
           Search
         </Button>
       </div>
     );
   }
 
-  const TodaySchedulePressed = () => {
-    setViewSelected(1);
-  };
-  const unScheduledPressed = () => {
+  
+  const VisitSearchPressed = () => {
     setViewSelected(2);
   };
-  const AllVisitsPressed = () => {
+  const VisitQuickSearchPressed = () => {
     setViewSelected(3);
   };
-  const PatientListPressed = () => {
-    setViewSelected(4);
-  };
-
+  
+  
   function RenderViews() {
     switch (ViewSelected) {
-      case 1:
-        return TodayScheduleView();
-
       case 2:
-        return UnScheduleView();
+        return VisitSearchView();
 
       case 3:
-        return VisitView();
+        return VisitQuickSearchView();
 
-      case 4:
-        return PatientView();
       default:
         break;
     }
@@ -170,148 +410,56 @@ function Visit() {
       date:"03/12/2023",
     },
   ];
-  const jsonData2 = [
-    {
-      id: 1,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
-    },
-    {
-      id: 2,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
-    },
-    {
-      id: 3,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
-    },
-  ];
+  
   //
-  const TodayScheduleView = () => {
+  const VisitSearchView = () => {
     return (
       <List style={{ maxHeight: "100%", overflow: "auto" }}>
         {jsonData.map((item) => (
           <ListItem
             className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
+
           >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
+         <p className="item1">Member Name</p>
+         <hr style={{height:"10px"}}/>
+        <p className="item1">Admission ID</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Care Giver IN</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Care Giver Name</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">From Date DD/MM/YYYY</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">To Date</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Assigment ID</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">MCO</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Cordinator</p>
+           
           </ListItem>
         ))}
       </List>
     );
   };
-  const UnScheduleView = () => {
+  const VisitQuickSearchView = () => {
     return (
       <List style={{ maxHeight: "100%", overflow: "auto" }}>
         {jsonData.map((item) => (
           <ListItem
             className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
+            
           >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
+           <p className="item1">MCO</p>
+           <hr style={{height:"10px"}}/>
+        <p className="item1">Member Search</p>
           </ListItem>
         ))}
       </List>
     );
   };
-  const VisitView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
-  const PatientView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData2.map((item) => (
-          <ListItem className="ListItem"
-          key={item.id}
-          button
-          component={Link}
-          to={`/patientdetails/${item.id}`}>
-            <ListItemText  className="ListText" primary={<p style={{ fontSize:  "25px" }}>{item.name}</p> } />
-            <ListItemText  className="ListText" primary={<p style={{ fontSize: "20px" }}>{item.address}</p> } />
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
+  
 
   return (
     <Wrapper>
@@ -374,7 +522,7 @@ function Visit() {
                 Call Dashboard
               </p>
             </Button>
-            <Button onClick={unScheduledPressed} className="navigationButton">
+            <Button onClick={VisitSearchPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
@@ -383,7 +531,7 @@ function Visit() {
             </Button>
 
             
-            <Button onClick={unScheduledPressed} className="navigationButton">
+            <Button onClick={VisitQuickSearchPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
@@ -400,6 +548,7 @@ function Visit() {
           {renderColumeName()}
           <SearchIcon className="searchIcon" onClick={handleClickIcon} />
           {isOverlayOpen && <Overlay />}
+          {isOverlayOpen2 && <Overlay2 />}
           {RenderViews()}
         </Card>
       </div>
@@ -446,50 +595,64 @@ width: 100%;
 }
 .ListItem{
     margin-top:1%;
-    margin-left:2%;
     background-color:#0B2B40;
     color:white;
     border-radius:10px;
-    width: 95%;
+    width: 100%;
 }
 .ListText{
-    width:300px;
-    text-align:center;
+  width: 100px;
+  text-align: center;
  
 }
-.ListItem:hover .ListText{
-  color:black;
-  font-weight:bold;
+.item1 {
+    
+
+  font-size: 15px;
+  color: white;
+  font-weight: bold;
+  text-align:center;
+  margin:0.5%;
 }
+
 
 // overlay css end
 .overlay{
-    position: fixed;
-    margin-left:09%;
-    width: 40%;
-    height: 70%;
-    z-index:1000;
-    background-color:white;
-    padding:1%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  height: 75%;
+  z-index: 1000;
+  background-color: white;
+  padding: 1%;
 }
 .crossIcon{
     margin-left:95%;
     margin-top:2%;
 }
 .searchFieldsDiv{
-    justify-content:center;
-    align-item:center;
-    display:flex;
-    flex-direction:column;
-    margin-left:30%;
+  display: flex; 
+  margin-top:2.5%;
+  width:85%;
+  margin-left:10%;
 }
 .Field{
     width:50%;
     margin:2%;
 }
-.searchButton{
-    margin-left:40%;
-    margin-top:5%;
+.searchButton {
+  margin-left: 35%;
+  margin-top: 5%;
+  width:30%;
+  background-color:#f26e22;
+  color:white;
+  font-weight:bold;
+}
+.searchButton:hover {
+  background-color:#2E0F59;
+  color:white;
 }
 
 //overlay css end
@@ -521,18 +684,20 @@ width: 100%;
     padding:1.7%;
 }
 .columnName{
-    display:flex;
-    flex-direction:row;
-    height:5.8%;
-    border-radius:15px;
+  display: flex;
+  flex-direction: row;
+  height: 5.8%;
+  border-radius: 15px;
+  padding:1%;
     
 }
-.colume1{
-    margin-left:12%;
-    font-size:15px;
-    color:grey;
-    font-weight:bold;
-    margin-top:0.5%;
+.colume1 {
+    
+  font-size: 15px;
+  color: grey;
+  font-weight: bold;
+  text-align:center;
+  margin:0.5%;
 }
 .colume2{
     margin-left:19%;

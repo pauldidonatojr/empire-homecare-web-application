@@ -21,15 +21,10 @@ import Grid from '@mui/material/Grid';
 function CareGiver() {
 
 
-
-  //
-
   const [age, setAge] = React.useState('');
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-
-  //
   const [ViewSelected, setViewSelected] = useState(1);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
@@ -43,15 +38,23 @@ function CareGiver() {
   const ColumnDiv = () => {
     return (
       <div className="columnName">
-        <p className="colume">First Name</p>
-        <p className="colume">Last Name</p>
-        <p className="colume">Phone</p>
-        <p className="colume">CareGiver Code</p>
-        <p className="colume">Alt CG Code</p>
-        <p className="colume" >SSN</p>
-        <p className="colume">Status</p>
-        <p className="colume">Provider</p>
-        <p className="colume">Discipline</p>
+        <p className="colume1">First Name</p>
+        <hr/>
+        <p className="colume1">Last Name</p>
+        <hr/>
+        <p className="colume1">Phone</p>
+        <hr/>
+        <p className="colume1">CareGiver Code</p>
+        <hr/>
+        <p className="colume1">Alt CG Code</p>
+        <hr/>
+        <p className="colume1">SSN</p>
+        <hr/>
+        <p className="colume1">Status</p>
+        <hr/>
+        <p className="colume1">Provider</p>
+        <hr/>
+        <p className="colume1">Discipline</p>
       </div>
     );
   };
@@ -86,6 +89,7 @@ function CareGiver() {
       <div className="overlay">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
         <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
+        <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Search Care Giver</p>
         <div className="searchFieldsDiv">
         <Grid container spacing={3}>
           
@@ -287,59 +291,23 @@ function CareGiver() {
             key={item.id}
            
           >
-            <ListItemText
-              primary={<p style={{ fontSize: "15px" }}>{item.name}</p>}
-              className="ListText"
-            />
-           
-            <ListItemText
-              primary={<p style={{ fontSize: "15px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              
-              primary={
-                <p style={{ fontSize: "15px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "15px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-              <ListItemText
-              primary={
-                <p style={{ fontSize: "15px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-              <ListItemText
-              primary={
-                <p style={{ fontSize: "15px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-              <ListItemText
-              
-              primary={
-                <p style={{ fontSize: "15px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-              <ListItemText
-              primary={
-                <p style={{ fontSize: "15px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-              <ListItemText
-              primary={
-                <p style={{ fontSize: "15px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
+        <p className="item1">First Name</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Last Name</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Phone</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">CareGiver Code</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Alt CG Code</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">SSN</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Status</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Provider</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Discipline</p>
           </ListItem>
         ))}
       </List>
@@ -479,7 +447,22 @@ width: 100%;
 .ListText{
     width:250px;
 }
-
+.colume1 {
+    
+  font-size: 15px;
+  color: grey;
+  font-weight: bold;
+  text-align:center;
+  margin:0.5%;
+}
+.item1 {
+    
+  font-size: 15px;
+  color: white;
+  font-weight: bold;
+  text-align:center;
+  margin:0.5%;
+}
 
 // overlay css end
   .overlay {
@@ -488,7 +471,7 @@ width: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 75%;
-  height: 60%;
+  height: 70%;
   z-index: 1000;
   background-color: white;
   padding: 1%;
@@ -551,6 +534,7 @@ width: 100%;
     flex-direction:row;
     height:5.8%;
     border-radius:15px;
+    padding:2.4%;
     
 }
 .colume{

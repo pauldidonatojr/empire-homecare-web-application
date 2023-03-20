@@ -72,18 +72,27 @@ function Homepage() {
   const ColumnDiv = () => {
     return (
       <div className="columnName">
-        <p className="colume1">Name</p>
-        <p className="colume2">Address</p>
-        <p className="colume3">Clock In</p>
-        <p className="colume4">Clock Out</p>
-      </div>
-    );
-  };
-  const PatientViewColumDiv = () => {
-    return (
-      <div className="columnName">
-        <p className="colume5">Name</p>
-        <p className="colume6">Address</p>
+        <p className="colume1">Member ID</p>
+        <hr/>
+        <p className="colume1">Admission ID</p>
+        <hr/>
+        <p className="colume1">First Name</p>
+        <hr/>
+        <p className="colume1">Last Name</p>
+        <hr/>
+        <p className="colume1">Phone Number</p>
+        <hr/>
+        <p className="colume1">Status</p>
+        <hr/>
+        <p className="colume1">Cordinator</p>
+        <hr/>
+        <p className="colume1">MCO</p>
+        <hr/>
+        <p className="colume1">Office</p>
+        <hr/>
+        <p className="colume1">Member Team</p>
+        <hr/>
+        <p className="colume1">Vendor Tax ID</p>
       </div>
     );
   };
@@ -91,12 +100,7 @@ function Homepage() {
     switch (ViewSelected) {
       case 1:
         return <ColumnDiv />;
-      case 2:
-        return <ColumnDiv />;
-      case 3:
-        return <ColumnDiv />;
-      case 4:
-        return <PatientViewColumDiv />;
+      
       default:
         break;
     }
@@ -109,6 +113,7 @@ function Homepage() {
       <div className="overlay">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
         <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
+        <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Members</p>
         <div className="searchFieldsDiv">
         <Grid container spacing={3}>
           
@@ -310,26 +315,27 @@ function Homepage() {
             className="ListItem"
            
           >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
+         <p className="item1">Member ID</p>
+         <hr style={{height:"10px"}}/>
+        <p className="item1">Admission ID</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">First Name</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Last Name</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Phone Number</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Status</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Cordinator</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">MCO</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Office</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Member Team</p>
+        <hr style={{height:"10px"}}/>
+        <p className="item1">Vendor Tax ID</p>
           </ListItem>
         ))}
       </List>
@@ -505,26 +511,30 @@ const Wrapper = styled.section`
   }
   .ListItem {
     margin-top: 1%;
-    margin-left: 2%;
     background-color: #0b2b40;
     color: white;
     border-radius: 10px;
-    width: 95%;
+    width: 100%;
   }
   .ListText {
-    width: 300px;
+    width: 100px;
     text-align: center;
   }
-  //
-
-  .menu {
-    background-color: #0a3a40;
+  .ListItem:hover .ListText {
+    color: black;
+    font-weight: bold;
+    background-color: white;
   }
-  .MenuItem {
-    width: 400px;
-  }
+  .item1 {
+    
 
-  //
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
+    text-align:center;
+    margin:0.5%;
+  }
+  //List Items
 
   //Notification Start
 
@@ -566,7 +576,7 @@ const Wrapper = styled.section`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 75%;
-  height: 60%;
+  height: 70%;
   z-index: 1000;
   background-color: white;
   padding: 1%;
@@ -627,49 +637,16 @@ const Wrapper = styled.section`
     flex-direction: row;
     height: 5.8%;
     border-radius: 15px;
+    padding:1%;
   }
   .colume1 {
-    margin-left: 12%;
     font-size: 15px;
     color: grey;
     font-weight: bold;
-    margin-top: 0.5%;
+    text-align:center;
+    margin:0.5%;
   }
-  .colume2 {
-    margin-left: 19%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
-  .colume3 {
-    margin-left: 17.5%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
-  .colume4 {
-    margin-left: 17%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
-  .colume5 {
-    margin-left: 20%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
-  .colume6 {
-    margin-left: 45%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
+  
   .searchIcon {
     position: absolute;
     z-index: 999;

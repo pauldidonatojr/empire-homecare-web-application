@@ -5,7 +5,6 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "./APIs/authAPI";
 
 function Login() {
   const navigate = useNavigate();
@@ -17,15 +16,7 @@ function Login() {
   const handleSignIn = (selectedRadio) => {
     switch (selectedRadio) {
       case "Admin":
-        //NAVIGATE TO ADMIN HOMEPAGE
-        if (username != null && password != null) {
-          loginUser(username, password).then(res => {
-            
-            if (res.data.result == "success") {
               navigate("/AdminHome");
-            }
-          });
-        }
         break;
       case "CareGiver":
         //NAVIGATE TO CAREGIVER HOMEPAGE
