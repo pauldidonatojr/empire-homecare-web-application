@@ -115,7 +115,8 @@ function Visit() {
     return (
       <div className="overlay">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ marginLeft: "30%" }}>Set Filter from here !</h1>
+        <h1 style={{ marginLeft: "41%" }}>Set Filter from here !</h1>
+      <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Visit Search</p>
         <div className="searchFieldsDiv">
         <Grid container spacing={3}>
         
@@ -318,34 +319,48 @@ function Visit() {
   }
   function Overlay2() {
     return (
-      <div className="overlay">
+      <div className="overlay2">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay2} />
-        <h1 style={{ marginLeft: "30%" }}>Set Filter from here !</h1>
-        <div className="searchFieldsDiv">
-          <TextField
-            className="Field"
+        <h1 style={{ marginLeft: "35%" }}>Set Filter from here !</h1>
+      <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Quick Visit Search</p>
+        <div className="searchFieldsDiv2">
+        <Grid container spacing={2}>
+        
+        
+         <Grid item xs="2.87">
+        
+        <Box >
+      <FormControl fullWidth>
+        <InputLabel >MCO</InputLabel>
+        <Select
+        
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+         </Grid>
+  
+        
+        <Grid item xs="3">
+        
+        <TextField
+           
             id="outlined-basic"
-            label="Name Hi there"
+            label="Member Search"
             variant="outlined"
           />
-          <TextField
-            className="Field"
-            id="outlined-basic"
-            label="Address"
-            variant="outlined"
-          />
-          <TextField
-            className="Field"
-            id="outlined-basic"
-            label="Expected Time Out"
-            variant="outlined"
-          />
-          <TextField
-            className="Field"
-            id="outlined-basic"
-            label="Expected Time In"
-            variant="outlined"
-          />
+          
+        </Grid>
+         
+    </Grid>
         </div>
         <Button className="searchButton" onClick={handleCloseOverlay2}>
           Search
@@ -453,7 +468,8 @@ function Visit() {
           >
            <p className="item1">MCO</p>
            <hr style={{height:"10px"}}/>
-        <p className="item1">Member Search</p>
+        <p className="item
+        1">Member Search</p>
           </ListItem>
         ))}
       </List>
@@ -628,6 +644,17 @@ width: 100%;
   background-color: white;
   padding: 1%;
 }
+.overlay2{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 40%;
+  z-index: 1000;
+  background-color: white;
+  padding: 1%;
+}
 .crossIcon{
     margin-left:95%;
     margin-top:2%;
@@ -637,6 +664,12 @@ width: 100%;
   margin-top:2.5%;
   width:85%;
   margin-left:10%;
+}
+.searchFieldsDiv2{
+  display: flex; 
+  margin-top:2.5%;
+  width:85%;
+  margin-left:30%;
 }
 .Field{
     width:50%;
@@ -654,7 +687,15 @@ width: 100%;
   background-color:#2E0F59;
   color:white;
 }
+.item1 {
+    
 
+  font-size: 15px;
+  color: white;
+  font-weight: bold;
+  text-align:center;
+  margin:0.5%;
+}
 //overlay css end
 
 

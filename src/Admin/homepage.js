@@ -625,7 +625,7 @@ const Wrapper = styled.section`
 
   //data display card
   .dataDisplay {
-    height: 645px;
+    height: 668px;
     width: 70%;
     margin-left: 2%;
     margin-top: 0.5%;
@@ -665,7 +665,7 @@ const Wrapper = styled.section`
   //UserInfo(TaskBar)
   .TaskBar {
     width: 20%;
-    height: 700px;
+    height: 725px;
     background-color: #2a558c;
     margin-top: 0.5%;
     margin-bottom: 10%;
