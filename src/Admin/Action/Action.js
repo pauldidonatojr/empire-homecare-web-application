@@ -10,13 +10,19 @@ import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
+import { useNavigate } from "react-router-dom";
 const Link = require("react-router-dom").Link;
 
 function Action() {
   const [ViewSelected, setViewSelected] = useState(1);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-
+  const navigate = useNavigate();
+  function  PendingQueuePressed(){
+    navigate("/PendingQueuePlacement");
+    
+   }
+   
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
   };
@@ -350,9 +356,8 @@ function Action() {
           <hr style={{width:"50%",fontSize:"10px",opacity:"0.2"}}/>
           <div className="buttonHolder">
             <Button
-              className="navigationButton"
               onClick={() => {
-                TodaySchedulePressed();
+                PendingQueuePressed();
               }}
             >
               <p

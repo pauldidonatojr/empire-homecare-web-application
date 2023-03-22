@@ -20,7 +20,7 @@ import Grid from '@mui/material/Grid';
 //
 const Link = require("react-router-dom").Link;
 
-function CallDashBoard() {
+function PendingQueuePlacement() {
   const [ViewSelected, setViewSelected] = useState(1);
 
   
@@ -32,9 +32,6 @@ const handleChange = (event) => {
 };
 
 //
-  
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-  const [isOverlayOpen2, setIsOverlayOpen2] = useState(false);
   const [isOverlayOpen3, setIsOverlayOpen3] = useState(false);
   const [isOverlayOpen4, setIsOverlayOpen4] = useState(false);
   const [isOverlayOpen5, setIsOverlayOpen5] = useState(false);
@@ -43,12 +40,7 @@ const handleChange = (event) => {
   const handleClickIcon = () => {
     
     switch (ViewSelected) {
-      case 1:
-        setIsOverlayOpen(true);
-        break;
-      case 2:
-        setIsOverlayOpen2(true);
-        break;
+      
       case 3:
         setIsOverlayOpen3(true);
         break;
@@ -67,14 +59,7 @@ const handleChange = (event) => {
 
   };
   //
-//
-const CallMaintancePressed = () => {
-  setViewSelected(1);
-};
 
-const MissedInPressed = () => {
-  setViewSelected(2);
-};
 const MissedOutPressed = () => {
   setViewSelected(3);
 };
@@ -87,13 +72,7 @@ const VisitLogPressed = () => {
 const RejectedCallsPressed = () => {
   setViewSelected(6);
 };
-  //
-  const handleCloseOverlay = () => {
-    setIsOverlayOpen(false);
-  };
-  const handleCloseOverlay2 = () => {
-    setIsOverlayOpen2(false);
-  };
+
   const handleCloseOverlay3 = () => {
     setIsOverlayOpen3(false);
   };
@@ -108,59 +87,6 @@ const RejectedCallsPressed = () => {
   };
 
 
-
-  const ColumnDiv1 = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">First Name</p>
-        <hr/>
-        <p className="colume1">Last Name</p>
-        <hr/>
-        <p className="colume1">Phone Code</p>
-        <hr/>
-        <p className="colume1">Assigment ID</p>
-        <hr/>
-        <p className="colume1">Admission ID</p>
-        <hr/>
-        <p className="colume1">Member First Name</p>
-        <hr/>
-        <p className="colume1">Member Last Name</p>
-        <hr/>
-        <p className="colume1">Cordinator</p>
-        <hr/>
-        <p className="colume1">Status</p>
-        <hr/>
-        <p className="colume1">Member Team</p>
-        <hr/>
-        <p className="colume1">Member Branch</p>
-        <hr/>
-        <p className="colume1">Member Branch</p>
-        <hr/>
-        <p className="colume1">From Date</p>
-        <hr/>
-        <p className="colume1">Till Date</p>
-      </div>
-    );
-  };
-  const ColumnDiv2 = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">Name</p>
-        <hr/>
-        <p className="colume1">Admission ID</p>
-        <hr/>
-        <p className="colume1">Member Name</p>
-        <hr/>
-        <p className="colume1">MCO</p>
-        <hr/>
-        <p className="colume1">Cordinator</p>
-        <hr/>
-        <p className="colume1">Team Member</p>
-        <hr/>
-        <p className="colume1">Assigment ID</p>
-      </div>
-    );
-  };
   const ColumnDiv3 = () => {
     return (
       <div className="columnName">
@@ -246,10 +172,7 @@ const RejectedCallsPressed = () => {
 
   function renderColumeName() {
     switch (ViewSelected) {
-      case 1:
-        return <ColumnDiv1 />;
-      case 2:
-        return <ColumnDiv2 />;
+      
       case 3:
         return <ColumnDiv3 />;
         case 4:
@@ -262,364 +185,18 @@ const RejectedCallsPressed = () => {
         break;
     }
   }
-  //CallMaintance Search Overlay
-  function Overlay() {
-    return (
-      <div className="overlay">
-      <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-      <h1 style={{ marginLeft: "41%" }}>Set Filter from here !</h1>
-      <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Call Maintaince</p>
-      <div className="searchFieldsDiv">
-      <Grid container spacing={3}>
-        
-      <Grid item xs="3">
-        <TextField
-         
-          id="outlined-basic"
-          label="Care Giver First Name"
-          variant="outlined"
-        />
-      </Grid>
-      <Grid item xs="3">
-      <TextField
-          id="outlined-basic"
-          label="Care Giver Last Name"
-          variant="outlined"
-        />
-      </Grid>
-        
-      <Grid item xs="3">
-      
-      <TextField
-         
-          id="outlined-basic"
-          label="Care Giver Code"
-          variant="outlined"
-        />
-      </Grid>
-      <Grid item xs="3">
-      
-      <TextField
-          id="outlined-basic"
-          label="Assigment ID"
-          variant="outlined"
-        />
-        
-      </Grid>
-
-      <Grid item xs="3">
-      
-      <TextField
-         
-          id="outlined-basic"
-          label="Admission ID"
-          variant="outlined"
-        />
-        
-      </Grid>
-      <Grid item xs="3">
-      
-      <TextField
-         
-          id="outlined-basic"
-          label="Member First Name"
-          variant="outlined"
-        />
-        
-      </Grid>
-      <Grid item xs="3">
-      
-      <TextField
-         
-          id="outlined-basic"
-          label="Member Last Name"
-          variant="outlined"
-        />
-        
-      </Grid>
-        
-
-      <Grid item xs="2.87">
-      
-      <Box >
-    <FormControl fullWidth>
-      <InputLabel >Cordinator</InputLabel>
-      <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={age}
-        label="Status"
-        onChange={handleChange}
-      >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </Select>
-    </FormControl>
-  </Box>  
-      </Grid>
-      <Grid item xs="2.87" style={{marginLeft:"1%"}}>
-      
-      <Box>
-    <FormControl fullWidth>
-      <InputLabel >Status</InputLabel>
-      <Select
-      
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={age}
-        label="Status"
-        onChange={handleChange}
-      >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </Select>
-    </FormControl>
-  </Box>
-       </Grid>
-       <Grid item xs="2.87">
-      
-      <Box >
-    <FormControl fullWidth>
-      <InputLabel >Member Team</InputLabel>
-      <Select
-      
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={age}
-        label="Status"
-        onChange={handleChange}
-      >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </Select>
-    </FormControl>
-  </Box>
-       </Grid>
-
-       <Grid item xs="2.87">
-      
-      <Box >
-    <FormControl fullWidth>
-      <InputLabel >Member Location</InputLabel>
-      <Select
-      
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={age}
-        label="Status"
-        onChange={handleChange}
-      >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </Select>
-    </FormControl>
-  </Box>
-       </Grid>
-       <Grid item xs="2.87">
-      
-      <Box >
-    <FormControl fullWidth>
-      <InputLabel >Member Branch</InputLabel>
-      <Select
-      
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={age}
-        label="Status"
-        onChange={handleChange}
-      >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </Select>
-    </FormControl>
-  </Box>
-       </Grid>
-
-       <Grid item xs="3">
-      
-      <TextField
-         
-          id="outlined-basic"
-          label="From Date dd/mm/yyyy"
-          variant="outlined"
-        />
-        
-      </Grid>
-      <Grid item xs="3">
-      
-      <TextField
-         
-          id="outlined-basic"
-          label="Till Date dd/mm/yyyy"
-          variant="outlined"
-        />
-        
-      </Grid>
-       
-  </Grid>
-      </div>
-      <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay}>
-        Search
-      </Button>
-    </div>
-    );
-  }
   
-//MissedIn
-function Overlay2() {
-  return (
-    <div className="overlay2">
-    <CloseIcon className="crossIcon" onClick={handleCloseOverlay2} />
-    <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
-    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Missed In</p>
-    <div className="searchFieldsDiv">
-    <Grid container spacing={3}>
-      
-    <Grid item xs="3">
-      <TextField
-       
-        id="outlined-basic"
-        label="CareGiver Name"
-        variant="outlined"
-      />
-    </Grid>
-    <Grid item xs="3">
-    <TextField
-        id="outlined-basic"
-        label="Admission ID"
-        variant="outlined"
-      />
-    </Grid>
-      
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Member Name"
-        variant="outlined"
-      />
-    </Grid>
-      
+  
 
-    <Grid item xs="2.87">
-    
-    <Box >
-  <FormControl fullWidth>
-    <InputLabel >MCO</InputLabel>
-    <Select
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      value={age}
-      label="Status"
-      onChange={handleChange}
-    >
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
-    </Select>
-  </FormControl>
-</Box>  
-    </Grid>
-    <Grid item xs="2.87" style={{marginLeft:"1%"}}>
-    
-    <Box>
-  <FormControl fullWidth>
-    <InputLabel >Cordinator</InputLabel>
-    <Select
-    
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      value={age}
-      label="Status"
-      onChange={handleChange}
-    >
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
-    </Select>
-  </FormControl>
-</Box>
-     </Grid>
-     <Grid item xs="2.87">
-    
-    <Box >
-  <FormControl fullWidth>
-    <InputLabel >Team Member</InputLabel>
-    <Select
-    
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      value={age}
-      label="Status"
-      onChange={handleChange}
-    >
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
-    </Select>
-  </FormControl>
-</Box>
-     </Grid>
-     <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Assigment ID"
-        variant="outlined"
-      />
-    </Grid>
-</Grid>
-    </div>
-    <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay2}>
-      Search
-    </Button>
-  </div>
-  );
-}
 
-//Missed Out
 function Overlay3() {
   return (
-    <div className="overlay3">
+    <div className="overlay">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay3} />
     <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Missed Out</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
-      
-    <Grid item xs="3">
-      <TextField
-       
-        id="outlined-basic"
-        label="CareGiver Name"
-        variant="outlined"
-      />
-    </Grid>
-    <Grid item xs="3">
-    <TextField
-        id="outlined-basic"
-        label="Admission ID"
-        variant="outlined"
-      />
-    </Grid>
-      
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Member Name"
-        variant="outlined"
-      />
-    </Grid>
-  
 
     <Grid item xs="2.87">
     
@@ -640,58 +217,6 @@ function Overlay3() {
   </FormControl>
 </Box>  
     </Grid>
-    <Grid item xs="2.87" style={{marginLeft:"1%"}}>
-    
-    <Box>
-  <FormControl fullWidth>
-    <InputLabel >Cordinator</InputLabel>
-    <Select
-    
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      value={age}
-      label="Status"
-      onChange={handleChange}
-    >
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
-    </Select>
-  </FormControl>
-</Box>
-     </Grid>
-     <Grid item xs="2.87">
-    
-    <Box >
-  <FormControl fullWidth>
-    <InputLabel >Team Member</InputLabel>
-    <Select
-    
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      value={age}
-      label="Status"
-      onChange={handleChange}
-    >
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
-    </Select>
-  </FormControl>
-</Box>
-     </Grid>
-
-     <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Assigment ID"
-        variant="outlined"
-      />
-    </Grid>
-  
-     
 </Grid>
     </div>
     <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay3}>
@@ -700,47 +225,20 @@ function Overlay3() {
   </div>
   );
 }
-//Missed Call Overlay
 function Overlay4() {
   return (
-    <div className="overlay4">
+    <div className="overlay">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay4} />
-    <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
+    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Missed Call</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
       
-    <Grid item xs="3">
-      <TextField
-       
-        id="outlined-basic"
-        label="Care Giver Name"
-        variant="outlined"
-      />
-    </Grid>
-    <Grid item xs="3">
-    <TextField
-        id="outlined-basic"
-        label="Admission ID"
-        variant="outlined"
-      />
-    </Grid>
-      
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Member Name"
-        variant="outlined"
-      />
-    </Grid>
-
     <Grid item xs="2.87">
     
     <Box >
   <FormControl fullWidth>
-    <InputLabel >MCO</InputLabel>
+    <InputLabel >MCdO</InputLabel>
     <Select
       labelId="demo-simple-select-label"
       id="demo-simple-select"
@@ -754,57 +252,7 @@ function Overlay4() {
     </Select>
   </FormControl>
 </Box>  
-    </Grid>
-    <Grid item xs="2.87" style={{marginLeft:"1%"}}>
-    
-    <Box>
-  <FormControl fullWidth>
-    <InputLabel >Cordinator</InputLabel>
-    <Select
-    
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      value={age}
-      label="Status"
-      onChange={handleChange}
-    >
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
-    </Select>
-  </FormControl>
-</Box>
-     </Grid>
-     <Grid item xs="2.87">
-    
-    <Box >
-  <FormControl fullWidth>
-    <InputLabel >Team Member</InputLabel>
-    <Select
-    
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      value={age}
-      label="Status"
-      onChange={handleChange}
-    >
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
-    </Select>
-  </FormControl>
-</Box>
-     </Grid>
-     <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Assigment ID"
-        variant="outlined"
-      />
-    </Grid>
-     
+    </Grid> 
 </Grid>
     </div>
     <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay4}>
@@ -816,52 +264,18 @@ function Overlay4() {
 //Visit Log
 function Overlay5() {
   return (
-    <div className="overlay5">
+    <div className="overlay">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay5} />
     <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Visit Log</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
       
-    <Grid item xs="3">
-      <TextField
-       
-        id="outlined-basic"
-        label="First Name"
-        variant="outlined"
-      />
-    </Grid>
-    <Grid item xs="3">
-    <TextField
-        id="outlined-basic"
-        label="Last Name"
-        variant="outlined"
-      />
-    </Grid>
-      
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Care Giver Code"
-        variant="outlined"
-      />
-    </Grid>
-    <Grid item xs="3">
-    
-    <TextField
-        id="outlined-basic"
-        label="Care Giver Name"
-        variant="outlined"
-      />
-      
-    </Grid>
     <Grid item xs="2.87">
     
     <Box >
   <FormControl fullWidth>
-    <InputLabel >Team Member</InputLabel>
+    <InputLabel >MCO</InputLabel>
     <Select
       labelId="demo-simple-select-label"
       id="demo-simple-select"
@@ -875,69 +289,6 @@ function Overlay5() {
     </Select>
   </FormControl>
 </Box>  
-    </Grid>
-
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Assigment ID"
-        variant="outlined"
-      />
-      
-    </Grid>
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Admission ID"
-        variant="outlined"
-      />
-      
-    </Grid>
-      
-
-    <Grid item xs="2.87">
-    
-    <Box >
-  <FormControl fullWidth>
-    <InputLabel >Cordinator</InputLabel>
-    <Select
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      value={age}
-      label="Status"
-      onChange={handleChange}
-    >
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
-    </Select>
-  </FormControl>
-</Box>  
-    </Grid>
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="From Date dd/mm/yyyy"
-        variant="outlined"
-      />
-      
-    </Grid>
-    
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Till Date dd/mm/yyyy"
-        variant="outlined"
-      />
-      
     </Grid>
      
 </Grid>
@@ -948,56 +299,21 @@ function Overlay5() {
   </div>
   );
 }
-//Rejected Calls
+
 function Overlay6() {
   return (
-    <div className="overlay6">
+    <div className="overlay">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay6} />
     <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
-    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Rejected Calls</p>
+    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Total Accepted</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
       
-    <Grid item xs="3">
-      <TextField
-       
-        id="outlined-basic"
-        label="Care Giver Code"
-        variant="outlined"
-      />
-    </Grid>
-    <Grid item xs="3">
-    <TextField
-        id="outlined-basic"
-        label="Care Giver Name"
-        variant="outlined"
-      />
-    </Grid>
-      
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Assigment ID"
-        variant="outlined"
-      />
-    </Grid>
-    <Grid item xs="3">
-    
-    <TextField
-        id="outlined-basic"
-        label="Admission ID"
-        variant="outlined"
-      />
-      
-    </Grid>
-
     <Grid item xs="2.87">
     
     <Box >
   <FormControl fullWidth>
-    <InputLabel >Team Member</InputLabel>
+    <InputLabel >MCO</InputLabel>
     <Select
       labelId="demo-simple-select-label"
       id="demo-simple-select"
@@ -1011,24 +327,6 @@ function Overlay6() {
     </Select>
   </FormControl>
 </Box>  
-    </Grid>
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="From Date dd/mm/yy"
-        variant="outlined"
-      />
-    </Grid>
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Till Date dd/mm/yy"
-        variant="outlined"
-      />
     </Grid>
      
 </Grid>
@@ -1043,11 +341,7 @@ function Overlay6() {
 
   function RenderViews() {
     switch (ViewSelected) {
-      case 1:
-        return CallMaintanceView();
-
-      case 2:
-        return MissedInView();
+      
       case 3:
         return MissedOutView();
       case 4:
@@ -1217,74 +511,7 @@ function Overlay6() {
     );
   };
   
-  const CallMaintanceView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto",width:"100%" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-          >
-        
-        <p className="item1">First Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Last Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Phone Code</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Assigment ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Admission ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member First Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member Last Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Cordinator</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Status</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member Team</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member Branch</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member Branch</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">From Date</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Till Date</p>
-    
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
-  const MissedInView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-          >
-           <p className="item1">Name</p>
-           <hr style={{height:"10px"}}/>
-        <p className="item1">Admission ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">MCO</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Cordinator</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Team Member</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Assigment ID</p>
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
+  
 
   return (
     <Wrapper>
@@ -1331,56 +558,34 @@ function Overlay6() {
           </p>
           <hr style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
           <div className="buttonHolder">
-            <Button
-              className="navigationButton"
-              onClick={() => {
-                CallMaintancePressed();
-              }}
-            >
-              <p
-                style={{
-                  fontSize: "15px",
-                  color: "white",
-                  fontWeight: "bold",
-                }}
-              >
-                Call Maintaince
-              </p>
-            </Button>
-            <Button onClick={MissedInPressed} className="navigationButton">
-              <p
-                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
-              >
-                Missed In
-              </p>
-            </Button>
+         
 
             <Button onClick={MissedOutPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Missed Out
+                Pending
               </p>
             </Button>
             <Button onClick={MissedCallPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Missed Call
+                Total Accepted
               </p>
             </Button>
             <Button onClick={VisitLogPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Visit Log
+                Staffed
               </p>
             </Button>
             <Button onClick={RejectedCallsPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Rejected Calls
+                Accepted Non MasterWok
               </p>
             </Button>
           </div>
@@ -1389,8 +594,6 @@ function Overlay6() {
         <Card className="dataDisplay">
           {renderColumeName()}
           <SearchIcon className="searchIcon" onClick={handleClickIcon} />
-          {isOverlayOpen && <Overlay />}
-          {isOverlayOpen2 && <Overlay2 />}
           {isOverlayOpen3 && <Overlay3 />}
           {isOverlayOpen4 && <Overlay4 />}
           {isOverlayOpen5 && <Overlay5 />}
@@ -1429,7 +632,7 @@ function Overlay6() {
     </Wrapper>
   );
 }
-export default CallDashBoard;
+export default PendingQueuePlacement;
 
 const Wrapper = styled.section`
   height: 100%;
@@ -1472,67 +675,13 @@ const Wrapper = styled.section`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 75%;
-  height: 75%;
+  width: 30%;
+  height: 50%;
   z-index: 1000;
   background-color: white;
   padding: 1%;
   }
-  .overlay2{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 75%;
-  height: 60%;
-  z-index: 1000;
-  background-color: white;
-  padding: 1%;
-  }
-  .overlay3{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 75%;
-    height: 60%;
-    z-index: 1000;
-    background-color: white;
-    padding: 1%;
-    }
-    .overlay4{
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 75%;
-      height: 60%;
-      z-index: 1000;
-      background-color: white;
-      padding: 1%;
-      }
-      .overlay5{
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 75%;
-        height: 65%;
-        z-index: 1000;
-        background-color: white;
-        padding: 1%;
-        }
-        .overlay6{
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 75%;
-          height: 55%;
-          z-index: 1000;
-          background-color: white;
-          padding: 1%;
-          }
+ 
   .crossIcon {
     margin-left: 95%;
     margin-top: 2%;
@@ -1541,7 +690,7 @@ const Wrapper = styled.section`
     display: flex; 
     margin-top:2.5%;
     width:85%;
-    margin-left:10%;
+    margin-left:40%;
   }
 
   .searchButton {

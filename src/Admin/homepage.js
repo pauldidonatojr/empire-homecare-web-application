@@ -274,6 +274,7 @@ function Homepage() {
   }
   //
   const jsonData = [
+    
     {
       id: 1,
       name: "Wanda De Martinez",
@@ -308,37 +309,45 @@ function Homepage() {
     },
   ];
   const MembersView = () => {
+  
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-           
-          >
-         <p className="item1">Member ID</p>
-         <hr style={{height:"10px"}}/>
-        <p className="item1">Admission ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">First Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Last Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Phone Number</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Status</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Cordinator</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">MCO</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Office</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member Team</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Vendor Tax ID</p>
-          </ListItem>
-        ))}
-      </List>
+     <div>
+        <table className="table">
+           <thead>
+            <tr>
+        <th className="th">Member ID</th>
+        <th className="th">Admission ID</th>
+        <th className="th">First Name</th>
+        <th className="th">Last Name</th>
+        <th className="th">Phone Number</th>
+        <th className="th">Status</th>
+        <th className="th">Cordinator</th>
+        <th className="th">MCO</th>
+        <th className="th">Office</th>
+        <th className="th">  Member Team</th>
+        <th className="th">Vendor Tax ID</th>
+            </tr>
+           </thead>
+           <tbody>
+            {jsonData.map((data,i)=>(
+              <tr>
+                <td className="th">{"KDJLKJ45"}</td>
+                <td className="th">{"Admission ID"}</td>
+                <td className="th">{"fIRSTJ"}</td>
+                <td className="th">{"lASTHAN"}</td>
+                <td className="th">{"data.address"}</td>
+                <td className="th">{data.address}</td>
+                <td className="th">{data.address}</td>
+                <td className="th">{data.address}</td>
+                <td className="th">{data.address}</td>
+                <td className="th">{data.address}</td>
+                <td className="th">{data.address}</td>
+              </tr>
+            ))}
+              
+           </tbody>
+        </table>      
+     </div>
     );
   };
   
@@ -462,7 +471,7 @@ function Homepage() {
         </Card>
 
         <Card className="dataDisplay">
-          {renderColumeName()}
+         
           <SearchIcon className="searchIcon" onClick={handleClickIcon} />
           {isOverlayOpen && <Overlay />}
           {RenderViews()}
@@ -509,6 +518,20 @@ const Wrapper = styled.section`
     display: flex;
     flex-direction: row;
   }
+
+  //
+
+  .table {
+    border-collapse: collapse;
+    padding:1%;
+  }
+  
+  .th {
+    border: 1px solid #aaaaaa;
+    width:20%;    
+  }
+
+  //
   .ListItem {
     margin-top: 1%;
     background-color: #0b2b40;
