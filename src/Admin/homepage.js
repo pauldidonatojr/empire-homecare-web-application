@@ -69,42 +69,7 @@ function Homepage() {
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
-  const ColumnDiv = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">Member ID</p>
-        <hr/>
-        <p className="colume1">Admission ID</p>
-        <hr/>
-        <p className="colume1">First Name</p>
-        <hr/>
-        <p className="colume1">Last Name</p>
-        <hr/>
-        <p className="colume1">Phone Number</p>
-        <hr/>
-        <p className="colume1">Status</p>
-        <hr/>
-        <p className="colume1">Cordinator</p>
-        <hr/>
-        <p className="colume1">MCO</p>
-        <hr/>
-        <p className="colume1">Office</p>
-        <hr/>
-        <p className="colume1">Member Team</p>
-        <hr/>
-        <p className="colume1">Vendor Tax ID</p>
-      </div>
-    );
-  };
-  function renderColumeName() {
-    switch (ViewSelected) {
-      case 1:
-        return <ColumnDiv />;
-      
-      default:
-        break;
-    }
-  }
+  
 
   function Overlay() {
     
@@ -324,24 +289,22 @@ function Homepage() {
         <th className="th">Cordinator</th>
         <th className="th">MCO</th>
         <th className="th">Office</th>
-        <th className="th">  Member Team</th>
         <th className="th">Vendor Tax ID</th>
             </tr>
            </thead>
            <tbody>
             {jsonData.map((data,i)=>(
               <tr>
-                <td className="th">{"KDJLKJ45"}</td>
-                <td className="th">{"Admission ID"}</td>
-                <td className="th">{"fIRSTJ"}</td>
-                <td className="th">{"lASTHAN"}</td>
-                <td className="th">{"data.address"}</td>
-                <td className="th">{data.address}</td>
-                <td className="th">{data.address}</td>
-                <td className="th">{data.address}</td>
-                <td className="th">{data.address}</td>
-                <td className="th">{data.address}</td>
-                <td className="th">{data.address}</td>
+                <td className="td">Member ID</td>
+                <td className="td">Admission ID</td>
+                <td className="td">First Name</td>
+                <td className="td">Last Name</td>
+                <td className="td">Phone Number</td>
+                <td className="td">Status</td>
+                <td className="td">Cordinator</td>
+                <td className="td">MCO</td>
+                <td className="td">Office</td>
+                <td className="td">Vendor Tax ID</td>
               </tr>
             ))}
               
@@ -472,8 +435,9 @@ function Homepage() {
 
         <Card className="dataDisplay">
          
-          <SearchIcon className="searchIcon" onClick={handleClickIcon} />
+         
           {isOverlayOpen && <Overlay />}
+          <SearchIcon className="searchIcon" onClick={handleClickIcon} />
           {RenderViews()}
         </Card>
       </div>
@@ -524,11 +488,22 @@ const Wrapper = styled.section`
   .table {
     border-collapse: collapse;
     padding:1%;
+    width:100%;
+    background-color: #0b2b40;
   }
   
   .th {
     border: 1px solid #aaaaaa;
-    width:20%;    
+    text-align: center;
+    font-size:20px;
+    color:white;
+  }
+  .td {
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    color:white;
+    font-size:17px;
+    
   }
 
   //
@@ -674,9 +649,9 @@ const Wrapper = styled.section`
     position: absolute;
     z-index: 999;
     padding: 1%;
-    font-size: 50px;
+    font-size: 25px;
     color: white;
-    margin-left: 65%;
+    margin-left: 69.2%;
     cursor: pointer;
     background-color: grey;
     border-radius: 500px;

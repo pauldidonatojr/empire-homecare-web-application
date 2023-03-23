@@ -11,6 +11,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
+//
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Grid from '@mui/material/Grid';
+//
 const Link = require("react-router-dom").Link;
 
 function Action() {
@@ -23,111 +31,138 @@ function Action() {
     
    }
    
+   //
+
+const [age, setAge] = React.useState('');
+const handleChange = (event) => {
+  setAge(event.target.value);
+};
+
+//
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
   };
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
-  const ColumnDiv = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">Name</p>
-        <p className="colume2">Address</p>
-        <p className="colume3">Clock In</p>
-        <p className="colume4">Clock Out</p>
-      </div>
-    );
-  };
-  const PatientViewColumDiv =() =>{
-    return(
-        <div className="columnName">
-        <p className="colume5">Name</p>
-        <p className="colume6">Address</p>
-      </div>
-    )
-  }
-  function renderColumeName() {
-    switch (ViewSelected) {
-      case 1:
-        return <ColumnDiv />;
-      case 2:
-        return <ColumnDiv />;
-      case 3:
-        return <ColumnDiv />;
-      case 4:
-        return (
-          <PatientViewColumDiv/>
-        );
-      default:
-        break;
-    }
-  }
+
 
   function Overlay() {
     return (
       <div className="overlay">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ marginLeft: "30%" }}>Set Filter from here !</h1>
-        <div className="searchFieldsDiv">
-          <TextField
-            className="Field"
-            id="outlined-basic"
-            label="Name"
-            variant="outlined"
-          />
-          <TextField
-            className="Field"
-            id="outlined-basic"
-            label="Address"
-            variant="outlined"
-          />
-          <TextField
-            className="Field"
-            id="outlined-basic"
-            label="Expected Time Out"
-            variant="outlined"
-          />
-          <TextField
-            className="Field"
-            id="outlined-basic"
-            label="Expected Time In"
-            variant="outlined"
-          />
-        </div>
-        <Button className="searchButton" onClick={handleCloseOverlay}>
-          Search
-        </Button>
+      <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
+      <h1 style={{textAlign:"center"}}>Set Filter from here !</h1>
+      <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Communication Message Center</p>
+      <div className="searchFieldsDiv">
+      <Grid container spacing={3}>
+      <Grid item xs="2.87">
+      
+      <Box >
+    <FormControl fullWidth>
+      <InputLabel >MCO</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={age}
+        label="Status"
+        onChange={handleChange}
+      >
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
+    </FormControl>
+  </Box>  
+      </Grid>
+      <Grid item xs="2.87">
+      
+      <Box >
+    <FormControl fullWidth>
+      <InputLabel >Message Type</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={age}
+        label="Status"
+        onChange={handleChange}
+      >
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
+    </FormControl>
+  </Box>  
+      </Grid>
+      <Grid item xs="2.87">
+      
+      <Box >
+    <FormControl fullWidth>
+      <InputLabel >Status</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={age}
+        label="Status"
+        onChange={handleChange}
+      >
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
+    </FormControl>
+  </Box>  
+      </Grid>
+      <Grid item xs="2.87">
+      
+      <Box >
+    <FormControl fullWidth>
+      <InputLabel >Reason</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={age}
+        label="Status"
+        onChange={handleChange}
+      >
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
+    </FormControl>
+  </Box>  
+      </Grid>
+      
+        
+      <Grid item xs="3">
+        <TextField
+         
+          id="outlined-basic"
+          label="From Date DD/MM/YYYY"
+          variant="outlined"
+        />
+      </Grid>
+      <Grid item xs="3">
+      <TextField
+          id="outlined-basic"
+          label="Till Date DD//MM/YYYY"
+          variant="outlined"
+        />
+      </Grid>
+  </Grid>
       </div>
+      <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay}>
+        Search
+      </Button>
+    </div>
     );
   }
-
-  const TodaySchedulePressed = () => {
-    setViewSelected(1);
-  };
-  const unScheduledPressed = () => {
-    setViewSelected(2);
-  };
-  const AllVisitsPressed = () => {
-    setViewSelected(3);
-  };
-  const PatientListPressed = () => {
-    setViewSelected(4);
-  };
-
+  function CommunicationMessageCenterPressed (){
+       setViewSelected(1);
+  }
   function RenderViews() {
     switch (ViewSelected) {
       case 1:
-        return TodayScheduleView();
-
-      case 2:
-        return UnScheduleView();
-
-      case 3:
-        return VisitView();
-
-      case 4:
-        return PatientView();
+        return CommunicationMessageCenterView();
       default:
         break;
     }
@@ -167,146 +202,40 @@ function Action() {
       date:"03/12/2023",
     },
   ];
-  const jsonData2 = [
-    {
-      id: 1,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
-    },
-    {
-      id: 2,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
-    },
-    {
-      id: 3,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
-    },
-  ];
-  //
-  const TodayScheduleView = () => {
+ 
+  const CommunicationMessageCenterView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
-  const UnScheduleView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
-  const VisitView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
-  const PatientView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData2.map((item) => (
-          <ListItem className="ListItem"
-          key={item.id}
-          button
-          component={Link}
-          to={`/patientdetails/${item.id}`}>
-            <ListItemText  className="ListText" primary={<p style={{ fontSize:  "25px" }}>{item.name}</p> } />
-            <ListItemText  className="ListText" primary={<p style={{ fontSize: "20px" }}>{item.address}</p> } />
-          </ListItem>
-        ))}
-      </List>
+      <div>
+      <table className="table">
+         <thead>
+          <tr>
+      <th className="th">MCO</th>
+      <th className="th">Message Type</th>
+      <th className="th">Status</th>
+      <th className="th">Reason</th>
+      <th className="th">From Date</th>
+      <th className="th">Till Date</th>
+      
+      
+      
+          </tr>
+         </thead>
+         <tbody>
+          {jsonData.map((data,i)=>(
+            <tr>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+                    
+            </tr>
+          ))}
+            
+         </tbody>
+      </table>      
+   </div>
     );
   };
 
@@ -370,7 +299,7 @@ function Action() {
                 Pending Placement Queue
               </p>
             </Button>
-            <Button onClick={unScheduledPressed} className="navigationButton">
+            <Button onClick={CommunicationMessageCenterPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
@@ -385,7 +314,6 @@ function Action() {
         </Card>
 
         <Card className="dataDisplay">
-          {renderColumeName()}
           <SearchIcon className="searchIcon" onClick={handleClickIcon} />
           {isOverlayOpen && <Overlay />}
           {RenderViews()}
@@ -432,6 +360,30 @@ width: 100%;
     display:flex;
     flex-direction:row;
 }
+//
+
+  .table {
+    border-collapse: collapse;
+    padding:1%;
+    width:100%;
+    background-color: #0b2b40;
+  }
+  
+  .th {
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    font-size:17px;
+    color:white;
+  }
+  .td {
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    color:white;
+    font-size:16px;
+    
+  }
+
+  //
 .ListItem{
     margin-top:1%;
     margin-left:2%;
@@ -449,27 +401,50 @@ width: 100%;
   color:black;
   font-weight:bold;
 }
-
+.overlay {
+  position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 75%;
+height: 75%;
+z-index: 1000;
+background-color: white;
+padding: 1%;
+}
 // overlay css end
 .overlay{
-    position: fixed;
-    margin-left:09%;
-    width: 40%;
-    height: 70%;
-    z-index:1000;
-    background-color:white;
-    padding:1%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  height: 60%;
+  z-index: 1000;
+  background-color: white;
+  padding: 1%;
 }
 .crossIcon{
     margin-left:95%;
     margin-top:2%;
 }
 .searchFieldsDiv{
-    justify-content:center;
-    align-item:center;
-    display:flex;
-    flex-direction:column;
-    margin-left:30%;
+  display: flex; 
+  margin-top:2.5%;
+  width:85%;
+  margin-left:10%;
+}
+.searchButton {
+  margin-left: 35%;
+  margin-top: 5%;
+  width:30%;
+  background-color:#f26e22;
+  color:white;
+  font-weight:bold;
+}
+.searchButton:hover {
+  background-color:#2E0F59;
+  color:white;
 }
 .Field{
     width:50%;
@@ -558,16 +533,16 @@ width: 100%;
     margin-top:0.5%;
 }
 .searchIcon{
-    position:absolute;
-    z-index:999;
-    padding:1%;
-    font-size:50px;
-    color:white;
-    margin-left:65%;
-    cursor:pointer;
-    background-color:grey;
-    border-radius:500px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  z-index: 999;
+  padding: 1%;
+  font-size: 25px;
+  color: white;
+  margin-left: 69.2%;
+  cursor: pointer;
+  background-color: grey;
+  border-radius: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
 
 //data display card end

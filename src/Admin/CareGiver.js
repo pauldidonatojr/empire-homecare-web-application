@@ -284,34 +284,45 @@ function CareGiver() {
   };
   const SearchCareGiverView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-           
-          >
-        <p className="item1">First Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Last Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Phone</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">CareGiver Code</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Alt CG Code</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">SSN</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Status</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Provider</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Discipline</p>
-          </ListItem>
-        ))}
-      </List>
-    );
+      <div>
+      <table className="table">
+         <thead>
+          <tr>
+      <th className="th">First Name</th>
+      <th className="th">Last Name</th>
+      <th className="th">Phone</th>
+      <th className="th">CareGiver Code</th>
+      <th className="th">Alt CG Code</th>
+      <th className="th">SSN</th>
+      
+      <th className="th">Status</th>
+      <th className="th">Provider</th>
+      <th className="th">Discipline</th>
+      
+          </tr>
+         </thead>
+         <tbody>
+          {jsonData.map((data,i)=>(
+            <tr>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">First Name</td>
+              <td className="td">Last Name</td>
+              <td className="td">Phone Number</td>
+              <td className="td">Status</td>
+              
+              <td className="td">MCO</td>
+              <td className="td">Officed</td>
+              <td className="td">Member Team</td>
+      
+            </tr>
+          ))}
+            
+         </tbody>
+      </table>      
+   </div>
+      
+    )
   };
 
   return (
@@ -389,7 +400,7 @@ function CareGiver() {
         </Card>
 
         <Card className="dataDisplay">
-          {renderColumeName()}
+          
           {RenderSearchIcon()}
           {isOverlayOpen && <Overlay />}
           {RenderViews()}
@@ -436,6 +447,30 @@ width: 100%;
     display:flex;
     flex-direction:row;
 }
+//
+
+.table {
+  border-collapse: collapse;
+  padding:1%;
+  width:100%;
+  background-color: #0b2b40;
+}
+
+.th {
+  border: 1px solid #aaaaaa;
+  text-align: center;
+  font-size:20px;
+  color:white;
+}
+.td {
+  border: 1px solid #aaaaaa;
+  text-align: center;
+  color:white;
+  font-size:17px;
+  
+}
+
+//
 .ListItem{
     margin-top:1%;
     
@@ -548,16 +583,16 @@ width: 100%;
 }
 
 .searchIcon{
-    position:absolute;
-    z-index:999;
-    padding:1%;
-    font-size:35px;
-    color:white;
-    margin-left:67%;
-    cursor:pointer;
-    background-color:grey;
-    border-radius:500px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  z-index: 999;
+  padding: 1%;
+  font-size: 25px;
+  color: white;
+  margin-left: 69.2%;
+  cursor: pointer;
+  background-color: grey;
+  border-radius: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
 
 //data display card end

@@ -9,11 +9,13 @@ import PatientDetails from "./CareGiver/PatientDetails";
 import CareGiver  from "./Admin/CareGiver";
 import Visits from "./Admin/Visit/Visit";
 import Action from './Admin/Action/Action';
-import Billing from './Admin/Billing';
+import Billing from './Admin/Billing/Billing';
 import Report from "./Admin/Report";
 import Admin from "./Admin/Admin";
 import CallDashBoard from "./Admin/Visit/CallDashBoard";
 import PendingQueuePlacement from "./Admin/Action/PendingQueuePlacement";
+import InvoiceSearch from "./Admin/Billing/InvoiceSearch"
+import ElectronicBilling from "./Admin/Billing/ElectronicBilling"
 
 function App() {
   return (
@@ -32,9 +34,9 @@ function App() {
       <Route path="/Report" element={<Report />}></Route> 
       <Route path="/Admin" element={<Admin />}></Route> 
       <Route path="/CallDashBoard" element={<CallDashBoard />}></Route>
-      
       <Route path="/PendingQueuePlacement" element={<PendingQueuePlacement />}></Route> 
-      
+      <Route path="/InvoiceSearch" element={<InvoiceSearch />}></Route>
+      <Route path="/ElectronicBilling" element={<ElectronicBilling />}></Route>
       
     </Routes>
 

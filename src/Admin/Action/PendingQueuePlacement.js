@@ -30,8 +30,6 @@ const [age, setAge] = React.useState('');
 const handleChange = (event) => {
   setAge(event.target.value);
 };
-
-//
   const [isOverlayOpen3, setIsOverlayOpen3] = useState(false);
   const [isOverlayOpen4, setIsOverlayOpen4] = useState(false);
   const [isOverlayOpen5, setIsOverlayOpen5] = useState(false);
@@ -58,7 +56,6 @@ const handleChange = (event) => {
     }
 
   };
-  //
 
 const MissedOutPressed = () => {
   setViewSelected(3);
@@ -86,106 +83,6 @@ const RejectedCallsPressed = () => {
     setIsOverlayOpen6(false);
   };
 
-
-  const ColumnDiv3 = () => {
-    return (
-      <div className="columnName">
-         <p className="colume1">Name</p>
-         <hr/>
-        <p className="colume1">Admission ID</p>
-        <hr/>
-        <p className="colume1">Member Name</p>
-        <hr/>
-        <p className="colume1">MCO</p>
-        <hr/>
-        <p className="colume1">Cordinator</p>
-        <hr/>
-        <p className="colume1">Team Member</p>
-        <hr/>
-        <p className="colume1">Assigment ID</p>
-      </div>
-    );
-  };
-  const ColumnDiv4 = () => {
-    return (
-      <div className="columnName">
-         <p className="colume1">Name</p>
-         <hr/>
-        <p className="colume1">Admission ID</p>
-        <hr/>
-        <p className="colume1">Member Name</p>
-        <hr/>
-        <p className="colume1">MCO</p>
-        <hr/>
-        <p className="colume1">Cordinator</p>
-        <hr/>
-        <p className="colume1">Team Member</p>
-        <hr/>
-        <p className="colume1">Assigment ID</p>
-      </div>
-    );
-  };
-  const ColumnDiv5 = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">First Name</p>
-        <hr/>
-        <p className="colume1">Last Name</p>
-        <hr/>
-        <p className="colume1">Care Giver Code</p>
-        <hr/>
-        <p className="colume1">Care Giver Name</p>
-        <hr/>
-        <p className="colume1">Team Member</p>
-        <hr/>
-        <p className="colume1">Assigment ID</p>
-        <hr/>
-        <p className="colume1">Admission ID</p>
-        <hr/>
-        <p className="colume1">Cordinator</p>
-        <hr/>
-        <p className="colume1">From Date</p>
-        <hr/>
-        <p className="colume1">Till Date</p>
-      </div>
-    );
-  };
-  const ColumnDiv6 = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">Care Giver Code</p>
-        <hr/>
-        <p className="colume1">Care Giver Name</p>
-        <hr/>
-        <p className="colume1">Assigment ID</p>
-        <hr/>
-        <p className="colume1">Admission ID</p>
-        <hr/>
-        <p className="colume1">Team Member</p>
-        <hr/>
-        <p className="colume1">From Date</p>
-        <hr/>
-        <p className="colume1">Till Date</p>
-      </div>
-    );
-  };
-
-  function renderColumeName() {
-    switch (ViewSelected) {
-      
-      case 3:
-        return <ColumnDiv3 />;
-        case 4:
-          return <ColumnDiv4 />;
-          case 5:
-        return <ColumnDiv5 />;
-        case 6:
-        return <ColumnDiv6 />;
-      default:
-        break;
-    }
-  }
-  
   
 
 
@@ -193,12 +90,12 @@ function Overlay3() {
   return (
     <div className="overlay">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay3} />
-    <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
-    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Missed Out</p>
+    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
+    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Pending</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
 
-    <Grid item xs="2.87">
+    <Grid item xs="5">
     
     <Box >
   <FormControl fullWidth>
@@ -230,15 +127,15 @@ function Overlay4() {
     <div className="overlay">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay4} />
     <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
-    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Missed Call</p>
+    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Total Accepted</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
       
-    <Grid item xs="2.87">
+    <Grid item xs="5">
     
     <Box >
   <FormControl fullWidth>
-    <InputLabel >MCdO</InputLabel>
+    <InputLabel >MCO</InputLabel>
     <Select
       labelId="demo-simple-select-label"
       id="demo-simple-select"
@@ -266,12 +163,12 @@ function Overlay5() {
   return (
     <div className="overlay">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay5} />
-    <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
-    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Visit Log</p>
+    <h1 style={{textAlign:"center"}}>Set Filter from here !</h1>
+    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Staffed</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
       
-    <Grid item xs="2.87">
+    <Grid item xs="5">
     
     <Box >
   <FormControl fullWidth>
@@ -304,12 +201,12 @@ function Overlay6() {
   return (
     <div className="overlay">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay6} />
-    <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
-    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Total Accepted</p>
+    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
+    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Accepted Non Masterwork</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
       
-    <Grid item xs="2.87">
+    <Grid item xs="5">
     
     <Box >
   <FormControl fullWidth>
@@ -394,120 +291,146 @@ function Overlay6() {
 
   const RejectedCallsView = () => {
     return (
-      <List style={{maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-           
-          >
-         <p className="item1">Care Giver Code</p>
-         <hr style={{height:"10px"}}/>
-        <p className="item1">Care Giver Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Assigment ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Admission ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Team Member</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">From Date</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Till Date</p>
-          </ListItem>
-        ))}
-      </List>
+      <div>
+      <table className="table">
+         <thead>
+          <tr>
+      <th className="th">Care Giver Name</th>
+      <th className="th">Admission ID</th>
+      <th className="th">Member Name</th>
+      <th className="th">MCO</th>
+      <th className="th">Cordinator</th>
+      <th className="th">Team Member</th>
+      <th className="th">Assigment ID</th>
+      
+      
+          </tr>
+         </thead>
+         <tbody>
+          {jsonData.map((data,i)=>(
+            <tr>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>             
+            </tr>
+          ))}
+            
+         </tbody>
+      </table>      
+   </div>
     );
   };
 
   
   const VisitLogView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
+      <div>
+      <table className="table">
+         <thead>
+          <tr>
+      <th className="th">Care Giver Name</th>
+      <th className="th">Admission ID</th>
+      <th className="th">Member Name</th>
+      <th className="th">MCO</th>
+      <th className="th">Cordinator</th>
+      <th className="th">Team Member</th>
+      <th className="th">Assigment ID</th>
+      
+      
+          </tr>
+         </thead>
+         <tbody>
+          {jsonData.map((data,i)=>(
+            <tr>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>             
+            </tr>
+          ))}
             
-          >
-            <p className="item1">First Name</p>
-            <hr style={{height:"10px"}}/>
-        <p className="item1">Last Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Care Giver Code</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Care Giver Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Team Member</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Assigment ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Admission ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Cordinator</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">From Date</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Till Date</p>
-          </ListItem>
-        ))}
-      </List>
+         </tbody>
+      </table>      
+   </div>
     );
   };
   
   const MissedCallView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
+      <div>
+      <table className="table">
+         <thead>
+          <tr>
+      <th className="th">Care Giver Name</th>
+      <th className="th">Admission ID</th>
+      <th className="th">Member Name</th>
+      <th className="th">MCO</th>
+      <th className="th">Cordinator</th>
+      <th className="th">Team Member</th>
+      <th className="th">Assigment ID</th>
+      
+      
+          </tr>
+         </thead>
+         <tbody>
+          {jsonData.map((data,i)=>(
+            <tr>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>             
+            </tr>
+          ))}
             
-          >
-            <p className="item1">Name</p>
-            <hr style={{height:"10px"}}/>
-        <p className="item1">Admission ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">MCO</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Cordinator</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Team Member</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Assigment ID</p>
-          </ListItem>
-        ))}
-      </List>
+         </tbody>
+      </table>      
+   </div>
     );
   };
   
   const MissedOutView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
+      <div>
+      <table className="table">
+         <thead>
+          <tr>
+      <th className="th">Care Giver Name</th>
+      <th className="th">Admission ID</th>
+      <th className="th">Member Name</th>
+      <th className="th">MCO</th>
+      <th className="th">Cordinator</th>
+      <th className="th">Team Member</th>
+      <th className="th">Assigment ID</th>
+      
+      
+          </tr>
+         </thead>
+         <tbody>
+          {jsonData.map((data,i)=>(
+            <tr>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>             
+            </tr>
+          ))}
             
-          >
-            <p className="item1">Name</p>
-            <hr style={{height:"10px"}}/>
-        <p className="item1">Admission ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">MCO</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Cordinator</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Team Member</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Assigment ID</p>
-          </ListItem>
-        ))}
-      </List>
+         </tbody>
+      </table>      
+   </div>
     );
   };
   
@@ -592,7 +515,6 @@ function Overlay6() {
         </Card>
 
         <Card className="dataDisplay">
-          {renderColumeName()}
           <SearchIcon className="searchIcon" onClick={handleClickIcon} />
           {isOverlayOpen3 && <Overlay3 />}
           {isOverlayOpen4 && <Overlay4 />}
@@ -642,6 +564,30 @@ const Wrapper = styled.section`
     display: flex;
     flex-direction: row;
   }
+  //
+
+  .table {
+    border-collapse: collapse;
+    padding:1%;
+    width:100%;
+    background-color: #0b2b40;
+  }
+  
+  .th {
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    font-size:17px;
+    color:white;
+  }
+  .td {
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    color:white;
+    font-size:16px;
+    
+  }
+
+  //
   .ListItem {
     margin-top: 1%;
     background-color: #0b2b40;
@@ -688,9 +634,10 @@ const Wrapper = styled.section`
   }
   .searchFieldsDiv {
     display: flex; 
-    margin-top:2.5%;
-    width:85%;
-    margin-left:40%;
+  margin-top: 2.5%;
+  width: 85%;
+  margin-left:33%;
+    
   }
 
   .searchButton {
@@ -752,15 +699,15 @@ const Wrapper = styled.section`
   
   .searchIcon {
     position: absolute;
-    z-index: 999;
-    padding: 1%;
-    font-size: 50px;
-    color: white;
-    margin-left: 65%;
-    cursor: pointer;
-    background-color: grey;
-    border-radius: 500px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+  padding: 1%;
+  font-size: 25px;
+  color: white;
+  margin-left: 69.2%;
+  cursor: pointer;
+  background-color: grey;
+  border-radius: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   }
 
   //data display card end

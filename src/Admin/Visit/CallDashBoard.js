@@ -107,161 +107,6 @@ const RejectedCallsPressed = () => {
     setIsOverlayOpen6(false);
   };
 
-
-
-  const ColumnDiv1 = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">First Name</p>
-        <hr/>
-        <p className="colume1">Last Name</p>
-        <hr/>
-        <p className="colume1">Phone Code</p>
-        <hr/>
-        <p className="colume1">Assigment ID</p>
-        <hr/>
-        <p className="colume1">Admission ID</p>
-        <hr/>
-        <p className="colume1">Member First Name</p>
-        <hr/>
-        <p className="colume1">Member Last Name</p>
-        <hr/>
-        <p className="colume1">Cordinator</p>
-        <hr/>
-        <p className="colume1">Status</p>
-        <hr/>
-        <p className="colume1">Member Team</p>
-        <hr/>
-        <p className="colume1">Member Branch</p>
-        <hr/>
-        <p className="colume1">Member Branch</p>
-        <hr/>
-        <p className="colume1">From Date</p>
-        <hr/>
-        <p className="colume1">Till Date</p>
-      </div>
-    );
-  };
-  const ColumnDiv2 = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">Name</p>
-        <hr/>
-        <p className="colume1">Admission ID</p>
-        <hr/>
-        <p className="colume1">Member Name</p>
-        <hr/>
-        <p className="colume1">MCO</p>
-        <hr/>
-        <p className="colume1">Cordinator</p>
-        <hr/>
-        <p className="colume1">Team Member</p>
-        <hr/>
-        <p className="colume1">Assigment ID</p>
-      </div>
-    );
-  };
-  const ColumnDiv3 = () => {
-    return (
-      <div className="columnName">
-         <p className="colume1">Name</p>
-         <hr/>
-        <p className="colume1">Admission ID</p>
-        <hr/>
-        <p className="colume1">Member Name</p>
-        <hr/>
-        <p className="colume1">MCO</p>
-        <hr/>
-        <p className="colume1">Cordinator</p>
-        <hr/>
-        <p className="colume1">Team Member</p>
-        <hr/>
-        <p className="colume1">Assigment ID</p>
-      </div>
-    );
-  };
-  const ColumnDiv4 = () => {
-    return (
-      <div className="columnName">
-         <p className="colume1">Name</p>
-         <hr/>
-        <p className="colume1">Admission ID</p>
-        <hr/>
-        <p className="colume1">Member Name</p>
-        <hr/>
-        <p className="colume1">MCO</p>
-        <hr/>
-        <p className="colume1">Cordinator</p>
-        <hr/>
-        <p className="colume1">Team Member</p>
-        <hr/>
-        <p className="colume1">Assigment ID</p>
-      </div>
-    );
-  };
-  const ColumnDiv5 = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">First Name</p>
-        <hr/>
-        <p className="colume1">Last Name</p>
-        <hr/>
-        <p className="colume1">Care Giver Code</p>
-        <hr/>
-        <p className="colume1">Care Giver Name</p>
-        <hr/>
-        <p className="colume1">Team Member</p>
-        <hr/>
-        <p className="colume1">Assigment ID</p>
-        <hr/>
-        <p className="colume1">Admission ID</p>
-        <hr/>
-        <p className="colume1">Cordinator</p>
-        <hr/>
-        <p className="colume1">From Date</p>
-        <hr/>
-        <p className="colume1">Till Date</p>
-      </div>
-    );
-  };
-  const ColumnDiv6 = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">Care Giver Code</p>
-        <hr/>
-        <p className="colume1">Care Giver Name</p>
-        <hr/>
-        <p className="colume1">Assigment ID</p>
-        <hr/>
-        <p className="colume1">Admission ID</p>
-        <hr/>
-        <p className="colume1">Team Member</p>
-        <hr/>
-        <p className="colume1">From Date</p>
-        <hr/>
-        <p className="colume1">Till Date</p>
-      </div>
-    );
-  };
-
-  function renderColumeName() {
-    switch (ViewSelected) {
-      case 1:
-        return <ColumnDiv1 />;
-      case 2:
-        return <ColumnDiv2 />;
-      case 3:
-        return <ColumnDiv3 />;
-        case 4:
-          return <ColumnDiv4 />;
-          case 5:
-        return <ColumnDiv5 />;
-        case 6:
-        return <ColumnDiv6 />;
-      default:
-        break;
-    }
-  }
   //CallMaintance Search Overlay
   function Overlay() {
     return (
@@ -1100,189 +945,252 @@ function Overlay6() {
 
   const RejectedCallsView = () => {
     return (
-      <List style={{maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-           
-          >
-         <p className="item1">Care Giver</p>
-         <hr style={{height:"10px"}}/>
-        <p className="item1">Care Giver Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Assigment ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Admission ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Team Member</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">From Date</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Till Date</p>
-          </ListItem>
-        ))}
-      </List>
+      <div>
+      <table className="table">
+         <thead>
+          <tr>
+      <th className="th">Care Giver Code</th>
+      <th className="th">Care Giver Name</th>
+      <th className="th">Assigment ID</th>
+      <th className="th">Admission ID</th>
+      <th className="th">Team Member</th>
+      <th className="th">From Date</th>
+      <th className="th">Till Date</th>
+      
+      
+          </tr>
+         </thead>
+         <tbody>
+          {jsonData.map((data,i)=>(
+            <tr>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>             
+            </tr>
+          ))}
+            
+         </tbody>
+      </table>      
+   </div>
+
+    ///
     );
   };
 
   
   const VisitLogView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
+      <div>
+      <table className="table">
+         <thead>
+          <tr>
+      <th className="th">First Name</th>
+      <th className="th">Last Name</th>
+      <th className="th">Care Giver Code</th>
+      <th className="th">Care Giver Name</th>
+      <th className="th">Team Member</th>
+      <th className="th">Assigment ID</th>
+      <th className="th">Admission ID</th>
+      
+      <th className="th">Cordinator</th>
+      
+      <th className="th">From Date</th>
+      <th className="th">Till Date</th>
+      
+      
+          </tr>
+         </thead>
+         <tbody>
+          {jsonData.map((data,i)=>(
+            <tr>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>  
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>             
+            </tr>
+          ))}
             
-          >
-            <p className="item1">First Name</p>
-            <hr style={{height:"10px"}}/>
-        <p className="item1">Last Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Care Giver Code</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Care Giver Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Team Member</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Assigment ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Admission ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Cordinator</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">From Date</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Till Date</p>
-          </ListItem>
-        ))}
-      </List>
+         </tbody>
+      </table>      
+   </div>
     );
   };
   
   const MissedCallView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
+      <div>
+      <table className="table">
+         <thead>
+          <tr>
+      <th className="th">Care Giver Name</th>
+      <th className="th">Admission ID</th>
+      <th className="th">Member Name</th>
+      <th className="th">MCO</th>
+      <th className="th">Cordinator</th>
+      <th className="th">Team Member</th>
+      <th className="th">Assigment ID</th>
+      
+      
+          </tr>
+         </thead>
+         <tbody>
+          {jsonData.map((data,i)=>(
+            <tr>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>             
+            </tr>
+          ))}
             
-          >
-            <p className="item1">Name</p>
-            <hr style={{height:"10px"}}/>
-        <p className="item1">Admission ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">MCO</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Cordinator</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Team Member</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Assigment ID</p>
-          </ListItem>
-        ))}
-      </List>
+         </tbody>
+      </table>      
+   </div>
+
+    ///
     );
   };
   
   const MissedOutView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
+      <div>
+      <table className="table">
+         <thead>
+          <tr>
+      <th className="th">Care Giver Name</th>
+      <th className="th">Admission ID</th>
+      <th className="th">Member Name</th>
+      <th className="th">MCO</th>
+      <th className="th">Cordinator</th>
+      <th className="th">Team Member</th>
+      <th className="th">Assigment ID</th>
+      
+      
+          </tr>
+         </thead>
+         <tbody>
+          {jsonData.map((data,i)=>(
+            <tr>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>             
+            </tr>
+          ))}
             
-          >
-            <p className="item1">Name</p>
-            <hr style={{height:"10px"}}/>
-        <p className="item1">Admission ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">MCO</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Cordinator</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Team Member</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Assigment ID</p>
-          </ListItem>
-        ))}
-      </List>
+         </tbody>
+      </table>      
+   </div>
+
+    ///
     );
   };
   
   const CallMaintanceView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto",width:"100%" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-          >
+
+<div>
+        <table className="table">
+           <thead>
+            <tr>
+        <th className="th">Care Giver First Name</th>
+        <th className="th">Care Giver Last Name</th>
+        <th className="th">Care Giver Code</th>
+        <th className="th">Assigment ID</th>
+        <th className="th">Admission ID</th>
+        <th className="th">Member First Name</th>
+        <th className="th">Member Last Name</th>
+        <th className="th">Cordinator</th>
+        <th className="th">Status</th>
+        <th className="th">Member Team</th>
+        <th className="th">Member Location</th>
+        <th className="th">Member Branch</th>
+        <th className="th">From Date DD/MM/YYYY</th>
+        <th className="th">To Date DD/MM/YYYY</th>
         
-        <p className="item1">First Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Last Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Phone Code</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Assigment ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Admission ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member First Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member Last Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Cordinator</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Status</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member Team</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member Branch</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member Branch</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">From Date</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Till Date</p>
-    
-          </ListItem>
-        ))}
-      </List>
+            </tr>
+           </thead>
+           <tbody>
+            {jsonData.map((data,i)=>(
+              <tr>
+                <td className="td">Member ID</td>
+                <td className="td">Admission ID</td>
+                <td className="td">Care Giver IN</td>
+                <td className="td">Member ID</td>
+                <td className="td">Admission ID</td>
+                <td className="td">Care Giver IN</td>
+                <td className="td">Member ID</td>
+                <td className="td">Admission ID</td>
+                <td className="td">Care Giver IN</td>
+                <td className="td">Member ID</td>
+                <td className="td">Admission ID</td>
+                <td className="td">Care Giver IN</td>
+                <td className="td">Member ID</td>
+                <td className="td">Member ID</td>
+               
+              </tr>
+            ))}
+              
+           </tbody>
+        </table>      
+     </div>
+
+      ///
+      
+     
     );
   };
   const MissedInView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-          >
-           <p className="item1">Name</p>
-           <hr style={{height:"10px"}}/>
-        <p className="item1">Admission ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Member Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">MCO</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Cordinator</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Team Member</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Assigment ID</p>
-          </ListItem>
-        ))}
-      </List>
+      <div>
+      <table className="table">
+         <thead>
+          <tr>
+      <th className="th">Care Giver Name</th>
+      <th className="th">Admission ID</th>
+      <th className="th">Member Name</th>
+      <th className="th">MCO</th>
+      <th className="th">Cordinator</th>
+      <th className="th">Team Member</th>
+      <th className="th">Assigment ID</th>
+      
+      
+          </tr>
+         </thead>
+         <tbody>
+          {jsonData.map((data,i)=>(
+            <tr>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>             
+            </tr>
+          ))}
+            
+         </tbody>
+      </table>      
+   </div>
+
+    ///
     );
   };
 
@@ -1387,7 +1295,7 @@ function Overlay6() {
         </Card>
 
         <Card className="dataDisplay">
-          {renderColumeName()}
+         
           <SearchIcon className="searchIcon" onClick={handleClickIcon} />
           {isOverlayOpen && <Overlay />}
           {isOverlayOpen2 && <Overlay2 />}
@@ -1455,6 +1363,30 @@ const Wrapper = styled.section`
     font-weight: bold;
     background-color: white;
   }
+  //
+
+  .table {
+    border-collapse: collapse;
+    padding:1%;
+    width:100%;
+    background-color: #0b2b40;
+  }
+  
+  .th {
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    font-size:17px;
+    color:white;
+  }
+  .td {
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    color:white;
+    font-size:16px;
+    
+  }
+
+  //
   .item1 {
     
    
@@ -1602,15 +1534,15 @@ const Wrapper = styled.section`
   
   .searchIcon {
     position: absolute;
-    z-index: 999;
-    padding: 1%;
-    font-size: 50px;
-    color: white;
-    margin-left: 65%;
-    cursor: pointer;
-    background-color: grey;
-    border-radius: 500px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+  padding: 1%;
+  font-size: 25px;
+  color: white;
+  margin-left: 69.2%;
+  cursor: pointer;
+  background-color: grey;
+  border-radius: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   }
 
   //data display card end

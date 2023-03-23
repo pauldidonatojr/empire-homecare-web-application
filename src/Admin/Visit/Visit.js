@@ -66,51 +66,6 @@ function Visit() {
 
   };
 
-  const ColumnDiv = () => {
-    return (
-      <div className="columnName">
-       <p className="colume1">Member Name</p>
-         <hr/>
-        <p className="colume1">Admission ID</p>
-        <hr/>
-        <p className="colume1">Care Giver IN</p>
-        <hr/>
-        <p className="colume1">Care Giver Name</p>
-        <hr/>
-        <p className="colume1">From Date DD/MM/YYYY</p>
-        <hr/>
-        <p className="colume1">To Date</p>
-        <hr/>
-        <p className="colume1">Assigment ID</p>
-        <hr/>
-        <p className="colume1">MCO</p>
-        <hr/>
-        <p className="colume1">Cordinator</p>
-      </div>
-    );
-  };
-  const ColumnDiv2 = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">MCO</p>
-        <hr/>
-        <p className="colume1">Member Search</p>
-      </div>
-    );
-  };
- 
-  function renderColumeName() {
-    switch (ViewSelected) {
-      case 2:
-        return <ColumnDiv />;
-      case 3:
-        return <ColumnDiv2 />;
-     
-      default:
-        break;
-    }
-  }
-
   function Overlay() {
     return (
       <div className="overlay">
@@ -429,50 +384,76 @@ function Visit() {
   //
   const VisitSearchView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
+<div>
+        <table className="table">
+           <thead>
+            <tr>
+        <th className="th">Care Giver First Name</th>
+        <th className="th">Care Giver Last Name</th>
+        <th className="th">Care Giver Code</th>
+        <th className="th">Assigment ID</th>
+        <th className="th">Member First Name</th>
+        <th className="th">Member Last Name</th>
+        <th className="th">Cordinator</th>
+        <th className="th">Status</th>
+        <th className="th">Member Team</th>
+        <th className="th">Member Location</th>
+        <th className="th">Member Branch</th>
+        <th className="th">From Date DD/MM/YYYY</th>
+        <th className="th">To Date DD/MM/YYYY</th>
+        
+            </tr>
+           </thead>
+           <tbody>
+            {jsonData.map((data,i)=>(
+              <tr>
+                <td className="td">Member ID</td>
+                <td className="td">Admission ID</td>
+                <td className="td">Care Giver IN</td>
+                <td className="td">Member ID</td>
+                <td className="td">Admission ID</td>
+                <td className="td">Care Giver IN</td>
+                <td className="td">Member ID</td>
+                <td className="td">Admission ID</td>
+                <td className="td">Care Giver IN</td>
+                <td className="td">Member ID</td>
+                <td className="td">Admission ID</td>
+                <td className="td">Care Giver IN</td>
+                <td className="td">Member ID</td>
+               
+              </tr>
+            ))}
+              
+           </tbody>
+        </table>      
+     </div>
 
-          >
-         <p className="item1">Member Name</p>
-         <hr style={{height:"10px"}}/>
-        <p className="item1">Admission ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Care Giver IN</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Care Giver Name</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">From Date DD/MM/YYYY</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">To Date</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Assigment ID</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">MCO</p>
-        <hr style={{height:"10px"}}/>
-        <p className="item1">Cordinator</p>
-           
-          </ListItem>
-        ))}
-      </List>
     );
   };
   const VisitQuickSearchView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
+      <div>
+      <table className="table">
+         <thead>
+          <tr>
+      <th className="th">MCO</th>
+      <th className="th">Member Search</th>
+     
+      
+          </tr>
+         </thead>
+         <tbody>
+          {jsonData.map((data,i)=>(
+            <tr>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+             
+            </tr>
+          ))}
             
-          >
-           <p className="item1">MCO</p>
-           <hr style={{height:"10px"}}/>
-        <p className="item
-        1">Member Search</p>
-          </ListItem>
-        ))}
-      </List>
+         </tbody>
+      </table>      
+   </div>
     );
   };
   
@@ -561,7 +542,7 @@ function Visit() {
         </Card>
 
         <Card className="dataDisplay">
-          {renderColumeName()}
+         
           <SearchIcon className="searchIcon" onClick={handleClickIcon} />
           {isOverlayOpen && <Overlay />}
           {isOverlayOpen2 && <Overlay2 />}
@@ -609,6 +590,30 @@ width: 100%;
     display:flex;
     flex-direction:row;
 }
+//
+
+  .table {
+    border-collapse: collapse;
+    padding:1%;
+    width:100%;
+    background-color: #0b2b40;
+  }
+  
+  .th {
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    font-size:18px;
+    color:white;
+  }
+  .td {
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    color:white;
+    font-size:16px;
+    
+  }
+
+  //
 .ListItem{
     margin-top:1%;
     background-color:#0B2B40;
@@ -776,16 +781,16 @@ width: 100%;
     margin-top:0.5%;
 }
 .searchIcon{
-    position:absolute;
-    z-index:999;
-    padding:1%;
-    font-size:50px;
-    color:white;
-    margin-left:65%;
-    cursor:pointer;
-    background-color:grey;
-    border-radius:500px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  z-index: 999;
+  padding: 1%;
+  font-size: 25px;
+  color: white;
+  margin-left: 69.2%;
+  cursor: pointer;
+  background-color: grey;
+  border-radius: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
 
 //data display card end
