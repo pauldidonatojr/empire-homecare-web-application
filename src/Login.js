@@ -12,7 +12,11 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   
-  
+  const [showCard, setShowCard] = useState(false);
+  useEffect(() => {
+    setShowCard(true);
+  }, []);
+
   const handleSignIn = (selectedRadio) => {
     switch (selectedRadio) {
       case "Admin":
@@ -48,7 +52,7 @@ function Login() {
         </div>
       </Card>
       <div className="cardHolder">
-        <Card className="DesignCard">
+        <Card  className={`DesignCard ${showCard ? 'show' : ''}`}>
           <h1 style={{ color: "white" }}>
             Purpose-Built Technology for Providers, MCOs, and State Medicaid
             Programs
@@ -59,7 +63,7 @@ function Login() {
             </h4>
           </div>
         </Card>
-        <Card className="loginCard">
+        <Card className={`loginCard ${showCard ? 'show' : ''}`}>
           <div>
             <h1 style={{ fontSize: "35px" }}>SIGN IN</h1>
           </div>
@@ -163,6 +167,13 @@ const Wrapper = styled.section`
     margin-top: 5%;
     padding: 3%;
     box-shadow: -1px 4px 19px 5px rgba(0, 0, 0, 0.43);
+    position:relative;
+    left: 100%;
+    transition: left 1.5s ease-out;
+  }
+  
+  .loginCard.show {
+    left: 0;
   }
   .radioHolder {
     display: flex;
@@ -193,7 +204,7 @@ const Wrapper = styled.section`
   }
 
   .DesignCard {
-    background-color: #2a558c;
+    background-color: #564873;
     height: 350px;
     width: 20%;
     margin-top: 5%;
@@ -201,7 +212,16 @@ const Wrapper = styled.section`
     margin-left: 18%;
     margin-right: 0.2%;
     box-shadow: -1px 4px 19px 5px rgba(0, 0, 0, 0.43);
+    position:relative;
+    left: -100%;
+    transition: left 1.5s ease-out;
   }
+  
+  .DesignCard.show {
+    left: 0;
+  }
+
+  
   @media only screen and (max-width: 600px) {
     .cardHolder {
         flex-direction: column;
