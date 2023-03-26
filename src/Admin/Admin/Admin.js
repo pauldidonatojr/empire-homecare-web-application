@@ -6,6 +6,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
+import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
@@ -17,48 +18,70 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 
-function Visit() {
- 
 
+function Report() {
+  const [ViewSelected, setViewSelected] = useState(1);
+  const navigate = useNavigate();
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [isOverlayOpen2, setIsOverlayOpen2] = useState(false);
+  const [isOverlayOpen3, setIsOverlayOpen3] = useState(false);
+  const [isOverlayOpen4, setIsOverlayOpen4] = useState(false);
+  const [isOverlayOpen5, setIsOverlayOpen5] = useState(false);
   const [age, setAge] = React.useState("");
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-
-  //
-
-  const [ViewSelected, setViewSelected] = useState(1);
-
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-  const [isOverlayOpen2, setIsOverlayOpen2] = useState(false);
-
+  const handleClickIcon = () => {
+    switch (ViewSelected) {
+      case 1:
+        setIsOverlayOpen(true);
+        break;
+      case 2:
+        setIsOverlayOpen2(true);
+        break;
+      case 3:
+        setIsOverlayOpen3(true);
+        break;
+      case 4:
+        setIsOverlayOpen4(true);
+        break;
+      case 5:
+        setIsOverlayOpen5(true);
+        break;
+      default:
+        break;
+    }
+  };
+  function RenderSearchIcon(){
+    switch (ViewSelected) {
+      
+      case 2:
+        return<SearchIcon className="searchIcon" onClick={handleClickIcon} />;
+      case 4:
+        return<SearchIcon className="searchIcon" onClick={handleClickIcon} />;
+      
+      default:
+        break;
+    }
+  }
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
   const handleCloseOverlay2 = () => {
     setIsOverlayOpen2(false);
   };
- 
-
-  const handleClickIcon = () => {
-    switch (ViewSelected) {
-      case 2:
-        setIsOverlayOpen(true);
-        break;
-    
-      case 4:
-        setIsOverlayOpen2(true);
-        break;
-      default:
-        break;
-    }
+  const handleCloseOverlay3 = () => {
+    setIsOverlayOpen3(false);
   };
-
+  const handleCloseOverlay4 = () => {
+    setIsOverlayOpen4(false);
+  };
+ 
   function Overlay() {
     return (
       <div className="overlay">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ marginLeft: "41%" }}>Set Filter from here !</h1>
+        <h1 style={{textAlign:"center"}}>Set Filter from here !</h1>
         <p
           style={{
             fontSize: 15,
@@ -67,39 +90,39 @@ function Visit() {
             textAlign: "center",
           }}
         >
-          Batch Search
+          Change Password
         </p>
-        <div className="searchFieldsDiv">
-          <Grid container spacing={3}>
-          <Grid item xs="3">
-              <TextField
-                id="outlined-basic"
-                label="Batch Number"
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item xs="2.87">
+        <div>
+       
+          <h3 style={{textAlign:"center",color:"grey"}}>This page does not include any searchable content</h3>
+        </div>
+        <Button className="searchButton" onClick={handleCloseOverlay}>
+          Okay
+        </Button>
+      </div>
+    );
+  }
+  function Overlay2() {
+    return (
+      <div className="overlay2">
+        <CloseIcon className="crossIcon" onClick={handleCloseOverlay2} />
+        <h1 style={{textAlign:"center"}}>Set Filter from here !</h1>
+        <p
+          style={{
+            fontSize: 15,
+            fontWeight: "bold",
+            color: "#042940",
+            textAlign: "center",
+          }}
+        >
+          Reference Table Management
+        </p>
+        <div className="searchFieldsDiv1">
+        <Grid container spacing={2}>
+        <Grid item xs="4">
               <Box>
                 <FormControl fullWidth>
-                  <InputLabel>MCO</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={age}
-                    label="Status"
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-            </Grid>
-            <Grid item xs="2.87">
-              <Box>
-                <FormControl fullWidth>
-                  <InputLabel>Claim Type</InputLabel>
+                  <InputLabel>Reference Table</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -115,35 +138,19 @@ function Visit() {
               </Box>
             </Grid>
             
-            <Grid item xs="3">
-              <TextField
-                id="outlined-basic"
-                label="From Date DD/MM/YYYY"
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item xs="3">
-              <TextField
-                id="outlined-basic"
-                label="To Date DD/MM/YYYY"
-                variant="outlined"
-              />
-            </Grid>
-
-          
           </Grid>
         </div>
-        <Button className="searchButton" onClick={handleCloseOverlay}>
+        <Button className="searchButton" onClick={handleCloseOverlay3}>
           Search
         </Button>
       </div>
     );
   }
-  function Overlay2() {
+  function Overlay4() {
     return (
       <div className="overlay2">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay2} />
-        <h1 style={{ textAlign: "center" }}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon" onClick={handleCloseOverlay4} />
+        <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
         <p
           style={{
             fontSize: 15,
@@ -152,20 +159,11 @@ function Visit() {
             textAlign: "center",
           }}
         >
-          Re Submit Claims
+          Rate Management
         </p>
-        <div className="searchFieldsDiv2">
-          <Grid container spacing={2}>
-           
-            <Grid item xs="3">
-              <TextField
-                id="outlined-basic"
-                label="Batch Number"
-                variant="outlined"
-              />
-            </Grid>
-
-            <Grid item xs="2.87">
+        <div className="searchFieldsDiv1">
+        <Grid container spacing={2}>
+        <Grid item xs="4">
               <Box>
                 <FormControl fullWidth>
                   <InputLabel>MCO</InputLabel>
@@ -183,45 +181,66 @@ function Visit() {
                 </FormControl>
               </Box>
             </Grid>
-
-            <Grid item xs="3">
-              <TextField
-                id="outlined-basic"
-                label="Batch Date DD/MM/YYYY"
-                variant="outlined"
-              />
-            </Grid>
-          
+            
           </Grid>
         </div>
-        <Button className="searchButton" onClick={handleCloseOverlay2}>
+        <Button className="searchButton" onClick={handleCloseOverlay4}>
           Search
         </Button>
       </div>
     );
   }
+  
 
+  const UserManagementPressed = () => {
+    //Navigate to User Managemnt
+    navigate("/UserManagement");
+  };
 
-  const VisitSearchPressed = () => {
+  const ChangePasswordPressed = () => {
+    setViewSelected(1);
+  };
+  const CordinatorSetupPressed = () => {
+   //Navigate to CordinatorSetUp
+   navigate("/CordinatorSetup");
+  };
+  const ReferenceTableManagementPressed = () => {
     setViewSelected(2);
   };
-
-  const ByBatchPressed = () => {
+  const ProviderProfilePressed = () => {
+    setViewSelected(3);
+  };
+  const RateManagementPressed = () => {
     setViewSelected(4);
   };
+  const FileProcessingPressed = () => {
+   //Navigate to File Processing
+   navigate("/FileProcessing");
+  };
+  const EdiImportPressed=()=> {
+   //Navigate to EDI Imports
+   navigate("/EDIImports");
+    
+  }
 
   function RenderViews() {
     switch (ViewSelected) {
-      case 2:
-        return ByInvoiceView();
-      case 4:
-        return ByBatchView();
+      case 1:
+        return ChangePasswordView();
 
+      case 2:
+        return ReferenceTableView();
+
+      case 3:
+        return ProviderProfileView();
+
+      case 4:
+        return RateManagementView();
       default:
         break;
     }
   }
-  //
+
   const jsonData = [
     {
       id: 1,
@@ -256,63 +275,149 @@ function Visit() {
       date: "03/12/2023",
     },
   ];
+  const jsonData2 = [
+    {
+      id: 1,
+      name: "Hector Salamanca",
+      address: "Downtown Lipsy London, SDWEI15",
+    },
+    {
+      id: 2,
+      name: "Hector Salamanca",
+      address: "Downtown Lipsy London, SDWEI15",
+    },
+    {
+      id: 3,
+      name: "Hector Salamanca",
+      address: "Downtown Lipsy London, SDWEI15",
+    },
+  ];
+  //CareGiverView
+  const ChangePasswordView = () => {
+    return (
+      <List style={{ maxHeight: "100%", overflow: "auto" }}>
+        {jsonData.map((item) => (
+          <ListItem className="ListItem">
+            <ListItemText
+              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
+              className="ListText"
+            />
+            <ListItemText
+              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
+              className="ListText"
+            />
+            <ListItemText
+              primary={
+                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
+              }
+              className="ListText"
+            />
+            <ListItemText
+              primary={
+                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
+              }
+              className="ListText"
+            />
+          </ListItem>
+        ))}
+      </List>
+    );
+  };
+  //ComplianceView
+  const ReferenceTableView = () => {
+    return (
+      <List style={{ maxHeight: "100%", overflow: "auto" }}>
+        {jsonData.map((item) => (
+          <ListItem className="ListItem">
+            <ListItemText
+              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
+              className="ListText"
+            />
+            <ListItemText
+              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
+              className="ListText"
+            />
+            <ListItemText
+              primary={
+                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
+              }
+              className="ListText"
+            />
+            <ListItemText
+              primary={
+                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
+              }
+              className="ListText"
+            />
+          </ListItem>
+        ))}
+      </List>
+    );
+  };
+  //OtherReportsView
+  const ProviderProfileView = () => {
+    return (
+      <List style={{ maxHeight: "100%", overflow: "auto" }}>
+        {jsonData.map((item) => (
+          <ListItem className="ListItem">
+            <ListItemText
+              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
+              className="ListText"
+            />
+            <ListItemText
+              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
+              className="ListText"
+            />
+            <ListItemText
+              primary={
+                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
+              }
+              className="ListText"
+            />
+            <ListItemText
+              primary={
+                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
+              }
+              className="ListText"
+            />
+          </ListItem>
+        ))}
+      </List>
+    );
+  };
+  //MembersView
+  const RateManagementView = () => {
+    return (
+      <List style={{ maxHeight: "100%", overflow: "auto" }}>
+        {jsonData.map((item) => (
+          <ListItem className="ListItem">
+            <ListItemText
+              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
+              className="ListText"
+            />
+            <ListItemText
+              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
+              className="ListText"
+            />
+            <ListItemText
+              primary={
+                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
+              }
+              className="ListText"
+            />
+            <ListItemText
+              primary={
+                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
+              }
+              className="ListText"
+            />
+          </ListItem>
+        ))}
+      </List>
+    );
+  };
+ 
 
-  //
-  const ByBatchView = () => {
-    return (
-      <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="th">Batch Number</th>
-              <th className="th">MCO</th>
-              <th className="th">Batch Date DD/MM/YYYY</th>
-             
-            </tr>
-          </thead>
-          <tbody>
-            {jsonData.map((data, i) => (
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  };
-  //
-  const ByInvoiceView = () => {
-    return (
-      <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="th">Batch Number</th>
-              <th className="th">MCO</th>
-              <th className="th">Claim Type</th>
-              <th className="th">From Date DD/MM/YYYY</th>
-              <th className="th">To Date DD/MM/YYYY</th>
-            </tr>
-          </thead>
-          <tbody>
-            {jsonData.map((data, i) => (
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  };
-  
   return (
     <Wrapper>
       <div className="Header">
@@ -361,7 +466,7 @@ function Visit() {
             <Button
               className="navigationButton"
               onClick={() => {
-                ByBatchPressed();
+                UserManagementPressed();
               }}
             >
               <p
@@ -371,23 +476,71 @@ function Visit() {
                   fontWeight: "bold",
                 }}
               >
-               Re Submit Claims
+                User Management
               </p>
             </Button>
-            <Button onClick={VisitSearchPressed} className="navigationButton">
+
+            <Button onClick={ChangePasswordPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Batch Search
+                Change Password
+              </p>
+            </Button>
+            <Button onClick={CordinatorSetupPressed} className="navigationButton">
+              <p
+                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
+              >
+                Cordinator Setup
+              </p>
+            </Button>
+
+            <Button onClick={ReferenceTableManagementPressed} className="navigationButton">
+              <p
+                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
+              >
+                Reference Table Management
+              </p>
+            </Button>
+
+            <Button onClick={ProviderProfilePressed} className="navigationButton">
+              <p
+                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
+              >
+                Provider Profile
+              </p>
+            </Button>
+
+            <Button onClick={RateManagementPressed} className="navigationButton">
+              <p
+                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
+              >
+                Rate Management
+              </p>
+            </Button>
+
+            <Button onClick={FileProcessingPressed} className="navigationButton">
+              <p
+                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
+              >
+                File Processing
+              </p>
+            </Button>
+            <Button onClick={EdiImportPressed} className="navigationButton">
+              <p
+                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
+              >
+                EDI Import
               </p>
             </Button>
           </div>
         </Card>
 
         <Card className="dataDisplay">
-          <SearchIcon className="searchIcon" onClick={handleClickIcon} />
+          {RenderSearchIcon()}
           {isOverlayOpen && <Overlay />}
           {isOverlayOpen2 && <Overlay2 />}
+          {isOverlayOpen4 && <Overlay4 />}
           {RenderViews()}
         </Card>
       </div>
@@ -422,7 +575,7 @@ function Visit() {
     </Wrapper>
   );
 }
-export default Visit;
+export default Report;
 
 const Wrapper = styled.section`
   height: 100%;
@@ -432,46 +585,21 @@ const Wrapper = styled.section`
     display: flex;
     flex-direction: row;
   }
-  //
-
-  .table {
-    border-collapse: collapse;
-    padding: 1%;
-    width: 100%;
-    background-color: #0b2b40;
-  }
-
-  .th {
-    border: 1px solid #aaaaaa;
-    text-align: center;
-    font-size: 18px;
-    color: white;
-  }
-  .td {
-    border: 1px solid #aaaaaa;
-    text-align: center;
-    color: white;
-    font-size: 16px;
-  }
-
-  //
   .ListItem {
     margin-top: 1%;
+    margin-left: 2%;
     background-color: #0b2b40;
     color: white;
     border-radius: 10px;
-    width: 100%;
+    width: 95%;
   }
   .ListText {
-    width: 100px;
+    width: 300px;
     text-align: center;
   }
-  .item1 {
-    font-size: 15px;
-    color: white;
+  .ListItem:hover .ListText {
+    color: black;
     font-weight: bold;
-    text-align: center;
-    margin: 0.5%;
   }
 
   // overlay css end
@@ -480,23 +608,34 @@ const Wrapper = styled.section`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 75%;
-    height: 55%;
+    width: 50%;
+    height: 50%;
     z-index: 1000;
     background-color: white;
     padding: 1%;
   }
-  .overlay2 {
+  .overlay2{  position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 44%;
+    z-index: 1000;
+    background-color: white;
+    padding: 1%;
+  }
+  .overlay3{  
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 75%;
-    height: 55%;
+    height: 60%;
     z-index: 1000;
     background-color: white;
     padding: 1%;
   }
+  
   .crossIcon {
     margin-left: 95%;
     margin-top: 2%;
@@ -507,15 +646,11 @@ const Wrapper = styled.section`
     width: 85%;
     margin-left: 10%;
   }
-  .searchFieldsDiv2 {
+  .searchFieldsDiv1 {
     display: flex;
     margin-top: 2.5%;
     width: 85%;
-    margin-left: 20%;
-  }
-  .Field {
-    width: 50%;
-    margin: 2%;
+    margin-left: 36%;
   }
   .searchButton {
     margin-left: 35%;
@@ -529,13 +664,12 @@ const Wrapper = styled.section`
     background-color: #2e0f59;
     color: white;
   }
-  .item1 {
-    font-size: 15px;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    margin: 0.5%;
+  .Field {
+    width: 50%;
+    margin: 2%;
   }
+  
+
   //overlay css end
 
   //need help div start
@@ -556,7 +690,7 @@ const Wrapper = styled.section`
 
   //data display card
   .dataDisplay {
-    height: 600px;
+    height: 722px;
     width: 70%;
     margin-left: 2%;
     margin-top: 3%;
@@ -568,14 +702,13 @@ const Wrapper = styled.section`
     flex-direction: row;
     height: 5.8%;
     border-radius: 15px;
-    padding: 1%;
   }
   .colume1 {
+    margin-left: 12%;
     font-size: 15px;
     color: grey;
     font-weight: bold;
-    text-align: center;
-    margin: 0.5%;
+    margin-top: 0.5%;
   }
   .colume2 {
     margin-left: 19%;
@@ -630,7 +763,7 @@ const Wrapper = styled.section`
   //UserInfo(TaskBar)
   .TaskBar {
     width: 20%;
-    height: 650px;
+    height: 780px;
     background-color:#564873;
     margin-top: 3%;
     margin-bottom: 10%;
@@ -652,7 +785,7 @@ const Wrapper = styled.section`
     flex-direction: column;
   }
   .navigationButton {
-    margin: 2%;
+    margin-top: 2%;
   }
 
   //UserInfo Ending

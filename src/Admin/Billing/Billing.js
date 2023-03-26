@@ -1109,7 +1109,7 @@ const Wrapper = styled.section`
   .TaskBar {
     width: 20%;
     height: 700px;
-    background-color: #2a558c;
+    background-color:#564873;
     margin-top: 3%;
     margin-bottom: 10%;
     margin-left: 2%;
@@ -1142,7 +1142,7 @@ const Wrapper = styled.section`
     bottom: 0;
     width: 100%;
     height: 250px;
-    background-color: #0a2740;
+    background-color: #2E0F59;
     margin-top: 0%;
   }
   .company {
@@ -1163,9 +1163,10 @@ const Wrapper = styled.section`
   .Header {
     display: flex;
     flex-direction: row;
-    margin-left: 5.9%;
+    align-items:center;
+    justify-content:center;
     margin-top: 0.5%;
-    width: 93%;
+    width: 100%;
     background-color: white;
   }
   .headerImage {

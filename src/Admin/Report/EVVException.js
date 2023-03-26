@@ -20,18 +20,13 @@ import Grid from '@mui/material/Grid';
 //
 const Link = require("react-router-dom").Link;
 
-function CallDashBoard() {
-  const [ViewSelected, setViewSelected] = useState(1);
-
-  
-//
+function EVVException() {
+ const [ViewSelected, setViewSelected] = useState(1);
 
 const [age, setAge] = React.useState('');
 const handleChange = (event) => {
   setAge(event.target.value);
 };
-
-//
   
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [isOverlayOpen2, setIsOverlayOpen2] = useState(false);
@@ -68,23 +63,23 @@ const handleChange = (event) => {
   };
   //
 //
-const CallMaintancePressed = () => {
+const ByCareGivePressed = () => {
   setViewSelected(1);
 };
 
-const MissedInPressed = () => {
+const ByReasonPressed = () => {
   setViewSelected(2);
 };
-const MissedOutPressed = () => {
+const ByDetailReportPressed = () => {
   setViewSelected(3);
 };
-const MissedCallPressed = () => {
+const ByStatisticsPressed = () => {
   setViewSelected(4);
 };
-const VisitLogPressed = () => {
+const ByProviderPressed = () => {
   setViewSelected(5);
 };
-const RejectedCallsPressed = () => {
+const ByAggregationPressed = () => {
   setViewSelected(6);
 };
   //
@@ -113,77 +108,69 @@ const RejectedCallsPressed = () => {
       <div className="overlay">
       <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
       <h1 style={{ marginLeft: "41%" }}>Set Filter from here !</h1>
-      <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Call Maintaince</p>
+      <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Exception By CareGiver</p>
       <div className="searchFieldsDiv">
       <Grid container spacing={3}>
-        
+      <Grid item xs="2.87">
+      
+      <Box >
+    <FormControl fullWidth>
+      <InputLabel >MCO (s)</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={age}
+        label="Status"
+        onChange={handleChange}
+      >
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
+    </FormControl>
+  </Box>  
+      </Grid>
       <Grid item xs="3">
         <TextField
          
           id="outlined-basic"
-          label="Care Giver First Name"
+          label="From Date DD/MM/YYYY"
           variant="outlined"
         />
       </Grid>
       <Grid item xs="3">
       <TextField
           id="outlined-basic"
-          label="Care Giver Last Name"
+          label="To Date DD/YY/YYYY"
           variant="outlined"
         />
       </Grid>
-        
       <Grid item xs="3">
+      <TextField
+          id="outlined-basic"
+          label="CareGiver"
+          variant="outlined"
+        />
+      </Grid>
+      <Grid item xs="2.87">
       
-      <TextField
-         
-          id="outlined-basic"
-          label="Care Giver Code"
-          variant="outlined"
-        />
+      <Box >
+    <FormControl fullWidth>
+      <InputLabel >Types Of Service</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={age}
+        label="Status"
+        onChange={handleChange}
+      >
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
+    </FormControl>
+  </Box>  
       </Grid>
-      <Grid item xs="3">
-      
-      <TextField
-          id="outlined-basic"
-          label="Assigment ID"
-          variant="outlined"
-        />
-        
-      </Grid>
-
-      <Grid item xs="3">
-      
-      <TextField
-         
-          id="outlined-basic"
-          label="Admission ID"
-          variant="outlined"
-        />
-        
-      </Grid>
-      <Grid item xs="3">
-      
-      <TextField
-         
-          id="outlined-basic"
-          label="Member First Name"
-          variant="outlined"
-        />
-        
-      </Grid>
-      <Grid item xs="3">
-      
-      <TextField
-         
-          id="outlined-basic"
-          label="Member Last Name"
-          variant="outlined"
-        />
-        
-      </Grid>
-        
-
       <Grid item xs="2.87">
       
       <Box >
@@ -203,33 +190,12 @@ const RejectedCallsPressed = () => {
     </FormControl>
   </Box>  
       </Grid>
-      <Grid item xs="2.87" style={{marginLeft:"1%"}}>
-      
-      <Box>
-    <FormControl fullWidth>
-      <InputLabel >Status</InputLabel>
-      <Select
-      
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={age}
-        label="Status"
-        onChange={handleChange}
-      >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </Select>
-    </FormControl>
-  </Box>
-       </Grid>
-       <Grid item xs="2.87">
+      <Grid item xs="2.87">
       
       <Box >
     <FormControl fullWidth>
-      <InputLabel >Member Team</InputLabel>
+      <InputLabel >Discipline (s)</InputLabel>
       <Select
-      
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={age}
@@ -241,71 +207,27 @@ const RejectedCallsPressed = () => {
         <MenuItem value={30}>Thirty</MenuItem>
       </Select>
     </FormControl>
-  </Box>
-       </Grid>
-
-       <Grid item xs="2.87">
-      
-      <Box >
-    <FormControl fullWidth>
-      <InputLabel >Member Location</InputLabel>
-      <Select
-      
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={age}
-        label="Status"
-        onChange={handleChange}
-      >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </Select>
-    </FormControl>
-  </Box>
-       </Grid>
-       <Grid item xs="2.87">
-      
-      <Box >
-    <FormControl fullWidth>
-      <InputLabel >Member Branch</InputLabel>
-      <Select
-      
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={age}
-        label="Status"
-        onChange={handleChange}
-      >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </Select>
-    </FormControl>
-  </Box>
-       </Grid>
-
-       <Grid item xs="3">
-      
-      <TextField
-         
-          id="outlined-basic"
-          label="From Date dd/mm/yyyy"
-          variant="outlined"
-        />
-        
+  </Box>  
       </Grid>
-      <Grid item xs="3">
+      <Grid item xs="2.87">
       
-      <TextField
-         
-          id="outlined-basic"
-          label="Till Date dd/mm/yyyy"
-          variant="outlined"
-        />
-        
-      </Grid>
-       
+      <Box >
+    <FormControl fullWidth>
+      <InputLabel >Team (s)</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={age}
+        label="Status"
+        onChange={handleChange}
+      >
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
+    </FormControl>
+  </Box>  
+      </Grid>   
   </Grid>
       </div>
       <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay}>
@@ -321,42 +243,15 @@ function Overlay2() {
     <div className="overlay2">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay2} />
     <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
-    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Missed In</p>
+    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Exception By Reason</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
       
-    <Grid item xs="3">
-      <TextField
-       
-        id="outlined-basic"
-        label="CareGiver Name"
-        variant="outlined"
-      />
-    </Grid>
-    <Grid item xs="3">
-    <TextField
-        id="outlined-basic"
-        label="Admission ID"
-        variant="outlined"
-      />
-    </Grid>
-      
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Member Name"
-        variant="outlined"
-      />
-    </Grid>
-      
-
     <Grid item xs="2.87">
     
     <Box >
   <FormControl fullWidth>
-    <InputLabel >MCO</InputLabel>
+    <InputLabel >MCO (s)</InputLabel>
     <Select
       labelId="demo-simple-select-label"
       id="demo-simple-select"
@@ -371,55 +266,99 @@ function Overlay2() {
   </FormControl>
 </Box>  
     </Grid>
-    <Grid item xs="2.87" style={{marginLeft:"1%"}}>
-    
-    <Box>
-  <FormControl fullWidth>
-    <InputLabel >Cordinator</InputLabel>
-    <Select
-    
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      value={age}
-      label="Status"
-      onChange={handleChange}
-    >
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
-    </Select>
-  </FormControl>
-</Box>
-     </Grid>
-     <Grid item xs="2.87">
-    
-    <Box >
-  <FormControl fullWidth>
-    <InputLabel >Team Member</InputLabel>
-    <Select
-    
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      value={age}
-      label="Status"
-      onChange={handleChange}
-    >
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
-    </Select>
-  </FormControl>
-</Box>
-     </Grid>
-     <Grid item xs="3">
-    
-    <TextField
+
+    <Grid item xs="3">
+      <TextField
        
         id="outlined-basic"
-        label="Assigment ID"
+        label="From Date DD/MM/YYYY"
         variant="outlined"
       />
     </Grid>
+    <Grid item xs="3">
+    <TextField
+        id="outlined-basic"
+        label="To Date DD/MM/YYYY"
+        variant="outlined"
+      />
+    </Grid>
+    <Grid item xs="2.87">
+    
+    <Box >
+  <FormControl fullWidth>
+    <InputLabel >Type Of Service</InputLabel>
+    <Select
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={age}
+      label="Status"
+      onChange={handleChange}
+    >
+      <MenuItem value={10}>Ten</MenuItem>
+      <MenuItem value={20}>Twenty</MenuItem>
+      <MenuItem value={30}>Thirty</MenuItem>
+    </Select>
+  </FormControl>
+</Box>  
+    </Grid>
+    <Grid item xs="2.87">
+    
+    <Box >
+  <FormControl fullWidth>
+    <InputLabel >Cordinator</InputLabel>
+    <Select
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={age}
+      label="Status"
+      onChange={handleChange}
+    >
+      <MenuItem value={10}>Ten</MenuItem>
+      <MenuItem value={20}>Twenty</MenuItem>
+      <MenuItem value={30}>Thirty</MenuItem>
+    </Select>
+  </FormControl>
+</Box>  
+    </Grid>
+    <Grid item xs="2.87">
+    
+    <Box >
+  <FormControl fullWidth>
+    <InputLabel >Reason</InputLabel>
+    <Select
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={age}
+      label="Status"
+      onChange={handleChange}
+    >
+      <MenuItem value={10}>Ten</MenuItem>
+      <MenuItem value={20}>Twenty</MenuItem>
+      <MenuItem value={30}>Thirty</MenuItem>
+    </Select>
+  </FormControl>
+</Box>  
+    </Grid>
+    <Grid item xs="2.87">
+    
+    <Box >
+  <FormControl fullWidth>
+    <InputLabel >Team(s)</InputLabel>
+    <Select
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={age}
+      label="Status"
+      onChange={handleChange}
+    >
+      <MenuItem value={10}>Ten</MenuItem>
+      <MenuItem value={20}>Twenty</MenuItem>
+      <MenuItem value={30}>Thirty</MenuItem>
+    </Select>
+  </FormControl>
+</Box>  
+    </Grid>
+    
 </Grid>
     </div>
     <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay2}>
@@ -435,7 +374,7 @@ function Overlay3() {
     <div className="overlay3">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay3} />
     <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
-    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Missed Out</p>
+    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Exception By Detail Report</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
       
@@ -443,34 +382,22 @@ function Overlay3() {
       <TextField
        
         id="outlined-basic"
-        label="CareGiver Name"
+        label="From Date DD/YY/YYYY"
         variant="outlined"
       />
     </Grid>
     <Grid item xs="3">
     <TextField
         id="outlined-basic"
-        label="Admission ID"
+        label="To Date DD/YY/YYYY"
         variant="outlined"
       />
     </Grid>
-      
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Member Name"
-        variant="outlined"
-      />
-    </Grid>
-  
-
     <Grid item xs="2.87">
     
     <Box >
   <FormControl fullWidth>
-    <InputLabel >MCO</InputLabel>
+    <InputLabel >MCO (s)</InputLabel>
     <Select
       labelId="demo-simple-select-label"
       id="demo-simple-select"
@@ -485,11 +412,79 @@ function Overlay3() {
   </FormControl>
 </Box>  
     </Grid>
+      
+    <Grid item xs="3">
+    
+    <TextField
+       
+        id="outlined-basic"
+        label="Invoice From Date DD/MM/YYYY"
+        variant="outlined"
+      />
+    </Grid>
+    <Grid item xs="3">
+    
+    <TextField
+       
+        id="outlined-basic"
+        label="Invoice To Date DD/MM/YYYY"
+        variant="outlined"
+      />
+    </Grid>
+  
+
+    <Grid item xs="2.87">
+    
+    <Box >
+  <FormControl fullWidth>
+    <InputLabel >Include Type</InputLabel>
+    <Select
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={age}
+      label="Status"
+      onChange={handleChange}
+    >
+      <MenuItem value={10}>Ten</MenuItem>
+      <MenuItem value={20}>Twenty</MenuItem>
+      <MenuItem value={30}>Thirty</MenuItem>
+    </Select>
+  </FormControl>
+</Box>  
+    </Grid>
+    <Grid item xs="2.87">
+    
+    <Box >
+  <FormControl fullWidth>
+    <InputLabel >Admission ID</InputLabel>
+    <Select
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={age}
+      label="Status"
+      onChange={handleChange}
+    >
+      <MenuItem value={10}>Ten</MenuItem>
+      <MenuItem value={20}>Twenty</MenuItem>
+      <MenuItem value={30}>Thirty</MenuItem>
+    </Select>
+  </FormControl>
+</Box>  
+    </Grid>
+    <Grid item xs="3">
+    
+    <TextField
+       
+        id="outlined-basic"
+        label="CareGiver"
+        variant="outlined"
+      />
+    </Grid>
     <Grid item xs="2.87" style={{marginLeft:"1%"}}>
     
     <Box>
   <FormControl fullWidth>
-    <InputLabel >Cordinator</InputLabel>
+    <InputLabel >Timesheet</InputLabel>
     <Select
     
       labelId="demo-simple-select-label"
@@ -509,7 +504,7 @@ function Overlay3() {
     
     <Box >
   <FormControl fullWidth>
-    <InputLabel >Team Member</InputLabel>
+    <InputLabel >Type Of Service</InputLabel>
     <Select
     
       labelId="demo-simple-select-label"
@@ -531,10 +526,51 @@ function Overlay3() {
     <TextField
        
         id="outlined-basic"
-        label="Assigment ID"
+        label="Batch Number"
         variant="outlined"
       />
     </Grid>
+
+    <Grid item xs="2.87">
+    
+    <Box >
+  <FormControl fullWidth>
+    <InputLabel >Cordinator</InputLabel>
+    <Select
+    
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={age}
+      label="Status"
+      onChange={handleChange}
+    >
+      <MenuItem value={10}>Ten</MenuItem>
+      <MenuItem value={20}>Twenty</MenuItem>
+      <MenuItem value={30}>Thirty</MenuItem>
+    </Select>
+  </FormControl>
+</Box>
+     </Grid>
+     <Grid item xs="2.87">
+    
+    <Box >
+  <FormControl fullWidth>
+    <InputLabel >Exception Code</InputLabel>
+    <Select
+    
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={age}
+      label="Status"
+      onChange={handleChange}
+    >
+      <MenuItem value={10}>Ten</MenuItem>
+      <MenuItem value={20}>Twenty</MenuItem>
+      <MenuItem value={30}>Thirty</MenuItem>
+    </Select>
+  </FormControl>
+</Box>
+     </Grid>
   
      
 </Grid>
@@ -551,7 +587,7 @@ function Overlay4() {
     <div className="overlay4">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay4} />
     <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
-    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Missed Call</p>
+    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Exception Statistics</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
       
@@ -559,24 +595,15 @@ function Overlay4() {
       <TextField
        
         id="outlined-basic"
-        label="Care Giver Name"
+        label="From Date DD/MM/YYYY"
         variant="outlined"
       />
     </Grid>
     <Grid item xs="3">
-    <TextField
-        id="outlined-basic"
-        label="Admission ID"
-        variant="outlined"
-      />
-    </Grid>
-      
-    <Grid item xs="3">
-    
-    <TextField
+      <TextField
        
         id="outlined-basic"
-        label="Member Name"
+        label="To Date DD/MM/YYYY"
         variant="outlined"
       />
     </Grid>
@@ -585,7 +612,7 @@ function Overlay4() {
     
     <Box >
   <FormControl fullWidth>
-    <InputLabel >MCO</InputLabel>
+    <InputLabel >Reason (s)</InputLabel>
     <Select
       labelId="demo-simple-select-label"
       id="demo-simple-select"
@@ -603,6 +630,26 @@ function Overlay4() {
     <Grid item xs="2.87" style={{marginLeft:"1%"}}>
     
     <Box>
+  <FormControl fullWidth>
+    <InputLabel >Type Of Service</InputLabel>
+    <Select
+    
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={age}
+      label="Status"
+      onChange={handleChange}
+    >
+      <MenuItem value={10}>Ten</MenuItem>
+      <MenuItem value={20}>Twenty</MenuItem>
+      <MenuItem value={30}>Thirty</MenuItem>
+    </Select>
+  </FormControl>
+</Box>
+     </Grid>
+     <Grid item xs="2.87">
+    
+    <Box >
   <FormControl fullWidth>
     <InputLabel >Cordinator</InputLabel>
     <Select
@@ -624,7 +671,7 @@ function Overlay4() {
     
     <Box >
   <FormControl fullWidth>
-    <InputLabel >Team Member</InputLabel>
+    <InputLabel >MCO(s)</InputLabel>
     <Select
     
       labelId="demo-simple-select-label"
@@ -640,15 +687,26 @@ function Overlay4() {
   </FormControl>
 </Box>
      </Grid>
-     <Grid item xs="3">
+     <Grid item xs="2.87">
     
-    <TextField
-       
-        id="outlined-basic"
-        label="Assigment ID"
-        variant="outlined"
-      />
-    </Grid>
+    <Box >
+  <FormControl fullWidth>
+    <InputLabel >Team</InputLabel>
+    <Select
+    
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={age}
+      label="Status"
+      onChange={handleChange}
+    >
+      <MenuItem value={10}>Ten</MenuItem>
+      <MenuItem value={20}>Twenty</MenuItem>
+      <MenuItem value={30}>Thirty</MenuItem>
+    </Select>
+  </FormControl>
+</Box>
+     </Grid>
      
 </Grid>
     </div>
@@ -664,49 +722,15 @@ function Overlay5() {
     <div className="overlay5">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay5} />
     <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
-    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Visit Log</p>
+    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Exception Summary By Provider</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
       
-    <Grid item xs="3">
-      <TextField
-       
-        id="outlined-basic"
-        label="First Name"
-        variant="outlined"
-      />
-    </Grid>
-    <Grid item xs="3">
-    <TextField
-        id="outlined-basic"
-        label="Last Name"
-        variant="outlined"
-      />
-    </Grid>
-      
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Care Giver Code"
-        variant="outlined"
-      />
-    </Grid>
-    <Grid item xs="3">
-    
-    <TextField
-        id="outlined-basic"
-        label="Care Giver Name"
-        variant="outlined"
-      />
-      
-    </Grid>
     <Grid item xs="2.87">
     
     <Box >
   <FormControl fullWidth>
-    <InputLabel >Team Member</InputLabel>
+    <InputLabel >MCO(s)</InputLabel>
     <Select
       labelId="demo-simple-select-label"
       id="demo-simple-select"
@@ -722,28 +746,41 @@ function Overlay5() {
 </Box>  
     </Grid>
 
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Assigment ID"
-        variant="outlined"
-      />
-      
-    </Grid>
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Admission ID"
-        variant="outlined"
-      />
-      
-    </Grid>
-      
 
+    <Grid item xs="3">
+      <TextField
+       
+        id="outlined-basic"
+        label="From Date DD/MM/YYYY"
+        variant="outlined"
+      />
+    </Grid>
+    <Grid item xs="3">
+    <TextField
+        id="outlined-basic"
+        label="To Date DD/MM/YYYY"
+        variant="outlined"
+      />
+    </Grid>
+    <Grid item xs="2.87">
+    
+    <Box >
+  <FormControl fullWidth>
+    <InputLabel >Type Of Service</InputLabel>
+    <Select
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={age}
+      label="Status"
+      onChange={handleChange}
+    >
+      <MenuItem value={10}>Ten</MenuItem>
+      <MenuItem value={20}>Twenty</MenuItem>
+      <MenuItem value={30}>Thirty</MenuItem>
+    </Select>
+  </FormControl>
+</Box>  
+    </Grid>
     <Grid item xs="2.87">
     
     <Box >
@@ -763,28 +800,25 @@ function Overlay5() {
   </FormControl>
 </Box>  
     </Grid>
-    <Grid item xs="3">
+    <Grid item xs="2.87">
     
-    <TextField
-       
-        id="outlined-basic"
-        label="From Date dd/mm/yyyy"
-        variant="outlined"
-      />
-      
-    </Grid>
-    
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Till Date dd/mm/yyyy"
-        variant="outlined"
-      />
-      
-    </Grid>
-     
+    <Box >
+  <FormControl fullWidth>
+    <InputLabel >Team(s)</InputLabel>
+    <Select
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={age}
+      label="Status"
+      onChange={handleChange}
+    >
+      <MenuItem value={10}>Ten</MenuItem>
+      <MenuItem value={20}>Twenty</MenuItem>
+      <MenuItem value={30}>Thirty</MenuItem>
+    </Select>
+  </FormControl>
+</Box>  
+    </Grid>  
 </Grid>
     </div>
     <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay5}>
@@ -799,50 +833,43 @@ function Overlay6() {
     <div className="overlay6">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay6} />
     <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
-    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Rejected Calls</p>
+    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>State Aggregation Report</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
       
-    <Grid item xs="3">
-      <TextField
-       
-        id="outlined-basic"
-        label="Care Giver Code"
-        variant="outlined"
-      />
-    </Grid>
-    <Grid item xs="3">
-    <TextField
-        id="outlined-basic"
-        label="Care Giver Name"
-        variant="outlined"
-      />
-    </Grid>
-      
-    <Grid item xs="3">
-    
-    <TextField
-       
-        id="outlined-basic"
-        label="Assigment ID"
-        variant="outlined"
-      />
-    </Grid>
-    <Grid item xs="3">
-    
-    <TextField
-        id="outlined-basic"
-        label="Admission ID"
-        variant="outlined"
-      />
-      
-    </Grid>
-
     <Grid item xs="2.87">
     
     <Box >
   <FormControl fullWidth>
-    <InputLabel >Team Member</InputLabel>
+    <InputLabel >Report Section</InputLabel>
+    <Select
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={age}
+      label="Status"
+      onChange={handleChange}
+    >
+      <MenuItem value={10}>Ten</MenuItem>
+      <MenuItem value={20}>Twenty</MenuItem>
+      <MenuItem value={30}>Thirty</MenuItem>
+    </Select>
+  </FormControl>
+</Box>  
+    </Grid>
+
+    <Grid item xs="3">
+      <TextField
+       
+        id="outlined-basic"
+        label="Visit To Date DD/MM/YYYY"
+        variant="outlined"
+      />
+    </Grid>
+    <Grid item xs="2.87">
+    
+    <Box >
+  <FormControl fullWidth>
+    <InputLabel >MCO (s)</InputLabel>
     <Select
       labelId="demo-simple-select-label"
       id="demo-simple-select"
@@ -858,22 +885,85 @@ function Overlay6() {
 </Box>  
     </Grid>
     <Grid item xs="3">
+    <TextField
+        id="outlined-basic"
+        label="Last Export From Date DD/MM/YYYY"
+        variant="outlined"
+      />
+    </Grid>
+    <Grid item xs="3">
+    <TextField
+        id="outlined-basic"
+        label="Last Export To Date DD/MM/YYYY"
+        variant="outlined"
+      />
+    </Grid>
+      
+    <Grid item xs="3">
     
     <TextField
        
         id="outlined-basic"
-        label="From Date dd/mm/yy"
+        label="Member"
         variant="outlined"
       />
     </Grid>
     <Grid item xs="3">
     
     <TextField
-       
         id="outlined-basic"
-        label="Till Date dd/mm/yy"
+        label="Medical ID Number"
         variant="outlined"
       />
+      
+    </Grid>
+    <Grid item xs="3">
+    
+    <TextField
+        id="outlined-basic"
+        label="CareGiver"
+        variant="outlined"
+      />
+      
+    </Grid>
+
+    <Grid item xs="2.87">
+    
+    <Box >
+  <FormControl fullWidth>
+    <InputLabel >Producure Code (s)</InputLabel>
+    <Select
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={age}
+      label="Status"
+      onChange={handleChange}
+    >
+      <MenuItem value={10}>Ten</MenuItem>
+      <MenuItem value={20}>Twenty</MenuItem>
+      <MenuItem value={30}>Thirty</MenuItem>
+    </Select>
+  </FormControl>
+</Box>  
+    </Grid>
+    <Grid item xs="2.87">
+    
+    <Box >
+  <FormControl fullWidth>
+    <InputLabel >Record Status (s)</InputLabel>
+    <Select
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={age}
+      label="Status"
+      onChange={handleChange}
+    >
+      <MenuItem value={10}>Ten</MenuItem>
+      <MenuItem value={20}>Twenty</MenuItem>
+      <MenuItem value={30}>Thirty</MenuItem>
+    </Select>
+  </FormControl>
+</Box>  
     </Grid>
      
 </Grid>
@@ -889,18 +979,18 @@ function Overlay6() {
   function RenderViews() {
     switch (ViewSelected) {
       case 1:
-        return CallMaintanceView();
+        return ByCareGiverView();
 
       case 2:
-        return MissedInView();
+        return ByReasonView();
       case 3:
-        return MissedOutView();
+        return ByDetailView();
       case 4:
-        return MissedCallView();
+        return ByStatisticsView();
       case 5:
-        return VisitLogView();
+        return ByProviderView();
       case 6:
-        return RejectedCallsView();
+        return ByAggregationView();
 
       default:
         break;
@@ -943,7 +1033,7 @@ function Overlay6() {
   ];
 
 
-  const RejectedCallsView = () => {
+  const ByAggregationView = () => {
     return (
       <div>
       <table className="table">
@@ -982,7 +1072,7 @@ function Overlay6() {
   };
 
   
-  const VisitLogView = () => {
+  const ByProviderView = () => {
     return (
       <div>
       <table className="table">
@@ -1026,7 +1116,7 @@ function Overlay6() {
     );
   };
   
-  const MissedCallView = () => {
+  const ByStatisticsView = () => {
     return (
       <div>
       <table className="table">
@@ -1064,7 +1154,7 @@ function Overlay6() {
     );
   };
   
-  const MissedOutView = () => {
+  const ByDetailView = () => {
     return (
       <div>
       <table className="table">
@@ -1102,7 +1192,7 @@ function Overlay6() {
     );
   };
   
-  const CallMaintanceView = () => {
+  const ByCareGiverView = () => {
     return (
 
 <div>
@@ -1156,7 +1246,7 @@ function Overlay6() {
      
     );
   };
-  const MissedInView = () => {
+  const ByReasonView = () => {
     return (
       <div>
       <table className="table">
@@ -1242,7 +1332,7 @@ function Overlay6() {
             <Button
               className="navigationButton"
               onClick={() => {
-                CallMaintancePressed();
+                ByCareGivePressed();
               }}
             >
               <p
@@ -1252,43 +1342,43 @@ function Overlay6() {
                   fontWeight: "bold",
                 }}
               >
-                Call Maintaince
+                Exception By CareGiver
               </p>
             </Button>
-            <Button onClick={MissedInPressed} className="navigationButton">
+            <Button onClick={ByReasonPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Missed In
+                Exception By Reason
               </p>
             </Button>
 
-            <Button onClick={MissedOutPressed} className="navigationButton">
+            <Button onClick={ByDetailReportPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Missed Out
+                Exception By Detail Report
               </p>
             </Button>
-            <Button onClick={MissedCallPressed} className="navigationButton">
+            <Button onClick={ByStatisticsPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Missed Call
+                Exception Statistics
               </p>
             </Button>
-            <Button onClick={VisitLogPressed} className="navigationButton">
+            <Button onClick={ByProviderPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Visit Log
+                 Exception Summary By Provider
               </p>
             </Button>
-            <Button onClick={RejectedCallsPressed} className="navigationButton">
+            <Button onClick={ByAggregationPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Rejected Calls
+               State Aggregation Report
               </p>
             </Button>
           </div>
@@ -1337,7 +1427,7 @@ function Overlay6() {
     </Wrapper>
   );
 }
-export default CallDashBoard;
+export default EVVException;
 
 const Wrapper = styled.section`
   height: 100%;
@@ -1427,7 +1517,7 @@ const Wrapper = styled.section`
     left: 50%;
     transform: translate(-50%, -50%);
     width: 75%;
-    height: 60%;
+    height: 75%;
     z-index: 1000;
     background-color: white;
     padding: 1%;
@@ -1460,7 +1550,7 @@ const Wrapper = styled.section`
           left: 50%;
           transform: translate(-50%, -50%);
           width: 75%;
-          height: 55%;
+          height: 65%;
           z-index: 1000;
           background-color: white;
           padding: 1%;

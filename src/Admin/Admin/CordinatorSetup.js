@@ -6,7 +6,6 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
@@ -35,40 +34,7 @@ function CareGiver() {
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
-  const ColumnDiv = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">First Name</p>
-        <hr/>
-        <p className="colume1">Last Name</p>
-        <hr/>
-        <p className="colume1">Phone</p>
-        <hr/>
-        <p className="colume1">CareGiver Code</p>
-        <hr/>
-        <p className="colume1">Alt CG Code</p>
-        <hr/>
-        <p className="colume1">SSN</p>
-        <hr/>
-        <p className="colume1">Status</p>
-        <hr/>
-        <p className="colume1">Provider</p>
-        <hr/>
-        <p className="colume1">Discipline</p>
-      </div>
-    );
-  };
-  function renderColumeName() {
-    switch (ViewSelected) {
-      case 1:
-        return null;
-      case 2:
-        return <ColumnDiv />;
-      
-      default:
-        break;
-    }
-  }
+
 
   function RenderSearchIcon(){
     switch (ViewSelected) {
@@ -88,8 +54,8 @@ function CareGiver() {
       
       <div className="overlay">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
-        <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Search Care Giver</p>
+        <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
+        <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Search New Cordinator</p>
         <div className="searchFieldsDiv">
         <Grid container spacing={3}>
           
@@ -97,58 +63,20 @@ function CareGiver() {
           <TextField
            
             id="outlined-basic"
-            label="First Name"
+            label="Name"
             variant="outlined"
           />
         </Grid>
         <Grid item xs="3">
         <TextField
             id="outlined-basic"
-            label="Last Name"
+            label="Member"
             variant="outlined"
           />
         </Grid>
           
-        <Grid item xs="3">
         
-        <TextField
-           
-            id="outlined-basic"
-            label="Phone Number"
-            variant="outlined"
-          />
-        </Grid>
-        <Grid item xs="3">
-        
-        <TextField
-            id="outlined-basic"
-            label="Care Giver Code"
-            variant="outlined"
-          />
-          
-        </Grid>
-
-        <Grid item xs="3">
-        
-        <TextField
-           
-            id="outlined-basic"
-            label="Alt Caregiver Code"
-            variant="outlined"
-          />
-          
-        </Grid>
-        <Grid item xs="3">
-        
-        <TextField
-           
-            id="outlined-basic"
-            label="SSN"
-            variant="outlined"
-          />
-          
-        </Grid>
-          
+       
 
         <Grid item xs="2.87">
         
@@ -169,46 +97,7 @@ function CareGiver() {
       </FormControl>
     </Box>  
         </Grid>
-        <Grid item xs="2.87" style={{marginLeft:"1%"}}>
-        
-        <Box>
-      <FormControl fullWidth>
-        <InputLabel >Provider</InputLabel>
-        <Select
-        
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Status"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-         </Grid>
-         <Grid item xs="2.87">
-        
-        <Box >
-      <FormControl fullWidth>
-        <InputLabel >Discipline</InputLabel>
-        <Select
-        
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Status"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-         </Grid>
+      
          
     </Grid>
         </div>
@@ -220,20 +109,20 @@ function CareGiver() {
     );
   }
 
-  const NewCareGiverPressed = () => {
+  const NewCordinatorPressed = () => {
     setViewSelected(1);
   };
-  const SearchCareGiverPressed = () => {
+  const SearchCordinatorPressed = () => {
     setViewSelected(2);
   };
 
   function RenderViews() {
     switch (ViewSelected) {
       case 1:
-        return NewCareGiverView();
+        return NewCordinatorView();
 
       case 2:
-        return SearchCareGiverView();
+        return SearchCordinatorView();
 
       default:
         break;
@@ -275,14 +164,14 @@ function CareGiver() {
     },
   ];
 
-  const NewCareGiverView = () => {
+  const NewCordinatorView = () => {
     return (
      <div>
-      New Care Giver Fields Here
+      New Cordinator Fields Here
      </div>
     );
   };
-  const SearchCareGiverView = () => {
+  const SearchCordinatorView = () => {
     return (
       <div>
       <table className="table">
@@ -373,7 +262,7 @@ function CareGiver() {
             <Button
               className="navigationButton"
               onClick={() => {
-                NewCareGiverPressed();
+                NewCordinatorPressed();
               }}
             >
               <p
@@ -383,14 +272,14 @@ function CareGiver() {
                   fontWeight: "bold",
                 }}
               >
-                New Care Giver
+                New Cordinator
               </p>
             </Button>
-            <Button onClick={SearchCareGiverPressed} className="navigationButton">
+            <Button onClick={SearchCordinatorPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Search Care Giver
+                Search Cordinator
               </p>
             </Button>
            
@@ -506,7 +395,7 @@ width: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 75%;
-  height: 70%;
+  height: 50%;
   z-index: 1000;
   background-color: white;
   padding: 1%;
@@ -519,7 +408,7 @@ width: 100%;
     display: flex; 
     margin-top:2.5%;
     width:85%;
-    margin-left:10%;
+    margin-left:20%;
   }
 
   .searchButton {

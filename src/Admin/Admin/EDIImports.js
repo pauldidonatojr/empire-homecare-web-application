@@ -20,7 +20,7 @@ import Grid from '@mui/material/Grid';
 //
 const Link = require("react-router-dom").Link;
 
-function PendingQueuePlacement() {
+function CallDashBoard() {
   const [ViewSelected, setViewSelected] = useState(1);
 
   
@@ -30,15 +30,24 @@ const [age, setAge] = React.useState('');
 const handleChange = (event) => {
   setAge(event.target.value);
 };
+
+//
+  
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [isOverlayOpen2, setIsOverlayOpen2] = useState(false);
   const [isOverlayOpen3, setIsOverlayOpen3] = useState(false);
   const [isOverlayOpen4, setIsOverlayOpen4] = useState(false);
   const [isOverlayOpen5, setIsOverlayOpen5] = useState(false);
-  const [isOverlayOpen6, setIsOverlayOpen6] = useState(false);
 
   const handleClickIcon = () => {
     
     switch (ViewSelected) {
-      
+      case 1:
+        setIsOverlayOpen(true);
+        break;
+      case 2:
+        setIsOverlayOpen2(true);
+        break;
       case 3:
         setIsOverlayOpen3(true);
         break;
@@ -48,15 +57,21 @@ const handleChange = (event) => {
       case 5:
         setIsOverlayOpen5(true);
         break;
-      case 6:
-        setIsOverlayOpen6(true);
-        break;
+     
       default:
         break;
     }
 
   };
+  //
+//
+const CallMaintancePressed = () => {
+  setViewSelected(1);
+};
 
+const MissedInPressed = () => {
+  setViewSelected(2);
+};
 const MissedOutPressed = () => {
   setViewSelected(3);
 };
@@ -66,10 +81,13 @@ const MissedCallPressed = () => {
 const VisitLogPressed = () => {
   setViewSelected(5);
 };
-const RejectedCallsPressed = () => {
-  setViewSelected(6);
-};
 
+  const handleCloseOverlay = () => {
+    setIsOverlayOpen(false);
+  };
+  const handleCloseOverlay2 = () => {
+    setIsOverlayOpen2(false);
+  };
   const handleCloseOverlay3 = () => {
     setIsOverlayOpen3(false);
   };
@@ -79,79 +97,217 @@ const RejectedCallsPressed = () => {
   const handleCloseOverlay5 = () => {
     setIsOverlayOpen5(false);
   };
-  const handleCloseOverlay6 = () => {
-    setIsOverlayOpen6(false);
-  };
+ 
 
+  //CallMaintance Search Overlay
+  function Overlay() {
+    return (
+      <div className="overlay">
+      <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
+      <h1 style={{ textAlign:"center"  }}>Set Filter from here !</h1>
+      <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Imported Files</p>
+      <div className="searchFieldsDiv">
+      <Grid container spacing={3}>
+      <Grid item xs="2.87">
+      
+      <Box >
+    <FormControl fullWidth>
+      <InputLabel >Interface</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={age}
+        label="Status"
+        onChange={handleChange}
+      >
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
+    </FormControl>
+  </Box>  
+      </Grid>
+      <Grid item xs="3">
+        <TextField
+         
+          id="outlined-basic"
+          label="Import From Date DD/MM/YYYY"
+          variant="outlined"
+        />
+      </Grid>
+      <Grid item xs="3">
+      <TextField
+          id="outlined-basic"
+          label="Import To Date DD/MM/YYYY"
+          variant="outlined"
+        />
+      </Grid>
+         
+  </Grid>
+      </div>
+      <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay}>
+        Search
+      </Button>
+    </div>
+    );
+  }
   
+//MissedIn
+function Overlay2() {
+  return (
+    <div className="overlay">
+    <CloseIcon className="crossIcon" onClick={handleCloseOverlay2} />
+    <h1 style={{ textAlign:"center"  }}>Set Filter from here !</h1>
+    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Pending Files</p>
+    <div className="searchFieldsDiv">
+      <Grid container spacing={3}>
+      <Grid item xs="2.87">
+      
+      <Box >
+    <FormControl fullWidth>
+      <InputLabel >Interface</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={age}
+        label="Status"
+        onChange={handleChange}
+      >
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
+    </FormControl>
+  </Box>  
+      </Grid>
+      <Grid item xs="3">
+        <TextField
+         
+          id="outlined-basic"
+          label="Import From Date DD/MM/YYYY"
+          variant="outlined"
+        />
+      </Grid>
+      <Grid item xs="3">
+      <TextField
+          id="outlined-basic"
+          label="Import To Date DD/MM/YYYY"
+          variant="outlined"
+        />
+      </Grid>
+         
+  </Grid>
+      </div>
+    <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay2}>
+      Search
+    </Button>
+  </div>
+  );
+}
 
-
+//Missed Out
 function Overlay3() {
   return (
     <div className="overlay">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay3} />
-    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
-    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Pending</p>
+    <h1 style={{ textAlign:"center"  }}>Set Filter from here !</h1>
+    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Failed To Import</p>
     <div className="searchFieldsDiv">
-    <Grid container spacing={3}>
-
-    <Grid item xs="5">
-    
-    <Box >
-  <FormControl fullWidth>
-    <InputLabel >MCO</InputLabel>
-    <Select
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      value={age}
-      label="Status"
-      onChange={handleChange}
-    >
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
-    </Select>
-  </FormControl>
-</Box>  
-    </Grid>
-</Grid>
-    </div>
+      <Grid container spacing={3}>
+      <Grid item xs="2.87">
+      
+      <Box >
+    <FormControl fullWidth>
+      <InputLabel >Interface</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={age}
+        label="Status"
+        onChange={handleChange}
+      >
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
+    </FormControl>
+  </Box>  
+      </Grid>
+      <Grid item xs="3">
+        <TextField
+         
+          id="outlined-basic"
+          label="Import From Date DD/MM/YYYY"
+          variant="outlined"
+        />
+      </Grid>
+      <Grid item xs="3">
+      <TextField
+          id="outlined-basic"
+          label="Import To Date DD/MM/YYYY"
+          variant="outlined"
+        />
+      </Grid>
+         
+  </Grid>
+      </div>
     <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay3}>
       Search
     </Button>
   </div>
   );
 }
+//Missed Call Overlay
 function Overlay4() {
   return (
     <div className="overlay">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay4} />
-    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
-    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Total Accepted</p>
+    <h1 style={{ textAlign:"center"  }}>Import Files from here !</h1>
+    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Import Files</p>
     <div className="searchFieldsDiv">
-    <Grid container spacing={3}>
+      <Grid container spacing={3}>
+      <Grid item xs="2.87">
       
-    <Grid item xs="5">
-    
-    <Box >
-  <FormControl fullWidth>
-    <InputLabel >MCO</InputLabel>
-    <Select
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      value={age}
-      label="Status"
-      onChange={handleChange}
-    >
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
-    </Select>
-  </FormControl>
-</Box>  
-    </Grid> 
-</Grid>
-    </div>
+      <Box >
+    <FormControl fullWidth>
+      <InputLabel >Interface</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={age}
+        label="Status"
+        onChange={handleChange}
+      >
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
+    </FormControl>
+  </Box>  
+      </Grid>
+      <Grid item xs="2.87">
+      
+      <Box >
+    <FormControl fullWidth>
+      <InputLabel >Usage</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={age}
+        label="Status"
+        onChange={handleChange}
+      >
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
+    </FormControl>
+  </Box>  
+      </Grid>
+     
+         
+  </Grid>
+      </div>
     <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay4}>
       Search
     </Button>
@@ -163,72 +319,48 @@ function Overlay5() {
   return (
     <div className="overlay">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay5} />
-    <h1 style={{textAlign:"center"}}>Set Filter from here !</h1>
-    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Staffed</p>
-    <div className="searchFieldsDiv">
-    <Grid container spacing={3}>
-      
-    <Grid item xs="5">
-    
-    <Box >
-  <FormControl fullWidth>
-    <InputLabel >MCO</InputLabel>
-    <Select
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      value={age}
-      label="Status"
-      onChange={handleChange}
-    >
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
-    </Select>
-  </FormControl>
-</Box>  
-    </Grid>
-     
-</Grid>
-    </div>
-    <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay5}>
-      Search
-    </Button>
-  </div>
-  );
-}
-
-function Overlay6() {
-  return (
-    <div className="overlay">
-    <CloseIcon className="crossIcon" onClick={handleCloseOverlay6} />
     <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
-    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Accepted Non Masterwork</p>
+    <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Re Processing</p>
     <div className="searchFieldsDiv">
-    <Grid container spacing={3}>
+      <Grid container spacing={3}>
+      <Grid item xs="2.87">
       
-    <Grid item xs="5">
-    
-    <Box >
-  <FormControl fullWidth>
-    <InputLabel >MCO</InputLabel>
-    <Select
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      value={age}
-      label="Status"
-      onChange={handleChange}
-    >
-      <MenuItem value={10}>Ten</MenuItem>
-      <MenuItem value={20}>Twenty</MenuItem>
-      <MenuItem value={30}>Thirty</MenuItem>
-    </Select>
-  </FormControl>
-</Box>  
-    </Grid>
-     
-</Grid>
-    </div>
-    <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay6}>
+      <Box >
+    <FormControl fullWidth>
+      <InputLabel >Interface</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={age}
+        label="Status"
+        onChange={handleChange}
+      >
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
+    </FormControl>
+  </Box>  
+      </Grid>
+      <Grid item xs="3">
+        <TextField
+         
+          id="outlined-basic"
+          label="Import From Date DD/MM/YYYY"
+          variant="outlined"
+        />
+      </Grid>
+      <Grid item xs="3">
+      <TextField
+          id="outlined-basic"
+          label="Import To Date DD/MM/YYYY"
+          variant="outlined"
+        />
+      </Grid>
+         
+  </Grid>
+      </div>
+    <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay5}>
       Search
     </Button>
   </div>
@@ -238,15 +370,17 @@ function Overlay6() {
 
   function RenderViews() {
     switch (ViewSelected) {
-      
+      case 1:
+        return CallMaintanceView();
+
+      case 2:
+        return MissedInView();
       case 3:
         return MissedOutView();
       case 4:
         return MissedCallView();
       case 5:
         return VisitLogView();
-      case 6:
-        return RejectedCallsView();
 
       default:
         break;
@@ -289,41 +423,7 @@ function Overlay6() {
   ];
 
 
-  const RejectedCallsView = () => {
-    return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
-    );
-  };
+  
 
   
   const VisitLogView = () => {
@@ -332,13 +432,18 @@ function Overlay6() {
       <table className="table">
          <thead>
           <tr>
+      <th className="th">First Name</th>
+      <th className="th">Last Name</th>
+      <th className="th">Care Giver Code</th>
       <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
       <th className="th">Team Member</th>
       <th className="th">Assigment ID</th>
+      <th className="th">Admission ID</th>
+      
+      <th className="th">Cordinator</th>
+      
+      <th className="th">From Date</th>
+      <th className="th">Till Date</th>
       
       
           </tr>
@@ -350,6 +455,9 @@ function Overlay6() {
               <td className="td">Admission ID</td>
               <td className="td">Care Giver IN</td>
               <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>  
               <td className="td">Admission ID</td>
               <td className="td">Care Giver IN</td>
               <td className="td">Member ID</td>             
@@ -395,6 +503,8 @@ function Overlay6() {
          </tbody>
       </table>      
    </div>
+
+    ///
     );
   };
   
@@ -431,10 +541,102 @@ function Overlay6() {
          </tbody>
       </table>      
    </div>
+
+    ///
     );
   };
   
-  
+  const CallMaintanceView = () => {
+    return (
+
+<div>
+        <table className="table">
+           <thead>
+            <tr>
+        <th className="th">Care Giver First Name</th>
+        <th className="th">Care Giver Last Name</th>
+        <th className="th">Care Giver Code</th>
+        <th className="th">Assigment ID</th>
+        <th className="th">Admission ID</th>
+        <th className="th">Member First Name</th>
+        <th className="th">Member Last Name</th>
+        <th className="th">Cordinator</th>
+        <th className="th">Status</th>
+        <th className="th">Member Team</th>
+        <th className="th">Member Location</th>
+        <th className="th">Member Branch</th>
+        <th className="th">From Date DD/MM/YYYY</th>
+        <th className="th">To Date DD/MM/YYYY</th>
+        
+            </tr>
+           </thead>
+           <tbody>
+            {jsonData.map((data,i)=>(
+              <tr>
+                <td className="td">Member ID</td>
+                <td className="td">Admission ID</td>
+                <td className="td">Care Giver IN</td>
+                <td className="td">Member ID</td>
+                <td className="td">Admission ID</td>
+                <td className="td">Care Giver IN</td>
+                <td className="td">Member ID</td>
+                <td className="td">Admission ID</td>
+                <td className="td">Care Giver IN</td>
+                <td className="td">Member ID</td>
+                <td className="td">Admission ID</td>
+                <td className="td">Care Giver IN</td>
+                <td className="td">Member ID</td>
+                <td className="td">Member ID</td>
+               
+              </tr>
+            ))}
+              
+           </tbody>
+        </table>      
+     </div>
+
+      ///
+      
+     
+    );
+  };
+  const MissedInView = () => {
+    return (
+      <div>
+      <table className="table">
+         <thead>
+          <tr>
+      <th className="th">Care Giver Name</th>
+      <th className="th">Admission ID</th>
+      <th className="th">Member Name</th>
+      <th className="th">MCO</th>
+      <th className="th">Cordinator</th>
+      <th className="th">Team Member</th>
+      <th className="th">Assigment ID</th>
+      
+      
+          </tr>
+         </thead>
+         <tbody>
+          {jsonData.map((data,i)=>(
+            <tr>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>
+              <td className="td">Admission ID</td>
+              <td className="td">Care Giver IN</td>
+              <td className="td">Member ID</td>             
+            </tr>
+          ))}
+            
+         </tbody>
+      </table>      
+   </div>
+
+    ///
+    );
+  };
 
   return (
     <Wrapper>
@@ -481,45 +683,63 @@ function Overlay6() {
           </p>
           <hr style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
           <div className="buttonHolder">
-         
+            <Button
+              className="navigationButton"
+              onClick={() => {
+                CallMaintancePressed();
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "15px",
+                  color: "white",
+                  fontWeight: "bold",
+                }}
+              >
+                Imported Files
+              </p>
+            </Button>
+            <Button onClick={MissedInPressed} className="navigationButton">
+              <p
+                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
+              >
+                Pending Files
+              </p>
+            </Button>
 
             <Button onClick={MissedOutPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Pending
+                Failed To Import
               </p>
             </Button>
             <Button onClick={MissedCallPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Total Accepted
+                Import Files
               </p>
             </Button>
             <Button onClick={VisitLogPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Staffed
+                Re Processing
               </p>
             </Button>
-            <Button onClick={RejectedCallsPressed} className="navigationButton">
-              <p
-                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
-              >
-                Accepted Non MasterWok
-              </p>
-            </Button>
+           
           </div>
         </Card>
 
         <Card className="dataDisplay">
+         
           <SearchIcon className="searchIcon" onClick={handleClickIcon} />
+          {isOverlayOpen && <Overlay />}
+          {isOverlayOpen2 && <Overlay2 />}
           {isOverlayOpen3 && <Overlay3 />}
           {isOverlayOpen4 && <Overlay4 />}
           {isOverlayOpen5 && <Overlay5 />}
-          {isOverlayOpen6 && <Overlay6 />}
           {RenderViews()}
         </Card>
       </div>
@@ -554,7 +774,7 @@ function Overlay6() {
     </Wrapper>
   );
 }
-export default PendingQueuePlacement;
+export default CallDashBoard;
 
 const Wrapper = styled.section`
   height: 100%;
@@ -563,6 +783,22 @@ const Wrapper = styled.section`
   .CardHolder {
     display: flex;
     flex-direction: row;
+  }
+  .ListItem {
+    margin-top: 1%;
+    background-color: #0b2b40;
+    color: white;
+    border-radius: 10px;
+    width: 100%;
+  }
+  .ListText {
+    width: 100px;
+    text-align: center;
+  }
+  .ListItem:hover .ListText {
+    color: black;
+    font-weight: bold;
+    background-color: white;
   }
   //
 
@@ -588,25 +824,9 @@ const Wrapper = styled.section`
   }
 
   //
-  .ListItem {
-    margin-top: 1%;
-    background-color: #0b2b40;
-    color: white;
-    border-radius: 10px;
-    width: 100%;
-  }
-  .ListText {
-    width: 100px;
-    text-align: center;
-  }
-  .ListItem:hover .ListText {
-    color: black;
-    font-weight: bold;
-    background-color: white;
-  }
   .item1 {
     
-
+   
     font-size: 15px;
     color: white;
     font-weight: bold;
@@ -621,7 +841,7 @@ const Wrapper = styled.section`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 30%;
+  width: 75%;
   height: 50%;
   z-index: 1000;
   background-color: white;
@@ -634,10 +854,9 @@ const Wrapper = styled.section`
   }
   .searchFieldsDiv {
     display: flex; 
-  margin-top: 2.5%;
-  width: 85%;
-  margin-left:33%;
-    
+    margin-top:2.5%;
+    width:85%;
+    margin-left:20%;
   }
 
   .searchButton {
@@ -688,7 +907,6 @@ const Wrapper = styled.section`
     padding:1%;
   }
   .colume1 {
-    
     font-size: 15px;
     color: grey;
     font-weight: bold;

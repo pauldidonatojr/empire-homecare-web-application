@@ -11,12 +11,17 @@ import Visits from "./Admin/Visit/Visit";
 import Action from './Admin/Action/Action';
 import Billing from './Admin/Billing/Billing';
 import Report from "./Admin/Report/Report";
-import Admin from "./Admin/Admin";
+import Admin from "./Admin/Admin/Admin";
 import CallDashBoard from "./Admin/Visit/CallDashBoard";
 import PendingQueuePlacement from "./Admin/Action/PendingQueuePlacement";
 import InvoiceSearch from "./Admin/Billing/InvoiceSearch"
 import ElectronicBilling from "./Admin/Billing/ElectronicBilling"
 import BillingReport from "./Admin/Report/Billing";
+import EVVException from "./Admin/Report/EVVException";
+import UserManagement from "./Admin/Admin/UserManagement";
+import CordinatorSetup from "./Admin/Admin/CordinatorSetup";
+import FileProcessing from "./Admin/Admin/FileProcessing";
+import EDIImports from "./Admin/Admin/EDIImports"
 
 function App() {
   return (
@@ -39,6 +44,11 @@ function App() {
       <Route path="/InvoiceSearch" element={<InvoiceSearch />}></Route>
       <Route path="/ElectronicBilling" element={<ElectronicBilling />}></Route>
       <Route path="/BillingReport" element={<BillingReport />}></Route>
+      <Route path="/EVVException" element={<EVVException />}></Route>
+      <Route path="/UserManagement" element={<UserManagement />}></Route>
+      <Route path="/CordinatorSetup" element={<CordinatorSetup />}></Route>
+      <Route path="/FileProcessing" element={<FileProcessing />}></Route>
+      <Route path="/EDIImports" element={<EDIImports />}></Route>
       
     </Routes>
 

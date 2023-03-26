@@ -553,7 +553,7 @@ padding: 1%;
 
     width:20%;
     height:650px;
-    background-color:#2A558C;
+    background-color:#564873;
     margin-top:3%;
     margin-bottom:10%;
     margin-left:2%;
@@ -587,7 +587,7 @@ padding: 1%;
  bottom:0;
  width:100%;
  height:250px;
- background-color:#0A2740;
+ background-color: #2E0F59;
  margin-top:0%;
 }
 .company{
@@ -606,12 +606,13 @@ padding: 1%;
 
 //Header CSS FILES
 .Header{
-display:flex;
-flex-direction:row;
-margin-left:5.9%;
-margin-top:0.5%;
-width:93%;
-background-color:white;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content:center;
+  margin-top: 0.5%;
+  width: 100%;
+  background-color: white;
 }
 .headerImage{
   width:7%;

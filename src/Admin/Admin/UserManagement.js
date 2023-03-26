@@ -35,40 +35,7 @@ function CareGiver() {
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
-  const ColumnDiv = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">First Name</p>
-        <hr/>
-        <p className="colume1">Last Name</p>
-        <hr/>
-        <p className="colume1">Phone</p>
-        <hr/>
-        <p className="colume1">CareGiver Code</p>
-        <hr/>
-        <p className="colume1">Alt CG Code</p>
-        <hr/>
-        <p className="colume1">SSN</p>
-        <hr/>
-        <p className="colume1">Status</p>
-        <hr/>
-        <p className="colume1">Provider</p>
-        <hr/>
-        <p className="colume1">Discipline</p>
-      </div>
-    );
-  };
-  function renderColumeName() {
-    switch (ViewSelected) {
-      case 1:
-        return null;
-      case 2:
-        return <ColumnDiv />;
-      
-      default:
-        break;
-    }
-  }
+
 
   function RenderSearchIcon(){
     switch (ViewSelected) {
@@ -89,7 +56,7 @@ function CareGiver() {
       <div className="overlay">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
         <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
-        <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Search Care Giver</p>
+        <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Search New User</p>
         <div className="searchFieldsDiv">
         <Grid container spacing={3}>
           
@@ -114,47 +81,17 @@ function CareGiver() {
         <TextField
            
             id="outlined-basic"
-            label="Phone Number"
+            label="Login Name"
             variant="outlined"
           />
         </Grid>
-        <Grid item xs="3">
-        
-        <TextField
-            id="outlined-basic"
-            label="Care Giver Code"
-            variant="outlined"
-          />
-          
-        </Grid>
-
-        <Grid item xs="3">
-        
-        <TextField
-           
-            id="outlined-basic"
-            label="Alt Caregiver Code"
-            variant="outlined"
-          />
-          
-        </Grid>
-        <Grid item xs="3">
-        
-        <TextField
-           
-            id="outlined-basic"
-            label="SSN"
-            variant="outlined"
-          />
-          
-        </Grid>
-          
+       
 
         <Grid item xs="2.87">
         
         <Box >
       <FormControl fullWidth>
-        <InputLabel >Status</InputLabel>
+        <InputLabel >Member Team</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -169,46 +106,7 @@ function CareGiver() {
       </FormControl>
     </Box>  
         </Grid>
-        <Grid item xs="2.87" style={{marginLeft:"1%"}}>
-        
-        <Box>
-      <FormControl fullWidth>
-        <InputLabel >Provider</InputLabel>
-        <Select
-        
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Status"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-         </Grid>
-         <Grid item xs="2.87">
-        
-        <Box >
-      <FormControl fullWidth>
-        <InputLabel >Discipline</InputLabel>
-        <Select
-        
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Status"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-         </Grid>
+      
          
     </Grid>
         </div>
@@ -278,7 +176,7 @@ function CareGiver() {
   const NewCareGiverView = () => {
     return (
      <div>
-      New Care Giver Fields Here
+      New User Fields Here
      </div>
     );
   };
@@ -383,14 +281,14 @@ function CareGiver() {
                   fontWeight: "bold",
                 }}
               >
-                New Care Giver
+                New User
               </p>
             </Button>
             <Button onClick={SearchCareGiverPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Search Care Giver
+                Search User
               </p>
             </Button>
            
@@ -506,7 +404,7 @@ width: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 75%;
-  height: 70%;
+  height: 50%;
   z-index: 1000;
   background-color: white;
   padding: 1%;

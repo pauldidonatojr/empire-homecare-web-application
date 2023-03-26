@@ -955,7 +955,7 @@ function Report() {
   }
 
   const BillingPressed = () => {
-    //Navigate to Invoice Search Page
+    //Navigate to Billing Report
     navigate("/BillingReport");
   };
 
@@ -967,6 +967,7 @@ function Report() {
   };
   const EVVExceptionPressed = () => {
     //Navigate To EVV Exception
+    navigate("/EVVException");
   };
   const OtherReportsPressed = () => {
     setViewSelected(3);
@@ -1462,7 +1463,7 @@ const Wrapper = styled.section`
 
   //data display card
   .dataDisplay {
-    height: 600px;
+    height: 670px;
     width: 70%;
     margin-left: 2%;
     margin-top: 3%;
@@ -1536,7 +1537,7 @@ const Wrapper = styled.section`
   .TaskBar {
     width: 20%;
     height: 725px;
-    background-color: #2a558c;
+    background-color:#564873;
     margin-top: 3%;
     margin-bottom: 10%;
     margin-left: 2%;
@@ -1569,7 +1570,7 @@ const Wrapper = styled.section`
     bottom: 0;
     width: 100%;
     height: 250px;
-    background-color: #0a2740;
+    background-color: #2E0F59;
     margin-top: 0%;
   }
   .company {
@@ -1590,9 +1591,10 @@ const Wrapper = styled.section`
   .Header {
     display: flex;
     flex-direction: row;
-    margin-left: 5.9%;
+    align-items:center;
+    justify-content:center;
     margin-top: 0.5%;
-    width: 93%;
+    width: 100%;
     background-color: white;
   }
   .headerImage {
