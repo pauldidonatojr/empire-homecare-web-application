@@ -53,13 +53,14 @@ function Login() {
       </Card>
       <div className="cardHolder">
         <Card  className={`DesignCard ${showCard ? 'show' : ''}`}>
-          <h1 style={{ color: "white" }}>
-            Purpose-Built Technology for Providers, MCOs, and State Medicaid
-            Programs
+          <h1 style={{ color: "white",fontSize:"35px" }}>
+          Welcome to
+      Empire Homecare
+Agency LLC
           </h1>
           <div className="subText">
             <h4 style={{ color: "white" }}>
-              Enable proactive homecare and better health outcomes.
+            Empire Homecare Agency LLC is a living legacy that reflects our commitment to improving the quality of life of our clients. As a provider of in-home care in Pennsylvania, we treat our clients as members of our own family.
             </h4>
           </div>
         </Card>
@@ -188,7 +189,7 @@ const Wrapper = styled.section`
     flex-direction: row;
   }
   .subText {
-    margin-top: 30%;
+    margin-top: 20%;
   }
   .usernameText {
     width:40%;
