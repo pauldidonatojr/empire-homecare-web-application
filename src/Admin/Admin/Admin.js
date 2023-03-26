@@ -17,6 +17,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
+import Footer from "../../Footer";
 
 
 function Report() {
@@ -545,33 +546,8 @@ function Report() {
         </Card>
       </div>
 
-      <div className="footer">
-        <div className="LogoHolder">
-          <img src="/LogoBK.png"></img>
-        </div>
-        <div className="company">
-          <h6 style={{ color: "grey" }}>COMPANY</h6>
-          <h5 style={{ color: "white" }}>About Us</h5>
-          <h5 style={{ color: "white" }}>Contact Us</h5>
-          <h5 style={{ color: "white" }}>Careers</h5>
-          <h5 style={{ color: "white" }}>Press</h5>
-        </div>
-        <div className="socials">
-          <h6 style={{ color: "grey" }}>SOCIAL MEDIA</h6>
-          <h5 style={{ color: "white" }}>
-            <FacebookIcon fontSize="small" />
-            Facebook
-          </h5>
-          <h5 style={{ color: "white" }}>
-            <TwitterIcon fontSize="small" />
-            Twitter
-          </h5>
-          <h5 style={{ color: "white" }}>
-            <LinkedInIcon fontSize="small" />
-            Linkdin
-          </h5>
-        </div>
-      </div>
+      <Footer/>
+      
     </Wrapper>
   );
 }
@@ -790,29 +766,6 @@ const Wrapper = styled.section`
 
   //UserInfo Ending
 
-  //Footer CSS Files
-  .footer {
-    display: flex;
-    flex-direction: row;
-    bottom: 0;
-    width: 100%;
-    height: 250px;
-    background-color: #2E0F59;
-    margin-top: 0%;
-  }
-  .company {
-    margin-left: 50%;
-    margin-top: 2%;
-  }
-  .socials {
-    margin-left: 5%;
-    margin-top: 2%;
-  }
-  .LogoHolder {
-    margin-top: 3%;
-    margin-left: 15%;
-  }
-  //Footer CSS Files end
 
   //Header CSS FILES
   .Header {
