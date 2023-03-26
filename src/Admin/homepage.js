@@ -18,6 +18,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../Footer";
+import { DataGrid } from '@mui/x-data-grid';
 
 
 function Homepage() {
@@ -277,45 +278,47 @@ function Homepage() {
   const MembersView = () => {
   
     return (
-     <div>
-        <table className="table">
-           <thead>
-            <tr>
-        <th className="th">Member ID</th>
-        <th className="th">Admission ID</th>
-        <th className="th">First Name</th>
-        <th className="th">Last Name</th>
-        <th className="th">Phone Number</th>
-        <th className="th">Status</th>
-        <th className="th">Cordinator</th>
-        <th className="th">MCO</th>
-        <th className="th">Office</th>
-        <th className="th">Vendor Tax ID</th>
-            </tr>
-           </thead>
-           <tbody>
-            {jsonData.map((data,i)=>(
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">First Name</td>
-                <td className="td">Last Name</td>
-                <td className="td">Phone Number</td>
-                <td className="td">Status</td>
-                <td className="td">Cordinator</td>
-                <td className="td">MCO</td>
-                <td className="td">Office</td>
-                <td className="td">Vendor Tax ID</td>
-              </tr>
-            ))}
-              
-           </tbody>
-        </table>      
-     </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
   
+  const columns = [
+    { field: 'id', headerName: 'Member ID', width: 100 },
+    { field: 'AdmissionId', headerName: 'Admission ID', width: 100 },
+    { field: 'firstName', headerName: 'First Name', width: 100 },
+    { field: 'lastName', headerName: 'Last name', width: 100 },
+    { field: 'phoneNumber', headerName: 'Phone Number', width: 100 },
+    { field: 'status', headerName: 'Status', width: 100 },
+    { field: 'cordinator', headerName: 'Cordinator', width: 100 },
+    { field: 'mco', headerName: 'MCO', width: 100 },
+    { field: 'office', headerName: 'Office', width: 100 },
+    { field: 'vendorTax', headerName: 'Vendor Tax', width: 100 },
+    
+  ];
   
+  const rows = [
+    {id:1,AdmissionId:"4578",firstName:"Jenifer",lastName:"Awston",phoneNumber:"02548965478",status:"Active",cordinator:"Adam Fernandez",mco:"Delta",office:"Homecare",vendorTax:"51s"},
+    {id:2,AdmissionId:"4578",firstName:"Jenifer",lastName:"Awston",phoneNumber:"02548965478",status:"Active",cordinator:"Adam Fernandez",mco:"Delta",office:"Homecare",vendorTax:"51s"},
+    
+    {id:3,AdmissionId:"4578",firstName:"Jenifer",lastName:"Awston",phoneNumber:"02548965478",status:"Active",cordinator:"Adam Fernandez",mco:"Delta",office:"Homecare",vendorTax:"51s"},
+    
+    {id:4,AdmissionId:"4578",firstName:"Jenifer",lastName:"Awston",phoneNumber:"02548965478",status:"Active",cordinator:"Adam Fernandez",mco:"Delta",office:"Homecare",vendorTax:"51s"},
+    
+    {id:5,AdmissionId:"4578",firstName:"Jenifer",lastName:"Awston",phoneNumber:"02548965478",status:"Active",cordinator:"Adam Fernandez",mco:"Delta",office:"Homecare",vendorTax:"51s"},
+    
+    {id:6,AdmissionId:"4578",firstName:"Jenifer",lastName:"Awston",phoneNumber:"02548965478",status:"Active",cordinator:"Adam Fernandez",mco:"Delta",office:"Homecare",vendorTax:"51s"},
+    
+    {id:7,AdmissionId:"4578",firstName:"Jenifer",lastName:"Awston",phoneNumber:"02548965478",status:"Active",cordinator:"Adam Fernandez",mco:"Delta",office:"Homecare",vendorTax:"51s"},
+   
+  ];
 
   return (
     <Wrapper>
