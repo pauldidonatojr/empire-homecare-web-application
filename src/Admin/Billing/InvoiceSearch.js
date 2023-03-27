@@ -537,7 +537,7 @@ function Visit() {
    // ByVisitView
    const columns4 = [
     { field: 'id', headerName: 'ID', width: 50 },
-    { field: 'memberName', headerName: 'Member Name', width: 100 },
+    { field: 'memberName', headerName: 'Member Name', width: 120 },
     { field: 'admissionID', headerName: 'Admission ID', width: 140 },
     { field: 'fromDate', headerName: 'From Date', width: 125 },
     { field: 'toDate', headerName: 'To Date', width: 120 },
