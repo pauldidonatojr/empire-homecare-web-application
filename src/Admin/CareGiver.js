@@ -247,8 +247,54 @@ function CareGiver() {
 
   const NewCareGiverView = () => {
     return (
-     <div>
-      New Care Giver Fields Here
+     <div className="Holder"  >
+        <div > 
+            <h1 className="Heading" >Demographics</h1>
+            <TextField className="input" label="First Name" variant="outlined" />
+            <TextField className="input" label="Middle Name" variant="outlined" />
+            <TextField className="input" label="Last Name" variant="outlined" />
+            <TextField className="input" label="Intials" variant="outlined" />
+            <TextField className="input" label="Gender" variant="outlined" />
+            <TextField className="input" label="DOB" variant="outlined" />
+            <TextField className="input" label="Status" variant="outlined" />
+            <TextField className="input" label="Alt Caregiver Code" variant="outlined" />
+            <TextField className="input" label="SSN" variant="outlined" />
+            <TextField className="input" label="Mobile ID" variant="outlined" />
+            <TextField className="input" label="Primary Member Team" variant="outlined" />
+            <TextField className="input" label="NPI Number" variant="outlined" />
+            <TextField className="input" label="Rehire ?" variant="outlined" />
+            <TextField className="input" label="Rehire Date" variant="outlined" />
+            <TextField className="input" label="Employment Type" variant="outlined" />
+           
+        </div>
+        <div>
+        <h1 className="Heading">Address</h1>
+        <TextField className="input" label="Street 1" variant="outlined" />
+        <TextField className="input" label="Street 2" variant="outlined" />
+        <TextField className="input" label="City" variant="outlined" />
+        <TextField className="input" label="Zip" variant="outlined" />
+        <TextField className="input" label="State" variant="outlined" />
+        <TextField className="input" label="Phone" variant="outlined" />
+        <TextField className="input" label="Phone 2" variant="outlined" />
+        <TextField className="input" label="Home Phone" variant="outlined" />
+        </div>
+        <div>
+        <h1 className="Heading">Emergency Contact 1</h1>
+        <TextField className="input" label="Name" variant="outlined" />
+        <TextField className="input" label="Relationship" variant="outlined" />
+        <TextField className="input" label="Address" variant="outlined" />
+        <TextField className="input" label="Phone 1" variant="outlined" />
+        <TextField className="input" label="Phone 2" variant="outlined" />
+        </div>
+        <div>
+        <h1 className="Heading">Emergency Contact 2</h1>
+        <TextField className="input" label="Name" variant="outlined" />
+        <TextField className="input" label="Relationship" variant="outlined" />
+        <TextField className="input" label="Address" variant="outlined" />
+        <TextField className="input" label="Phone 1" variant="outlined" />
+        <TextField className="input" label="Phone 2" variant="outlined" />
+        </div>
+        <Button className="Signup" variant="contained">Sign Up</Button>
      </div>
     );
   };
@@ -386,7 +432,41 @@ width: 100%;
     flex-direction:row;
 }
 //
+.Heading{
+  text-align:center;
+  color:#14140F;
 
+}
+.input{
+  margin:2%;
+  font-weight:bold;
+}
+.Signup{
+  margin-left:42%;
+  width:180px;
+  height:50px;
+  margin-bottom:2%;
+  background-color:#F26E22;
+color:white;
+shadowColor: "#000",
+shadowOffset: {
+	width: 0,
+	height: 6,
+},
+shadowOpacity: 0.39,
+shadowRadius: 8.30,
+
+elevation: 13,
+}
+.Holder{
+  height:100%;
+  width:100%;
+  overflow: auto;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+}
+
+//
 .table {
   border-collapse: collapse;
   padding:1%;
