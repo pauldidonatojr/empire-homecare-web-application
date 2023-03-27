@@ -18,6 +18,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../../Footer";
+import { DataGrid } from '@mui/x-data-grid';
 //
 const Link = require("react-router-dom").Link;
 
@@ -1036,255 +1037,225 @@ function Overlay6() {
 
   const ByAggregationView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Code</th>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Assigment ID</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Team Member</th>
-      <th className="th">From Date</th>
-      <th className="th">Till Date</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
-
-    ///
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows7}
+        columns={columns7}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>   
     );
   };
+    //// // ByAggregationView
+    const columns7 = [
+      { field: 'id', headerName: 'ID', width: 100 },
+      { field: 'ReportSection', headerName: 'Report Section', width: 150 },
+      { field: 'VisitDate', headerName: 'Visit Date', width: 150 },
+      { field: 'mco', headerName: 'MCO', width: 150 },
+      { field: 'LastExportDate', headerName: 'Last Export Date', width: 150 },
+      { field: 'Member', headerName: 'Member', width: 150 },
+      { field: 'MedicalID', headerName: 'Medical ID', width: 150 },
+      { field: 'CareGiver', headerName: 'CareGiver', width: 150 },
+      { field: 'ProcedureCode', headerName: 'Procedure Code', width: 150 },
+      { field: 'RecordStatus', headerName: 'Record Status', width: 150 },
+      
+    
+    ];
+    
+    const rows7 = [
+      {id:1,ReportSection:"4578",VisitDate:"Jenifer",mco:"Member",LastExportDate:"Member",Member:"Member",MedicalID:"AS4587",CareGiver:"Danny",ProcedureCode:"87D54D",RecordStatus:"Active"},
+      {id:2,ReportSection:"4578",VisitDate:"Jenifer",mco:"Member",LastExportDate:"Member",Member:"Member",MedicalID:"AS4587",CareGiver:"Danny",ProcedureCode:"87D54D",RecordStatus:"Active"},
+      {id:3,ReportSection:"4578",VisitDate:"Jenifer",mco:"Member",LastExportDate:"Member",Member:"Member",MedicalID:"AS4587",CareGiver:"Danny",ProcedureCode:"87D54D",RecordStatus:"Active"},
+      {id:4,ReportSection:"4578",VisitDate:"Jenifer",mco:"Member",LastExportDate:"Member",Member:"Member",MedicalID:"AS4587",CareGiver:"Danny",ProcedureCode:"87D54D",RecordStatus:"Active"},
+      {id:5,ReportSection:"4578",VisitDate:"Jenifer",mco:"Member",LastExportDate:"Member",Member:"Member",MedicalID:"AS4587",CareGiver:"Danny",ProcedureCode:"87D54D",RecordStatus:"Active"},
+    ];
 
   
   const ByProviderView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">First Name</th>
-      <th className="th">Last Name</th>
-      <th className="th">Care Giver Code</th>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      <th className="th">Admission ID</th>
-      
-      <th className="th">Cordinator</th>
-      
-      <th className="th">From Date</th>
-      <th className="th">Till Date</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>  
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows5}
+        columns={columns5}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>    
     );
   };
+   //// // ByProviderView
+   const columns5 = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'mco', headerName: 'MCO', width: 150 },
+    { field: 'date', headerName: 'Date', width: 150 },
+    { field: 'TypeOfService', headerName: 'Type Of Service', width: 150 },
+    { field: 'Cordinator', headerName: 'Cordinator', width: 150 },
+    { field: 'team', headerName: 'Team(s)', width: 150 },
+    
+  
+  ];
+  
+  const rows5 = [
+    {id:1,mco:"4578",date:"Jenifer",TypeOfService:"Member",Cordinator:"Member",team:"Member"},
+    {id:2,mco:"4578",date:"Jenifer",TypeOfService:"Member",Cordinator:"Member",team:"Member"},
+    {id:3,mco:"4578",date:"Jenifer",TypeOfService:"Member",Cordinator:"Member",team:"Member"},
+    {id:4,mco:"4578",date:"Jenifer",TypeOfService:"Member",Cordinator:"Member",team:"Member"},
+    
+   
+  ];
   
   const ByStatisticsView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
-
-    ///
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows6}
+        columns={columns6}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>    
     );
   };
+   //// // ByStatisticsView
+   const columns6 = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'mco', headerName: 'MCO', width: 150 },
+    { field: 'date', headerName: 'Date', width: 150 },
+    { field: 'TypeOfService', headerName: 'Type Of Service', width: 150 },
+    { field: 'Cordinator', headerName: 'Cordinator', width: 150 },
+    { field: 'reason', headerName: 'Reason', width: 150 },
+    { field: 'team', headerName: 'Team(s)', width: 150 },
+    
+  
+  ];
+  
+  const rows6 = [
+    {id:1,mco:"4578",date:"Jenifer",TypeOfService:"Member",Cordinator:"Member",reason:"Delay",team:"Member"},
+    {id:2,mco:"4578",date:"Jenifer",TypeOfService:"Member",Cordinator:"Member",reason:"Delay",team:"Member"},
+    {id:3,mco:"4578",date:"Jenifer",TypeOfService:"Member",Cordinator:"Member",reason:"Delay",team:"Member"},
+    {id:4,mco:"4578",date:"Jenifer",TypeOfService:"Member",Cordinator:"Member",reason:"Delay",team:"Member"},
+    
+    
+   
+  ];
   
   const ByDetailView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
-
-    ///
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows4}
+        columns={columns4}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>    
     );
   };
+  //// // ByDetailView
+  const columns4 = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'mco', headerName: 'MCO', width: 100 },
+    { field: 'date', headerName: 'Date', width: 100 },
+    { field: 'InvoiceDate', headerName: 'Invoice Date', width: 100 },
+    { field: 'IncludeType', headerName: 'Include Type', width: 100 },
+    { field: 'AdmissionID', headerName: 'Admission ID', width: 100 },
+    { field: 'CareGiver', headerName: 'CareGiver', width: 100 },
+    { field: 'Timesheet', headerName: 'Timesheet', width: 100 },
+    { field: 'TypeOfService', headerName: 'Type Of Service', width: 120 },
+    { field: 'BatchNumber', headerName: 'Batch Number', width: 120 },
+    { field: 'Cordinator', headerName: 'Cordinator', width: 120 },
+    { field: 'ExceptionCode', headerName: 'Exception Code', width: 120 },
+    
+  
+  ];
+  
+  const rows4 = [
+    {id:1,mco:"4578",date:"Jenifer",InvoiceDate:"Awston",IncludeType:"Awston",AdmissionID:"Awston",CareGiver:"Active",Timesheet:"Member"
+    ,TypeOfService:"Member",BatchNumber:"Member",Cordinator:"Member",ExceptionCode:"Member"},
+    {id:2,mco:"4578",date:"Jenifer",InvoiceDate:"Awston",IncludeType:"Awston",AdmissionID:"Awston",CareGiver:"Active",Timesheet:"Member"
+    ,TypeOfService:"Member",BatchNumber:"Member",Cordinator:"Member",ExceptionCode:"Member"},
+    {id:3,mco:"4578",date:"Jenifer",InvoiceDate:"Awston",IncludeType:"Awston",AdmissionID:"Awston",CareGiver:"Active",Timesheet:"Member"
+    ,TypeOfService:"Member",BatchNumber:"Member",Cordinator:"Member",ExceptionCode:"Member"},
+    {id:4,mco:"4578",date:"Jenifer",InvoiceDate:"Awston",IncludeType:"Awston",AdmissionID:"Awston",CareGiver:"Active",Timesheet:"Member"
+    ,TypeOfService:"Member",BatchNumber:"Member",Cordinator:"Member",ExceptionCode:"Member"},
+   
+  ];
   
   const ByCareGiverView = () => {
     return (
-
-<div>
-        <table className="table">
-           <thead>
-            <tr>
-        <th className="th">Care Giver First Name</th>
-        <th className="th">Care Giver Last Name</th>
-        <th className="th">Care Giver Code</th>
-        <th className="th">Assigment ID</th>
-        <th className="th">Admission ID</th>
-        <th className="th">Member First Name</th>
-        <th className="th">Member Last Name</th>
-        <th className="th">Cordinator</th>
-        <th className="th">Status</th>
-        <th className="th">Member Team</th>
-        <th className="th">Member Location</th>
-        <th className="th">Member Branch</th>
-        <th className="th">From Date DD/MM/YYYY</th>
-        <th className="th">To Date DD/MM/YYYY</th>
-        
-            </tr>
-           </thead>
-           <tbody>
-            {jsonData.map((data,i)=>(
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Member ID</td>
-               
-              </tr>
-            ))}
-              
-           </tbody>
-        </table>      
-     </div>
-
-      ///
-      
-     
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows2}
+        columns={columns2}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>     
     );
   };
+ 
+
+  //// // ByCareGiverView
+  const columns2 = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'mco', headerName: 'MCO', width: 100 },
+    { field: 'date', headerName: 'Date', width: 100 },
+    { field: 'CareGiver', headerName: 'Care Giver', width: 150 },
+    { field: 'TypeOfService', headerName: 'Type Of Service', width: 150 },
+    { field: 'Cordinator', headerName: 'Cordinator', width: 150 },
+    { field: 'Status', headerName: 'Status', width: 150 },
+    { field: 'Team', headerName: 'Team(s)', width: 150 },
+    
+  
+  ];
+  
+  const rows2 = [
+    {id:1,mco:"4578",date:"Jenifer",CareGiver:"Awston",TypeOfService:"Awston",Cordinator:"Awston",Status:"Active",Team:"Member"},
+    {id:2,mco:"4578",date:"Jenifer",CareGiver:"Awston",TypeOfService:"Awston",Cordinator:"Awston",Status:"Active",Team:"Member"},
+    {id:3,mco:"4578",date:"Jenifer",CareGiver:"Awston",TypeOfService:"Awston",Cordinator:"Awston",Status:"Active",Team:"Member"},
+    {id:4,mco:"4578",date:"Jenifer",CareGiver:"Awston",TypeOfService:"Awston",Cordinator:"Awston",Status:"Active",Team:"Member"},
+    {id:5,mco:"4578",date:"Jenifer",CareGiver:"Awston",TypeOfService:"Awston",Cordinator:"Awston",Status:"Active",Team:"Member"},
+   
+    
+  ];
   const ByReasonView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
-
-    ///
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows3}
+        columns={columns3}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>     
     );
   };
-
+  //// // ByReasonView
+  const columns3 = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'mco', headerName: 'MCO', width: 150 },
+    { field: 'date', headerName: 'Date', width: 150 },
+    { field: 'TypeOfService', headerName: 'Type Of Service', width: 150 },
+    { field: 'Cordinator', headerName: 'Cordinator', width: 150 },
+    { field: 'reason', headerName: 'Reason', width: 150 },
+    { field: 'Team', headerName: 'Team(s)', width: 150 },
+    
+  
+  ];
+  
+  const rows3 = [
+    {id:1,mco:"4578",date:"Jenifer",CareGiver:"Awston",TypeOfService:"Awston",Cordinator:"Awston",reason:"Active",Team:"Member"},
+    {id:2,mco:"4578",date:"Jenifer",CareGiver:"Awston",TypeOfService:"Awston",Cordinator:"Awston",reason:"Active",Team:"Member"},
+    {id:3,mco:"4578",date:"Jenifer",CareGiver:"Awston",TypeOfService:"Awston",Cordinator:"Awston",reason:"Active",Team:"Member"},
+    {id:4,mco:"4578",date:"Jenifer",CareGiver:"Awston",TypeOfService:"Awston",Cordinator:"Awston",reason:"Active",Team:"Member"},
+  ];
   return (
     <Wrapper>
       <div className="Header">

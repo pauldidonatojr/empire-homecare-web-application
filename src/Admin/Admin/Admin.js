@@ -19,6 +19,8 @@ import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 import Footer from "../../Footer";
 
+import { DataGrid } from '@mui/x-data-grid';
+
 
 function Report() {
   const [ViewSelected, setViewSelected] = useState(1);
@@ -293,130 +295,74 @@ function Report() {
       address: "Downtown Lipsy London, SDWEI15",
     },
   ];
-  //CareGiverView
   const ChangePasswordView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem className="ListItem">
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
+     <div>
+      Change Password Fields Here
+     </div>
     );
   };
-  //ComplianceView
+ 
   const ReferenceTableView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem className="ListItem">
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows5}
+        columns={columns5}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
-  //OtherReportsView
+   //ReferenceTableView
+   const columns5 = [
+    { field: 'id', headerName: 'ID', width: 200 },
+    { field: 'TableReference', headerName: 'TableReference', width: 300 },
+   
+   
+  ];
+  
+  const rows5 = [
+    {id:1,TableReference:"Re Processing"},
+   
+    
+  ];
   const ProviderProfileView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem className="ListItem">
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
+     <div>
+      Provider Profile Views Here
+     </div>
     );
   };
-  //MembersView
+  
   const RateManagementView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem className="ListItem">
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+  //RateManagementView
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 200 },
+    { field: 'TableReference', headerName: 'TableReference', width: 300 },
+   
+   
+  ];
+  
+  const rows = [
+    {id:1,TableReference:"Re Processing"},
+   
+    
+  ];
  
 
   return (

@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
-//
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -18,14 +13,11 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../../Footer";
-//
+import { DataGrid } from '@mui/x-data-grid';
 const Link = require("react-router-dom").Link;
 
 function CallDashBoard() {
   const [ViewSelected, setViewSelected] = useState(1);
-
-  
-//
 
 const [age, setAge] = React.useState('');
 const handleChange = (event) => {
@@ -66,20 +58,20 @@ const handleChange = (event) => {
   };
   //
 //
-const CallMaintancePressed = () => {
+const ImportedPressed = () => {
   setViewSelected(1);
 };
 
-const MissedInPressed = () => {
+const PendingPressed = () => {
   setViewSelected(2);
 };
-const MissedOutPressed = () => {
+const FailedImportPressed = () => {
   setViewSelected(3);
 };
-const MissedCallPressed = () => {
+const ImportFilesPressed = () => {
   setViewSelected(4);
 };
-const VisitLogPressed = () => {
+const ReprocessingPressed = () => {
   setViewSelected(5);
 };
 
@@ -372,16 +364,16 @@ function Overlay5() {
   function RenderViews() {
     switch (ViewSelected) {
       case 1:
-        return CallMaintanceView();
+        return ImportedView();
 
       case 2:
-        return MissedInView();
+        return PendingView();
       case 3:
-        return MissedOutView();
+        return FailedImportView();
       case 4:
-        return MissedCallView();
+        return ImportFileView();
       case 5:
-        return VisitLogView();
+        return ReProcessingView();
 
       default:
         break;
@@ -427,218 +419,141 @@ function Overlay5() {
   
 
   
-  const VisitLogView = () => {
+  const ReProcessingView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">First Name</th>
-      <th className="th">Last Name</th>
-      <th className="th">Care Giver Code</th>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      <th className="th">Admission ID</th>
-      
-      <th className="th">Cordinator</th>
-      
-      <th className="th">From Date</th>
-      <th className="th">Till Date</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>  
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows5}
+        columns={columns5}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+   //ReProcessingView
+   const columns5 = [
+    { field: 'id', headerName: 'ID', width: 200 },
+    { field: 'Interface', headerName: 'Interface', width: 300 },
+    { field: 'ImportDate', headerName: 'Import Date', width: 300 },
+   
+  ];
   
-  const MissedCallView = () => {
+  const rows5 = [
+    {id:1,Interface:"Re Processing",ImportDate:"10 Jan 2023"},
+   
+    
+  ];
+  
+  const ImportFileView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
-
-    ///
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows4}
+        columns={columns4}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+   //ImportFileView
+   const columns4 = [
+    { field: 'id', headerName: 'ID', width: 200 },
+    { field: 'Interface', headerName: 'Interface', width: 300 },
+    { field: 'ImportDate', headerName: 'Import Date', width: 300 },
+    { field: 'usage', headerName: 'Usage', width: 300 },
+   
+  ];
   
-  const MissedOutView = () => {
+  const rows4 = [
+    {id:1,Interface:"Import",ImportDate:"10 Jan 2023",usage:"Prove"},
+   
+    
+  ];
+  
+  const FailedImportView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
-
-    ///
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows3}
+        columns={columns3}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
-  
-  const CallMaintanceView = () => {
-    return (
-
-<div>
-        <table className="table">
-           <thead>
-            <tr>
-        <th className="th">Care Giver First Name</th>
-        <th className="th">Care Giver Last Name</th>
-        <th className="th">Care Giver Code</th>
-        <th className="th">Assigment ID</th>
-        <th className="th">Admission ID</th>
-        <th className="th">Member First Name</th>
-        <th className="th">Member Last Name</th>
-        <th className="th">Cordinator</th>
-        <th className="th">Status</th>
-        <th className="th">Member Team</th>
-        <th className="th">Member Location</th>
-        <th className="th">Member Branch</th>
-        <th className="th">From Date DD/MM/YYYY</th>
-        <th className="th">To Date DD/MM/YYYY</th>
-        
-            </tr>
-           </thead>
-           <tbody>
-            {jsonData.map((data,i)=>(
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Member ID</td>
-               
-              </tr>
-            ))}
-              
-           </tbody>
-        </table>      
-     </div>
-
-      ///
-      
+    //FailedImportView
+    const columns3 = [
+      { field: 'id', headerName: 'ID', width: 200 },
+      { field: 'Interface', headerName: 'Interface', width: 300 },
+      { field: 'ImportDate', headerName: 'Import Date', width: 300 },
      
-    );
-  };
-  const MissedInView = () => {
+    ];
+    
+    const rows3 = [
+      {id:1,Interface:"Failed",ImportDate:"10 Jan 2023"},
+     
+      
+    ];
+  
+  const ImportedView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
 
-    ///
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+  //ImportedView
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 200 },
+    { field: 'Interface', headerName: 'Interface', width: 300 },
+    { field: 'ImportDate', headerName: 'Import Date', width: 300 },
+   
+  ];
+  
+  const rows = [
+    {id:1,Interface:"Imported",ImportDate:"10 Jan 2023"},
+   
+    
+  ];
+  const PendingView = () => {
+    return (
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows2}
+        columns={columns2}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
+    );
+  };
+//PendingView
+const columns2 = [
+  { field: 'id', headerName: 'ID', width: 200 },
+  { field: 'Interface', headerName: 'Interface', width: 300 },
+  { field: 'ImportDate', headerName: 'Import Date', width: 300 },
+ 
+];
 
+const rows2 = [
+  {id:1,Interface:"Pending",ImportDate:"20 Jul 2020"},
+ 
+  
+];
   return (
     <Wrapper>
       <div className="Header">
@@ -687,7 +602,7 @@ function Overlay5() {
             <Button
               className="navigationButton"
               onClick={() => {
-                CallMaintancePressed();
+                ImportedPressed();
               }}
             >
               <p
@@ -700,7 +615,7 @@ function Overlay5() {
                 Imported Files
               </p>
             </Button>
-            <Button onClick={MissedInPressed} className="navigationButton">
+            <Button onClick={PendingPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
@@ -708,21 +623,21 @@ function Overlay5() {
               </p>
             </Button>
 
-            <Button onClick={MissedOutPressed} className="navigationButton">
+            <Button onClick={FailedImportPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
                 Failed To Import
               </p>
             </Button>
-            <Button onClick={MissedCallPressed} className="navigationButton">
+            <Button onClick={ImportFilesPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
                 Import Files
               </p>
             </Button>
-            <Button onClick={VisitLogPressed} className="navigationButton">
+            <Button onClick={ReprocessingPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >

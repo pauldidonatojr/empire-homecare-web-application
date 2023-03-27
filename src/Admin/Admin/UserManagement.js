@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
@@ -17,6 +13,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../../Footer";
+
+import { DataGrid } from '@mui/x-data-grid';
 
 
 function CareGiver() {
@@ -183,46 +181,36 @@ function CareGiver() {
   };
   const SearchCareGiverView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">First Name</th>
-      <th className="th">Last Name</th>
-      <th className="th">Phone</th>
-      <th className="th">CareGiver Code</th>
-      <th className="th">Alt CG Code</th>
-      <th className="th">SSN</th>
-      
-      <th className="th">Status</th>
-      <th className="th">Provider</th>
-      <th className="th">Discipline</th>
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">First Name</td>
-              <td className="td">Last Name</td>
-              <td className="td">Phone Number</td>
-              <td className="td">Status</td>
-              
-              <td className="td">MCO</td>
-              <td className="td">Officed</td>
-              <td className="td">Member Team</td>
-      
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows2}
+        columns={columns2}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
       
     )
   };
+  //SearchCareGiverView
+  const columns2 = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'FirstName', headerName: 'First Name', width: 200 },
+    { field: 'LastName', headerName: 'Last Name', width: 200 },
+    { field: 'LoginName', headerName: 'Login Name', width: 200 },
+    { field: 'MemberTeam', headerName: 'Member Team', width: 200 },
+   
+  ];
+  
+  const rows2 = [
+    {id:1,FirstName:"4578",LastName:"Jenifer",LoginName:"Awston",MemberTeam:"Awston"},
+    {id:2,FirstName:"4578",LastName:"Jenifer",LoginName:"Awston",MemberTeam:"Awston"},
+    {id:3,FirstName:"4578",LastName:"Jenifer",LoginName:"Awston",MemberTeam:"Awston"},
+    {id:4,FirstName:"4578",LastName:"Jenifer",LoginName:"Awston",MemberTeam:"Awston"},
+   
+    
+  ];
 
   return (
     <Wrapper>

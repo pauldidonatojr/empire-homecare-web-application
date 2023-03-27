@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 //
+import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -18,14 +15,11 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../../Footer";
-//
-const Link = require("react-router-dom").Link;
+
 
 function PendingQueuePlacement() {
   const [ViewSelected, setViewSelected] = useState(1);
 
-  
-//
 
 const [age, setAge] = React.useState('');
 const handleChange = (event) => {
@@ -293,9 +287,9 @@ function Overlay4() {
     switch (ViewSelected) {
       
       case 3:
-        return MissedOutView();
+        return ClaimView();
       case 4:
-        return MissedCallView();
+        return RemitanceView();
 
       default:
         break;
@@ -340,77 +334,73 @@ function Overlay4() {
 
   
   
-  const MissedCallView = () => {
+  const RemitanceView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows2}
+        columns={columns2}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+   //RemitanceView
+   const columns2 = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'FileType', headerName: 'File Type', width: 150 },
+    { field: 'mco', headerName: 'MCO', width: 150 },
+    { field: 'ProcessedDate', headerName: 'Processed Date', width: 150 },
+    { field: 'BatchInvoice', headerName: 'Batch Invoice', width: 150 },
+    { field: 'FileName', headerName: 'File Name', width: 150 },
+    { field: 'status', headerName: 'Status', width: 150 },
+   
+  ];
   
-  const MissedOutView = () => {
+  const rows2 = [
+    {id:1,FileType:"Final",mco:"Farhan",ProcessedDate:"10 Jul 2023",BatchInvoice:"555445",FileName:"Awston",status:"InActive"},
+    {id:2,FileType:"Final",mco:"Farhan",ProcessedDate:"10 Jul 2023",BatchInvoice:"555445",FileName:"Awston",status:"InActive"},
+    {id:3,FileType:"Final",mco:"Farhan",ProcessedDate:"10 Jul 2023",BatchInvoice:"555445",FileName:"Awston",status:"InActive"},
+    {id:4,FileType:"Final",mco:"Farhan",ProcessedDate:"10 Jul 2023",BatchInvoice:"555445",FileName:"Awston",status:"InActive"},
+    
+    
+  
+  ];
+  
+  const ClaimView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+  //ClaimView
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'FileType', headerName: 'File Type', width: 150 },
+    { field: 'mco', headerName: 'MCO', width: 150 },
+    { field: 'ProcessedDate', headerName: 'Processed Date', width: 150 },
+    { field: 'BatchInvoice', headerName: 'Batch Invoice', width: 150 },
+    { field: 'FileName', headerName: 'File Name', width: 150 },
+    { field: 'status', headerName: 'Status', width: 150 },
+   
+  ];
+  
+  const rows = [
+    {id:1,FileType:"4578",mco:"Jenifer",ProcessedDate:"Awston",BatchInvoice:"Awston",FileName:"Awston",status:"Awston"},
+    {id:2,FileType:"4578",mco:"Jenifer",ProcessedDate:"Awston",BatchInvoice:"Awston",FileName:"Awston",status:"Awston"},
+    {id:3,FileType:"4578",mco:"Jenifer",ProcessedDate:"Awston",BatchInvoice:"Awston",FileName:"Awston",status:"Awston"},
+    {id:4,FileType:"4578",mco:"Jenifer",ProcessedDate:"Awston",BatchInvoice:"Awston",FileName:"Awston",status:"Awston"},
+  
+  ];
   
   
 
