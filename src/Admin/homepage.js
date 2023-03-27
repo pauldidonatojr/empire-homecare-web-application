@@ -295,7 +295,7 @@ function Homepage() {
     { field: 'AdmissionId', headerName: 'Admission ID', width: 100 },
     { field: 'firstName', headerName: 'First Name', width: 100 },
     { field: 'lastName', headerName: 'Last name', width: 100 },
-    { field: 'phoneNumber', headerName: 'Phone Number', width: 100 },
+    { field: 'phoneNumber', headerName: 'Phone Number', width: 120 },
     { field: 'status', headerName: 'Status', width: 100 },
     { field: 'cordinator', headerName: 'Cordinator', width: 100 },
     { field: 'mco', headerName: 'MCO', width: 100 },
