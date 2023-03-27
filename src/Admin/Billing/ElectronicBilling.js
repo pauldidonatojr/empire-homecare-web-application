@@ -9,13 +9,13 @@ import Avatar from "@mui/material/Avatar";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
-import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
+import { DataGrid } from '@mui/x-data-grid';
 import Footer from "../../Footer";
 
 function Visit() {
@@ -28,7 +28,7 @@ function Visit() {
 
   //
 
-  const [ViewSelected, setViewSelected] = useState(1);
+  const [ViewSelected, setViewSelected] = useState(2);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [isOverlayOpen2, setIsOverlayOpen2] = useState(false);
@@ -203,20 +203,20 @@ function Visit() {
   }
 
 
-  const VisitSearchPressed = () => {
+  const BatchSearchPressed = () => {
     setViewSelected(2);
   };
 
-  const ByBatchPressed = () => {
+  const SubmitPressed = () => {
     setViewSelected(4);
   };
 
   function RenderViews() {
     switch (ViewSelected) {
       case 2:
-        return ByInvoiceView();
+        return BatchSearchView();
       case 4:
-        return ByBatchView();
+        return SubmitView();
 
       default:
         break;
@@ -259,60 +259,66 @@ function Visit() {
   ];
 
   //
-  const ByBatchView = () => {
+  const SubmitView = () => {
     return (
-      <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="th">Batch Number</th>
-              <th className="th">MCO</th>
-              <th className="th">Batch Date DD/MM/YYYY</th>
-             
-            </tr>
-          </thead>
-          <tbody>
-            {jsonData.map((data, i) => (
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows2}
+        columns={columns2}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
-  //
-  const ByInvoiceView = () => {
+  // // SubmitView
+  const columns2 = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'batchNumber', headerName: 'Batch Number', width: 250 },
+    { field: 'mco', headerName: 'MCO', width: 250 },
+    { field: 'batchDate', headerName: 'Batch Date', width: 250 },
+   
+  ];
+  
+  const rows2 = [
+    {id:1,batchNumber:"4578",mco:"Jenifer",batchDate:"Awston"},
+    {id:2,batchNumber:"4578",mco:"Jenifer",batchDate:"Awston"},
+    {id:3,batchNumber:"4578",mco:"Jenifer",batchDate:"Awston"},
+    
+    
+  ];
+  const BatchSearchView = () => {
     return (
-      <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="th">Batch Number</th>
-              <th className="th">MCO</th>
-              <th className="th">Claim Type</th>
-              <th className="th">From Date DD/MM/YYYY</th>
-              <th className="th">To Date DD/MM/YYYY</th>
-            </tr>
-          </thead>
-          <tbody>
-            {jsonData.map((data, i) => (
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows4}
+        columns={columns4}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+  // BatchSearchView
+  const columns4 = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'batchNumber', headerName: 'Batch Number', width: 175 },
+    { field: 'mco', headerName: 'MCO', width: 175 },
+    { field: 'claimType', headerName: 'Claim Type', width: 175 },
+    { field: 'fromDate', headerName: 'From Date', width: 175 },
+    { field: 'toDate', headerName: 'To Date', width: 175 },
+   
+  ];
+  
+  const rows4 = [
+    {id:1,batchNumber:"4578",mco:"Jenifer",claimType:"Awston",fromDate:"02548965478",toDate:"Active"},
+    {id:2,batchNumber:"4578",mco:"Jenifer",claimType:"Awston",fromDate:"02548965478",toDate:"Active"},
+    {id:3,batchNumber:"4578",mco:"Jenifer",claimType:"Awston",fromDate:"02548965478",toDate:"Active"},
+    {id:4,batchNumber:"4578",mco:"Jenifer",claimType:"Awston",fromDate:"02548965478",toDate:"Active"},
+    
+  ];
   
   return (
     <Wrapper>
@@ -362,7 +368,7 @@ function Visit() {
             <Button
               className="navigationButton"
               onClick={() => {
-                ByBatchPressed();
+                SubmitPressed();
               }}
             >
               <p
@@ -375,7 +381,7 @@ function Visit() {
                Re Submit Claims
               </p>
             </Button>
-            <Button onClick={VisitSearchPressed} className="navigationButton">
+            <Button onClick={BatchSearchPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >

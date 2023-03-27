@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
-import TextField from "@mui/material/TextField";
+
+import { DataGrid } from '@mui/x-data-grid';
 //
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -58,16 +55,16 @@ const handleChange = (event) => {
 
   };
 
-const MissedOutPressed = () => {
+const PendingPressed = () => {
   setViewSelected(3);
 };
-const MissedCallPressed = () => {
+const TotalPressed = () => {
   setViewSelected(4);
 };
-const VisitLogPressed = () => {
+const StaffedPressed = () => {
   setViewSelected(5);
 };
-const RejectedCallsPressed = () => {
+const MasterworkPressed = () => {
   setViewSelected(6);
 };
 
@@ -241,13 +238,13 @@ function Overlay6() {
     switch (ViewSelected) {
       
       case 3:
-        return MissedOutView();
+        return PendingView();
       case 4:
-        return MissedCallView();
+        return AcceptedView();
       case 5:
-        return VisitLogView();
+        return StaffedView();
       case 6:
-        return RejectedCallsView();
+        return MasterworkView();
 
       default:
         break;
@@ -290,151 +287,88 @@ function Overlay6() {
   ];
 
 
-  const RejectedCallsView = () => {
+  const AcceptedView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
 
   
-  const VisitLogView = () => {
+  const StaffedView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
   
-  const MissedCallView = () => {
+  const MasterworkView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
   
-  const MissedOutView = () => {
+  const PendingView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
-  
+  // CommunicationMessageCenterView
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'mco', headerName: 'MCO', width: 150 }, 
+    { field: 'messageType', headerName: 'Message Type', width: 200 },
+    { field: 'status', headerName: 'Status', width: 150 },
+    { field: 'reason', headerName: 'Reason', width: 150 },
+   { field: 'fromDate', headerName: 'From Date', width: 150 },
+    { field: 'tillDate', headerName: 'Till Date', width: 150 },
+    
+  ];
+  //demo data to display
+  const rows = [
+    {id:1,mco:"Justin",messageType:"Alo",status:"02457894561",reason:"XOXO",fromDate:"XZXZ",tillDate:"1123456"},
+    
+    {id:2,mco:"Justin",messageType:"Alo",status:"02457894561",reason:"XOXO",fromDate:"XZXZ",tillDate:"1123456"},
+    
+    {id:3,mco:"Justin",messageType:"Alo",status:"02457894561",reason:"XOXO",fromDate:"XZXZ",tillDate:"1123456"},
+    
+    {id:4,mco:"Justin",messageType:"Alo",status:"02457894561",reason:"XOXO",fromDate:"XZXZ",tillDate:"1123456"},
+    
+    {id:5,mco:"Justin",messageType:"Alo",status:"02457894561",reason:"XOXO",fromDate:"XZXZ",tillDate:"1123456"},
+   
+    
+  ];
+  //
   
 
   return (
@@ -484,28 +418,28 @@ function Overlay6() {
           <div className="buttonHolder">
          
 
-            <Button onClick={MissedOutPressed} className="navigationButton">
+            <Button onClick={PendingPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
                 Pending
               </p>
             </Button>
-            <Button onClick={MissedCallPressed} className="navigationButton">
+            <Button onClick={TotalPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
                 Total Accepted
               </p>
             </Button>
-            <Button onClick={VisitLogPressed} className="navigationButton">
+            <Button onClick={StaffedPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
                 Staffed
               </p>
             </Button>
-            <Button onClick={RejectedCallsPressed} className="navigationButton">
+            <Button onClick={MasterworkPressed} className="navigationButton">
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >

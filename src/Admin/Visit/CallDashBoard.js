@@ -18,6 +18,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../../Footer";
+import { DataGrid } from '@mui/x-data-grid';
 //
 const Link = require("react-router-dom").Link;
 
@@ -946,254 +947,244 @@ function Overlay6() {
 
   const RejectedCallsView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Code</th>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Assigment ID</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Team Member</th>
-      <th className="th">From Date</th>
-      <th className="th">Till Date</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
-
-    ///
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows6}
+        columns={columns6}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+  //rejecyed call View columns and demo data
+  const columns6 = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'careGiverCode', headerName: 'CareGiver Code', width: 150 },
+    { field: 'careGiverName', headerName: 'CareGiver Name', width: 150 },
+    { field: 'assigmentID', headerName: 'Assigment ID', width: 135 },
+    { field: 'admissionID', headerName: 'Admission ID', width: 135 },
+    { field: 'teamMember', headerName: 'Team Member', width: 135 },
+    { field: 'fromDate', headerName: 'From Date', width: 135 },
+    { field: 'tillDate', headerName: 'Till Date', width: 135 },
+   
+  ];
+  //demo data to display
+  const rows6 = [
+    {id:1,careGiverCode:"02457894561",careGiverName:"XOXO",assigmentID:"XZXZ",admissionID:"1123456",teamMember:"Active",fromDate:"10 jul 2020",tillDate:"10 jul 2021"},
+    {id:2,careGiverCode:"02457894561",careGiverName:"XOXO",assigmentID:"XZXZ",admissionID:"1123456",teamMember:"Active",fromDate:"10 jul 2020",tillDate:"10 jul 2021"},
+    {id:3,careGiverCode:"02457894561",careGiverName:"XOXO",assigmentID:"XZXZ",admissionID:"1123456",teamMember:"Active",fromDate:"10 jul 2020",tillDate:"10 jul 2021"},
+    {id:4,careGiverCode:"02457894561",careGiverName:"XOXO",assigmentID:"XZXZ",admissionID:"1123456",teamMember:"Active",fromDate:"10 jul 2020",tillDate:"10 jul 2021"},
+   
+   
+  ];
+  //
 
   
   const VisitLogView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">First Name</th>
-      <th className="th">Last Name</th>
-      <th className="th">Care Giver Code</th>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      <th className="th">Admission ID</th>
-      
-      <th className="th">Cordinator</th>
-      
-      <th className="th">From Date</th>
-      <th className="th">Till Date</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>  
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows5}
+        columns={columns5}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+  //Visit Log View columns and demo data
+  const columns5 = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'firstName', headerName: 'First Name', width: 100 }, 
+    { field: 'lastName', headerName: 'Last Name', width: 100 },
+    { field: 'careGiverCode', headerName: 'CareGiver Code', width: 130 },
+    { field: 'careGiverName', headerName: 'CareGiver Name', width: 130 },
+    { field: 'assigmentID', headerName: 'Assigment ID', width: 100 },
+    { field: 'admissionID', headerName: 'Admission ID', width: 100 },
+    { field: 'cordinator', headerName: 'Cordinator', width: 100 },
+    { field: 'fromDate', headerName: 'From Date', width: 100 },
+    { field: 'tillDate', headerName: 'Till Date', width: 150 },
+   
+  ];
+  //demo data to display
+  const rows5 = [
+    {id:1,firstName:"Justin",lastName:"Alo",careGiverCode:"02457894561",careGiverName:"XOXO",assigmentID:"XZXZ",admissionID:"1123456",cordinator:"Active",fromDate:"10 jul 2020",tillDate:"10 jul 2021"},
+    {id:2,firstName:"Justin",lastName:"Alo",careGiverCode:"02457894561",careGiverName:"XOXO",assigmentID:"XZXZ",admissionID:"1123456",cordinator:"Active",fromDate:"10 jul 2020",tillDate:"10 jul 2021"},
+    {id:3,firstName:"Justin",lastName:"Alo",careGiverCode:"02457894561",careGiverName:"XOXO",assigmentID:"XZXZ",admissionID:"1123456",cordinator:"Active",fromDate:"10 jul 2020",tillDate:"10 jul 2021"},
+    {id:4,firstName:"Justin",lastName:"Alo",careGiverCode:"02457894561",careGiverName:"XOXO",assigmentID:"XZXZ",admissionID:"1123456",cordinator:"Active",fromDate:"10 jul 2020",tillDate:"10 jul 2021"},
+    {id:5,firstName:"Justin",lastName:"Alo",careGiverCode:"02457894561",careGiverName:"XOXO",assigmentID:"XZXZ",admissionID:"1123456",cordinator:"Active",fromDate:"10 jul 2020",tillDate:"10 jul 2021"},
+   
+   
+  ];
+  //
   
   const MissedCallView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
-
-    ///
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows4}
+        columns={columns4}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
+    
     );
   };
+  //MissedCallView columns and demo data
+  const columns4 = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'careGiverName', headerName: 'Care Giver Name', width: 150 }, 
+    { field: 'admissionID', headerName: 'Admission ID', width: 150 },
+    { field: 'memberName', headerName: 'Member Name', width: 150 },
+    { field: 'mco', headerName: 'MCO', width: 100 },
+    { field: 'cordinator', headerName: 'Cordinator', width: 150 },
+    { field: 'teamMember', headerName: 'Team Member', width: 150 },
+    { field: 'assigmentID', headerName: 'Assigment ID', width: 150 },
+    
+  ];
+  //demo data to display
+  const rows4 = [
+    {id:1,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+    {id:2,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+    {id:3,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+    {id:4,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+    {id:5,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+    {id:6,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+   
+  ];
+  //
   
   const MissedOutView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
       
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
-
-    ///
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows3}
+        columns={columns3}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
+    
     );
   };
+  //MissedOutView columns and demo data
+  const columns3 = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'careGiverName', headerName: 'Care Giver Name', width: 150 }, 
+    { field: 'admissionID', headerName: 'Admission ID', width: 150 },
+    { field: 'memberName', headerName: 'Member Name', width: 150 },
+    { field: 'mco', headerName: 'MCO', width: 100 },
+    { field: 'cordinator', headerName: 'Cordinator', width: 150 },
+    { field: 'teamMember', headerName: 'Team Member', width: 150 },
+    { field: 'assigmentID', headerName: 'Assigment ID', width: 150 },
+    
+  ];
+  //demo data to display
+  const rows3 = [
+    {id:1,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+    {id:2,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+    {id:3,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+    {id:4,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+    {id:5,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+    {id:6,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+   
+  ];
+  //
   
   const CallMaintanceView = () => {
     return (
 
-<div>
-        <table className="table">
-           <thead>
-            <tr>
-        <th className="th">Care Giver First Name</th>
-        <th className="th">Care Giver Last Name</th>
-        <th className="th">Care Giver Code</th>
-        <th className="th">Assigment ID</th>
-        <th className="th">Admission ID</th>
-        <th className="th">Member First Name</th>
-        <th className="th">Member Last Name</th>
-        <th className="th">Cordinator</th>
-        <th className="th">Status</th>
-        <th className="th">Member Team</th>
-        <th className="th">Member Location</th>
-        <th className="th">Member Branch</th>
-        <th className="th">From Date DD/MM/YYYY</th>
-        <th className="th">To Date DD/MM/YYYY</th>
-        
-            </tr>
-           </thead>
-           <tbody>
-            {jsonData.map((data,i)=>(
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Member ID</td>
-               
-              </tr>
-            ))}
-              
-           </tbody>
-        </table>      
-     </div>
-
-      ///
-      
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
      
     );
   };
+  
+  //call maintance columns and demo data
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'firstName', headerName: 'First Name', width: 100 }, 
+    { field: 'lastName', headerName: 'Last Name', width: 100 },
+    { field: 'caregiverCode', headerName: 'CareGiver Code', width: 100 },
+    { field: 'assigmentID', headerName: 'Assigment ID', width: 100 },
+    { field: 'admissionID', headerName: 'Admission ID', width: 100 },
+    { field: 'memberFirstName', headerName: 'Member First Name', width: 100 },
+    { field: 'cordinator', headerName: 'Cordinator', width: 100 },
+    { field: 'status', headerName: 'Status', width: 100 },
+    { field: 'memberTeam', headerName: 'Member Team', width: 100 },
+    { field: 'memberLocation', headerName: 'Member Location', width: 100 },
+    { field: 'memberBranch', headerName: 'Member Branch', width: 100 },
+    { field: 'fromDate', headerName: 'From Date', width: 100 },
+    { field: 'tillDate', headerName: 'Till Date', width: 100 },
+    
+  ];
+  //demo data to display
+  const rows = [
+    {id:1,firstName:"Justin",lastName:"Alo",caregiverCode:"02457894561",assigmentID:"XOXO",admissionID:"XZXZ",memberFirstName:"1123456",cordinator:"Active",status:"Homecare",memberTeam:"51s",
+    memberLocation:"China",memberBranch:"Depot",fromDate:"10 Jul 2020",tillDate:"10 Jul 2021"},
+    {id:2,firstName:"Justin",lastName:"Alo",caregiverCode:"02457894561",assigmentID:"XOXO",admissionID:"XZXZ",memberFirstName:"1123456",cordinator:"Active",status:"Homecare",memberTeam:"51s",
+    memberLocation:"China",memberBranch:"Depot",fromDate:"10 Jul 2020",tillDate:"10 Jul 2021"},
+    {id:3,firstName:"Justin",lastName:"Alo",caregiverCode:"02457894561",assigmentID:"XOXO",admissionID:"XZXZ",memberFirstName:"1123456",cordinator:"Active",status:"Homecare",memberTeam:"51s",
+    memberLocation:"China",memberBranch:"Depot",fromDate:"10 Jul 2020",tillDate:"10 Jul 2021"},
+    {id:4,firstName:"Justin",lastName:"Alo",caregiverCode:"02457894561",assigmentID:"XOXO",admissionID:"XZXZ",memberFirstName:"1123456",cordinator:"Active",status:"Homecare",memberTeam:"51s",
+    memberLocation:"China",memberBranch:"Depot",fromDate:"10 Jul 2020",tillDate:"10 Jul 2021"},
+    {id:5,firstName:"Justin",lastName:"Alo",caregiverCode:"02457894561",assigmentID:"XOXO",admissionID:"XZXZ",memberFirstName:"1123456",cordinator:"Active",status:"Homecare",memberTeam:"51s",
+    memberLocation:"China",memberBranch:"Depot",fromDate:"10 Jul 2020",tillDate:"10 Jul 2021"},
+    
+  ];
+  //
   const MissedInView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">Care Giver Name</th>
-      <th className="th">Admission ID</th>
-      <th className="th">Member Name</th>
-      <th className="th">MCO</th>
-      <th className="th">Cordinator</th>
-      <th className="th">Team Member</th>
-      <th className="th">Assigment ID</th>
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
-
+    
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows2}
+        columns={columns2}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     ///
     );
   };
+  //MissedInView columns and demo data
+  const columns2 = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'careGiverName', headerName: 'Care Giver Name', width: 150 }, 
+    { field: 'admissionID', headerName: 'Admission ID', width: 150 },
+    { field: 'memberName', headerName: 'Member Name', width: 150 },
+    { field: 'mco', headerName: 'MCO', width: 100 },
+    { field: 'cordinator', headerName: 'Cordinator', width: 150 },
+    { field: 'teamMember', headerName: 'Team Member', width: 150 },
+    { field: 'assigmentID', headerName: 'Assigment ID', width: 150 },
+    
+  ];
+  //demo data to display
+  const rows2 = [
+    {id:1,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+    {id:2,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+    {id:3,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+    {id:4,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+    {id:5,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+    {id:6,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
+   
+  ];
+  //
 
   return (
     <Wrapper>

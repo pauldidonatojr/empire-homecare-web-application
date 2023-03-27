@@ -19,6 +19,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../../Footer";
+import { DataGrid } from '@mui/x-data-grid';
 //
 const Link = require("react-router-dom").Link;
 
@@ -206,39 +207,44 @@ const handleChange = (event) => {
  
   const CommunicationMessageCenterView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">MCO</th>
-      <th className="th">Message Type</th>
-      <th className="th">Status</th>
-      <th className="th">Reason</th>
-      <th className="th">From Date</th>
-      <th className="th">Till Date</th>
-      
-      
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">Care Giver IN</td>
-                    
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
+
     );
   };
+  // CommunicationMessageCenterView
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'mco', headerName: 'MCO', width: 150 }, 
+    { field: 'messageType', headerName: 'Message Type', width: 200 },
+    { field: 'status', headerName: 'Status', width: 150 },
+    { field: 'reason', headerName: 'Reason', width: 150 },
+   { field: 'fromDate', headerName: 'From Date', width: 150 },
+    { field: 'tillDate', headerName: 'Till Date', width: 150 },
+    
+  ];
+  //demo data to display
+  const rows = [
+    {id:1,mco:"Justin",messageType:"Alo",status:"02457894561",reason:"XOXO",fromDate:"XZXZ",tillDate:"1123456"},
+    
+    {id:2,mco:"Justin",messageType:"Alo",status:"02457894561",reason:"XOXO",fromDate:"XZXZ",tillDate:"1123456"},
+    
+    {id:3,mco:"Justin",messageType:"Alo",status:"02457894561",reason:"XOXO",fromDate:"XZXZ",tillDate:"1123456"},
+    
+    {id:4,mco:"Justin",messageType:"Alo",status:"02457894561",reason:"XOXO",fromDate:"XZXZ",tillDate:"1123456"},
+    
+    {id:5,mco:"Justin",messageType:"Alo",status:"02457894561",reason:"XOXO",fromDate:"XZXZ",tillDate:"1123456"},
+   
+    
+  ];
+  //
 
   return (
     <Wrapper>

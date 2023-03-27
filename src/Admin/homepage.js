@@ -291,7 +291,7 @@ function Homepage() {
   };
   
   const columns = [
-    { field: 'id', headerName: 'Member ID', width: 100 },
+    { field: 'id', headerName: 'ID', width: 100 },
     { field: 'AdmissionId', headerName: 'Admission ID', width: 100 },
     { field: 'firstName', headerName: 'First Name', width: 100 },
     { field: 'lastName', headerName: 'Last name', width: 100 },

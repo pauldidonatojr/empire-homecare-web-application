@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
 import SearchIcon from "@mui/icons-material/Search";
@@ -16,6 +13,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 import Footer from "../../Footer";
+import { DataGrid } from '@mui/x-data-grid';
 
 function Billing() {
   
@@ -413,72 +411,76 @@ function Billing() {
 
   const BankDetailReportView = () => {
     return (
-      <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="th">MCO</th>
-              <th className="th">Member Name</th>
-              <th className="th">Assigment ID</th>
-              <th className="th">Invoice Number</th>
-              <th className="th">From Date DD/MM/YYYY</th>
-              <th className="th">To Date DD/MM/YYYY</th>
-              <th className="th">Batch Number</th>
-              <th className="th">Office</th>
-            </tr>
-          </thead>
-          <tbody>
-            {jsonData.map((data, i) => (
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows2}
+        columns={columns2}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+  // // BankDetailReportView
+  const columns2 = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'mco', headerName: 'MCO', width: 150 },
+    { field: 'BatchNumber', headerName: 'Batch Number', width: 150 },
+    { field: 'BatchDate', headerName: 'Batch Date', width: 150 },
+    { field: 'PaymentStatus', headerName: 'Payment Status', width: 150 },
+    { field: 'team', headerName: 'Team(s)', width: 150 },
+  
+  ];
+  
+  const rows2 = [
+    {id:1,mco:"4578",BatchNumber:"Jenifer",BatchDate:"Awston",PaymentStatus:"Awston",team:"Awston"},
+    {id:2,mco:"4578",BatchNumber:"Jenifer",BatchDate:"Awston",PaymentStatus:"Awston",team:"Awston"},
+    {id:3,mco:"4578",BatchNumber:"Jenifer",BatchDate:"Awston",PaymentStatus:"Awston",team:"Awston"},
+    {id:4,mco:"4578",BatchNumber:"Jenifer",BatchDate:"Awston",PaymentStatus:"Awston",team:"Awston"},
+    {id:5,mco:"4578",BatchNumber:"Jenifer",BatchDate:"Awston",PaymentStatus:"Awston",team:"Awston"},
+    
+  ];
   const BillingView = () => {
     return (
-      <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="th">Member Name</th>
-              <th className="th">Admission ID</th>
-              <th className="th">From date DD/MM/YYYY</th>
-              <th className="th">To date DD/MM/YYYY</th>
-              <th className="th">MCO</th>
-              <th className="th">Invoice Number</th>
-              <th className="th">Export Status</th>
-              <th className="th"> Billing Hold</th>
-            </tr>
-          </thead>
-          <tbody>
-            {jsonData.map((data, i) => (
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+   // // BillingView
+   const columns = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'VisitDate', headerName: 'Visit Date', width: 100 },
+    { field: 'contract', headerName: 'Contract', width: 100 },
+    { field: 'InvoiceDate', headerName: 'Invoice Date', width: 100 },
+    { field: 'InvoiceNumber', headerName: 'Invoice Number', width: 100 },
+    { field: 'BatchDate', headerName: 'Batch Date', width: 100 },
+    { field: 'BatchNumber', headerName: 'Batch Number', width: 100 },
+    { field: 'CareGiver', headerName: 'Care Giver', width: 100 },
+    { field: 'Member', headerName: 'Member', width: 100 },
+    { field: 'GroupBy', headerName: 'Group By', width: 100 },
+    { field: 'MemberTeam', headerName: 'Member Team', width: 100 },
+    { field: 'ServiceCode', headerName: 'Service Code', width: 100 },
+    { field: 'team', headerName: 'Team(s)', width: 100 },
+  ];
+  
+  const rows = [
+    {id:1,VisitDate:"4578",contract:"Jenifer",InvoiceDate:"Awston",InvoiceNumber:"Awston",BatchDate:"Awston",BatchNumber:"Awston",CareGiver:"Awston"
+    ,Member:"Awston",GroupBy:"Awston",MemberTeam:"Awston",ServiceCode:"Awston",team:"Awston"},
+    {id:2,VisitDate:"4578",contract:"Jenifer",InvoiceDate:"Awston",InvoiceNumber:"Awston",BatchDate:"Awston",BatchNumber:"Awston",CareGiver:"Awston"
+    ,Member:"Awston",GroupBy:"Awston",MemberTeam:"Awston",ServiceCode:"Awston",team:"Awston"},
+    {id:3,VisitDate:"4578",contract:"Jenifer",InvoiceDate:"Awston",InvoiceNumber:"Awston",BatchDate:"Awston",BatchNumber:"Awston",CareGiver:"Awston"
+    ,Member:"Awston",GroupBy:"Awston",MemberTeam:"Awston",ServiceCode:"Awston",team:"Awston"},
+    
+    
+  ];
 
   return (
     <Wrapper>

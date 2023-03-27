@@ -19,6 +19,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../../Footer";
+import { DataGrid } from '@mui/x-data-grid';
 const Link = require("react-router-dom").Link;
 
 
@@ -385,79 +386,85 @@ function Visit() {
   //
   const VisitSearchView = () => {
     return (
-<div>
-        <table className="table">
-           <thead>
-            <tr>
-        <th className="th">Care Giver First Name</th>
-        <th className="th">Care Giver Last Name</th>
-        <th className="th">Care Giver Code</th>
-        <th className="th">Assigment ID</th>
-        <th className="th">Member First Name</th>
-        <th className="th">Member Last Name</th>
-        <th className="th">Cordinator</th>
-        <th className="th">Status</th>
-        <th className="th">Member Team</th>
-        <th className="th">Member Location</th>
-        <th className="th">Member Branch</th>
-        <th className="th">From Date DD/MM/YYYY</th>
-        <th className="th">To Date DD/MM/YYYY</th>
-        
-            </tr>
-           </thead>
-           <tbody>
-            {jsonData.map((data,i)=>(
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-               
-              </tr>
-            ))}
-              
-           </tbody>
-        </table>      
-     </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
 
     );
   };
+  // VisitSearchView
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'firstName', headerName: 'First Name', width: 100 }, 
+    { field: 'lastName', headerName: 'Last Name', width: 100 },
+    { field: 'caregiverCode', headerName: 'CareGiver Code', width: 150 },
+    { field: 'assigmentID', headerName: 'Assigment ID', width: 100 },
+    { field: 'admissionID', headerName: 'Admission ID', width: 100 },
+    { field: 'memberFirstName', headerName: 'Member First Name', width: 150 },
+    { field: 'memberLastName', headerName: 'Member Last Name', width: 150 },
+    { field: 'cordinator', headerName: 'Cordinator', width: 100 },
+    { field: 'status', headerName: 'Status', width: 100 },
+    { field: 'memberTeam', headerName: 'Member Team', width: 150 },
+    { field: 'memberLocation', headerName: 'Member Location', width: 150 },
+    { field: 'memberBranch', headerName: 'Member Branch', width: 150 },
+    { field: 'fromDate', headerName: 'From Date', width: 100 },
+    { field: 'tillDate', headerName: 'Till Date', width: 100 },
+    
+  ];
+  //demo data to display
+  const rows = [
+    {id:1,firstName:"Justin",lastName:"Alo",caregiverCode:"02457894561",assigmentID:"XOXO",admissionID:"XZXZ",memberFirstName:"1123456",memberLastName:"1123456",cordinator:"Active",status:"Homecare",memberTeam:"51s",
+    memberLocation:"China",memberBranch:"Depot",fromDate:"10 Jul 2020",tillDate:"10 Jul 2021"},
+    {id:2,firstName:"Justin",lastName:"Alo",caregiverCode:"02457894561",assigmentID:"XOXO",admissionID:"XZXZ",memberFirstName:"1123456",memberLastName:"1123456",cordinator:"Active",status:"Homecare",memberTeam:"51s",
+    memberLocation:"China",memberBranch:"Depot",fromDate:"10 Jul 2020",tillDate:"10 Jul 2021"},
+    {id:3,firstName:"Justin",lastName:"Alo",caregiverCode:"02457894561",assigmentID:"XOXO",admissionID:"XZXZ",memberFirstName:"1123456",memberLastName:"1123456",cordinator:"Active",status:"Homecare",memberTeam:"51s",
+    memberLocation:"China",memberBranch:"Depot",fromDate:"10 Jul 2020",tillDate:"10 Jul 2021"},
+    {id:4,firstName:"Justin",lastName:"Alo",caregiverCode:"02457894561",assigmentID:"XOXO",admissionID:"XZXZ",memberFirstName:"1123456",memberLastName:"1123456",cordinator:"Active",status:"Homecare",memberTeam:"51s",
+    memberLocation:"China",memberBranch:"Depot",fromDate:"10 Jul 2020",tillDate:"10 Jul 2021"},
+    {id:5,firstName:"Justin",lastName:"Alo",caregiverCode:"02457894561",assigmentID:"XOXO",admissionID:"XZXZ",memberFirstName:"1123456",memberLastName:"1123456",cordinator:"Active",status:"Homecare",memberTeam:"51s",
+    memberLocation:"China",memberBranch:"Depot",fromDate:"10 Jul 2020",tillDate:"10 Jul 2021"},
+    {id:6,firstName:"Justin",lastName:"Alo",caregiverCode:"02457894561",assigmentID:"XOXO",admissionID:"XZXZ",memberFirstName:"1123456",memberLastName:"1123456",cordinator:"Active",status:"Homecare",memberTeam:"51s",
+    memberLocation:"China",memberBranch:"Depot",fromDate:"10 Jul 2020",tillDate:"10 Jul 2021"},
+    
+  ];
+  //
   const VisitQuickSearchView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">MCO</th>
-      <th className="th">Member Search</th>
-     
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-             
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows2}
+        columns={columns2}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
-  
+  // VisitQuickSearchView
+  const columns2 = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'mco', headerName: 'MCO', width: 300 }, 
+    { field: 'member', headerName: 'Member', width: 300 },
+    
+    
+  ];
+  //demo data to display
+  const rows2 = [
+    {id:1,mco:"Justin",member:"Alo"},
+    {id:2,mco:"Justin",member:"Alo"},
+    {id:3,mco:"Justin",member:"Alo"},
+    {id:4,mco:"Justin",member:"Alo"},
+    {id:5,mco:"Justin",member:"Alo"},
+    
+  ];
+  //
 
   return (
     <Wrapper>

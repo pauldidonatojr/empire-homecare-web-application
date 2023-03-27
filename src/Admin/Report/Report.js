@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
 import { List, ListItem, ListItemText } from "@material-ui/core";
@@ -18,6 +15,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 import Footer from "../../Footer";
+import { DataGrid } from '@mui/x-data-grid';
 
 function Report() {
   const [ViewSelected, setViewSelected] = useState(1);
@@ -1054,154 +1052,183 @@ function Report() {
   //
   const CareGiverView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem className="ListItem">
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows2}
+        columns={columns2}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+   // CareGiverView
+   const columns2 = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'careGiverCode', headerName: 'CareGiver Code', width: 100 },
+    { field: 'firstName', headerName: 'First Name', width: 100 },
+    { field: 'lastName', headerName: 'Last Name', width: 100 },
+    { field: 'discipline', headerName: 'Discipline', width: 100 },
+    { field: 'type', headerName: 'Type', width: 100 },
+    { field: 'status', headerName: 'Status', width: 100 },
+    { field: 'restrictions', headerName: 'Restrictions', width: 100 },
+    { field: 'hireFrom', headerName: 'Hire Date', width: 100 },
+    { field: 'team', headerName: 'Team', width: 100 },
+    { field: 'lastWorkDate', headerName: 'Last Work Date', width: 100 },
+    { field: 'location', headerName: 'Location', width: 100 },
+    { field: 'branch', headerName: 'Branch', width: 100 },
+    { field: 'applicationDate', headerName: 'Application Date', width: 100 },
+    { field: 'employeeDemo', headerName: 'CareGiver Demo', width: 100 },
+    { field: 'careGiverEmployment', headerName: 'CareGiver Employment', width: 100 },
+    { field: 'careGiverAddress', headerName: 'CareGiver Address', width: 100 },
+    { field: 'careGiverRestriction', headerName: 'CareGiver Restriction', width: 100 },
+    { field: 'CareGiverPayroll', headerName: 'CareGiver Compliance', width: 100 },
+    { field: 'CareGiverNotification', headerName: 'CareGiver Notification', width: 100 },
+  ];
+  
+  const rows2 = [
+    {id:1,careGiverCode:"4578",firstName:"Jenifer",lastName:"Awston",discipline:"Awston",type:"Awston",status:"Awston",restrictions:"Awston",hireFrom:"Awston"
+    ,team:"Awston",lastWorkDate:"Awston",location:"Awston",branch:"Awston",applicationDate:"Awston",employeeDemo:"Awston",careGiverEmployment:"Awston",careGiverAddress:"Awston",careGiverRestriction:"Awston"
+    ,CareGiverPayroll:"Awston",CareGiverNotification:"Awston"},
+    {id:2,careGiverCode:"4578",firstName:"Jenifer",lastName:"Awston",discipline:"Awston",type:"Awston",status:"Awston",restrictions:"Awston",hireFrom:"Awston"
+    ,team:"Awston",lastWorkDate:"Awston",location:"Awston",branch:"Awston",applicationDate:"Awston",employeeDemo:"Awston",careGiverEmployment:"Awston",careGiverAddress:"Awston",careGiverRestriction:"Awston"
+    ,CareGiverPayroll:"Awston",CareGiverNotification:"Awston"},
+    {id:3,careGiverCode:"4578",firstName:"Jenifer",lastName:"Awston",discipline:"Awston",type:"Awston",status:"Awston",restrictions:"Awston",hireFrom:"Awston"
+    ,team:"Awston",lastWorkDate:"Awston",location:"Awston",branch:"Awston",applicationDate:"Awston",employeeDemo:"Awston",careGiverEmployment:"Awston",careGiverAddress:"Awston",careGiverRestriction:"Awston"
+    ,CareGiverPayroll:"Awston",CareGiverNotification:"Awston"},
+    
+    
+    
+  ];
   const ComplianceView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem className="ListItem">
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows3}
+        columns={columns3}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+  // // ComplianceView
+  const columns3 = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'provider', headerName: 'Provider', width: 250 },
+    { field: 'date', headerName: 'Date', width: 250 },
+    { field: 'team', headerName: 'Team(s)', width: 250 },
+   
+  ];
+  
+  const rows3 = [
+    {id:1,provider:"4578",date:"Jenifer",team:"Awston"},
+    {id:2,provider:"4578",date:"Jenifer",team:"Awston"},
+    {id:3,provider:"4578",date:"Jenifer",team:"Awston"},
+    {id:4,provider:"4578",date:"Jenifer",team:"Awston"},
+    
+  ];
   const OtherReportsView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem className="ListItem">
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows4}
+        columns={columns4}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+   // // OtherReportsView
+   const columns4 = [
+    { field: 'id', headerName: 'ID', width: 120 },
+    { field: 'date', headerName: 'Date', width: 150 },
+    { field: 'mco', headerName: 'MCO', width: 150 },
+    { field: 'member', headerName: 'Member', width: 150 },
+    { field: 'LinkedNoteDate', headerName: 'Linked Note Date', width: 150 },
+    { field: 'reason', headerName: 'Reason', width: 150 },
+    { field: 'NotesType', headerName: 'Notes Type', width: 150 },
+  
+  ];
+  
+  const rows4 = [
+    {id:1,date:"4578",mco:"Jenifer",member:"Awston",LinkedNoteDate:"Awston",reason:"Awston",NotesType:"Awston"},
+    {id:2,date:"4578",mco:"Jenifer",member:"Awston",LinkedNoteDate:"Awston",reason:"Awston",NotesType:"Awston"},
+    {id:3,date:"4578",mco:"Jenifer",member:"Awston",LinkedNoteDate:"Awston",reason:"Awston",NotesType:"Awston"},
+    {id:4,date:"4578",mco:"Jenifer",member:"Awston",LinkedNoteDate:"Awston",reason:"Awston",NotesType:"Awston"},
+  
+  ];
   const MembersView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem className="ListItem">
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows5}
+        columns={columns5}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+   // // MembersView
+   const columns5 = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'FirstName', headerName: 'First Name', width: 100 },
+    { field: 'LastName', headerName: 'Last Name', width: 100 },
+    { field: 'CareGiverCode', headerName: 'CareGiver Code', width:150 },
+    { field: 'AltCareGiverCode', headerName: 'Alt CareGiver Code', width: 150 },
+    { field: 'ssn', headerName: 'SSN', width: 100 },
+    { field: 'status', headerName: 'Status', width: 100 },
+    { field: 'provider', headerName: 'Provider', width: 100 },
+    { field: 'discipline', headerName: 'Discipline', width: 100 },
+  
+  ];
+  
+  const rows5 = [
+    {id:1,FirstName:"4578",LastName:"Jenifer",CareGiverCode:"Awston",AltCareGiverCode:"Awston",ssn:"Awston",status:"Awston",provider:"Alpha",discipline:"Bravo"},
+    {id:2,FirstName:"4578",LastName:"Jenifer",CareGiverCode:"Awston",AltCareGiverCode:"Awston",ssn:"Awston",status:"Awston",provider:"Alpha",discipline:"Bravo"},
+    {id:3,FirstName:"4578",LastName:"Jenifer",CareGiverCode:"Awston",AltCareGiverCode:"Awston",ssn:"Awston",status:"Awston",provider:"Alpha",discipline:"Bravo"},
+    {id:4,FirstName:"4578",LastName:"Jenifer",CareGiverCode:"Awston",AltCareGiverCode:"Awston",ssn:"Awston",status:"Awston",provider:"Alpha",discipline:"Bravo"},
+    
+  ];
   const VisitsView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem className="ListItem">
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows6}
+        columns={columns6}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+  // // VisitsView
+  const columns6 = [
+    { field: 'id', headerName: 'ID', width: 120 },
+    { field: 'Date', headerName: 'Date', width: 120 },
+    { field: 'cordinator', headerName: 'Cordinator', width: 120 },
+    { field: 'mco', headerName: 'MCO', width:150 },
+    { field: 'VisitType', headerName: 'Visit Type', width: 120 },
+    { field: 'Discipline', headerName: 'Discipline', width: 120 },
+    { field: 'status', headerName: 'Status', width: 120 },
+    { field: 'team', headerName: 'Team(s)', width: 120 }, 
+  ];
+  
+  const rows6 = [
+    {id:1,Date:"4578",cordinator:"Jenifer",mco:"Awston",VisitType:"Awston",Discipline:"Awston",status:"Awston",team:"Alpha"},
+    {id:2,Date:"4578",cordinator:"Jenifer",mco:"Awston",VisitType:"Awston",Discipline:"Awston",status:"Awston",team:"Alpha"},
+    {id:3,Date:"4578",cordinator:"Jenifer",mco:"Awston",VisitType:"Awston",Discipline:"Awston",status:"Awston",team:"Alpha"},
+    {id:4,Date:"4578",cordinator:"Jenifer",mco:"Awston",VisitType:"Awston",Discipline:"Awston",status:"Awston",team:"Alpha"},
+   
+    
+  ];
 
   return (
     <Wrapper>
@@ -1497,9 +1524,9 @@ const Wrapper = styled.section`
     position: absolute;
     z-index: 999;
     padding: 1%;
-    font-size: 50px;
+    font-size: 25px;
     color: white;
-    margin-left: 65%;
+    margin-left: 69.2%;
     cursor: pointer;
     background-color: grey;
     border-radius: 500px;

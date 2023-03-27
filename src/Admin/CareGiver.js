@@ -17,6 +17,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../Footer";
+import { DataGrid } from '@mui/x-data-grid';
 
 
 function CareGiver() {
@@ -36,40 +37,8 @@ function CareGiver() {
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
-  const ColumnDiv = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">First Name</p>
-        <hr/>
-        <p className="colume1">Last Name</p>
-        <hr/>
-        <p className="colume1">Phone</p>
-        <hr/>
-        <p className="colume1">CareGiver Code</p>
-        <hr/>
-        <p className="colume1">Alt CG Code</p>
-        <hr/>
-        <p className="colume1">SSN</p>
-        <hr/>
-        <p className="colume1">Status</p>
-        <hr/>
-        <p className="colume1">Provider</p>
-        <hr/>
-        <p className="colume1">Discipline</p>
-      </div>
-    );
-  };
-  function renderColumeName() {
-    switch (ViewSelected) {
-      case 1:
-        return null;
-      case 2:
-        return <ColumnDiv />;
-      
-      default:
-        break;
-    }
-  }
+ 
+
 
   function RenderSearchIcon(){
     switch (ViewSelected) {
@@ -285,46 +254,40 @@ function CareGiver() {
   };
   const SearchCareGiverView = () => {
     return (
-      <div>
-      <table className="table">
-         <thead>
-          <tr>
-      <th className="th">First Name</th>
-      <th className="th">Last Name</th>
-      <th className="th">Phone</th>
-      <th className="th">CareGiver Code</th>
-      <th className="th">Alt CG Code</th>
-      <th className="th">SSN</th>
-      
-      <th className="th">Status</th>
-      <th className="th">Provider</th>
-      <th className="th">Discipline</th>
-      
-          </tr>
-         </thead>
-         <tbody>
-          {jsonData.map((data,i)=>(
-            <tr>
-              <td className="td">Member ID</td>
-              <td className="td">Admission ID</td>
-              <td className="td">First Name</td>
-              <td className="td">Last Name</td>
-              <td className="td">Phone Number</td>
-              <td className="td">Status</td>
-              
-              <td className="td">MCO</td>
-              <td className="td">Officed</td>
-              <td className="td">Member Team</td>
-      
-            </tr>
-          ))}
-            
-         </tbody>
-      </table>      
-   </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
       
     )
   };
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'firstName', headerName: 'First Name', width: 100 }, 
+    { field: 'firstName', headerName: 'First Name', width: 100 },
+    { field: 'lastName', headerName: 'Last Name', width: 100 },
+    { field: 'phoneNumber', headerName: 'Phone Number', width: 100 },
+    { field: 'caregiverCode', headerName: 'CareGiver Code', width: 100 },
+    { field: 'altCareCode', headerName: 'Alt Care Giver Code', width: 100 },
+    { field: 'ssn', headerName: 'SSN', width: 100 },
+    { field: 'status', headerName: 'Status', width: 100 },
+    { field: 'provider', headerName: 'Provider', width: 100 },
+    { field: 'discipline', headerName: 'Discipline', width: 100 },
+    
+  ];
+  //demo data to display
+  const rows = [
+    {id:1,firstName:"Justin",lastName:"Alo",phoneNumber:"02457894561",caregiverCode:"XOXO",altCareCode:"XZXZ",ssn:"1123456",status:"Active",provider:"Homecare",discipline:"51s"},
+    {id:2,firstName:"Justin",lastName:"Alo",phoneNumber:"02457894561",caregiverCode:"XOXO",altCareCode:"XZXZ",ssn:"1123456",status:"Active",provider:"Homecare",discipline:"51s"},
+    {id:3,firstName:"Justin",lastName:"Alo",phoneNumber:"02457894561",caregiverCode:"XOXO",altCareCode:"XZXZ",ssn:"1123456",status:"Active",provider:"Homecare",discipline:"51s"},
+    {id:4,firstName:"Justin",lastName:"Alo",phoneNumber:"02457894561",caregiverCode:"XOXO",altCareCode:"XZXZ",ssn:"1123456",status:"Active",provider:"Homecare",discipline:"51s"},
+   
+  ];
 
   return (
     <Wrapper>

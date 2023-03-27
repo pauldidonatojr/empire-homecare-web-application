@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
-import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,21 +13,15 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 import Footer from "../../Footer";
+import { DataGrid } from '@mui/x-data-grid';
 
 function Visit() {
-  const navigate = useNavigate();
-  function CallDashBoardPressed() {}
-
-  //
-
   const [age, setAge] = React.useState("");
   const handleChange = (event) => {
     setAge(event.target.value);
   };
 
-  //
-
-  const [ViewSelected, setViewSelected] = useState(1);
+  const [ViewSelected, setViewSelected] = useState(2);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [isOverlayOpen2, setIsOverlayOpen2] = useState(false);
@@ -464,109 +454,107 @@ function Visit() {
   //
   const ByBatchView = () => {
     return (
-      <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="th">Batch Number</th>
-              <th className="th">Status</th>
-              <th className="th">From Date DD/MM/YYYY</th>
-              <th className="th">To Date DD/MM/YYYY</th>
-              <th className="th">AR Export From Date</th>
-              <th className="th">AR Export To Date</th>
-              <th className="th">Billing Export From Date</th>
-              <th className="th">Billing Export To Date</th>
-              <th className="th">MCO</th>
-            </tr>
-          </thead>
-          <tbody>
-            {jsonData.map((data, i) => (
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows1}
+        columns={columns1}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
   //
+  // ByBatchView
+  const columns1 = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'batchNumber', headerName: 'Batch Number', width: 120 },
+    { field: 'status', headerName: 'Status', width: 110 },
+    { field: 'fromDate', headerName: 'From Date', width: 110 },
+    { field: 'toDate', headerName: 'To Date', width: 110 },
+    { field: 'aRExportFromDate', headerName: 'AR Export From Date', width: 155 },
+    { field: 'aRExportToDate', headerName: 'AR Export To Date', width: 155 },
+    { field: 'billingExport', headerName: 'Billing Export', width: 120 },
+    { field: 'mco', headerName: 'MCO', width: 125 },
+  ];
+  
+  const rows1 = [
+    {id:1,batchNumber:"4578",status:"Jenifer",fromDate:"Awston",toDate:"02548965478",aRExportFromDate:"Active",aRExportToDate:"Adam Fernandez",billingExport:"Delta",mco:"Delta"},
+    {id:2,batchNumber:"4578",status:"Jenifer",fromDate:"Awston",toDate:"02548965478",aRExportFromDate:"Active",aRExportToDate:"Adam Fernandez",billingExport:"Delta",mco:"Delta"},
+    {id:3,batchNumber:"4578",status:"Jenifer",fromDate:"Awston",toDate:"02548965478",aRExportFromDate:"Active",aRExportToDate:"Adam Fernandez",billingExport:"Delta",mco:"Delta"},
+    {id:4,batchNumber:"4578",status:"Jenifer",fromDate:"Awston",toDate:"02548965478",aRExportFromDate:"Active",aRExportToDate:"Adam Fernandez",billingExport:"Delta",mco:"Delta"},
+    {id:5,batchNumber:"4578",status:"Jenifer",fromDate:"Awston",toDate:"02548965478",aRExportFromDate:"Active",aRExportToDate:"Adam Fernandez",billingExport:"Delta",mco:"Delta"},
+   
+  ];
   const ByInvoiceView = () => {
     return (
-      <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="th">MCO</th>
-              <th className="th">Member Name</th>
-              <th className="th">Assigment ID</th>
-              <th className="th">Invoice Number</th>
-              <th className="th">From Date DD/MM/YYYY</th>
-              <th className="th">To Date DD/MM/YYYY</th>
-              <th className="th">Batch Number</th>
-              <th className="th">Office</th>
-            </tr>
-          </thead>
-          <tbody>
-            {jsonData.map((data, i) => (
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows3}
+        columns={columns3}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+  // ByInvoiceView
+  const columns3 = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'mco', headerName: 'MCO', width: 100 },
+    { field: 'memberName', headerName: 'Member Name', width: 130 },
+    { field: 'admissionID', headerName: 'Admission ID', width: 140 },
+    { field: 'invoiceNumber', headerName: 'Invoice Number', width: 140 },
+    { field: 'fromDate', headerName: 'From Date', width: 125 },
+    { field: 'toDate', headerName: 'To Date', width: 120 },
+    { field: 'batchNumber', headerName: 'Batch Number', width: 125 },
+    { field: 'office', headerName: 'Office', width: 125 },
+   
+  ];
+  
+  const rows3 = [
+    {id:1,mco:"4578",memberName:"Jenifer",admissionID:"Awston",invoiceNumber:"02548965478",fromDate:"Active",toDate:"Adam Fernandez",batchNumber:"Delta",office:"Delta"},
+    {id:2,mco:"4578",memberName:"Jenifer",admissionID:"Awston",invoiceNumber:"02548965478",fromDate:"Active",toDate:"Adam Fernandez",batchNumber:"Delta",office:"Delta"},
+    {id:3,mco:"4578",memberName:"Jenifer",admissionID:"Awston",invoiceNumber:"02548965478",fromDate:"Active",toDate:"Adam Fernandez",batchNumber:"Delta",office:"Delta"},
+    {id:4,mco:"4578",memberName:"Jenifer",admissionID:"Awston",invoiceNumber:"02548965478",fromDate:"Active",toDate:"Adam Fernandez",batchNumber:"Delta",office:"Delta"},
+  
+  ];
   const ByVisitView = () => {
     return (
-      <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="th">Member Name</th>
-              <th className="th">Admission ID</th>
-              <th className="th">From date DD/MM/YYYY</th>
-              <th className="th">To date DD/MM/YYYY</th>
-              <th className="th">MCO</th>
-              <th className="th">Invoice Number</th>
-              <th className="th">Export Status</th>
-              <th className="th"> Billing Hold</th>
-            </tr>
-          </thead>
-          <tbody>
-            {jsonData.map((data, i) => (
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows4}
+        columns={columns4}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+   // ByVisitView
+   const columns4 = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'memberName', headerName: 'Member Name', width: 100 },
+    { field: 'admissionID', headerName: 'Admission ID', width: 140 },
+    { field: 'fromDate', headerName: 'From Date', width: 125 },
+    { field: 'toDate', headerName: 'To Date', width: 120 },
+    { field: 'mco', headerName: 'MCO', width: 125 },
+    { field: 'invoiceNumber', headerName: 'Invoice Number', width: 125 },
+    { field: 'exportStatus', headerName: 'Export Status', width: 125 },
+    { field: 'billingHold', headerName: 'Billing Hold', width: 125 },
+   
+  ];
+  
+  const rows4 = [
+    {id:1,memberName:"4578",admissionID:"Jenifer",fromDate:"Awston",toDate:"02548965478",mco:"Active",invoiceNumber:"Adam Fernandez",exportStatus:"Delta",billingHold:"Delta"},
+    {id:2,memberName:"4578",admissionID:"Jenifer",fromDate:"Awston",toDate:"02548965478",mco:"Active",invoiceNumber:"Adam Fernandez",exportStatus:"Delta",billingHold:"Delta"},
+    {id:3,memberName:"4578",admissionID:"Jenifer",fromDate:"Awston",toDate:"02548965478",mco:"Active",invoiceNumber:"Adam Fernandez",exportStatus:"Delta",billingHold:"Delta"},
+    {id:4,memberName:"4578",admissionID:"Jenifer",fromDate:"Awston",toDate:"02548965478",mco:"Active",invoiceNumber:"Adam Fernandez",exportStatus:"Delta",billingHold:"Delta"},
+     
+  ];
 
   return (
     <Wrapper>
@@ -659,7 +647,7 @@ function Visit() {
         </Card>
       </div>
 
-  <Footer/>
+      <Footer />
     </Wrapper>
   );
 }
@@ -855,15 +843,15 @@ const Wrapper = styled.section`
   }
   .searchIcon {
     position: absolute;
-  z-index: 999;
-  padding: 1%;
-  font-size: 25px;
-  color: white;
-  margin-left: 69.2%;
-  cursor: pointer;
-  background-color: grey;
-  border-radius: 500px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    z-index: 999;
+    padding: 1%;
+    font-size: 25px;
+    color: white;
+    margin-left: 69.2%;
+    cursor: pointer;
+    background-color: grey;
+    border-radius: 500px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   }
 
   //data display card end
@@ -872,7 +860,7 @@ const Wrapper = styled.section`
   .TaskBar {
     width: 20%;
     height: 650px;
-    background-color:#564873;
+    background-color: #564873;
     margin-top: 3%;
     margin-bottom: 10%;
     margin-left: 2%;
@@ -898,13 +886,12 @@ const Wrapper = styled.section`
 
   //UserInfo Ending
 
-
   //Header CSS FILES
   .Header {
     display: flex;
     flex-direction: row;
-    align-items:center;
-    justify-content:center;
+    align-items: center;
+    justify-content: center;
     margin-top: 0.5%;
     width: 100%;
     background-color: white;

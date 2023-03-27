@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
-//
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -18,7 +14,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 import Footer from "../../Footer";
-//
+import { DataGrid } from '@mui/x-data-grid';
 const Link = require("react-router-dom").Link;
 
 function Billing() {
@@ -572,8 +568,7 @@ function Billing() {
         return BillingReviewView();
       case 4:
         return NewInvoiceBatchView();
-      case 5:
-        return VisitLogView();
+      
 
       default:
         break;
@@ -615,170 +610,125 @@ function Billing() {
     },
   ];
 
-  const VisitLogView = () => {
-    return (
-      <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="th">First Name</th>
-              <th className="th">Last Name</th>
-              <th className="th">Care Giver Code</th>
-              <th className="th">Care Giver Name</th>
-              <th className="th">Team Member</th>
-              <th className="th">Assigment ID</th>
-              <th className="th">Admission ID</th>
-
-              <th className="th">Cordinator</th>
-
-              <th className="th">From Date</th>
-              <th className="th">Till Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {jsonData.map((data, i) => (
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  };
+ 
 
   const NewInvoiceBatchView = () => {
     return (
-      <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="th">MCO</th>
-              <th className="th">Service Giver</th>
-              <th className="th">Discipline</th>
-              <th className="th">From Date</th>
-              <th className="th">To Date</th>
-              <th className="th">Member Team</th>
-              <th className="th">Member</th>
-            </tr>
-          </thead>
-          <tbody>
-            {jsonData.map((data, i) => (
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      ///
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows3}
+        columns={columns3}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+  // NewInvoiceBatchView
+  const columns3 = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'mco', headerName: 'MCO', width: 100 },
+    { field: 'serviceGiverCode', headerName: 'Service Giver Code', width: 150 },
+    { field: 'discipline', headerName: 'Discipline', width: 150 },
+    { field: 'fromDate', headerName: 'From Date', width: 130 },
+    { field: 'toDate', headerName: 'To Date', width: 130 },
+    { field: 'memberTeam', headerName: 'Member Team', width: 150 },
+    { field: 'member', headerName: 'Member', width: 130 },
+   
+  ];
+  
+  const rows3 = [
+    {id:1,mco:"4578",serviceGiverCode:"Jenifer",discipline:"Awston",fromDate:"02548965478",toDate:"Active",memberTeam:"Adam Fernandez",member:"Delta"},
+    
+    {id:2,mco:"4578",serviceGiverCode:"Jenifer",discipline:"Awston",fromDate:"02548965478",toDate:"Active",memberTeam:"Adam Fernandez",member:"Delta"},
+    
+    {id:3,mco:"4578",serviceGiverCode:"Jenifer",discipline:"Awston",fromDate:"02548965478",toDate:"Active",memberTeam:"Adam Fernandez",member:"Delta"},
+    
+  ];
 
   const PreBillingReviewView = () => {
     return (
-      <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="th">Member Name</th>
-              <th className="th">Admission ID</th>
-              <th className="th">Care Giver Code</th>
-              <th className="th">Care Giver Name</th>
-              <th className="th">Member Team</th>
-              <th className="th">MCO</th>
-              <th className="th">Cordinator</th>
-              <th className="th">From Date</th>
-              <th className="th">To Date</th>
-              <th className="th">Problem</th>
-            </tr>
-          </thead>
-          <tbody>
-            {jsonData.map((data, i) => (
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      ///
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+  // PreBillingReviewView
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'AdmissionId', headerName: 'Admission ID', width: 100 },
+    { field: 'careGiverCode', headerName: 'CareGiver Code', width: 150 },
+    { field: 'careGiverName', headerName: 'CareGiver Name', width: 150 },
+    { field: 'memberTeam', headerName: 'Member Team', width: 100 },
+    { field: 'mco', headerName: 'MCO', width: 100 },
+    { field: 'cordinator', headerName: 'Cordinator', width: 100 },
+    { field: 'fromDate', headerName: 'From Date', width: 100 },
+    { field: 'toDate', headerName: 'To Date', width: 100 },
+    { field: 'problem', headerName: 'Problem', width: 100 },
+    
+  ];
+  
+  const rows = [
+    {id:1,AdmissionId:"4578",careGiverCode:"Jenifer",careGiverName:"Awston",memberTeam:"02548965478",mco:"Active",cordinator:"Adam Fernandez",fromDate:"Delta",toDate:"Homecare",problem:"51s"},
+    {id:2,AdmissionId:"4578",careGiverCode:"Jenifer",careGiverName:"Awston",memberTeam:"02548965478",mco:"Active",cordinator:"Adam Fernandez",fromDate:"Delta",toDate:"Homecare",problem:"51s"},
+    {id:3,AdmissionId:"4578",careGiverCode:"Jenifer",careGiverName:"Awston",memberTeam:"02548965478",mco:"Active",cordinator:"Adam Fernandez",fromDate:"Delta",toDate:"Homecare",problem:"51s"},
+    {id:4,AdmissionId:"4578",careGiverCode:"Jenifer",careGiverName:"Awston",memberTeam:"02548965478",mco:"Active",cordinator:"Adam Fernandez",fromDate:"Delta",toDate:"Homecare",problem:"51s"},
+    {id:5,AdmissionId:"4578",careGiverCode:"Jenifer",careGiverName:"Awston",memberTeam:"02548965478",mco:"Active",cordinator:"Adam Fernandez",fromDate:"Delta",toDate:"Homecare",problem:"51s"},
+    
+  ];
   const BillingReviewView = () => {
     return (
-      <div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th className="th">By Group MCO</th>
-              <th className="th">MCO</th>
-              <th className="th">Member Team</th>
-              <th className="th">Cordinator</th>
-              <th className="th">Hold Reason</th>
-              <th className="th">Member First Name</th>
-              <th className="th">Member Last Name</th>
-              <th className="th">Visit From Date</th>
-              <th className="th">Visit To Date</th>
-              <th className="th">Batch Number</th>
-              <th className="th">Invoice Number</th>
-              <th className="th">Invoice From Date</th>
-              <th className="th">Invoice Till Date</th>
-              <th className="th">Service Code</th>
-            </tr>
-          </thead>
-          <tbody>
-            {jsonData.map((data, i) => (
-              <tr>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-                <td className="td">Admission ID</td>
-                <td className="td">Care Giver IN</td>
-                <td className="td">Member ID</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      ///
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows2}
+        columns={columns2}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+      />
+    </div>
     );
   };
+  // BillingReviewView
+  const columns2 = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'byGroupMco', headerName: 'By Group(MCO)', width: 150 },
+    { field: 'mco', headerName: 'MCO', width: 100 },
+    { field: 'memberTeam', headerName: 'Member Team', width: 150 },
+    { field: 'cordinator', headerName: 'Cordinator', width: 100 },
+    { field: 'holdReason', headerName: 'Hold Reason', width: 100 },
+    { field: 'memberFirstName', headerName: 'Member First Name', width: 150 },
+    { field: 'memberLastName', headerName: 'Member Last Name', width: 150 },
+    { field: 'visitFromDate', headerName: 'Visit From Date', width: 130 },
+    { field: 'visitToDate', headerName: 'Visit To Date', width: 130 },
+    { field: 'batchNumber', headerName: 'Batch Number', width: 130 },
+    { field: 'invoiceNumber', headerName: 'Invoice Number', width: 130 },
+    { field: 'invoiceFromDate', headerName: 'Invoice From Date', width: 130 },
+    { field: 'invoiceToDate', headerName: 'Invoice To Date', width: 130 },
+    { field: 'serviceCode', headerName: 'Service Code', width: 130 },
+    
+  ];
+  
+  const rows2 = [
+    {id:1,byGroupMco:"4578",mco:"Awston",memberTeam:"02548965478",cordinator:"Active",
+    holdReason:"Adam Fernandez",memberFirstName:"Delta",memberLastName:"Homecare",visitFromDate:"51s",visitToDate:"51s",batchNumber:"13255",invoiceNumber:"123487",
+    invoiceFromDate:"10 Jul 2023",invoiceToDate:"10 Jul 2025",serviceCode:"125AS"},
+    {id:2,byGroupMco:"4578",mco:"Awston",memberTeam:"02548965478",cordinator:"Active",
+    holdReason:"Adam Fernandez",memberFirstName:"Delta",memberLastName:"Homecare",visitFromDate:"51s",visitToDate:"51s",batchNumber:"13255",invoiceNumber:"123487",
+    invoiceFromDate:"10 Jul 2023",invoiceToDate:"10 Jul 2025",serviceCode:"125AS"},
+    {id:3,byGroupMco:"4578",mco:"Awston",memberTeam:"02548965478",cordinator:"Active",
+    holdReason:"Adam Fernandez",memberFirstName:"Delta",memberLastName:"Homecare",visitFromDate:"51s",visitToDate:"51s",batchNumber:"13255",invoiceNumber:"123487",
+    invoiceFromDate:"10 Jul 2023",invoiceToDate:"10 Jul 2025",serviceCode:"125AS"},
+    
+    
+  ];
 
   return (
     <Wrapper>
