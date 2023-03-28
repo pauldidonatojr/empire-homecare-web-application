@@ -13,13 +13,18 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../../Footer";
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+
+ 
 
 import { DataGrid } from '@mui/x-data-grid';
 
 
 function CareGiver() {
 
-
+  const [checked1, setChecked1] = useState(false);
   const [age, setAge] = React.useState('');
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -174,9 +179,149 @@ function CareGiver() {
 
   const NewCareGiverView = () => {
     return (
-     <div>
-      New User Fields Here
-     </div>
+      <div className="Holder"  >
+      <div > 
+          <h1 className="Heading" >Demographics</h1>
+          <TextField className="input" label="First Name" variant="outlined" />
+          <TextField className="input" label="Last Name" variant="outlined" />
+          <TextField className="input" label="Login Name" variant="outlined" />
+          <TextField className="input" label="Email" variant="outlined" />
+          
+      <FormControl style={{marginTop:"2%",marginLeft:"2%",width:"20.5%"}}>
+        <InputLabel >Role</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl style={{marginTop:"2%",marginLeft:"3.5%",width:"20.5%"}}>
+        <InputLabel >Default Module Tab</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl style={{marginTop:"2%",marginLeft:"3.5%",width:"20.5%"}}>
+        <InputLabel >Status</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    
+          
+         
+      </div>
+      <div>
+      <h1 className="Heading">IP Restriction</h1>
+     
+      <div className="checkbox">
+      <FormGroup style={{marginLeft:"44%"}}>
+      <FormControlLabel control={<Checkbox defaultChecked />} label="IP Restricted" />
+    </FormGroup>
+       <div style={{marginLeft:"15%"}}>
+        <TextField className="input" label="IP1" variant="outlined" />
+        <TextField className="input" label="IP2" variant="outlined" />
+        <TextField className="input" label="IP3" variant="outlined" />
+        </div>
+    </div>
+    <div className="checkbox">
+      <FormGroup style={{marginLeft:"40%"}}>
+      <FormControlLabel control={<Checkbox defaultChecked />} label="Monday - Hourly Restricted" />
+    </FormGroup>
+       <div style={{marginLeft:"15%"}}>
+        <TextField className="input" label="IP1" variant="outlined" />
+        <TextField className="input" label="IP2" variant="outlined" />
+        <TextField className="input" label="IP3" variant="outlined" />
+        </div>
+    </div>
+    <div className="checkbox">
+      <FormGroup style={{marginLeft:"40%"}}>
+      <FormControlLabel control={<Checkbox defaultChecked />} label="Tuesday - Hourly Restricted" />
+    </FormGroup>
+       <div style={{marginLeft:"15%"}}>
+        <TextField className="input" label="IP1" variant="outlined" />
+        <TextField className="input" label="IP2" variant="outlined" />
+        <TextField className="input" label="IP3" variant="outlined" />
+        </div>
+    </div>
+    <div className="checkbox">
+      <FormGroup style={{marginLeft:"40%"}}>
+      <FormControlLabel control={<Checkbox defaultChecked />} label="Wednesday - Hourly Restricted" />
+    </FormGroup>
+       <div style={{marginLeft:"15%"}}>
+        <TextField className="input" label="IP1" variant="outlined" />
+        <TextField className="input" label="IP2" variant="outlined" />
+        <TextField className="input" label="IP3" variant="outlined" />
+        </div>
+    </div>
+    <div className="checkbox">
+      <FormGroup style={{marginLeft:"40%"}}>
+      <FormControlLabel control={<Checkbox defaultChecked />} label="Thursday - Hourly Restricted" />
+    </FormGroup>
+       <div style={{marginLeft:"15%"}}>
+        <TextField className="input" label="IP1" variant="outlined" />
+        <TextField className="input" label="IP2" variant="outlined" />
+        <TextField className="input" label="IP3" variant="outlined" />
+        </div>
+    </div>
+    <div className="checkbox">
+      <FormGroup style={{marginLeft:"40%"}}>
+      <FormControlLabel control={<Checkbox defaultChecked />} label="Friday - Hourly Restricted" />
+    </FormGroup>
+       <div style={{marginLeft:"15%"}}>
+        <TextField className="input" label="IP1" variant="outlined" />
+        <TextField className="input" label="IP2" variant="outlined" />
+        <TextField className="input" label="IP3" variant="outlined" />
+        </div>
+    </div>
+    <div className="checkbox">
+      <FormGroup style={{marginLeft:"40%"}}>
+      <FormControlLabel control={<Checkbox defaultChecked />} label="Saturday - Hourly Restricted" />
+    </FormGroup>
+       <div style={{marginLeft:"15%"}}>
+        <TextField className="input" label="IP1" variant="outlined" />
+        <TextField className="input" label="IP2" variant="outlined" />
+        <TextField className="input" label="IP3" variant="outlined" />
+        </div>
+    </div>
+    <div className="checkbox">
+      <FormGroup style={{marginLeft:"40%"}}>
+      <FormControlLabel control={<Checkbox defaultChecked />} label="Sunday - Hourly Restricted" />
+    </FormGroup>
+       <div style={{marginLeft:"15%"}}>
+        <TextField className="input" label="IP1" variant="outlined" />
+        <TextField className="input" label="IP2" variant="outlined" />
+        <TextField className="input" label="IP3" variant="outlined" />
+        </div>
+    </div>
+                
+      </div>
+     
+      <Button className="Signup" variant="contained">Add New User</Button>
+   </div>
+  
     );
   };
   const SearchCareGiverView = () => {
@@ -308,6 +453,46 @@ width: 100%;
     display:flex;
     flex-direction:row;
 }
+//
+.checkbox{
+  
+  margin-top:0.5%;
+}
+.Heading{
+  text-align:center;
+  color:#14140F;
+
+}
+.input{
+  margin:2%;
+  font-weight:bold;
+}
+.Signup{
+  margin-left:42%;
+  margin-top:1%;
+  width:180px;
+  height:50px;
+  margin-bottom:2%;
+  background-color:#F26E22;
+color:white;
+shadowColor: "#000",
+shadowOffset: {
+	width: 0,
+	height: 6,
+},
+shadowOpacity: 0.39,
+shadowRadius: 8.30,
+
+elevation: 13,
+}
+.Holder{
+  height:100%;
+  width:100%;
+  overflow: auto;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+}
+
 //
 
 .table {

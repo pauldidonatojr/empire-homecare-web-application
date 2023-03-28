@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
@@ -18,6 +14,9 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 import Footer from "../../Footer";
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 import { DataGrid } from '@mui/x-data-grid';
 
@@ -297,8 +296,17 @@ function Report() {
   ];
   const ChangePasswordView = () => {
     return (
-     <div>
-      Change Password Fields Here
+      <div className="Holder"  >
+        <div className="InputHolder"> 
+            <h1 className="Heading" >Change Password</h1>
+            <TextField className="input" label="Current Password" variant="outlined" />
+            <TextField className="input" label="New Password" variant="outlined" />
+            <TextField className="input" label="Repeat New Password" variant="outlined" />
+
+        </div>
+      
+        
+        <Button className="Signup" variant="contained">Apply Changes</Button>
      </div>
     );
   };
@@ -331,9 +339,108 @@ function Report() {
   ];
   const ProviderProfileView = () => {
     return (
-     <div>
-      Provider Profile Views Here
-     </div>
+      <div className="Holder"  >
+      <div > 
+          <h1 className="Heading" >General</h1>
+          <TextField className="input1" label="Vendor Name" variant="outlined" />
+          <TextField className="input1" label="Vendor Intials" variant="outlined" />
+          <TextField className="input1" label="Password Expiry (Days)" variant="outlined" />
+          <TextField className="input1" label="Service Zip Code" variant="outlined" />
+          <TextField className="input1" label="Mobile Offline Sync Period" variant="outlined" />
+          <FormControl style={{marginTop:"2%",marginLeft:"2%",width:"20.5%"}}>
+        <InputLabel >Select Language</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl style={{marginTop:"2%",marginLeft:"3.8%",width:"20.5%"}}>
+        <InputLabel >Cordinator</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+      <div className="checkitem">
+      <FormControlLabel  control={<Checkbox defaultChecked />} label="Automatic Visit Creation Bases on EVV Confirmation" />
+      <FormControlLabel  control={<Checkbox defaultChecked />} label="Mobile GPS Visit Verfication" />
+      <FormControlLabel  control={<Checkbox defaultChecked />} label="Allow Single Clock In/Out for Consective Shift (Mobile App)" />
+      </div>
+        
+         
+      </div>
+      <div>
+      <h1 className="Heading">Call Exception Notification</h1>
+     
+      <div className="checkbox">
+      <FormGroup style={{marginLeft:"40%"}}>
+      <FormControlLabel control={<Checkbox defaultChecked />} label="Weekday" />
+    </FormGroup>
+       <div style={{marginLeft:"15%"}}>
+        <TextField className="input1" label="From" variant="outlined" />
+        <TextField className="input1" label="To" variant="outlined" />
+        <TextField className="input1" label="Frequency(min)" variant="outlined" />
+        </div>
+    </div>
+    <div className="checkbox">
+      <FormGroup style={{marginLeft:"40%"}}>
+      <FormControlLabel control={<Checkbox defaultChecked />} label="Saturday" />
+    </FormGroup>
+       <div style={{marginLeft:"15%"}}>
+        <TextField className="input1" label="From" variant="outlined" />
+        <TextField className="input1" label="To" variant="outlined" />
+        <TextField className="input1" label="Frequency(min)" variant="outlined" />
+        </div>
+    </div>
+    <div className="checkbox">
+      <FormGroup style={{marginLeft:"40%"}}>
+      <FormControlLabel control={<Checkbox defaultChecked />} label="Sunday" />
+    </FormGroup>
+       <div style={{marginLeft:"15%"}}>
+        <TextField className="input1" label="From" variant="outlined" />
+        <TextField className="input1" label="To" variant="outlined" />
+        <TextField className="input1" label="Frequency(min)" variant="outlined" />
+        </div>
+    </div>
+    
+    <TextField className="input1" label="Alert Email" variant="outlined" />
+   
+     
+      </div>
+      <div>
+      <h1 className="Heading">Address</h1>
+      <TextField className="input1" label="Street 1" variant="outlined" />
+      <TextField className="input1" label="Street 2" variant="outlined" />
+      <TextField className="input1" label="City" variant="outlined" />
+      <TextField className="input1" label="State" variant="outlined" />
+      <TextField className="input1" label="Zip Code" variant="outlined" />
+      <TextField className="input1" label="Home Phone" variant="outlined" />
+      <TextField className="input1" label="Phone 1" variant="outlined" />
+      <TextField className="input1" label="Phone 2" variant="outlined" />
+      <TextField className="input1" label="Evening Phone" variant="outlined" />
+      <TextField className="input1" label="Weekend Phone" variant="outlined" />
+     
+      <TextField className="input1" label="Audit Call In (%)" variant="outlined" />
+      <TextField className="input1" label="Audit Call Out (%)" variant="outlined" />
+     
+      </div>
+    
+      <Button className="Signup" variant="contained">Sign Up</Button>
+   </div>
     );
   };
   
@@ -507,6 +614,60 @@ const Wrapper = styled.section`
     display: flex;
     flex-direction: row;
   }
+
+  //
+  .checkitem{
+    
+    display: flex;
+    align-items: center;
+  }
+.Heading{
+  text-align:center;
+  color:#14140F;
+
+}
+
+.input{
+  margin:2%;
+  font-weight:bold;
+  width:30%;
+
+}
+.input1{
+  margin:2%;
+    font-weight:bold;}
+.Signup{
+  margin-left:42%;
+  width:180px;
+  height:50px;
+  margin-bottom:2%;
+  background-color:#F26E22;
+color:white;
+shadowColor: "#000",
+shadowOffset: {
+	width: 0,
+	height: 6,
+},
+shadowOpacity: 0.39,
+shadowRadius: 8.30,
+
+elevation: 13,
+}
+.Holder{
+  height:100%;
+  width:100%;
+  overflow: auto;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+}
+
+.InputHolder{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-top:10%;
+}
+//
   .ListItem {
     margin-top: 1%;
     margin-left: 2%;

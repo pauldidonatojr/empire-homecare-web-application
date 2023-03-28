@@ -165,8 +165,31 @@ function CareGiver() {
 
   const NewCordinatorView = () => {
     return (
-     <div>
-      New Cordinator Fields Here
+      <div className="Holder"  >
+        <div className="InputHolder"> 
+            <h1 className="Heading" >Add New Cordinator</h1>
+            <TextField className="input" label="Cordinator Number" variant="outlined" />
+            <TextField className="input" label="Cordinator Name" variant="outlined" />
+         
+         <FormControl style={{marginTop:"2%",marginLeft:"",width:"30%"}}>
+        <InputLabel >Status</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Status"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+
+        </div>
+      
+        
+        <Button className="Signup" variant="contained">Add</Button>
      </div>
     );
   };
@@ -301,6 +324,50 @@ width: 100%;
 .CardHolder{
     display:flex;
     flex-direction:row;
+}
+//
+//
+.Heading{
+  text-align:center;
+  color:#14140F;
+
+}
+.input{
+  margin:2%;
+  font-weight:bold;
+  width:30%;
+
+}
+.Signup{
+  margin-left:42%;
+  margin-top:2%;
+  width:180px;
+  height:50px;
+  margin-bottom:2%;
+  background-color:#F26E22;
+color:white;
+shadowColor: "#000",
+shadowOffset: {
+	width: 0,
+	height: 6,
+},
+shadowOpacity: 0.39,
+shadowRadius: 8.30,
+
+elevation: 13,
+}
+.Holder{
+  height:100%;
+  width:100%;
+  overflow: auto;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+}
+.InputHolder{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-top:10%;
 }
 //
 
