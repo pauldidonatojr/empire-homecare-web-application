@@ -57,15 +57,16 @@ const list = (anchor) => (
     role="presentation"
     onClick={toggleDrawer(anchor, false)}
     onKeyDown={toggleDrawer(anchor, false)}
+    
   >
-    <List>
-    <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
+    
+    <div style={{backgroundColor:"#2E0F59",display:"flex",flexDirection:"column",alignItems:"center",height:"680px"}}>
     
     <p
            className="Files"
             style={{
               fontSize: "20px",
-              color: "black",
+              color: "#F2B90F",
               fontWeight: "bold",
             }}
           >
@@ -73,15 +74,15 @@ const list = (anchor) => (
           </p>
           <hr className="line" style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
         
-     <h2 className="Item">Members</h2>
-     <h2 className="Item">Care Givers</h2>
-     <h2 className="Item"> Visits</h2>
-     <h2 className="Item">Action</h2>
-     <h2 className="Item">Billings</h2>
-     <h2 className="Item">Report</h2>
-     <h2 className="Item">Admin</h2>
+     <h2 style={{color:"#F2B90F"}}>Members</h2>
+     <h2 style={{color:"#F2B90F"}}>Care Givers</h2>
+     <h2 style={{color:"#F2B90F"}}> Visits</h2>
+     <h2 style={{color:"#F2B90F"}}>Action</h2>
+     <h2 style={{color:"#F2B90F"}} >Billings</h2>
+     <h2 style={{color:"#F2B90F"}} >Report</h2>
+     <h2 style={{color:"#F2B90F"}}>Admin</h2>
      </div>
-    </List>
+    
     
    
   </Box>
@@ -600,12 +601,12 @@ const Wrapper = styled.section`
   .NotificationHolder {
     padding: 15px;
     display: flex;
-    flex-direction: row-reverse;
+    
   }
   .LinkNotification {
-    background-color: #0a3a40;
-    color: white;
-    padding: 15px;
+    background-color:#2E0F59;
+    color: #F2B90F;
+    padding: 20px;
     font-weight: bold;
     margin-left: 2%;
     margin-right: 6%;
@@ -616,9 +617,9 @@ const Wrapper = styled.section`
     background-color: #f26e22;
   }
   .SystemNotification {
-    background-color: #0a3a40;
-    color: white;
-    padding: 15px;
+    background-color:#2E0F59;
+    color: #F2B90F;
+    padding: 19px;
     font-weight: bold;
     border-radius: 10px;
   }
@@ -851,6 +852,7 @@ const Wrapper = styled.section`
       padding:5px;
       height:10%;
       font-size:12px;
+      margin-left:06%;
     }
     .SystemNotification{
       padding:5px;
@@ -874,14 +876,14 @@ const Wrapper = styled.section`
       margin-right:20%;
       font-size:50px;
       display:inline;
-      color:white;
-      background-color:#97A6A0;
+      color:#F2B90F;
+      background-color:#2E0F59;
       border-radius:10px;
       
     }
     .LogoutIcon{
       font-size:40px;
-      color:#97A6A0;
+      color:#2E0F59;
       margin-left:20%;
       display:inline;
 
@@ -911,9 +913,8 @@ const Wrapper = styled.section`
     .searchButton {
       margin-top: 5%;
       margin-bottom: 2%;
-
-     
     }
+    
     
   }
 `;
