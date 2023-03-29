@@ -131,12 +131,12 @@ const list = (anchor) => (
       
       <div className="overlay">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
+        <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
         <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Members</p>
         <div className="searchFieldsDiv">
-        <Grid container spacing={3}>
+        
           
-        <Grid item xs="3">
+        <Grid className="griditem">
           <TextField
            
             id="outlined-basic"
@@ -144,7 +144,7 @@ const list = (anchor) => (
             variant="outlined"
           />
         </Grid>
-        <Grid item xs="3">
+        <Grid className="griditem">
         <TextField
             id="outlined-basic"
             label="Admission ID"
@@ -152,7 +152,7 @@ const list = (anchor) => (
           />
         </Grid>
           
-        <Grid item xs="3">
+        <Grid className="griditem">
         
         <TextField
            
@@ -161,7 +161,7 @@ const list = (anchor) => (
             variant="outlined"
           />
         </Grid>
-        <Grid item xs="3">
+        <Grid className="griditem">
         
         <TextField
             id="outlined-basic"
@@ -171,7 +171,7 @@ const list = (anchor) => (
           
         </Grid>
 
-        <Grid item xs="3">
+        <Grid className="griditem">
         
         <TextField
            
@@ -183,7 +183,7 @@ const list = (anchor) => (
         </Grid>
           
 
-        <Grid item xs="2.87">
+        <Grid className="griditem2">
         
         <Box >
       <FormControl fullWidth>
@@ -202,7 +202,7 @@ const list = (anchor) => (
       </FormControl>
     </Box>  
         </Grid>
-        <Grid item xs="2.87" style={{marginLeft:"1%"}}>
+        <Grid className="griditem2" >
         
         <Box>
       <FormControl fullWidth>
@@ -222,7 +222,7 @@ const list = (anchor) => (
       </FormControl>
     </Box>
          </Grid>
-         <Grid item xs="2.87" style={{marginLeft:"1%"}}>
+         <Grid className="griditem2">
         
         <Box >
       <FormControl fullWidth>
@@ -242,7 +242,7 @@ const list = (anchor) => (
       </FormControl>
     </Box>
          </Grid>
-         <Grid item xs="2.87">
+         <Grid className="griditem2">
         
         <Box>
       <FormControl fullWidth>
@@ -262,7 +262,7 @@ const list = (anchor) => (
       </FormControl>
     </Box>
          </Grid>
-         <Grid item xs="3" style={{marginLeft:"1%"}}>
+         <Grid className="griditem2">
          <TextField
            
             id="outlined-basic"
@@ -270,7 +270,7 @@ const list = (anchor) => (
             variant="outlined"
           />
          </Grid>
-    </Grid>
+    
         </div>
         <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay}>
           Search
@@ -536,6 +536,12 @@ const Wrapper = styled.section`
   }
 
   //
+  .griditem{
+    width:100%;
+  }
+  .griditem2{
+    width:68%;
+  }
   .menuIcon{
     display:none;
   }
@@ -639,10 +645,12 @@ const Wrapper = styled.section`
     margin-top: 2%;
   }
   .searchFieldsDiv {
-    display: flex; 
-    margin-top:2.5%;
-    width:85%;
-    margin-left:10%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* create 3 equal columns */
+    grid-gap: 10px; /* add some space between the columns */
+    margin-top: 2.5%;
+    width: 85%;
+    margin-left: 10%;
   }
 
   .searchButton {
@@ -882,5 +890,30 @@ const Wrapper = styled.section`
       margin-left: 90.2%;
      
     }
+    
+    .crossIcon{
+      margin-left:90%;
+    }
+    .griditem{
+      width:100%;
+    }
+    .griditem2{
+      width:92%;
+    }
+    .searchFieldsDiv {
+      grid-template-columns: repeat(1, 1fr); /* create 3 equal columns */
+    }
+    .overlay {
+    width: 75%;
+    height: 80%;
+    overflow:auto;
+    }
+    .searchButton {
+      margin-top: 5%;
+      margin-bottom: 2%;
+
+     
+    }
+    
   }
 `;
