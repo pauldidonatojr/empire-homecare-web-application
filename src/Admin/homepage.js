@@ -74,13 +74,13 @@ const list = (anchor) => (
           </p>
           <hr className="line" style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
         
-     <h2 style={{color:"#F2B90F"}}>Members</h2>
-     <h2 style={{color:"#F2B90F"}}>Care Givers</h2>
-     <h2 style={{color:"#F2B90F"}}> Visits</h2>
-     <h2 style={{color:"#F2B90F"}}>Action</h2>
-     <h2 style={{color:"#F2B90F"}} >Billings</h2>
-     <h2 style={{color:"#F2B90F"}} >Report</h2>
-     <h2 style={{color:"#F2B90F"}}>Admin</h2>
+     <h3 style={{color:"#F2B90F"}}>Members</h3>
+     <h3 style={{color:"#F2B90F"}}>Care Givers</h3>
+     <h3 style={{color:"#F2B90F"}}> Visits</h3>
+     <h3 style={{color:"#F2B90F"}}>Action</h3>
+     <h3 style={{color:"#F2B90F"}} >Billings</h3>
+     <h3 style={{color:"#F2B90F"}} >Report</h3>
+     <h3 style={{color:"#F2B90F"}}>Admin</h3>
      </div>
     
     
@@ -851,13 +851,30 @@ const Wrapper = styled.section`
     .LinkNotification{
       padding:5px;
       height:10%;
-      font-size:12px;
-      margin-left:06%;
+      font-size:14px;
+      shadowColor: "#000",
+shadowOffset: {
+	width: 0,
+	height: 7,
+},
+shadowOpacity: 0.41,
+shadowRadius: 9.11,
+
+elevation: 14,
     }
     .SystemNotification{
       padding:5px;
       height:10%;
-      font-size:12px;
+      font-size:13.5px;
+      shadowColor: "#000",
+shadowOffset: {
+	width: 0,
+	height: 7,
+},
+shadowOpacity: 0.41,
+shadowRadius: 9.11,
+
+elevation: 14,
       
     }
     .LogOutbutton {
@@ -876,14 +893,14 @@ const Wrapper = styled.section`
       margin-right:20%;
       font-size:50px;
       display:inline;
-      color:#F2B90F;
-      background-color:#2E0F59;
+      color:white;
+      background-color:grey;
       border-radius:10px;
       
     }
     .LogoutIcon{
       font-size:40px;
-      color:#2E0F59;
+      color:grey;
       margin-left:20%;
       display:inline;
 
