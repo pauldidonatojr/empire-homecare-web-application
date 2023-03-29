@@ -13,27 +13,27 @@ function Footer(){
           <img src="/LogoBK.png"></img>
         </div>
         <div className="company">
-          <h6 style={{ color: "grey" }}>COMPANY</h6>
-          <h5 style={{ color: "white" }}>About Us</h5>
-          <h5 style={{ color: "white" }}>Contact Us</h5>
-          <h5 style={{ color: "white" }}>Careers</h5>
-          <h5 style={{ color: "white" }}>Press</h5>
+          <h6 className="headres" style={{ color: "grey" }}>COMPANY</h6>
+          <h5 className="aboutus" style={{ color: "white" }}>About Us</h5>
+          <h5 className="contact" style={{ color: "white" }}>Contact Us</h5>
+          <h5 className="carreer" style={{ color: "white" }}>Careers</h5>
+          <h5 className="press" style={{ color: "white" }}>Press</h5>
         </div>
         <div className="socials">
-          <h6 style={{ color: "grey" }}>SOCIAL MEDIA</h6>
+          <h6 className="headres" style={{ color: "grey" }}>SOCIAL MEDIA</h6>
          
           
-          <h5 style={{color: "white",textAlign:"center"}}>
-          <FacebookIcon style={{fontSize:"30px"}} />
+          <h5 className="facebook" style={{color: "white",textAlign:"center"}}>
+          <FacebookIcon  style={{fontSize:"30px"}} />
            
           </h5>
        
-          <h5 style={{ color: "white",textAlign:"center" }}>
-            <TwitterIcon style={{fontSize:"30px"}} />
+          <h5 className="res2" style={{ color: "white",textAlign:"center" }}>
+            <TwitterIcon className="res" style={{fontSize:"30px"}} />
            
           </h5>
-          <h5 style={{ color: "white",textAlign:"center" }}>
-            <LinkedInIcon style={{fontSize:"30px"}} />
+          <h5 className="res2" style={{ color: "white",textAlign:"center" }}>
+            <LinkedInIcon className="res" style={{fontSize:"30px"}} />
            
           </h5>
         </div>
@@ -69,4 +69,53 @@ const Wrapper = styled.section`
   margin-left: 15%;
 }
 //Footer CSS Files end
+@media only screen and (max-width: 600px) {
+  .LogoHolder {
+    display:none;
+  }
+  .footer{
+    display:grid;
+    height: 100%;
+  }
+  .company {
+    margin-left: 5%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .socials {
+    margin-top:0;
+    margin-left: 5%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .res{
+    margin-left: 2%;
+  }
+  .res2{
+    margin-left: 20%;
+    
+  }
+  .headres{
+    display:none;
+  }
+  .aboutus{
+    font-size:17px;
+  }
+  .contact{
+    font-size:17px;
+    margin-left:5%;
+  }
+  .carreer{
+    font-size:17px;
+    margin-left:5%;
+    
+  }
+  .press{
+    font-size:17px;
+    margin-left:5%;
+
+  }
+}
 `

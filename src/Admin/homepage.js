@@ -1,12 +1,8 @@
 import React, {useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
@@ -19,6 +15,14 @@ import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../Footer";
 import { DataGrid } from '@mui/x-data-grid';
+//
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import MenuIcon from '@mui/icons-material/Menu';
+import LogoutIcon from '@mui/icons-material/Logout';
+
+
+//
 
 
 function Homepage() {
@@ -34,7 +38,55 @@ function Homepage() {
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const navigate = useNavigate();
+//
+const [state, setState] = React.useState({
+  left: false,
+});
 
+const toggleDrawer = (anchor, open) => (event) => {
+  if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    return;
+  }
+
+  setState({ ...state, [anchor]: open });
+};
+
+const list = (anchor) => (
+  <Box
+    sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+    role="presentation"
+    onClick={toggleDrawer(anchor, false)}
+    onKeyDown={toggleDrawer(anchor, false)}
+  >
+    <List>
+    <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
+    
+    <p
+           className="Files"
+            style={{
+              fontSize: "20px",
+              color: "black",
+              fontWeight: "bold",
+            }}
+          >
+            Files
+          </p>
+          <hr className="line" style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
+        
+     <h2 className="Item">Members</h2>
+     <h2 className="Item">Care Givers</h2>
+     <h2 className="Item"> Visits</h2>
+     <h2 className="Item">Action</h2>
+     <h2 className="Item">Billings</h2>
+     <h2 className="Item">Report</h2>
+     <h2 className="Item">Admin</h2>
+     </div>
+    </List>
+    
+   
+  </Box>
+);
+//
 
  function CareGiverPressed (){
 
@@ -322,22 +374,43 @@ function Homepage() {
 
   return (
     <Wrapper>
+     
       <div className="Header">
+      
+      <MenuIcon
+    className="menuIcon"
+    onClick={toggleDrawer('left', true)}
+     anchor={'left'}
+     open={state['left']}
+     onClose={toggleDrawer('left', false)}>
+      
+    </MenuIcon>
         <img className="headerImage" src="./EmpireHomeCareLogo.png" />
-        <button className="button">Page 1</button>
-        <button className="button">Page 2</button>
-        <button className="button"> Page 3</button>
-        <button className="button"> Page 4</button>
         <Button className="LogOutbutton" variant="outlined">
           Log Out
         </Button>
+        <LogoutIcon className="LogoutIcon"></LogoutIcon>
       </div>
 
       <div className="NotificationHolder">
         <Button className="LinkNotification"> Link Notification </Button>
         <Button className="SystemNotification"> System Notification </Button>
       </div>
-
+      <div style={{display:"none"}}>
+{['left'].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+          <Drawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)}
+          >
+            {list(anchor)}
+          </Drawer>
+        </React.Fragment>
+      ))}
+      </div>
+   
       <div className="CardHolder">
         <Card className="TaskBar">
           <div className="UserInfo">
@@ -359,6 +432,7 @@ function Homepage() {
           </div>
           <hr />
           <p
+           className="Files"
             style={{
               marginLeft: "45%",
               fontSize: "20px",
@@ -368,7 +442,7 @@ function Homepage() {
           >
             Files
           </p>
-          <hr style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
+          <hr className="line" style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
           <div className="buttonHolder">
             <Button
               className="navigationButton"
@@ -462,6 +536,9 @@ const Wrapper = styled.section`
   }
 
   //
+  .menuIcon{
+    display:none;
+  }
 
   .table {
     border-collapse: collapse;
@@ -684,6 +761,7 @@ const Wrapper = styled.section`
     width: 7%;
     height: 1%;
     border-radius: 15px;
+    margin-right:55%;
   }
   .headerImage:hover {
     animation: wave 1s infinite;
@@ -727,4 +805,82 @@ const Wrapper = styled.section`
     color: black;
   }
   //Header CSS FILES ENDING
+  .LogoutIcon{
+    display:none;
+  }
+  @media only screen and (max-width: 600px) {
+    
+    .TaskBar {
+      display:none;
+     
+    }
+    .UserInfo{
+      display:none;
+    }
+    .hr{
+      display:none;
+    }
+    .Files{
+      display:none;
+    }
+    .CardHolder {
+      flex-direction: column;
+      margin-top: 0%;
+    }
+    .buttonHolder {
+      flex-direction: row;
+    }
+    .dataDisplay {
+      height: 668px;
+      width: 97%;
+      margin-top: 0%;
+      margin-left:0%;
+    }
+    .line{
+      display:none;
+    }
+    .LinkNotification{
+      padding:5px;
+      height:10%;
+      font-size:12px;
+    }
+    .SystemNotification{
+      padding:5px;
+      height:10%;
+      font-size:12px;
+      
+    }
+    .LogOutbutton {
+      width: 20%;
+      height: 50%;
+      display:none;
+    
+    }
+    .headerImage {
+      width: 30%;
+      height: 15%;
+      border-radius: 15px;
+      margin-right:0;
+    }
+    .menuIcon{
+      margin-right:20%;
+      font-size:50px;
+      display:inline;
+      color:white;
+      background-color:#97A6A0;
+      border-radius:10px;
+      
+    }
+    .LogoutIcon{
+      font-size:40px;
+      color:#97A6A0;
+      margin-left:20%;
+      display:inline;
+
+    }
+    .searchIcon {
+      margin-left: 90.2%;
+     
+    }
+  }
 `;
