@@ -74,13 +74,13 @@ const list = (anchor) => (
           </p>
           <hr className="line" style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
         
-     <h3 style={{color:"#F2B90F"}}>Members</h3>
-     <h3 style={{color:"#F2B90F"}}>Care Givers</h3>
-     <h3 style={{color:"#F2B90F"}}> Visits</h3>
-     <h3 style={{color:"#F2B90F"}}>Action</h3>
-     <h3 style={{color:"#F2B90F"}} >Billings</h3>
-     <h3 style={{color:"#F2B90F"}} >Report</h3>
-     <h3 style={{color:"#F2B90F"}}>Admin</h3>
+     <h3  onClick={MemberPressed} style={{color:"#F2B90F"}}>Members</h3>
+     <h3  onClick={CareGiverPressed} style={{color:"#F2B90F"}}>Care Givers</h3>
+     <h3 onClick={VisitPressed}  style={{color:"#F2B90F"}}> Visits</h3>
+     <h3 onClick={ActionPressed} style={{color:"#F2B90F"}}>Action</h3>
+     <h3 onClick={BillingPressed} style={{color:"#F2B90F"}} >Billings</h3>
+     <h3 onClick={ReportPressed} style={{color:"#F2B90F"}} >Report</h3>
+     <h3 onClick={AdminPressed} style={{color:"#F2B90F"}}>Admin</h3>
      </div>
     
     

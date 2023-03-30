@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
@@ -19,6 +15,9 @@ import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../../Footer";
 import { DataGrid } from '@mui/x-data-grid';
+import Drawer from '@mui/material/Drawer';
+import MenuIcon from '@mui/icons-material/Menu';
+import LogoutIcon from '@mui/icons-material/Logout';
 //
 const Link = require("react-router-dom").Link;
 
@@ -114,12 +113,12 @@ const RejectedCallsPressed = () => {
     return (
       <div className="overlay">
       <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-      <h1 style={{ marginLeft: "41%" }}>Set Filter from here !</h1>
+      <h1 style={{ textAlign:"center"}}>Set Filter from here !</h1>
       <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Call Maintaince</p>
       <div className="searchFieldsDiv">
-      <Grid container spacing={3}>
+      
         
-      <Grid item xs="3">
+      <Grid className="griditem">
         <TextField
          
           id="outlined-basic"
@@ -127,7 +126,7 @@ const RejectedCallsPressed = () => {
           variant="outlined"
         />
       </Grid>
-      <Grid item xs="3">
+      <Grid className="griditem">
       <TextField
           id="outlined-basic"
           label="Care Giver Last Name"
@@ -135,7 +134,7 @@ const RejectedCallsPressed = () => {
         />
       </Grid>
         
-      <Grid item xs="3">
+      <Grid className="griditem">
       
       <TextField
          
@@ -144,7 +143,7 @@ const RejectedCallsPressed = () => {
           variant="outlined"
         />
       </Grid>
-      <Grid item xs="3">
+      <Grid className="griditem">
       
       <TextField
           id="outlined-basic"
@@ -154,7 +153,7 @@ const RejectedCallsPressed = () => {
         
       </Grid>
 
-      <Grid item xs="3">
+      <Grid className="griditem">
       
       <TextField
          
@@ -164,7 +163,7 @@ const RejectedCallsPressed = () => {
         />
         
       </Grid>
-      <Grid item xs="3">
+      <Grid className="griditem">
       
       <TextField
          
@@ -174,7 +173,7 @@ const RejectedCallsPressed = () => {
         />
         
       </Grid>
-      <Grid item xs="3">
+      <Grid className="griditem">
       
       <TextField
          
@@ -186,7 +185,7 @@ const RejectedCallsPressed = () => {
       </Grid>
         
 
-      <Grid item xs="2.87">
+      <Grid className="griditem2">
       
       <Box >
     <FormControl fullWidth>
@@ -205,7 +204,7 @@ const RejectedCallsPressed = () => {
     </FormControl>
   </Box>  
       </Grid>
-      <Grid item xs="2.87" style={{marginLeft:"1%"}}>
+      <Grid className="griditem2">
       
       <Box>
     <FormControl fullWidth>
@@ -225,7 +224,7 @@ const RejectedCallsPressed = () => {
     </FormControl>
   </Box>
        </Grid>
-       <Grid item xs="2.87">
+       <Grid className="griditem2">
       
       <Box >
     <FormControl fullWidth>
@@ -246,7 +245,7 @@ const RejectedCallsPressed = () => {
   </Box>
        </Grid>
 
-       <Grid item xs="2.87">
+       <Grid className="griditem2">
       
       <Box >
     <FormControl fullWidth>
@@ -266,7 +265,7 @@ const RejectedCallsPressed = () => {
     </FormControl>
   </Box>
        </Grid>
-       <Grid item xs="2.87">
+       <Grid className="griditem2">
       
       <Box >
     <FormControl fullWidth>
@@ -287,7 +286,7 @@ const RejectedCallsPressed = () => {
   </Box>
        </Grid>
 
-       <Grid item xs="3">
+       <Grid className="griditem2">
       
       <TextField
          
@@ -297,7 +296,7 @@ const RejectedCallsPressed = () => {
         />
         
       </Grid>
-      <Grid item xs="3">
+      <Grid className="griditem2">
       
       <TextField
          
@@ -308,7 +307,6 @@ const RejectedCallsPressed = () => {
         
       </Grid>
        
-  </Grid>
       </div>
       <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay}>
         Search
@@ -322,12 +320,12 @@ function Overlay2() {
   return (
     <div className="overlay2">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay2} />
-    <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
+    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Missed In</p>
     <div className="searchFieldsDiv">
-    <Grid container spacing={3}>
+    
       
-    <Grid item xs="3">
+    <Grid  className="griditem">
       <TextField
        
         id="outlined-basic"
@@ -335,7 +333,7 @@ function Overlay2() {
         variant="outlined"
       />
     </Grid>
-    <Grid item xs="3">
+    <Grid className="griditem">
     <TextField
         id="outlined-basic"
         label="Admission ID"
@@ -343,7 +341,7 @@ function Overlay2() {
       />
     </Grid>
       
-    <Grid item xs="3">
+    <Grid className="griditem">
     
     <TextField
        
@@ -354,7 +352,7 @@ function Overlay2() {
     </Grid>
       
 
-    <Grid item xs="2.87">
+    <Grid className="griditem2">
     
     <Box >
   <FormControl fullWidth>
@@ -373,7 +371,7 @@ function Overlay2() {
   </FormControl>
 </Box>  
     </Grid>
-    <Grid item xs="2.87" style={{marginLeft:"1%"}}>
+    <Grid className="griditem2">
     
     <Box>
   <FormControl fullWidth>
@@ -393,7 +391,7 @@ function Overlay2() {
   </FormControl>
 </Box>
      </Grid>
-     <Grid item xs="2.87">
+     <Grid className="griditem2">
     
     <Box >
   <FormControl fullWidth>
@@ -413,7 +411,7 @@ function Overlay2() {
   </FormControl>
 </Box>
      </Grid>
-     <Grid item xs="3">
+     <Grid className="griditem">
     
     <TextField
        
@@ -422,7 +420,7 @@ function Overlay2() {
         variant="outlined"
       />
     </Grid>
-</Grid>
+
     </div>
     <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay2}>
       Search
@@ -436,12 +434,12 @@ function Overlay3() {
   return (
     <div className="overlay3">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay3} />
-    <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
+    <h1 style={{ textAlign:"center"}}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Missed Out</p>
     <div className="searchFieldsDiv">
-    <Grid container spacing={3}>
+    
       
-    <Grid item xs="3">
+    <Grid className="griditem">
       <TextField
        
         id="outlined-basic"
@@ -449,7 +447,7 @@ function Overlay3() {
         variant="outlined"
       />
     </Grid>
-    <Grid item xs="3">
+    <Grid className="griditem">
     <TextField
         id="outlined-basic"
         label="Admission ID"
@@ -457,7 +455,7 @@ function Overlay3() {
       />
     </Grid>
       
-    <Grid item xs="3">
+    <Grid className="griditem">
     
     <TextField
        
@@ -468,7 +466,7 @@ function Overlay3() {
     </Grid>
   
 
-    <Grid item xs="2.87">
+    <Grid className="griditem2">
     
     <Box >
   <FormControl fullWidth>
@@ -487,7 +485,7 @@ function Overlay3() {
   </FormControl>
 </Box>  
     </Grid>
-    <Grid item xs="2.87" style={{marginLeft:"1%"}}>
+    <Grid className="griditem2">
     
     <Box>
   <FormControl fullWidth>
@@ -507,7 +505,7 @@ function Overlay3() {
   </FormControl>
 </Box>
      </Grid>
-     <Grid item xs="2.87">
+     <Grid className="griditem2">
     
     <Box >
   <FormControl fullWidth>
@@ -528,7 +526,7 @@ function Overlay3() {
 </Box>
      </Grid>
 
-     <Grid item xs="3">
+     <Grid className="griditem">
     
     <TextField
        
@@ -539,7 +537,7 @@ function Overlay3() {
     </Grid>
   
      
-</Grid>
+
     </div>
     <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay3}>
       Search
@@ -552,12 +550,12 @@ function Overlay4() {
   return (
     <div className="overlay4">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay4} />
-    <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
+    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Missed Call</p>
     <div className="searchFieldsDiv">
-    <Grid container spacing={3}>
+  
       
-    <Grid item xs="3">
+    <Grid className="griditem">
       <TextField
        
         id="outlined-basic"
@@ -565,7 +563,7 @@ function Overlay4() {
         variant="outlined"
       />
     </Grid>
-    <Grid item xs="3">
+    <Grid className="griditem">
     <TextField
         id="outlined-basic"
         label="Admission ID"
@@ -573,7 +571,7 @@ function Overlay4() {
       />
     </Grid>
       
-    <Grid item xs="3">
+    <Grid className="griditem">
     
     <TextField
        
@@ -583,7 +581,7 @@ function Overlay4() {
       />
     </Grid>
 
-    <Grid item xs="2.87">
+    <Grid className="griditem2">
     
     <Box >
   <FormControl fullWidth>
@@ -602,7 +600,7 @@ function Overlay4() {
   </FormControl>
 </Box>  
     </Grid>
-    <Grid item xs="2.87" style={{marginLeft:"1%"}}>
+    <Grid className="griditem2" style={{marginLeft:"1%"}}>
     
     <Box>
   <FormControl fullWidth>
@@ -622,7 +620,7 @@ function Overlay4() {
   </FormControl>
 </Box>
      </Grid>
-     <Grid item xs="2.87">
+     <Grid className="griditem2">
     
     <Box >
   <FormControl fullWidth>
@@ -642,7 +640,7 @@ function Overlay4() {
   </FormControl>
 </Box>
      </Grid>
-     <Grid item xs="3">
+     <Grid className="griditem">
     
     <TextField
        
@@ -652,7 +650,7 @@ function Overlay4() {
       />
     </Grid>
      
-</Grid>
+
     </div>
     <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay4}>
       Search
@@ -665,12 +663,12 @@ function Overlay5() {
   return (
     <div className="overlay5">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay5} />
-    <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
+    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Visit Log</p>
     <div className="searchFieldsDiv">
-    <Grid container spacing={3}>
+   
       
-    <Grid item xs="3">
+    <Grid className="griditem">
       <TextField
        
         id="outlined-basic"
@@ -678,7 +676,7 @@ function Overlay5() {
         variant="outlined"
       />
     </Grid>
-    <Grid item xs="3">
+    <Grid className="griditem">
     <TextField
         id="outlined-basic"
         label="Last Name"
@@ -686,7 +684,7 @@ function Overlay5() {
       />
     </Grid>
       
-    <Grid item xs="3">
+    <Grid className="griditem">
     
     <TextField
        
@@ -695,7 +693,7 @@ function Overlay5() {
         variant="outlined"
       />
     </Grid>
-    <Grid item xs="3">
+    <Grid className="griditem">
     
     <TextField
         id="outlined-basic"
@@ -704,7 +702,7 @@ function Overlay5() {
       />
       
     </Grid>
-    <Grid item xs="2.87">
+    <Grid className="griditem2">
     
     <Box >
   <FormControl fullWidth>
@@ -724,7 +722,7 @@ function Overlay5() {
 </Box>  
     </Grid>
 
-    <Grid item xs="3">
+    <Grid className="griditem">
     
     <TextField
        
@@ -734,7 +732,7 @@ function Overlay5() {
       />
       
     </Grid>
-    <Grid item xs="3">
+    <Grid className="griditem">
     
     <TextField
        
@@ -746,7 +744,7 @@ function Overlay5() {
     </Grid>
       
 
-    <Grid item xs="2.87">
+    <Grid className="griditem2">
     
     <Box >
   <FormControl fullWidth>
@@ -765,7 +763,7 @@ function Overlay5() {
   </FormControl>
 </Box>  
     </Grid>
-    <Grid item xs="3">
+    <Grid className="griditem">
     
     <TextField
        
@@ -776,7 +774,7 @@ function Overlay5() {
       
     </Grid>
     
-    <Grid item xs="3">
+    <Grid className="griditem">
     
     <TextField
        
@@ -786,8 +784,7 @@ function Overlay5() {
       />
       
     </Grid>
-     
-</Grid>
+
     </div>
     <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay5}>
       Search
@@ -805,7 +802,7 @@ function Overlay6() {
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
       
-    <Grid item xs="3">
+    <Grid className="griditem">
       <TextField
        
         id="outlined-basic"
@@ -813,7 +810,7 @@ function Overlay6() {
         variant="outlined"
       />
     </Grid>
-    <Grid item xs="3">
+    <Grid className="griditem">
     <TextField
         id="outlined-basic"
         label="Care Giver Name"
@@ -821,7 +818,7 @@ function Overlay6() {
       />
     </Grid>
       
-    <Grid item xs="3">
+    <Grid className="griditem">
     
     <TextField
        
@@ -830,7 +827,7 @@ function Overlay6() {
         variant="outlined"
       />
     </Grid>
-    <Grid item xs="3">
+    <Grid className="griditem">
     
     <TextField
         id="outlined-basic"
@@ -840,7 +837,7 @@ function Overlay6() {
       
     </Grid>
 
-    <Grid item xs="2.87">
+    <Grid className="griditem2">
     
     <Box >
   <FormControl fullWidth>
@@ -859,7 +856,7 @@ function Overlay6() {
   </FormControl>
 </Box>  
     </Grid>
-    <Grid item xs="3">
+    <Grid className="griditem">
     
     <TextField
        
@@ -868,7 +865,7 @@ function Overlay6() {
         variant="outlined"
       />
     </Grid>
-    <Grid item xs="3">
+    <Grid className="griditem">
     
     <TextField
        
@@ -1185,18 +1182,91 @@ function Overlay6() {
    
   ];
   //
+//
+const [state, setState] = React.useState({
+  left: false,
+});
 
+const toggleDrawer = (anchor, open) => (event) => {
+  if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    return;
+  }
+
+  setState({ ...state, [anchor]: open });
+};
+
+const list = (anchor) => (
+  <Box
+    sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+    role="presentation"
+    onClick={toggleDrawer(anchor, false)}
+    onKeyDown={toggleDrawer(anchor, false)}
+    
+  >
+    
+    <div style={{backgroundColor:"#2E0F59",display:"flex",flexDirection:"column",alignItems:"center",height:"680px"}}>
+    
+    <p
+           className="Files"
+            style={{
+              fontSize: "20px",
+              color: "#F2B90F",
+              fontWeight: "bold",
+            }}
+          >
+            Files
+          </p>
+          <hr className="line" style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
+        
+     
+     <h3    onClick={() => {
+                CallMaintancePressed();
+              }}  style={{color:"#F2B90F"}}>Call Maintance</h3>
+     <h3  onClick={MissedInPressed}  style={{color:"#F2B90F"}}>Missed In</h3>
+     <h3  onClick={MissedOutPressed}  style={{color:"#F2B90F"}}>Missed Out</h3>
+     <h3  onClick={MissedCallPressed}  style={{color:"#F2B90F"}}>Missed Call</h3>
+     <h3  onClick={VisitLogPressed}  style={{color:"#F2B90F"}}>Visit Log</h3>
+     <h3  onClick={RejectedCallsPressed}  style={{color:"#F2B90F"}}>Rejected Calls</h3>
+     
+   
+     </div>
+    
+    
+   
+  </Box>
+);
+//
   return (
     <Wrapper>
       <div className="Header">
+      <MenuIcon
+    className="menuIcon"
+    onClick={toggleDrawer('left', true)}
+     anchor={'left'}
+     open={state['left']}
+     onClose={toggleDrawer('left', false)}>
+      
+    </MenuIcon>
         <img className="headerImage" src="./EmpireHomeCareLogo.png" />
-        <button className="button">Page 1</button>
-        <button className="button">Page 2</button>
-        <button className="button"> Page 3</button>
-        <button className="button"> Page 4</button>
+        
         <Button className="LogOutbutton" variant="outlined">
           Log Out
         </Button>
+        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+      </div>
+      <div style={{display:"none"}}>
+{['left'].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+          <Drawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)}
+          >
+            {list(anchor)}
+          </Drawer>
+        </React.Fragment>
+      ))}
       </div>
 
       <div className="CardHolder">
@@ -1436,10 +1506,12 @@ const Wrapper = styled.section`
     margin-top: 2%;
   }
   .searchFieldsDiv {
-    display: flex; 
-    margin-top:2.5%;
-    width:85%;
-    margin-left:10%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* create 3 equal columns */
+    grid-gap: 10px; /* add some space between the columns */
+    margin-top: 2.5%;
+    width: 85%;
+    margin-left: 10%;
   }
 
   .searchButton {
@@ -1558,6 +1630,7 @@ const Wrapper = styled.section`
     width: 7%;
     height: 1%;
     border-radius: 15px;
+    margin-right:55%;
   }
   .headerImage:hover {
     animation: wave 1s infinite;
@@ -1601,4 +1674,163 @@ const Wrapper = styled.section`
     color: black;
   }
   //Header CSS FILES ENDING
+  .griditem{
+    width:100%;
+  }
+  .griditem2{
+    width:68%;
+  }
+  .menuIcon{
+    display:none;
+  }
+  .LogoutIcon{
+    display:none;
+  }
+  @media only screen and (max-width: 600px) {
+      
+    .TaskBar {
+      display:none;
+     
+    }
+    .UserInfo{
+      display:none;
+    }
+    .hr{
+      display:none;
+    }
+    .Files{
+      display:none;
+    }
+    .CardHolder {
+      flex-direction: column;
+      margin-top: 0%;
+    }
+    .buttonHolder {
+      flex-direction: row;
+    }
+    .dataDisplay {
+      height: 668px;
+      width: 97%;
+      margin-top: 0%;
+      margin-left:0%;
+    }
+    .line{
+      display:none;
+    }
+    .LinkNotification{
+      padding:5px;
+      height:10%;
+      font-size:14px;
+      shadowColor: "#000",
+  shadowOffset: {
+  width: 0,
+  height: 7,
+  },
+  shadowOpacity: 0.41,
+  shadowRadius: 9.11,
+  
+  elevation: 14,
+    }
+    .SystemNotification{
+      padding:5px;
+      height:10%;
+      font-size:13.5px;
+      shadowColor: "#000",
+  shadowOffset: {
+  width: 0,
+  height: 7,
+  },
+  shadowOpacity: 0.41,
+  shadowRadius: 9.11,
+  
+  elevation: 14,
+      
+    }
+    .LogOutbutton {
+      width: 20%;
+      height: 50%;
+      display:none;
+    
+    }
+    .headerImage {
+      width: 30%;
+      height: 15%;
+      margin-bottom:2%;
+      border-radius: 15px;
+      margin-right:0;
+    }
+    .menuIcon{
+      margin-right:20%;
+      font-size:50px;
+      display:inline;
+      color:white;
+      background-color:grey;
+      border-radius:10px;
+      
+    }
+    .LogoutIcon{
+      font-size:40px;
+      color:grey;
+      margin-left:20%;
+      display:inline;
+  
+    }
+    .searchIcon {
+      margin-left: 90.2%;
+     
+    }
+    
+    .crossIcon{
+      margin-left:90%;
+    }
+    .griditem{
+      width:100%;
+    }
+    .griditem2{
+      width:92%;
+    }
+   
+    .searchFieldsDiv {
+      grid-template-columns: repeat(1, 1fr); /* create 3 equal columns */
+    }
+    .overlay {
+    width: 75%;
+    height: 80%;
+    overflow:auto;
+    }
+    .overlay2 {
+      width: 75%;
+      height: 75%;
+      overflow:auto;
+      }
+      .overlay3{
+        width: 75%;
+        height: 80%;
+        overflow:auto;
+       
+      }
+      .overlay4{
+        width: 75%;
+        height: 80%;
+        overflow:auto;
+       
+      }
+      .overlay5{
+        width: 75%;
+        height: 80%;
+        overflow:auto;
+        
+      }
+    .searchButton {
+      margin-top: 5%;
+      margin-bottom: 2%;
+    }
+    .input{
+      margin-left:20%;
+    }
+    
+    .Signup{
+      margin-left:25%;
+      
+    }
 `;
