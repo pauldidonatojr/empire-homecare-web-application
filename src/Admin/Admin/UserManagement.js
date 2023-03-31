@@ -16,6 +16,9 @@ import Footer from "../../Footer";
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Drawer from "@mui/material/Drawer";
+import MenuIcon from "@mui/icons-material/Menu";
+import LogoutIcon from "@mui/icons-material/Logout";
 
  
 
@@ -59,12 +62,12 @@ function CareGiver() {
       
       <div className="overlay">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
+        <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
         <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Search New User</p>
         <div className="searchFieldsDiv">
-        <Grid container spacing={3}>
+   
           
-        <Grid item xs="3">
+        <Grid className="griditem">
           <TextField
            
             id="outlined-basic"
@@ -72,7 +75,7 @@ function CareGiver() {
             variant="outlined"
           />
         </Grid>
-        <Grid item xs="3">
+        <Grid className="griditem">
         <TextField
             id="outlined-basic"
             label="Last Name"
@@ -80,7 +83,7 @@ function CareGiver() {
           />
         </Grid>
           
-        <Grid item xs="3">
+        <Grid className="griditem">
         
         <TextField
            
@@ -91,7 +94,7 @@ function CareGiver() {
         </Grid>
        
 
-        <Grid item xs="2.87">
+        <Grid className="griditem2">
         
         <Box >
       <FormControl fullWidth>
@@ -112,7 +115,7 @@ function CareGiver() {
         </Grid>
       
          
-    </Grid>
+   
         </div>
         <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay}>
           Search
@@ -187,7 +190,7 @@ function CareGiver() {
           <TextField className="input" label="Login Name" variant="outlined" />
           <TextField className="input" label="Email" variant="outlined" />
           
-      <FormControl style={{marginTop:"2%",marginLeft:"2%",width:"20.5%"}}>
+      <FormControl className="dropdown">
         <InputLabel >Role</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -201,7 +204,7 @@ function CareGiver() {
           <MenuItem value={30}>Thirty</MenuItem>
         </Select>
       </FormControl>
-      <FormControl style={{marginTop:"2%",marginLeft:"3.5%",width:"20.5%"}}>
+      <FormControl className="dropdown" >
         <InputLabel >Default Module Tab</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -215,7 +218,7 @@ function CareGiver() {
           <MenuItem value={30}>Thirty</MenuItem>
         </Select>
       </FormControl>
-      <FormControl style={{marginTop:"2%",marginLeft:"3.5%",width:"20.5%"}}>
+      <FormControl className="dropdown" >
         <InputLabel >Status</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -237,80 +240,80 @@ function CareGiver() {
       <h1 className="Heading">IP Restriction</h1>
      
       <div className="checkbox">
-      <FormGroup style={{marginLeft:"44%"}}>
+      <FormGroup className="FromGroup" >
       <FormControlLabel control={<Checkbox defaultChecked />} label="IP Restricted" />
     </FormGroup>
-       <div style={{marginLeft:"15%"}}>
+       <div className="checkboxItems">
         <TextField className="input" label="IP1" variant="outlined" />
         <TextField className="input" label="IP2" variant="outlined" />
         <TextField className="input" label="IP3" variant="outlined" />
         </div>
     </div>
     <div className="checkbox">
-      <FormGroup style={{marginLeft:"40%"}}>
+      <FormGroup className="FromGroup">
       <FormControlLabel control={<Checkbox defaultChecked />} label="Monday - Hourly Restricted" />
     </FormGroup>
-       <div style={{marginLeft:"15%"}}>
+       <div className="checkboxItems">
         <TextField className="input" label="IP1" variant="outlined" />
         <TextField className="input" label="IP2" variant="outlined" />
         <TextField className="input" label="IP3" variant="outlined" />
         </div>
     </div>
     <div className="checkbox">
-      <FormGroup style={{marginLeft:"40%"}}>
+      <FormGroup className="FromGroup">
       <FormControlLabel control={<Checkbox defaultChecked />} label="Tuesday - Hourly Restricted" />
     </FormGroup>
-       <div style={{marginLeft:"15%"}}>
+       <div className="checkboxItems">
         <TextField className="input" label="IP1" variant="outlined" />
         <TextField className="input" label="IP2" variant="outlined" />
         <TextField className="input" label="IP3" variant="outlined" />
         </div>
     </div>
     <div className="checkbox">
-      <FormGroup style={{marginLeft:"40%"}}>
+      <FormGroup className="FromGroup">
       <FormControlLabel control={<Checkbox defaultChecked />} label="Wednesday - Hourly Restricted" />
     </FormGroup>
-       <div style={{marginLeft:"15%"}}>
+       <div className="checkboxItems">
         <TextField className="input" label="IP1" variant="outlined" />
         <TextField className="input" label="IP2" variant="outlined" />
         <TextField className="input" label="IP3" variant="outlined" />
         </div>
     </div>
     <div className="checkbox">
-      <FormGroup style={{marginLeft:"40%"}}>
+      <FormGroup className="FromGroup">
       <FormControlLabel control={<Checkbox defaultChecked />} label="Thursday - Hourly Restricted" />
     </FormGroup>
-       <div style={{marginLeft:"15%"}}>
+       <div className="checkboxItems">
         <TextField className="input" label="IP1" variant="outlined" />
         <TextField className="input" label="IP2" variant="outlined" />
         <TextField className="input" label="IP3" variant="outlined" />
         </div>
     </div>
     <div className="checkbox">
-      <FormGroup style={{marginLeft:"40%"}}>
+      <FormGroup className="FromGroup">
       <FormControlLabel control={<Checkbox defaultChecked />} label="Friday - Hourly Restricted" />
     </FormGroup>
-       <div style={{marginLeft:"15%"}}>
+       <div className="checkboxItems">
         <TextField className="input" label="IP1" variant="outlined" />
         <TextField className="input" label="IP2" variant="outlined" />
         <TextField className="input" label="IP3" variant="outlined" />
         </div>
     </div>
     <div className="checkbox">
-      <FormGroup style={{marginLeft:"40%"}}>
+      <FormGroup className="FromGroup">
       <FormControlLabel control={<Checkbox defaultChecked />} label="Saturday - Hourly Restricted" />
     </FormGroup>
-       <div style={{marginLeft:"15%"}}>
+       <div className="checkboxItems">
         <TextField className="input" label="IP1" variant="outlined" />
         <TextField className="input" label="IP2" variant="outlined" />
         <TextField className="input" label="IP3" variant="outlined" />
         </div>
     </div>
     <div className="checkbox">
-      <FormGroup style={{marginLeft:"40%"}}>
+      <FormGroup className="FromGroup">
       <FormControlLabel control={<Checkbox defaultChecked />} label="Sunday - Hourly Restricted" />
     </FormGroup>
-       <div style={{marginLeft:"15%"}}>
+       <div className="checkboxItems">
         <TextField className="input" label="IP1" variant="outlined" />
         <TextField className="input" label="IP2" variant="outlined" />
         <TextField className="input" label="IP3" variant="outlined" />
@@ -356,18 +359,90 @@ function CareGiver() {
    
     
   ];
+ //
+ const [state, setState] = React.useState({
+  left: false,
+});
 
+const toggleDrawer = (anchor, open) => (event) => {
+  if (
+    event.type === "keydown" &&
+    (event.key === "Tab" || event.key === "Shift")
+  ) {
+    return;
+  }
+
+  setState({ ...state, [anchor]: open });
+};
+
+const list = (anchor) => (
+  <Box
+    sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+    role="presentation"
+    onClick={toggleDrawer(anchor, false)}
+    onKeyDown={toggleDrawer(anchor, false)}
+  >
+    <div
+      style={{
+        backgroundColor: "#2E0F59",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        height: "680px",
+      }}
+    >
+      <p
+        className="Files"
+        style={{
+          fontSize: "20px",
+          color: "#F2B90F",
+          fontWeight: "bold",
+        }}
+      >
+        Files
+      </p>
+      <hr
+        className="line"
+        style={{ width: "50%", fontSize: "10px", opacity: "0.2" }}
+      />
+
+      <h3  onClick={NewCareGiverPressed} style={{ color: "#F2B90F" }}>New User</h3>
+      <h3  onClick={SearchCareGiverPressed} style={{ color: "#F2B90F" }}>Search User</h3>
+      
+    </div>
+  </Box>
+);
+//
   return (
     <Wrapper>
       <div className="Header">
+      <MenuIcon
+          className="menuIcon"
+          onClick={toggleDrawer("left", true)}
+          anchor={"left"}
+          open={state["left"]}
+          onClose={toggleDrawer("left", false)}
+        ></MenuIcon>
         <img className="headerImage" src="./EmpireHomeCareLogo.png" />
-        <button className="button">Page 1</button>
-        <button className="button">Page 2</button>
-        <button className="button"> Page 3</button>
-        <button className="button"> Page 4</button>
+       
         <Button className="LogOutbutton" variant="outlined">
           Log Out
         </Button>
+        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+      </div>
+      <div style={{ display: "none" }}>
+        {["left"].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {list(anchor)}
+            </Drawer>
+          </React.Fragment>
+        ))}
       </div>
 
       <div className="CardHolder">
@@ -454,6 +529,14 @@ width: 100%;
     flex-direction:row;
 }
 //
+.FromGroup{
+  margin-left:40%;
+}
+.dropdown{
+  margin-top:2%;
+  margin-left:3.5%;
+  width:20.5%;
+}
 .checkbox{
   
   margin-top:0.5%;
@@ -515,6 +598,9 @@ elevation: 13,
   font-size:17px;
   
 }
+.checkboxItems{
+  margin-left:15%;
+}
 
 //
 .ListItem{
@@ -562,10 +648,12 @@ elevation: 13,
     margin-top: 2%;
   }
   .searchFieldsDiv {
-    display: flex; 
-    margin-top:2.5%;
-    width:85%;
-    margin-left:10%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* create 3 equal columns */
+    grid-gap: 10px; /* add some space between the columns */
+    margin-top: 2.5%;
+    width: 85%;
+    margin-left: 10%;
   }
 
   .searchButton {
@@ -736,6 +824,160 @@ border-radius:10px;
 color:black;
 }
 //Header CSS FILES ENDING
+.LogoutIcon{
+  display:none;
+}
+.menuIcon{
+  display:none;
+}
+.headerImage {
+  width: 7%;
+  height: 1%;
+  border-radius: 15px;
+  margin-right:55%;
+}
+.griditem{
+  width:100%;
+}
+.griditem2{
+  width:68%;
+}
+//Header CSS FILES ENDING
+@media only screen and (max-width: 600px) {
+    
+  .TaskBar {
+    display:none;
+   
+  }
+  .UserInfo{
+    display:none;
+  }
+  .hr{
+    display:none;
+  }
+  .Files{
+    display:none;
+  }
+  .CardHolder {
+    flex-direction: column;
+    margin-top: 0%;
+  }
+  .buttonHolder {
+    flex-direction: row;
+  }
+  .dataDisplay {
+    height: 668px;
+    width: 97%;
+    margin-top: 0%;
+    margin-left:0%;
+  }
+  .line{
+    display:none;
+  }
+  .LinkNotification{
+    padding:5px;
+    height:10%;
+    font-size:14px;
+    shadowColor: "#000",
+shadowOffset: {
+width: 0,
+height: 7,
+},
+shadowOpacity: 0.41,
+shadowRadius: 9.11,
 
+elevation: 14,
+  }
+  .SystemNotification{
+    padding:5px;
+    height:10%;
+    font-size:13.5px;
+    shadowColor: "#000",
+shadowOffset: {
+width: 0,
+height: 7,
+},
+shadowOpacity: 0.41,
+shadowRadius: 9.11,
+
+elevation: 14,
+    
+  }
+  .LogOutbutton {
+    width: 20%;
+    height: 50%;
+    display:none;
+  
+  }
+  .headerImage {
+    width: 30%;
+    height: 15%;
+    margin-bottom:2%;
+    border-radius: 15px;
+    margin-right:0;
+  }
+  .menuIcon{
+    margin-right:20%;
+    font-size:50px;
+    display:inline;
+    color:white;
+    background-color:grey;
+    border-radius:10px;
+    
+  }
+  .LogoutIcon{
+    font-size:40px;
+    color:grey;
+    margin-left:20%;
+    display:inline;
+
+  }
+  .searchIcon {
+    margin-left: 90.2%;
+   
+  }
+  
+  .crossIcon{
+    margin-left:90%;
+  }
+  .griditem{
+    width:100%;
+  }
+  .griditem2{
+    width:92%;
+  }
+ 
+  .searchFieldsDiv {
+    grid-template-columns: repeat(1, 1fr); /* create 3 equal columns */
+  }
+  .overlay {
+  width: 75%;
+  height: 80%;
+  overflow:auto;
+  }
+  .searchButton {
+    margin-top: 5%;
+    margin-bottom: 2%;
+    margin-left:35%;
+  }
+  .input{
+    margin-left:20%;
+  }
+  
+  .Signup{
+    margin-left:25%;
+    
+  }
+  .dropdown{
+    width:61%;
+    margin-left:20%;
+  }
+  .FromGroup{
+    margin-left:20%;
+  }
+  .checkboxItems{
+    margin-left:0%;
+  }
+}
 
 `;

@@ -17,7 +17,9 @@ import Footer from "../../Footer";
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-
+import Drawer from "@mui/material/Drawer";
+import MenuIcon from "@mui/icons-material/Menu";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { DataGrid } from '@mui/x-data-grid';
 
 
@@ -120,8 +122,8 @@ function Report() {
           Reference Table Management
         </p>
         <div className="searchFieldsDiv1">
-        <Grid container spacing={2}>
-        <Grid item xs="4">
+       
+        <Grid className="griditem2">
               <Box>
                 <FormControl fullWidth>
                   <InputLabel>Reference Table</InputLabel>
@@ -140,7 +142,7 @@ function Report() {
               </Box>
             </Grid>
             
-          </Grid>
+         
         </div>
         <Button className="searchButton" onClick={handleCloseOverlay3}>
           Search
@@ -164,8 +166,8 @@ function Report() {
           Rate Management
         </p>
         <div className="searchFieldsDiv1">
-        <Grid container spacing={2}>
-        <Grid item xs="4">
+     
+        <Grid className="griditem2">
               <Box>
                 <FormControl fullWidth>
                   <InputLabel>MCO</InputLabel>
@@ -184,7 +186,7 @@ function Report() {
               </Box>
             </Grid>
             
-          </Grid>
+       
         </div>
         <Button className="searchButton" onClick={handleCloseOverlay4}>
           Search
@@ -347,7 +349,7 @@ function Report() {
           <TextField className="input1" label="Password Expiry (Days)" variant="outlined" />
           <TextField className="input1" label="Service Zip Code" variant="outlined" />
           <TextField className="input1" label="Mobile Offline Sync Period" variant="outlined" />
-          <FormControl style={{marginTop:"2%",marginLeft:"2%",width:"20.5%"}}>
+          <FormControl  className="dropdown" >
         <InputLabel >Select Language</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -361,7 +363,7 @@ function Report() {
           <MenuItem value={30}>Thirty</MenuItem>
         </Select>
       </FormControl>
-      <FormControl style={{marginTop:"2%",marginLeft:"3.8%",width:"20.5%"}}>
+      <FormControl className="dropdown" >
         <InputLabel >Cordinator</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -387,30 +389,30 @@ function Report() {
       <h1 className="Heading">Call Exception Notification</h1>
      
       <div className="checkbox">
-      <FormGroup style={{marginLeft:"40%"}}>
+      <FormGroup className="FormGroup" >
       <FormControlLabel control={<Checkbox defaultChecked />} label="Weekday" />
     </FormGroup>
-       <div style={{marginLeft:"15%"}}>
+       <div className="checkboxContent" >
         <TextField className="input1" label="From" variant="outlined" />
         <TextField className="input1" label="To" variant="outlined" />
         <TextField className="input1" label="Frequency(min)" variant="outlined" />
         </div>
     </div>
     <div className="checkbox">
-      <FormGroup style={{marginLeft:"40%"}}>
+      <FormGroup className="FormGroup" >
       <FormControlLabel control={<Checkbox defaultChecked />} label="Saturday" />
     </FormGroup>
-       <div style={{marginLeft:"15%"}}>
+       <div className="checkboxContent">
         <TextField className="input1" label="From" variant="outlined" />
         <TextField className="input1" label="To" variant="outlined" />
         <TextField className="input1" label="Frequency(min)" variant="outlined" />
         </div>
     </div>
     <div className="checkbox">
-      <FormGroup style={{marginLeft:"40%"}}>
+      <FormGroup className="FormGroup" >
       <FormControlLabel control={<Checkbox defaultChecked />} label="Sunday" />
     </FormGroup>
-       <div style={{marginLeft:"15%"}}>
+       <div className="checkboxContent">
         <TextField className="input1" label="From" variant="outlined" />
         <TextField className="input1" label="To" variant="outlined" />
         <TextField className="input1" label="Frequency(min)" variant="outlined" />
@@ -471,18 +473,96 @@ function Report() {
     
   ];
  
+  //
+  const [state, setState] = React.useState({
+    left: false,
+  });
 
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <Box
+      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <div
+        style={{
+          backgroundColor: "#2E0F59",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          height: "680px",
+        }}
+      >
+        <p
+          className="Files"
+          style={{
+            fontSize: "20px",
+            color: "#F2B90F",
+            fontWeight: "bold",
+          }}
+        >
+          Files
+        </p>
+        <hr
+          className="line"
+          style={{ width: "50%", fontSize: "10px", opacity: "0.2" }}
+        />
+
+        <h3  onClick={UserManagementPressed} style={{ color: "#F2B90F",textAlign:"center" }}>User Management</h3>
+        <h3  onClick={ChangePasswordPressed} style={{ color: "#F2B90F",textAlign:"center" }}>Change Password</h3>
+        <h3  onClick={CordinatorSetupPressed} style={{ color: "#F2B90F",textAlign:"center" }}>Cordinator Setup</h3>
+        <h3  onClick={ReferenceTableManagementPressed} style={{ color: "#F2B90F",textAlign:"center" }}>Reference Table Management</h3>
+        <h3  onClick={ProviderProfilePressed} style={{ color: "#F2B90F",textAlign:"center" }}>Provider Profile</h3>
+        <h3  onClick={RateManagementPressed} style={{ color: "#F2B90F",textAlign:"center" }}>Rate Management</h3>
+        <h3  onClick={FileProcessingPressed} style={{ color: "#F2B90F",textAlign:"center" }}>File Processing</h3>
+        <h3  onClick={EdiImportPressed} style={{ color: "#F2B90F",textAlign:"center" }}>EDI Import</h3>
+      
+      </div>
+    </Box>
+  );
+  //
   return (
     <Wrapper>
       <div className="Header">
+      <MenuIcon
+          className="menuIcon"
+          onClick={toggleDrawer("left", true)}
+          anchor={"left"}
+          open={state["left"]}
+          onClose={toggleDrawer("left", false)}
+        ></MenuIcon>
         <img className="headerImage" src="./EmpireHomeCareLogo.png" />
-        <button className="button">Page 1</button>
-        <button className="button">Page 2</button>
-        <button className="button"> Page 3</button>
-        <button className="button"> Page 4</button>
+       
         <Button className="LogOutbutton" variant="outlined">
           Log Out
         </Button>
+        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+      </div>
+      <div style={{ display: "none" }}>
+        {["left"].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {list(anchor)}
+            </Drawer>
+          </React.Fragment>
+        ))}
       </div>
 
       <div className="CardHolder">
@@ -616,6 +696,11 @@ const Wrapper = styled.section`
   }
 
   //
+  .dropdown{
+    margin-top:2%;
+    margin-left:2%;
+    width:20.5%;
+  }
   .checkitem{
     
     display: flex;
@@ -626,7 +711,12 @@ const Wrapper = styled.section`
   color:#14140F;
 
 }
-
+.FormGroup{
+  margin-left:40%;
+}
+.checkboxContent{
+  margin-left:15%;
+}
 .input{
   margin:2%;
   font-weight:bold;
@@ -730,10 +820,12 @@ elevation: 13,
     margin-left: 10%;
   }
   .searchFieldsDiv1 {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* create 3 equal columns */
+    grid-gap: 10px; /* add some space between the columns */
     margin-top: 2.5%;
     width: 85%;
-    margin-left: 36%;
+    margin-left: 10%;
   }
   .searchButton {
     margin-left: 35%;
@@ -931,6 +1023,169 @@ elevation: 13,
     color: black;
   }
  
- 
+  .LogoutIcon{
+    display:none;
+  }
+  .menuIcon{
+    display:none;
+  }
+  .headerImage {
+    width: 7%;
+    height: 1%;
+    border-radius: 15px;
+    margin-right:55%;
+  }
+  .griditem{
+    width:100%;
+  }
+  .griditem2{
+    width:68%;
+  }
+  //Header CSS FILES ENDING
+  @media only screen and (max-width: 600px) {
+      
+    .TaskBar {
+      display:none;
+     
+    }
+    .UserInfo{
+      display:none;
+    }
+    .hr{
+      display:none;
+    }
+    .Files{
+      display:none;
+    }
+    .CardHolder {
+      flex-direction: column;
+      margin-top: 0%;
+    }
+    .buttonHolder {
+      flex-direction: row;
+    }
+    .dataDisplay {
+      height: 668px;
+      width: 97%;
+      margin-top: 0%;
+      margin-left:0%;
+    }
+    .line{
+      display:none;
+    }
+    .LinkNotification{
+      padding:5px;
+      height:10%;
+      font-size:14px;
+      shadowColor: "#000",
+  shadowOffset: {
+  width: 0,
+  height: 7,
+  },
+  shadowOpacity: 0.41,
+  shadowRadius: 9.11,
+  
+  elevation: 14,
+    }
+    .SystemNotification{
+      padding:5px;
+      height:10%;
+      font-size:13.5px;
+      shadowColor: "#000",
+  shadowOffset: {
+  width: 0,
+  height: 7,
+  },
+  shadowOpacity: 0.41,
+  shadowRadius: 9.11,
+  
+  elevation: 14,
+      
+    }
+    .LogOutbutton {
+      width: 20%;
+      height: 50%;
+      display:none;
+    
+    }
+    .headerImage {
+      width: 30%;
+      height: 15%;
+      margin-bottom:2%;
+      border-radius: 15px;
+      margin-right:0;
+    }
+    .menuIcon{
+      margin-right:20%;
+      font-size:50px;
+      display:inline;
+      color:white;
+      background-color:grey;
+      border-radius:10px;
+      
+    }
+    .LogoutIcon{
+      font-size:40px;
+      color:grey;
+      margin-left:20%;
+      display:inline;
+  
+    }
+    .searchIcon {
+      margin-left: 90.2%;
+     
+    }
+    
+    .crossIcon{
+      margin-left:90%;
+    }
+    .griditem{
+      width:100%;
+    }
+    .griditem2{
+      width:92%;
+    }
+   
+    .searchFieldsDiv1 {
+      grid-template-columns: repeat(1, 1fr); /* create 3 equal columns */
+    }
+    .overlay {
+    width: 75%;
+    height: 100%;
+    overflow:auto;
+    }
+    .overlay2 {
+      width: 75%;
+      height: 50%;
+      overflow:auto;
+      }
+    .searchButton {
+      margin-top: 5%;
+      margin-bottom: 2%;
+      margin-left:35%;
+    }
+    .input{
+      width:60%;
+    }
+    .input1{
+      margin-left:17%;
+    }
+    
+    .Signup{
+      margin-left:25%;
+      
+    }
+    .FormGroup{
+      margin-left:35%;
+    }
+    .checkboxContent{
+      margin-left:0%;
+    }
+    .dropdown{
+      width:62%;
+      margin-left:16%;
+    }
+  }
+  
 
 `

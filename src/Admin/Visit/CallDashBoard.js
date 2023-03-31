@@ -797,10 +797,10 @@ function Overlay6() {
   return (
     <div className="overlay6">
     <CloseIcon className="crossIcon" onClick={handleCloseOverlay6} />
-    <h1 style={{ marginLeft: "40%" }}>Set Filter from here !</h1>
+    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Rejected Calls</p>
     <div className="searchFieldsDiv">
-    <Grid container spacing={3}>
+   
       
     <Grid className="griditem">
       <TextField
@@ -874,8 +874,7 @@ function Overlay6() {
         variant="outlined"
       />
     </Grid>
-     
-</Grid>
+  
     </div>
     <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay6}>
       Search
@@ -1496,7 +1495,7 @@ const Wrapper = styled.section`
           left: 50%;
           transform: translate(-50%, -50%);
           width: 75%;
-          height: 55%;
+          height: 60%;
           z-index: 1000;
           background-color: white;
           padding: 1%;
@@ -1816,6 +1815,12 @@ const Wrapper = styled.section`
        
       }
       .overlay5{
+        width: 75%;
+        height: 80%;
+        overflow:auto;
+        
+      }
+      .overlay6{
         width: 75%;
         height: 80%;
         overflow:auto;
