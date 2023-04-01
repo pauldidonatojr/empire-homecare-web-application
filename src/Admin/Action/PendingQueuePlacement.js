@@ -19,11 +19,13 @@ import Footer from "../../Footer";
 //
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
+import {AuthContext} from '../../components/context'
 import LogoutIcon from "@mui/icons-material/Logout";
 //
 const Link = require("react-router-dom").Link;
 
 function PendingQueuePlacement() {
+  const { signOut } = React.useContext(AuthContext);
   const [ViewSelected, setViewSelected] = useState(1);
 
   
@@ -445,7 +447,7 @@ function Overlay6() {
         ></MenuIcon>
         <img className="headerImage" src="./EmpireHomeCareLogo.png" />
        
-        <Button className="LogOutbutton" variant="outlined">
+        <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
         <LogoutIcon className="LogoutIcon"></LogoutIcon>

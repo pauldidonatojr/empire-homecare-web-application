@@ -14,6 +14,14 @@ import { display } from "@mui/system";
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useNavigate } from "react-router-dom";
+import Footer from "../Footer";
+import Drawer from "@mui/material/Drawer";
+import MenuIcon from "@mui/icons-material/Menu";
+import LogoutIcon from "@mui/icons-material/Logout";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import {AuthContext} from '../components/context'
+
 //
 const jsonData = [
   {
@@ -121,11 +129,16 @@ const PlanOfCareList = [
   ];
 
 const VisitDetails = () => {
+  const { signOut } = React.useContext(AuthContext);
   
   const navigate = useNavigate();
   const { id } = useParams();
   const selectedItem = jsonData.find((item) => item.id === parseInt(id));
   const [ViewSelected, setViewSelected] = useState(1);
+  const [state, setState] = React.useState({
+    left: false,
+  });
+  
 
   if (!selectedItem) {
     return <div>Item not found</div>;
@@ -196,7 +209,7 @@ const VisitDetails = () => {
       <div className="ListHolder">
 
         <div className="PlanofCareList">
-          <p style ={{color:"grey",fontWeight:"bold",fontSize:"20px",marginLeft:"30%"}}>Plan Of Care</p>
+          <p style ={{color:"white",fontWeight:"bold",fontSize:"20px",textAlign:"center"}}>Plan Of Care</p>
         <List style={{maxHeight: "75%", overflow: "auto" }}>
         {PlanOfCareList.map((item) => (
           <ListItem
@@ -212,7 +225,7 @@ const VisitDetails = () => {
       </List>
         </div>
         <div className="OtherList">
-          <p style ={{color:"grey",fontSize:"20px",fontWeight:"bold",marginLeft:"30%"}}>Other Task</p>
+          <p style ={{color:"white",fontSize:"20px",fontWeight:"bold",textAlign:"center"}}>Other Task</p>
         <List style={{ maxHeight: "75%", overflow: "auto" }}>
         {OtherTaskList.map((item) => (
           <ListItem
@@ -237,10 +250,10 @@ const VisitDetails = () => {
       <div>
         <Card className="DirectionCard">
          <div style={{textAlign:"center"}}>
-         <p style={{fontSize:"15px",color:"grey",fontWeight:"bold"}}>Primary Address</p>
+         <p style={{fontSize:"15px",color:"white",fontWeight:"bold"}}>Primary Address</p>
          </div>
          <div>
-         <p style={{fontSize:"25px",fontWeight:"bold",color:"white"}}>{" 262A Upper Tooting Road South West London, SW15DR"}</p>
+         <p style={{fontSize:"25px",fontWeight:"bold",color:"white",textAlign:"center"}}>{" 262A Upper Tooting Road South West London, SW15DR"}</p>
          </div>
         </Card>
         <div className="mapholder">
@@ -254,7 +267,7 @@ const VisitDetails = () => {
       <div className="PatientViewHolder" >
 
         <Card className="contactCard">
-          <p style={{textAlign:"center",fontSize:"15px",color:"grey",fontWeight:"bold"}}>Contact Information</p>
+          <p style={{textAlign:"center",fontSize:"15px",color:"white",fontWeight:"bold"}}>Contact Information</p>
 
           <div className="phoneNumber">
           <PhoneIcon style={{color:"whitesmoke",fontSize:"30px",marginTop:"15%",marginRight:"5%"}} />
@@ -275,7 +288,7 @@ const VisitDetails = () => {
         </Card>
 
         <Card className="EmergencyCard">
-          <p style={{textAlign:"center",fontSize:"15px",color:"grey",fontWeight:"bold"}}>Emergency Contact</p>
+          <p style={{textAlign:"center",fontSize:"15px",color:"white",fontWeight:"bold"}}>Emergency Contact</p>
 
           <div className="phoneNumber">
           <PhoneIcon style={{color:"whitesmoke",fontSize:"30px",marginTop:"15%",marginRight:"5%"}} />
@@ -290,19 +303,91 @@ const VisitDetails = () => {
       </div>
     );
   };
+    //
+   
+  
+    const toggleDrawer = (anchor, open) => (event) => {
+      if (
+        event.type === "keydown" &&
+        (event.key === "Tab" || event.key === "Shift")
+      ) {
+        return;
+      }
+  
+      setState({ ...state, [anchor]: open });
+    };
+  
+    const list = (anchor) => (
+      <Box
+        sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+        role="presentation"
+        onClick={toggleDrawer(anchor, false)}
+        onKeyDown={toggleDrawer(anchor, false)}
+      >
+        <div
+          style={{
+            backgroundColor: "#2E0F59",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            height: "680px",
+          }}
+        >
+          <p
+            className="Files"
+            style={{
+              fontSize: "20px",
+              color: "#F2B90F",
+              fontWeight: "bold",
+            }}
+          >
+            Files
+          </p>
+          <hr
+            className="line"
+            style={{ width: "50%", fontSize: "10px", opacity: "0.2" }}
+          />
+  
+          <h3 onClick={ClockInOutPressed}  style={{ color: "#F2B90F" }}>Clock In / Out</h3>
+          <h3 onClick={DirectionPressed}  style={{ color: "#F2B90F" }}>Direction</h3>
+          <h3 onClick={PatientInfoPressed}  style={{ color: "#F2B90F" }}>Patient Info</h3>
+      
+        </div>
+      </Box>
+    );
+    //
   
   return (
   <Wrapper>
       <div className="Header">
+      <MenuIcon
+          className="menuIcon"
+          onClick={toggleDrawer("left", true)}
+          anchor={"left"}
+          open={state["left"]}
+          onClose={toggleDrawer("left", false)}
+        ></MenuIcon>
         <img className="headerImage" src="/EmpireHomeCareLogo.png" 
         onClick={() =>navigate("/CareGiverHome")}/>
-        <button className="button">Page 1</button>
-        <button className="button">Page 2</button>
-        <button className="button"> Page 3</button>
-        <button className="button"> Page 4</button>
-        <Button className="LogOutbutton" variant="outlined">
+       
+        <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
+        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+      </div>
+      <div style={{ display: "none" }}>
+        {["left"].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {list(anchor)}
+            </Drawer>
+          </React.Fragment>
+        ))}
       </div>
 
       <div className="CardHolder">
@@ -380,33 +465,7 @@ const VisitDetails = () => {
         <Card className="dataDisplay">{RenderViews()}</Card>
       </div>
 
-      <div className="footer">
-        <div className="LogoHolder">
-          <img src="/LogoBK.png"></img>
-        </div>
-        <div className="company">
-          <h6 style={{ color: "grey" }}>COMPANY</h6>
-          <h5 style={{ color: "white" }}>About Us</h5>
-          <h5 style={{ color: "white" }}>Contact Us</h5>
-          <h5 style={{ color: "white" }}>Careers</h5>
-          <h5 style={{ color: "white" }}>Press</h5>
-        </div>
-        <div className="socials">
-          <h6 style={{ color: "grey" }}>SOCIAL MEDIA</h6>
-          <h5 style={{ color: "white" }}>
-            <FacebookIcon fontSize="small" />
-            Facebook
-          </h5>
-          <h5 style={{ color: "white" }}>
-            <TwitterIcon fontSize="small" />
-            Twitter
-          </h5>
-          <h5 style={{ color: "white" }}>
-            <LinkedInIcon fontSize="small" />
-            Linkdin
-          </h5>
-        </div>
-      </div>
+     <Footer/>
     </Wrapper>
   );
 };
@@ -426,7 +485,7 @@ width: 100%;
   flex-direction:row;
 }
 .contactCard{
-  background-color:#012E40;
+  background-color:#564873;
   border-radius:15px;
   padding:2%;
   width:50%;
@@ -438,11 +497,12 @@ width: 100%;
 .phoneNumber{
   display:flex;
   flex-direction:row;
+  text-align:center;
 }
 .EmergencyCard{
   
   margin-left:2%;
-  background-color:#012E40;
+  background-color:#564873;
   border-radius:15px;
   padding:2%;
   width:50%;
@@ -462,7 +522,7 @@ width: 100%;
   margin-left:5%;
   border-radius:15px;
   padding:1%;
-  background-color:#002333;
+  background-color:#564873;
 }
 .OtherList{
   height:325px;
@@ -471,7 +531,7 @@ width: 100%;
   margin-left:12.5%;
   border-radius:15px;
   padding:1%;
-  background-color:#002333;
+  background-color:#564873;
 }
 .ListItem{
   margin-top:1%;
@@ -492,10 +552,9 @@ width: 100%;
 .mapholder{
   
   height: 450px;
-  width: 800px;
+  width: 100%;
   background-color: white;
   margin-top: 1%;
-  margin-left: 12.5%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -503,7 +562,7 @@ width: 100%;
 .DirectionCard{
   display:flex;
   flex-direction:column;
-  background-color:#012E40;
+  background-color:#564873;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -521,7 +580,7 @@ width: 100%;
 
 }
 .clockInCard{
-    background-color:#002333;
+  background-color:#564873;
     width:50%;
     display:flex;
     align-items:center;
@@ -533,7 +592,7 @@ width: 100%;
 }
 .clockOutCard{
     
-    background-color:#002333;
+  background-color:#564873;
     width:50%;
     display:flex;
     flex-direction:column;
@@ -561,7 +620,7 @@ width: 100%;
 .clockBtn{
     color:white;
     font-size:20px;
-    background-color:black;
+    background-color:#f26e22;
     border-radius:15px;
     width:150px;
 }
@@ -577,6 +636,7 @@ width: 100%;
     margin-top:3%;
     background-color:#F2F2F2;
     padding:1.7%;
+    overflow:auto;
 }
 //data display card end
 
@@ -585,7 +645,7 @@ width: 100%;
 
     width:20%;
     height:655px;
-    background-color:#2A558C;
+    background-color:#564873;
     margin-top:3%;
     margin-bottom:10%;
     margin-left:2%;
@@ -629,28 +689,7 @@ width: 100%;
 
 //need help end
 
-//Footer CSS Files
-.footer{
-    display:flex;
-    flex-direction:row;
-    bottom:0;
-    width:100%;
-    height:250px;
-    background-color:#0A2740;
-   }
-   .company{
-    margin-left:50%;
-    margin-top:2%;
-   }
-   .socials{
-    margin-left:5%;
-    margin-top:2%;
-   }
-   .LogoHolder{
-       margin-top:3%;
-       margin-left:15%;
-   }
-   //Footer CSS Files end
+
    //Header CSS FILES
    .Header{
    display:flex;
@@ -708,4 +747,159 @@ width: 100%;
    color:black;
    }
    //Header CSS FILES ENDING
+   .LogoutIcon{
+    display:none;
+  }
+  .menuIcon{
+    display:none;
+  }
+  .headerImage {
+    width: 7%;
+    height: 1%;
+    border-radius: 15px;
+    margin-right:55%;
+  }
+  .griditem{
+    width:100%;
+  }
+  .griditem2{
+    width:68%;
+  }
+  //Header CSS FILES ENDING
+  @media only screen and (max-width: 600px) {
+      
+    .TaskBar {
+      display:none;
+     
+    }
+    .UserInfo{
+      display:none;
+    }
+    .hr{
+      display:none;
+    }
+    .Files{
+      display:none;
+    }
+    .CardHolder {
+      flex-direction: column;
+      margin-top: 0%;
+    }
+    .buttonHolder {
+      flex-direction: row;
+    }
+    .dataDisplay {
+      height: 668px;
+      width: 97%;
+      margin-top: 0%;
+      margin-left:0%;
+    }
+    .line{
+      display:none;
+    }
+    .LinkNotification{
+      padding:5px;
+      height:10%;
+      font-size:14px;
+    }
+    .SystemNotification{
+      padding:5px;
+      height:10%;
+      font-size:13.5px;
+     }
+    .LogOutbutton {
+      width: 20%;
+      height: 50%;
+      display:none;
+    
+    }
+    .headerImage {
+      width: 30%;
+      height: 15%;
+      margin-bottom:2%;
+      border-radius: 15px;
+      margin-right:0;
+    }
+    .menuIcon{
+      margin-right:20%;
+      font-size:50px;
+      display:inline;
+      color:white;
+      background-color:grey;
+      border-radius:10px;
+      
+      margin-top:10%;
+      
+    }
+    .LogoutIcon{
+      font-size:40px;
+      color:grey;
+      margin-left:20%;
+      display:inline;
+      margin-top:10%;
+  
+    }
+    .searchIcon {
+      margin-left: 90.2%;
+     
+    }
+    
+    .crossIcon{
+      margin-left:90%;
+    }
+    .griditem{
+      width:100%;
+    }
+    .griditem2{
+      width:92%;
+    }
+   
+    .searchFieldsDiv {
+      grid-template-columns: repeat(1, 1fr); /* create 3 equal columns */
+    }
+    .overlay {
+    width: 75%;
+    height: 80%;
+    overflow:auto;
+    }
+    .searchButton {
+      margin-top: 5%;
+      margin-bottom: 2%;
+      margin-left:35%;
+    }
+    .input{
+      margin-left:20%;
+    }
+    
+    .Signup{
+      margin-left:25%;
+      
+    }
+    .PatientViewHolder{
+      
+      flex-direction:column;
+    }
+    .contactCard{
+      width:95%;  
+      margin-left:0; 
+    }
+    .EmergencyCard{
+      width:95%;
+      margin-left:0;  
+      margin-top:1%;
+    }
+    .ListHolder{
+     
+      flex-direction:column;
+    }
+    .PlanofCareList{
+      margin-left:0%;
+      width:98%;
+    }
+    .OtherList{
+      margin-left:0%;
+      width:98%;
+      
+    }
+  }
    `;

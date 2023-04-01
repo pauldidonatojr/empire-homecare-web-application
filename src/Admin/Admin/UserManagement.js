@@ -19,13 +19,14 @@ import Checkbox from '@mui/material/Checkbox';
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
-
+import {AuthContext} from '../../components/context';
  
 
 import { DataGrid } from '@mui/x-data-grid';
 
 
 function CareGiver() {
+  const { signOut } = React.useContext(AuthContext);
 
   const [checked1, setChecked1] = useState(false);
   const [age, setAge] = React.useState('');
@@ -425,7 +426,7 @@ const list = (anchor) => (
         ></MenuIcon>
         <img className="headerImage" src="./EmpireHomeCareLogo.png" />
        
-        <Button className="LogOutbutton" variant="outlined">
+        <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
         <LogoutIcon className="LogoutIcon"></LogoutIcon>

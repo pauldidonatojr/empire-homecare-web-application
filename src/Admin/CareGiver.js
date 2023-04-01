@@ -21,9 +21,10 @@ import { DataGrid } from '@mui/x-data-grid';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
-
+import {AuthContext} from '../components/context'
 
 function CareGiver() {
+  const { signOut } = React.useContext(AuthContext);
 
 
   const [age, setAge] = React.useState('');
@@ -398,7 +399,7 @@ const list = (anchor) => (
     </MenuIcon>
         <img className="headerImage" src="./EmpireHomeCareLogo.png" />
        
-        <Button className="LogOutbutton" variant="outlined">
+        <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
         <LogoutIcon className="LogoutIcon"></LogoutIcon>
@@ -526,16 +527,7 @@ width: 100%;
   height:50px;
   margin-bottom:2%;
   background-color:#F26E22;
-color:white;
-shadowColor: "#000",
-shadowOffset: {
-	width: 0,
-	height: 6,
-},
-shadowOpacity: 0.39,
-shadowRadius: 8.30,
-
-elevation: 13,
+  color:white;
 }
 .Holder{
   height:100%;
@@ -827,29 +819,12 @@ color:black;
     padding:5px;
     height:10%;
     font-size:14px;
-    shadowColor: "#000",
-shadowOffset: {
-width: 0,
-height: 7,
-},
-shadowOpacity: 0.41,
-shadowRadius: 9.11,
-
-elevation: 14,
+    
   }
   .SystemNotification{
     padding:5px;
     height:10%;
     font-size:13.5px;
-    shadowColor: "#000",
-shadowOffset: {
-width: 0,
-height: 7,
-},
-shadowOpacity: 0.41,
-shadowRadius: 9.11,
-
-elevation: 14,
     
   }
   .LogOutbutton {

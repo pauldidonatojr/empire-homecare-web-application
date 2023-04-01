@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
-import { List, ListItem, ListItemText } from "@material-ui/core";
-import { display } from "@mui/system";
 import PhoneIcon from '@mui/icons-material/Phone';
 import { useNavigate } from "react-router-dom";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Drawer from "@mui/material/Drawer";
+import MenuIcon from "@mui/icons-material/Menu";
+import LogoutIcon from "@mui/icons-material/Logout";
+import {AuthContext} from '../components/context'
+
+import { DataGrid } from '@mui/x-data-grid';
+import Footer from "../Footer";
+
+import Box from "@mui/material/Box";
 const Link = require("react-router-dom").Link;
 //HELLO I HAVE BEEN PUSHED
 const jsonData = [
@@ -52,6 +53,7 @@ const jsonData = [
 ];
 
 const PatientDetails =()=>{
+  const { signOut } = React.useContext(AuthContext);
   const navigate = useNavigate();
 
   const [ViewSelected, setViewSelected] = useState(2);
@@ -82,7 +84,7 @@ const PatientDetails =()=>{
       <div className="PatientViewHolder" >
 
         <Card className="contactCard">
-          <p style={{textAlign:"center",fontSize:"15px",color:"grey",fontWeight:"bold"}}>Contact Information</p>
+          <p style={{textAlign:"center",fontSize:"15px",color:"white",fontWeight:"bold"}}>Contact Information</p>
 
           <div className="phoneNumber">
           <PhoneIcon style={{color:"whitesmoke",fontSize:"30px",marginTop:"15%",marginRight:"5%"}} />
@@ -98,12 +100,12 @@ const PatientDetails =()=>{
           </div>
           <div className="phoneNumber">
           <LocationOnIcon style={{color:"whitesmoke",fontSize:"30px",marginTop:"6%"}} />
-          <p style={{fontWeight:"bold",color:"whitesmoke",fontSize:"25px"}}>262 A Upper Tooting Road, SW10DS</p>
+          <p style={{fontWeight:"bold",color:"whitesmoke",fontSize:"25px",textAlign:"center"}}>262 A Upper Tooting Road, SW10DS</p>
           </div>
         </Card>
 
         <Card className="EmergencyCard">
-          <p style={{textAlign:"center",fontSize:"15px",color:"grey",fontWeight:"bold"}}>Emergency Contact</p>
+          <p style={{textAlign:"center",fontSize:"15px",color:"white",fontWeight:"bold"}}>Emergency Contact</p>
 
           <div className="phoneNumber">
           <PhoneIcon style={{color:"whitesmoke",fontSize:"30px",marginTop:"15%",marginRight:"5%"}} />
@@ -118,75 +120,129 @@ const PatientDetails =()=>{
       </div>
     )
   }
+
+  const handleRowClick = (params) => {
+    const rowId = params.row.id;
+    // Navigate to the /visitdetails/:id URL using the navigate function and the rowId as a URL parameter
+    navigate(`/visitdetails/${rowId}`);
+  };
   const VisitView =()=> {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-      {jsonData.map((item) => (
-        <ListItem
-          className="ListItem"
-          key={item.id}
-          button
-          component={Link}
-          to={`/visitdetails/${item.id}`}
-        >
-          <ListItemText
-            primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-            className="ListText"
-          />
-          <ListItemText
-            primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-            className="ListText"
-          />
-          <ListItemText
-            primary={
-              <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-            }
-            className="ListText"
-          />
-          <ListItemText
-            primary={
-              <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-            }
-            className="ListText"
-          />
-        </ListItem>
-      ))}
-    </List>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows2}
+        columns={columns2}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+        onRowClick={handleRowClick}
+      />
+    </div>
     )
   }
-  const ColumnDiv = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">Name</p>
-        <p className="colume2">Address</p>
-        <p className="colume3">Clock In</p>
-        <p className="colume4">Clock Out</p>
-      </div>
-    );
-  };
-  function renderColumeName() {
-    switch (ViewSelected) {
-      case 2:
-        return <ColumnDiv />;
-      default:
-        break;
+   //UnScheduleView
+   const columns2 = [
+    { field: 'id', headerName: 'ID', width: 200 },
+    { field: 'name', headerName: 'Name', width: 200 },
+    { field: 'address', headerName: 'Address', width: 200 },
+    { field: 'clockOut', headerName: 'Expected Clock Out', width: 200 },
+    { field: 'clockIn', headerName: 'Expected Clock In', width: 200 },
+   
+  ];
+  
+  const rows2 = [
+    {id:1,name:"Nelson",address:"Upper Tooting 262 A",clockOut:"01:05 AM",clockIn:"01:05 AM"},
+   
+    
+  ];
+  
+
+
+  //
+  const [state, setState] = React.useState({
+    left: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
     }
-  }
 
+    setState({ ...state, [anchor]: open });
+  };
 
+  const list = (anchor) => (
+    <Box
+      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <div
+        style={{
+          backgroundColor: "#2E0F59",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          height: "680px",
+        }}
+      >
+        <p
+          className="Files"
+          style={{
+            fontSize: "20px",
+            color: "#F2B90F",
+            fontWeight: "bold",
+          }}
+        >
+          Files
+        </p>
+        <hr
+          className="line"
+          style={{ width: "50%", fontSize: "10px", opacity: "0.2" }}
+        />
 
+        <h3 onClick={PatientInfoPressed} style={{ color: "#F2B90F" }}>Patient Info</h3>
+        <h3 onClick={VisitsPressed} style={{ color: "#F2B90F" }}>Visits</h3>
+       
+      </div>
+    </Box>
+  );
+  //
     return (
         <Wrapper>
              <div className="Header">
+             <MenuIcon
+          className="menuIcon"
+          onClick={toggleDrawer("left", true)}
+          anchor={"left"}
+          open={state["left"]}
+          onClose={toggleDrawer("left", false)}
+        ></MenuIcon>
         <img className="headerImage" src="/EmpireHomeCareLogo.png" 
         onClick={() =>navigate("/CareGiverHome")}/>
-        <button className="button">Page 1</button>
-        <button className="button">Page 2</button>
-        <button className="button"> Page 3</button>
-        <button className="button"> Page 4</button>
-        <Button className="LogOutbutton" variant="outlined">
+       
+        <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
+        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+      </div>
+      <div style={{ display: "none" }}>
+        {["left"].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {list(anchor)}
+            </Drawer>
+          </React.Fragment>
+        ))}
       </div>
 
       <div className="CardHolder">
@@ -255,37 +311,10 @@ const PatientDetails =()=>{
         </Card>
 
         <Card className="dataDisplay">
-        {renderColumeName()}
+      
           {RenderViews()}</Card>
       </div>
-
-      <div className="footer">
-        <div className="LogoHolder">
-          <img src="/LogoBK.png"></img>
-        </div>
-        <div className="company">
-          <h6 style={{ color: "grey" }}>COMPANY</h6>
-          <h5 style={{ color: "white" }}>About Us</h5>
-          <h5 style={{ color: "white" }}>Contact Us</h5>
-          <h5 style={{ color: "white" }}>Careers</h5>
-          <h5 style={{ color: "white" }}>Press</h5>
-        </div>
-        <div className="socials">
-          <h6 style={{ color: "grey" }}>SOCIAL MEDIA</h6>
-          <h5 style={{ color: "white" }}>
-            <FacebookIcon fontSize="small" />
-            Facebook
-          </h5>
-          <h5 style={{ color: "white" }}>
-            <TwitterIcon fontSize="small" />
-            Twitter
-          </h5>
-          <h5 style={{ color: "white" }}>
-            <LinkedInIcon fontSize="small" />
-            Linkdin
-          </h5>
-        </div>
-      </div>
+ <Footer/>
         </Wrapper>
     )
 }
@@ -319,7 +348,8 @@ width: 100%;
   flex-direction:row;
 }
 .contactCard{
-  background-color:#012E40;
+    
+  background-color:#564873;
   border-radius:15px;
   padding:2%;
   width:50%;
@@ -335,7 +365,7 @@ width: 100%;
 .EmergencyCard{
   
   margin-left:2%;
-  background-color:#012E40;
+  background-color:#564873;
   border-radius:15px;
   padding:2%;
   width:50%;
@@ -415,7 +445,7 @@ color:black;
 
     width:20%;
     height:655px;
-    background-color:#2A558C;
+    background-color:#564873;
     margin-top:3%;
     margin-bottom:10%;
     margin-left:2%;
@@ -505,26 +535,160 @@ color:black;
   margin-top:0.5%;
 }
 //data display card end
-//Footer CSS Files
-.footer{
-    display:flex;
-    flex-direction:row;
-    bottom:0;
+
+   .LogoutIcon{
+    display:none;
+  }
+  .menuIcon{
+    display:none;
+  }
+  .headerImage {
+    width: 7%;
+    height: 1%;
+    border-radius: 15px;
+    margin-right:55%;
+  }
+  .griditem{
     width:100%;
-    height:250px;
-    background-color:#0A2740;
-   }
-   .company{
-    margin-left:50%;
-    margin-top:2%;
-   }
-   .socials{
-    margin-left:5%;
-    margin-top:2%;
-   }
-   .LogoHolder{
-       margin-top:3%;
-       margin-left:15%;
-   }
-   //Footer CSS Files end
+  }
+  .griditem2{
+    width:68%;
+  }
+  //Header CSS FILES ENDING
+  @media only screen and (max-width: 600px) {
+      
+    .TaskBar {
+      display:none;
+     
+    }
+    .UserInfo{
+      display:none;
+    }
+    .hr{
+      display:none;
+    }
+    .Files{
+      display:none;
+    }
+    .CardHolder {
+      flex-direction: column;
+      margin-top: 0%;
+    }
+    .buttonHolder {
+      flex-direction: row;
+    }
+    .dataDisplay {
+      height: 668px;
+      width: 97%;
+      margin-top: 0%;
+      margin-left:0%;
+    }
+    .line{
+      display:none;
+    }
+    .LinkNotification{
+      padding:5px;
+      height:10%;
+      font-size:14px;
+    }
+    .SystemNotification{
+      padding:5px;
+      height:10%;
+      font-size:13.5px;
+    }
+    .LogOutbutton {
+      width: 20%;
+      height: 50%;
+      display:none;
+    
+    }
+    .headerImage {
+      width: 30%;
+      height: 15%;
+      margin-bottom:2%;
+      border-radius: 15px;
+      margin-right:0;
+    }
+    .menuIcon{
+      margin-right:20%;
+      font-size:50px;
+      display:inline;
+      color:white;
+      background-color:grey;
+      border-radius:10px;
+      
+      margin-top:10%;
+      
+    }
+    .LogoutIcon{
+      font-size:40px;
+      color:grey;
+      margin-left:20%;
+      display:inline;
+      margin-top:10%;
+  
+    }
+    .searchIcon {
+      margin-left: 90.2%;
+     
+    }
+    
+    .crossIcon{
+      margin-left:90%;
+    }
+    .griditem{
+      width:100%;
+    }
+    .griditem2{
+      width:92%;
+    }
+   
+    .searchFieldsDiv {
+      grid-template-columns: repeat(1, 1fr); /* create 3 equal columns */
+    }
+    .overlay {
+    width: 75%;
+    height: 80%;
+    overflow:auto;
+    }
+    .searchButton {
+      margin-top: 5%;
+      margin-bottom: 2%;
+      margin-left:35%;
+    }
+    .input{
+      margin-left:20%;
+    }
+    
+    .Signup{
+      margin-left:25%;
+      
+    }
+    .PatientViewHolder{
+      
+      flex-direction:column;
+    }
+    .contactCard{
+      width:95%;  
+      margin-left:0; 
+    }
+    .EmergencyCard{
+      width:95%;
+      margin-left:0;  
+      margin-top:1%;
+    }
+    .ListHolder{
+     
+      flex-direction:column;
+    }
+    .PlanofCareList{
+      margin-left:0%;
+      width:98%;
+    }
+    .OtherList{
+      margin-left:0%;
+      width:98%;
+      
+    }
+  }
 `

@@ -1,18 +1,28 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
 import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
+import Footer from "../Footer";
+import Drawer from "@mui/material/Drawer";
+import MenuIcon from "@mui/icons-material/Menu";
+import LogoutIcon from "@mui/icons-material/Logout";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import {AuthContext} from '../components/context'
+
+import { useNavigate } from 'react-router-dom';
+
+import { DataGrid } from '@mui/x-data-grid';
 const Link = require("react-router-dom").Link;
 
+
 function Homepage() {
+  const { signOut } = React.useContext(AuthContext);
   const [ViewSelected, setViewSelected] = useState(1);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
@@ -23,71 +33,55 @@ function Homepage() {
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
-  const ColumnDiv = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">Name</p>
-        <p className="colume2">Address</p>
-        <p className="colume3">Clock In</p>
-        <p className="colume4">Clock Out</p>
-      </div>
-    );
-  };
-  const PatientViewColumDiv =() =>{
-    return(
-        <div className="columnName">
-        <p className="colume5">Name</p>
-        <p className="colume6">Address</p>
-      </div>
-    )
-  }
-  function renderColumeName() {
-    switch (ViewSelected) {
-      case 1:
-        return <ColumnDiv />;
-      case 2:
-        return <ColumnDiv />;
-      case 3:
-        return <ColumnDiv />;
-      case 4:
-        return (
-          <PatientViewColumDiv/>
-        );
-      default:
-        break;
-    }
-  }
+ 
 
   function Overlay() {
     return (
       <div className="overlay">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ marginLeft: "30%" }}>Set Filter from here !</h1>
+        <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
         <div className="searchFieldsDiv">
-          <TextField
-            className="Field"
-            id="outlined-basic"
-            label="Name"
-            variant="outlined"
-          />
-          <TextField
-            className="Field"
-            id="outlined-basic"
-            label="Address"
-            variant="outlined"
-          />
-          <TextField
-            className="Field"
-            id="outlined-basic"
-            label="Expected Time Out"
-            variant="outlined"
-          />
-          <TextField
-            className="Field"
-            id="outlined-basic"
-            label="Expected Time In"
-            variant="outlined"
-          />
+        <Grid className="griditem">
+        <TextField
+         
+          id="outlined-basic"
+          label="Name"
+          variant="outlined"
+        />
+      </Grid>
+      <Grid className="griditem">
+        <TextField
+         
+          id="outlined-basic"
+          label="Address"
+          variant="outlined"
+        />
+      </Grid>
+      <Grid className="griditem">
+        <TextField
+         
+          id="outlined-basic"
+          label="Address"
+          variant="outlined"
+        />
+      </Grid>
+      <Grid className="griditem">
+        <TextField
+         
+          id="outlined-basic"
+          label="Expected Time Out"
+          variant="outlined"
+        />
+      </Grid>
+      <Grid className="griditem">
+        <TextField
+         
+          id="outlined-basic"
+          label="Expected Time In"
+          variant="outlined"
+        />
+      </Grid>
+        
         </div>
         <Button className="searchButton" onClick={handleCloseOverlay}>
           Search
@@ -181,140 +175,225 @@ function Homepage() {
   //
   const TodayScheduleView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+        onRowClick={handleRowClick}
+      />
+    </div>
+      
     );
   };
+   //TodayScheduleView
+   const columns = [
+    { field: 'id', headerName: 'ID', width: 200 },
+    { field: 'name', headerName: 'Name', width: 200 },
+    { field: 'address', headerName: 'Address', width: 200 },
+    { field: 'clockOut', headerName: 'Expected Clock Out', width: 200 },
+    { field: 'clockIn', headerName: 'Expected Clock In', width: 200 },
+   
+  ];
+  
+  const rows = [
+    {id:1,name:"Hec tor",address:"Upper Tooting 262 A",clockOut:"01:05 AM",clockIn:"01:05 AM"},
+   
+    
+  ];
   const UnScheduleView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows2}
+        columns={columns2}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+        onRowClick={handleRowClick}
+      />
+    </div>
     );
+  };
+   //UnScheduleView
+   const columns2 = [
+    { field: 'id', headerName: 'ID', width: 200 },
+    { field: 'name', headerName: 'Name', width: 200 },
+    { field: 'address', headerName: 'Address', width: 200 },
+    { field: 'clockOut', headerName: 'Expected Clock Out', width: 200 },
+    { field: 'clockIn', headerName: 'Expected Clock In', width: 200 },
+   
+  ];
+  
+  const rows2 = [
+    {id:1,name:"Nelson",address:"Upper Tooting 262 A",clockOut:"01:05 AM",clockIn:"01:05 AM"},
+   
+    
+  ];
+
+  
+
+  const navigate = useNavigate();
+
+  const handleRowClick = (params) => {
+    const rowId = params.row.id;
+    // Navigate to the /visitdetails/:id URL using the navigate function and the rowId as a URL parameter
+    navigate(`/visitdetails/${rowId}`);
   };
   const VisitView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
+      <div style={{ height: "100%", width: '100%' }}>
+      <DataGrid
+        rows={rows3}
+        columns={columns3}
+        pageSize={5}
+        rowsPerPageOptions={[15]}
+        checkboxSelection
+        onRowClick={handleRowClick}
+      />
+    </div>
     );
   };
+   //VisitView
+   const columns3 = [
+    { field: 'id', headerName: 'ID', width: 200 },
+    { field: 'name', headerName: 'Name', width: 200 },
+    { field: 'address', headerName: 'Address', width: 200 },
+    { field: 'clockOut', headerName: 'Expected Clock Out', width: 200 },
+    { field: 'clockIn', headerName: 'Expected Clock In', width: 200 },
+   
+  ];
+  
+  const rows3 = [
+    {id:1,name:"Jacky",address:"Upper Tooting 262 A",clockOut:"01:05 AM",clockIn:"01:05 AM"},
+   
+    
+  ];
+
+  const handleRowClick2 = (params) => {
+    const rowId = params.row.id;
+    // Navigate to the /visitdetails/:id URL using the navigate function and the rowId as a URL parameter
+    navigate(`/patientdetails/${rowId}`);
+  };
+  
   const PatientView = () => {
     return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData2.map((item) => (
-          <ListItem className="ListItem"
-          key={item.id}
-          button
-          component={Link}
-          to={`/patientdetails/${item.id}`}>
-            <ListItemText  className="ListText" primary={<p style={{ fontSize:  "25px" }}>{item.name}</p> } />
-            <ListItemText  className="ListText" primary={<p style={{ fontSize: "20px" }}>{item.address}</p> } />
-          </ListItem>
-        ))}
-      </List>
+     
+         <div style={{ height: "100%", width: '100%' }}>
+         <DataGrid
+           rows={rows5}
+           columns={columns5}
+           pageSize={5}
+           rowsPerPageOptions={[15]}
+           checkboxSelection
+           onRowClick={handleRowClick2}
+         />
+       </div>
     );
   };
+  //VisitView
+  const columns5 = [
+    { field: 'id', headerName: 'ID', width: 200 },
+    { field: 'name', headerName: 'Name', width: 300 },
+    { field: 'address', headerName: 'Address', width: 300 },
+   
+  ];
+  
+  const rows5 = [
+    {id:1,name:"Helen",address:"Upper Tooting 262 A"},
+   
+    
+  ];
+
+  //
+  const [state, setState] = React.useState({
+    left: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <Box
+      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <div
+        style={{
+          backgroundColor: "#2E0F59",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          height: "680px",
+        }}
+      >
+        <p
+          className="Files"
+          style={{
+            fontSize: "20px",
+            color: "#F2B90F",
+            fontWeight: "bold",
+          }}
+        >
+          Files
+        </p>
+        <hr
+          className="line"
+          style={{ width: "50%", fontSize: "10px", opacity: "0.2" }}
+        />
+
+        <h3  onClick={TodaySchedulePressed} style={{ color: "#F2B90F" }}>Today's Schedule Visits</h3>
+        <h3  onClick={unScheduledPressed} style={{ color: "#F2B90F" }}>Un-Scheduled Visits</h3>
+        <h3  onClick={AllVisitsPressed} style={{ color: "#F2B90F" }}>All Visits</h3>
+        <h3  onClick={PatientListPressed} style={{ color: "#F2B90F" }}>Patient List</h3>
+      
+      </div>
+    </Box>
+  );
+  //
 
   return (
     <Wrapper>
       <div className="Header">
+      <MenuIcon
+          className="menuIcon"
+          onClick={toggleDrawer("left", true)}
+          anchor={"left"}
+          open={state["left"]}
+          onClose={toggleDrawer("left", false)}
+        ></MenuIcon>
         <img className="headerImage" src="./EmpireHomeCareLogo.png" />
-        <button className="button">Page 1</button>
-        <button className="button">Page 2</button>
-        <button className="button"> Page 3</button>
-        <button className="button"> Page 4</button>
-        <Button className="LogOutbutton" variant="outlined">
+       
+        <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
+        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+      </div>
+      <div style={{ display: "none" }}>
+        {["left"].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {list(anchor)}
+            </Drawer>
+          </React.Fragment>
+        ))}
       </div>
 
       <div className="CardHolder">
@@ -397,40 +476,14 @@ function Homepage() {
         </Card>
 
         <Card className="dataDisplay">
-          {renderColumeName()}
+        
           <SearchIcon className="searchIcon" onClick={handleClickIcon} />
           {isOverlayOpen && <Overlay />}
           {RenderViews()}
         </Card>
       </div>
 
-      <div className="footer">
-        <div className="LogoHolder">
-          <img src="/LogoBK.png"></img>
-        </div>
-        <div className="company">
-          <h6 style={{ color: "grey" }}>COMPANY</h6>
-          <h5 style={{ color: "white" }}>About Us</h5>
-          <h5 style={{ color: "white" }}>Contact Us</h5>
-          <h5 style={{ color: "white" }}>Careers</h5>
-          <h5 style={{ color: "white" }}>Press</h5>
-        </div>
-        <div className="socials">
-          <h6 style={{ color: "grey" }}>SOCIAL MEDIA</h6>
-          <h5 style={{ color: "white" }}>
-            <FacebookIcon fontSize="small" />
-            Facebook
-          </h5>
-          <h5 style={{ color: "white" }}>
-            <TwitterIcon fontSize="small" />
-            Twitter
-          </h5>
-          <h5 style={{ color: "white" }}>
-            <LinkedInIcon fontSize="small" />
-            Linkdin
-          </h5>
-        </div>
-      </div>
+      <Footer/>
     </Wrapper>
   );
 }
@@ -464,34 +517,45 @@ width: 100%;
 
 // overlay css end
 .overlay{
-    position: fixed;
-    margin-left:09%;
-    width: 40%;
-    height: 70%;
-    z-index:1000;
-    background-color:white;
-    padding:1%;
+  position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 75%;
+height: 75%;
+z-index: 1000;
+background-color: white;
+padding: 1%;
 }
 .crossIcon{
     margin-left:95%;
     margin-top:2%;
 }
 .searchFieldsDiv{
-    justify-content:center;
-    align-item:center;
-    display:flex;
-    flex-direction:column;
-    margin-left:30%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* create 3 equal columns */
+  grid-gap: 10px; /* add some space between the columns */
+  margin-top: 2.5%;
+  width: 85%;
+  margin-left: 10%;
 }
 .Field{
     width:50%;
     margin:2%;
 }
 .searchButton{
-    margin-left:40%;
-    margin-top:5%;
+  margin-left: 35%;
+  margin-top: 5%;
+  width:30%;
+  height:08%;
+  background-color:#f26e22;
+  color:white;
+  font-weight:bold;
 }
-
+.searchButton:hover {
+  background-color:#2E0F59;
+  color:white;
+}
 //overlay css end
 
 
@@ -513,7 +577,7 @@ width: 100%;
 
 //data display card
 .dataDisplay{
-    height:600px;
+    height:595px;
     width:70%;
     margin-left:2%;
     margin-top:3%;
@@ -570,16 +634,16 @@ width: 100%;
     margin-top:0.5%;
 }
 .searchIcon{
-    position:absolute;
-    z-index:999;
-    padding:1%;
-    font-size:50px;
-    color:white;
-    margin-left:65%;
-    cursor:pointer;
-    background-color:grey;
-    border-radius:500px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  z-index: 999;
+  padding: 1%;
+  font-size: 25px;
+  color: white;
+  margin-left: 69.2%;
+  cursor: pointer;
+  background-color: grey;
+  border-radius: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
 
 //data display card end
@@ -590,7 +654,7 @@ width: 100%;
 
     width:20%;
     height:650px;
-    background-color:#2A558C;
+    background-color:#564873;
     margin-top:3%;
     margin-bottom:10%;
     margin-left:2%;
@@ -617,28 +681,7 @@ width: 100%;
 
 //UserInfo Ending
 
-//Footer CSS Files
-.footer{
- display:flex;
- flex-direction:row;
- bottom:0;
- width:100%;
- height:250px;
- background-color:#0A2740;
- margin-top:0%;
-}
-.company{
- margin-left:50%;
- margin-top:2%;
-}
-.socials{
- margin-left:5%;
- margin-top:2%;
-}
-.LogoHolder{
-    margin-top:3%;
-    margin-left:15%;
-}
+
 //Footer CSS Files end
 
 //Header CSS FILES
@@ -650,11 +693,7 @@ margin-top:0.5%;
 width:93%;
 background-color:white;
 }
-.headerImage{
-  width:7%;
-  height:1%;
-  border-radius:15px;
-  }
+
 .headerImage:hover{
 animation: wave 1s infinite;
 
@@ -698,6 +737,135 @@ border-radius:10px;
 color:black;
 }
 //Header CSS FILES ENDING
+.LogoutIcon{
+  display:none;
+}
+.menuIcon{
+  display:none;
+}
+.headerImage {
+  width: 7%;
+  height: 1%;
+  border-radius: 15px;
+  margin-right:55%;
+}
+.griditem{
+  width:100%;
+}
+.griditem2{
+  width:68%;
+}
+//Header CSS FILES ENDING
+@media only screen and (max-width: 600px) {
+    
+  .TaskBar {
+    display:none;
+   
+  }
+  .UserInfo{
+    display:none;
+  }
+  .hr{
+    display:none;
+  }
+  .Files{
+    display:none;
+  }
+  .CardHolder {
+    flex-direction: column;
+    margin-top: 0%;
+  }
+  .buttonHolder {
+    flex-direction: row;
+  }
+  .dataDisplay {
+    height: 668px;
+    width: 97%;
+    margin-top: 0%;
+    margin-left:0%;
+  }
+  .line{
+    display:none;
+  }
+  .LinkNotification{
+    padding:5px;
+    height:10%;
+    font-size:14px;
+  }
+  .SystemNotification{
+    padding:5px;
+    height:10%;
+    font-size:13.5px;
+    
+  }
+  .LogOutbutton {
+    width: 20%;
+    height: 50%;
+    display:none;
+  
+  }
+  .headerImage {
+    width: 30%;
+    height: 15%;
+    margin-bottom:2%;
+    border-radius: 15px;
+    margin-right:0;
+  }
+  .menuIcon{
+    margin-right:20%;
+    font-size:50px;
+    display:inline;
+    color:white;
+    background-color:grey;
+    border-radius:10px;
+    
+    margin-top:10%;
+    
+  }
+  .LogoutIcon{
+    font-size:40px;
+    color:grey;
+    margin-left:20%;
+    display:inline;
+    margin-top:10%;
 
+  }
+  .searchIcon {
+    margin-left: 90.2%;
+   
+  }
+  
+  .crossIcon{
+    margin-left:90%;
+  }
+  .griditem{
+    width:100%;
+  }
+  .griditem2{
+    width:92%;
+  }
+ 
+  .searchFieldsDiv {
+    grid-template-columns: repeat(1, 1fr); /* create 3 equal columns */
+  }
+  .overlay {
+  width: 75%;
+  height: 80%;
+  overflow:auto;
+  }
+  .searchButton {
+    margin-top: 5%;
+    margin-bottom: 2%;
+    margin-left:35%;
+  }
+  .input{
+    margin-left:20%;
+  }
+  
+  .Signup{
+    margin-left:25%;
+    
+  }
+}
 
 `;

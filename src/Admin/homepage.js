@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -15,108 +15,104 @@ import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../Footer";
 import { DataGrid } from '@mui/x-data-grid';
-//
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
-
-
-//
-
+import {AuthContext} from '../components/context'
+import { getMembers } from "../API/membersApi";
 
 function Homepage() {
+  const [memberData, setMemberData] = useState([]);
+  const { signOut } = React.useContext(AuthContext);
 
   const [age, setAge] = React.useState('');
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-
-
-
   const [ViewSelected, setViewSelected] = useState(1);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const navigate = useNavigate();
-//
-const [state, setState] = React.useState({
-  left: false,
-});
+  //
+  const [state, setState] = React.useState({
+    left: false,
+  });
 
-const toggleDrawer = (anchor, open) => (event) => {
-  if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-    return;
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+
+    >
+
+      <div style={{ backgroundColor: "#2E0F59", display: "flex", flexDirection: "column", alignItems: "center", height: "680px" }}>
+
+        <p
+          className="Files"
+          style={{
+            fontSize: "20px",
+            color: "#F2B90F",
+            fontWeight: "bold",
+          }}
+        >
+          Files
+        </p>
+        <hr className="line" style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
+
+        <h3 onClick={MemberPressed} style={{ color: "#F2B90F" }}>Members</h3>
+        <h3 onClick={CareGiverPressed} style={{ color: "#F2B90F" }}>Care Givers</h3>
+        <h3 onClick={VisitPressed} style={{ color: "#F2B90F" }}> Visits</h3>
+        <h3 onClick={ActionPressed} style={{ color: "#F2B90F" }}>Action</h3>
+        <h3 onClick={BillingPressed} style={{ color: "#F2B90F" }} >Billings</h3>
+        <h3 onClick={ReportPressed} style={{ color: "#F2B90F" }} >Report</h3>
+        <h3 onClick={AdminPressed} style={{ color: "#F2B90F" }}>Admin</h3>
+      </div>
+
+
+
+    </Box>
+  );
+  //
+
+  function CareGiverPressed() {
+
+    navigate("/CareGiver");
   }
 
-  setState({ ...state, [anchor]: open });
-};
+  function VisitPressed() {
+    navigate("/Visit");
 
-const list = (anchor) => (
-  <Box
-    sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-    role="presentation"
-    onClick={toggleDrawer(anchor, false)}
-    onKeyDown={toggleDrawer(anchor, false)}
-    
-  >
-    
-    <div style={{backgroundColor:"#2E0F59",display:"flex",flexDirection:"column",alignItems:"center",height:"680px"}}>
-    
-    <p
-           className="Files"
-            style={{
-              fontSize: "20px",
-              color: "#F2B90F",
-              fontWeight: "bold",
-            }}
-          >
-            Files
-          </p>
-          <hr className="line" style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
-        
-     <h3  onClick={MemberPressed} style={{color:"#F2B90F"}}>Members</h3>
-     <h3  onClick={CareGiverPressed} style={{color:"#F2B90F"}}>Care Givers</h3>
-     <h3 onClick={VisitPressed}  style={{color:"#F2B90F"}}> Visits</h3>
-     <h3 onClick={ActionPressed} style={{color:"#F2B90F"}}>Action</h3>
-     <h3 onClick={BillingPressed} style={{color:"#F2B90F"}} >Billings</h3>
-     <h3 onClick={ReportPressed} style={{color:"#F2B90F"}} >Report</h3>
-     <h3 onClick={AdminPressed} style={{color:"#F2B90F"}}>Admin</h3>
-     </div>
-    
-    
-   
-  </Box>
-);
-//
+  }
+  function ActionPressed() {
+    navigate("/Action");
 
- function CareGiverPressed (){
+  }
+  function BillingPressed() {
+    navigate("/Billing");
 
-  navigate("/CareGiver");
- }
+  }
+  function ReportPressed() {
+    navigate("/Report");
 
- function VisitPressed(){
-  navigate("/Visit");
-  
- }
- function ActionPressed (){
-  navigate("/Action");
-  
- }
- function BillingPressed (){
-  navigate("/Billing");
-  
- }
- function ReportPressed(){
-  navigate("/Report");
-  
- }
- function  AdminPressed(){
-  navigate("/Admin");
-  
- }
- function MemberPressed (){
-  setViewSelected(1);
- }
+  }
+  function AdminPressed() {
+    navigate("/Admin");
+
+  }
+  function MemberPressed() {
+    setViewSelected(1);
+  }
 
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
@@ -124,160 +120,160 @@ const list = (anchor) => (
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
-  
+
 
   function Overlay() {
-    
+
     return (
-      
+
       <div className="overlay">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
-        <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Members</p>
+        <h1 style={{ textAlign: "center" }}>Set Filter from here !</h1>
+        <p style={{ fontSize: 15, fontWeight: "bold", color: "#042940", textAlign: "center" }}>Members</p>
         <div className="searchFieldsDiv">
-        
-          
-        <Grid className="griditem">
-          <TextField
-           
-            id="outlined-basic"
-            label="Member ID"
-            variant="outlined"
-          />
-        </Grid>
-        <Grid className="griditem">
-        <TextField
-            id="outlined-basic"
-            label="Admission ID"
-            variant="outlined"
-          />
-        </Grid>
-          
-        <Grid className="griditem">
-        
-        <TextField
-           
-            id="outlined-basic"
-            label="First Name"
-            variant="outlined"
-          />
-        </Grid>
-        <Grid className="griditem">
-        
-        <TextField
-            id="outlined-basic"
-            label="Last Name"
-            variant="outlined"
-          />
-          
-        </Grid>
 
-        <Grid className="griditem">
-        
-        <TextField
-           
-            id="outlined-basic"
-            label="Phone Number"
-            variant="outlined"
-          />
-          
-        </Grid>
-          
 
-        <Grid className="griditem2">
-        
-        <Box >
-      <FormControl fullWidth>
-        <InputLabel >Status</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Status"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>  
-        </Grid>
-        <Grid className="griditem2" >
-        
-        <Box>
-      <FormControl fullWidth>
-        <InputLabel >Cordinator</InputLabel>
-        <Select
-        
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Status"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-         </Grid>
-         <Grid className="griditem2">
-        
-        <Box >
-      <FormControl fullWidth>
-        <InputLabel >MCO</InputLabel>
-        <Select
-        
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Status"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-         </Grid>
-         <Grid className="griditem2">
-        
-        <Box>
-      <FormControl fullWidth>
-        <InputLabel >Office</InputLabel>
-        <Select
-        
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Status"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-         </Grid>
-         <Grid className="griditem2">
-         <TextField
-           
-            id="outlined-basic"
-            label="Vender Tax ID"
-            variant="outlined"
-          />
-         </Grid>
-    
+          <Grid className="griditem">
+            <TextField
+
+              id="outlined-basic"
+              label="Member ID"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid className="griditem">
+            <TextField
+              id="outlined-basic"
+              label="Admission ID"
+              variant="outlined"
+            />
+          </Grid>
+
+          <Grid className="griditem">
+
+            <TextField
+
+              id="outlined-basic"
+              label="First Name"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid className="griditem">
+
+            <TextField
+              id="outlined-basic"
+              label="Last Name"
+              variant="outlined"
+            />
+
+          </Grid>
+
+          <Grid className="griditem">
+
+            <TextField
+
+              id="outlined-basic"
+              label="Phone Number"
+              variant="outlined"
+            />
+
+          </Grid>
+
+
+          <Grid className="griditem2">
+
+            <Box >
+              <FormControl fullWidth>
+                <InputLabel >Status</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid className="griditem2" >
+
+            <Box>
+              <FormControl fullWidth>
+                <InputLabel >Cordinator</InputLabel>
+                <Select
+
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid className="griditem2">
+
+            <Box >
+              <FormControl fullWidth>
+                <InputLabel >MCO</InputLabel>
+                <Select
+
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid className="griditem2">
+
+            <Box>
+              <FormControl fullWidth>
+                <InputLabel >Office</InputLabel>
+                <Select
+
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid className="griditem2">
+            <TextField
+
+              id="outlined-basic"
+              label="Vender Tax ID"
+              variant="outlined"
+            />
+          </Grid>
+
         </div>
         <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay}>
           Search
         </Button>
       </div>
-      
+
     );
   }
 
@@ -294,7 +290,7 @@ const list = (anchor) => (
   }
   //
   const jsonData = [
-    
+
     {
       id: 1,
       name: "Wanda De Martinez",
@@ -329,65 +325,80 @@ const list = (anchor) => (
     },
   ];
   const MembersView = () => {
-  
+
     return (
       <div style={{ height: "100%", width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[15]}
-        checkboxSelection
-      />
-    </div>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[15]}
+          checkboxSelection
+        />
+      </div>
     );
   };
-  
+
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'AdmissionId', headerName: 'Admission ID', width: 100 },
-    { field: 'firstName', headerName: 'First Name', width: 100 },
-    { field: 'lastName', headerName: 'Last name', width: 100 },
-    { field: 'phoneNumber', headerName: 'Phone Number', width: 120 },
-    { field: 'status', headerName: 'Status', width: 100 },
-    { field: 'cordinator', headerName: 'Cordinator', width: 100 },
-    { field: 'mco', headerName: 'MCO', width: 100 },
-    { field: 'office', headerName: 'Office', width: 100 },
-    { field: 'vendorTax', headerName: 'Vendor Tax', width: 100 },
-    
+    { field: 'Name', headerName: 'Name', width: 100 },
+    { field: 'Gender', headerName: 'Gender', width: 100 },
+    { field: 'MCOName', headerName: 'MCO Name', width: 100 },
+    { field: 'Discipline', headerName: 'discipline', width: 100 },
+    { field: 'FirstDayofService', headerName: 'Joining Date', width: 100 },
+    { field: 'Location', headerName: 'Location', width: 120 },
+    { field: 'Status', headerName: 'Status', width: 100 },
+    { field: 'AdmissionID', headerName: 'Admission ID', width: 100 },
+    { field: 'SSN', headerName: 'SSN', width: 100 },
+    { field: 'Phone', headerName: 'Phone', width: 100 },
+
   ];
-  
+
   const rows = [
-    {id:1,AdmissionId:"4578",firstName:"Jenifer",lastName:"Awston",phoneNumber:"02548965478",status:"Active",cordinator:"Adam Fernandez",mco:"Delta",office:"Homecare",vendorTax:"51s"},
-    {id:2,AdmissionId:"4578",firstName:"Jenifer",lastName:"Awston",phoneNumber:"02548965478",status:"Active",cordinator:"Adam Fernandez",mco:"Delta",office:"Homecare",vendorTax:"51s"},
-    
-    {id:3,AdmissionId:"4578",firstName:"Jenifer",lastName:"Awston",phoneNumber:"02548965478",status:"Active",cordinator:"Adam Fernandez",mco:"Delta",office:"Homecare",vendorTax:"51s"},
-    
-    {id:4,AdmissionId:"4578",firstName:"Jenifer",lastName:"Awston",phoneNumber:"02548965478",status:"Active",cordinator:"Adam Fernandez",mco:"Delta",office:"Homecare",vendorTax:"51s"},
-    
-    {id:5,AdmissionId:"4578",firstName:"Jenifer",lastName:"Awston",phoneNumber:"02548965478",status:"Active",cordinator:"Adam Fernandez",mco:"Delta",office:"Homecare",vendorTax:"51s"},
-    
-    {id:6,AdmissionId:"4578",firstName:"Jenifer",lastName:"Awston",phoneNumber:"02548965478",status:"Active",cordinator:"Adam Fernandez",mco:"Delta",office:"Homecare",vendorTax:"51s"},
-    
-    {id:7,AdmissionId:"4578",firstName:"Jenifer",lastName:"Awston",phoneNumber:"02548965478",status:"Active",cordinator:"Adam Fernandez",mco:"Delta",office:"Homecare",vendorTax:"51s"},
-   
+    // { id: 1, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
+    // { id: 2, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
+
+    // { id: 3, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
+
+    // { id: 4, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
+
+    // { id: 5, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
+
+    // { id: 6, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
+
+    // { id: 7, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
+
   ];
+
+
+  function populateRows(){
+    console.log("|Hey")
+    getMembers().then(res => {
+      setMemberData(res.data);
+    });
+  }
+
+  // useEffect(() => {
+    
+  // }, [memberData]);
+
+  populateRows();
 
   return (
     <Wrapper>
-     
+
       <div className="Header">
-      
-      <MenuIcon
-    className="menuIcon"
-    onClick={toggleDrawer('left', true)}
-     anchor={'left'}
-     open={state['left']}
-     onClose={toggleDrawer('left', false)}>
-      
-    </MenuIcon>
+
+        <MenuIcon
+          className="menuIcon"
+          onClick={toggleDrawer('left', true)}
+          anchor={'left'}
+          open={state['left']}
+          onClose={toggleDrawer('left', false)}>
+
+        </MenuIcon>
         <img className="headerImage" src="./EmpireHomeCareLogo.png" />
-        <Button className="LogOutbutton" variant="outlined">
+        <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
         <LogoutIcon className="LogoutIcon"></LogoutIcon>
@@ -397,21 +408,21 @@ const list = (anchor) => (
         <Button className="LinkNotification"> Link Notification </Button>
         <Button className="SystemNotification"> System Notification </Button>
       </div>
-      <div style={{display:"none"}}>
-{['left'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <Drawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {list(anchor)}
-          </Drawer>
-        </React.Fragment>
-      ))}
+      <div style={{ display: "none" }}>
+        {['left'].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {list(anchor)}
+            </Drawer>
+          </React.Fragment>
+        ))}
       </div>
-   
+
       <div className="CardHolder">
         <Card className="TaskBar">
           <div className="UserInfo">
@@ -433,7 +444,7 @@ const list = (anchor) => (
           </div>
           <hr />
           <p
-           className="Files"
+            className="Files"
             style={{
               marginLeft: "45%",
               fontSize: "20px",
@@ -448,7 +459,7 @@ const list = (anchor) => (
             <Button
               className="navigationButton"
               onClick={MemberPressed}>
-           
+
               <p
                 style={{
                   fontSize: "15px",
@@ -461,7 +472,7 @@ const list = (anchor) => (
             </Button>
 
             <Button
-            onClick={CareGiverPressed}
+              onClick={CareGiverPressed}
               className="navigationButton"
             >
               <p
@@ -471,9 +482,9 @@ const list = (anchor) => (
               </p>
             </Button>
 
-            <Button  
-             onClick={VisitPressed}  
-             >
+            <Button
+              onClick={VisitPressed}
+            >
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
@@ -485,7 +496,7 @@ const list = (anchor) => (
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-               Action
+                Action
               </p>
             </Button>
             <Button onClick={BillingPressed} className="navigationButton">
@@ -513,15 +524,17 @@ const list = (anchor) => (
         </Card>
 
         <Card className="dataDisplay">
-         
-         
+
+
           {isOverlayOpen && <Overlay />}
           <SearchIcon className="searchIcon" onClick={handleClickIcon} />
-          {RenderViews()}
+          {
+          RenderViews()
+          }
         </Card>
       </div>
 
-     <Footer/>
+      <Footer />
     </Wrapper>
   );
 }
@@ -773,7 +786,7 @@ const Wrapper = styled.section`
     margin-right:55%;
   }
   .headerImage:hover {
-    animation: wave 1s infinite;
+    /* animation: wave 1s infinite; */
   }
   @keyframes wave {
     0% {
@@ -852,29 +865,29 @@ const Wrapper = styled.section`
       padding:5px;
       height:10%;
       font-size:14px;
-      shadowColor: "#000",
-shadowOffset: {
-	width: 0,
-	height: 7,
-},
-shadowOpacity: 0.41,
-shadowRadius: 9.11,
+      /* shadow-color: #000;
+     .shadowOffset {
+      width: 0;
+      height: 7;
+     }; */
+    /* shadowOpacity: 0.41;
+    shadowRadius: 9.11; */
 
-elevation: 14,
+    /* elevation: 14; */
     }
     .SystemNotification{
       padding:5px;
       height:10%;
       font-size:13.5px;
-      shadowColor: "#000",
-shadowOffset: {
-	width: 0,
-	height: 7,
-},
-shadowOpacity: 0.41,
-shadowRadius: 9.11,
+      /* shadow-color: "#000",
+      shadow-offset: {
+      width: 0;
+      height: 7;
+    }; */
+    /* shadow-opacity: 0.41;
+    shadow-radius: 9.11; */
 
-elevation: 14,
+    elevation: 14;
       
     }
     .LogOutbutton {
@@ -931,7 +944,5 @@ elevation: 14,
       margin-top: 5%;
       margin-bottom: 2%;
     }
-    
-    
   }
 `;

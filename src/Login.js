@@ -5,30 +5,50 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from './components/context'
+import { loginUser } from './API/authAPI';
+
+
 
 function Login() {
+  const { signIn } = React.useContext(AuthContext);
   const navigate = useNavigate();
   const [selectedRadio, setSelectedRadio] = useState("");
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  
+
   const [showCard, setShowCard] = useState(false);
   useEffect(() => {
     setShowCard(true);
   }, []);
 
+
+  const loginHandle = (username, password, usertype) => {
+    signIn(username, usertype, password);
+  }
+
   const handleSignIn = (selectedRadio) => {
     switch (selectedRadio) {
       case "Admin":
+        if (username != null && password != null) {
+          loginUser(username, password).then(res => {
+            if (res.data.result == "success") {
+              loginHandle(username, password, 'admin');
               navigate("/AdminHome");
+            }
+          });
+        }
         break;
       case "CareGiver":
         //NAVIGATE TO CAREGIVER HOMEPAGE
+        loginHandle(username, password, 'caregiver');
         navigate("/CareGiverHome");
+
         break;
       case "Patient":
         //NAVIGATE TO PATIENT HOMEPAGE
         navigate("/PatientHome");
+        loginHandle(username, password, 'patient');
         break;
       default:
         break;
@@ -52,15 +72,15 @@ function Login() {
         </div>
       </Card>
       <div className="cardHolder">
-        <Card  className={`DesignCard ${showCard ? 'show' : ''}`}>
-          <h1 style={{ color: "white",fontSize:"35px" }}>
-          Welcome to
-      Empire Homecare
-Agency LLC
+        <Card className={`DesignCard ${showCard ? 'show' : ''}`}>
+          <h1 style={{ color: "white", fontSize: "35px" }}>
+            Welcome to
+            Empire Homecare
+            Agency LLC
           </h1>
           <div className="subText">
             <h4 style={{ color: "white" }}>
-            Empire Homecare Agency LLC is a living legacy that reflects our commitment to improving the quality of life of our clients. As a provider of in-home care in Pennsylvania, we treat our clients as members of our own family.
+              Empire Homecare Agency LLC is a living legacy that reflects our commitment to improving the quality of life of our clients. As a provider of in-home care in Pennsylvania, we treat our clients as members of our own family.
             </h4>
           </div>
         </Card>

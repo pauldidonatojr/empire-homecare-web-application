@@ -20,8 +20,8 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
+import {AuthContext} from '../../components/context'
 const Link = require("react-router-dom").Link;
-
 
 function Visit() {
 
@@ -512,6 +512,7 @@ const list = (anchor) => (
   ];
   //
 
+  const { signOut } = React.useContext(AuthContext);
   return (
     <Wrapper>
       <div className="Header">
@@ -525,7 +526,7 @@ const list = (anchor) => (
     </MenuIcon>
         <img className="headerImage" src="./EmpireHomeCareLogo.png" />
     
-        <Button className="LogOutbutton" variant="outlined">
+        <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
         <LogoutIcon className="LogoutIcon"></LogoutIcon>
