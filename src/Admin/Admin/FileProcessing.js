@@ -7,6 +7,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 //
+
+import { useNavigate } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -22,6 +24,7 @@ import {AuthContext} from '../../components/context'
 
 
 function PendingQueuePlacement() {
+  const navigate = useNavigate();
   const { signOut } = React.useContext(AuthContext);
   const [ViewSelected, setViewSelected] = useState(3);
 
@@ -423,6 +426,13 @@ function Overlay4() {
     };
   
     const list = (anchor) => (
+      <div  style={{
+        height: "100vh",
+        backgroundColor: "#2E0F59",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+      }}>
       <Box
         sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
         role="presentation"
@@ -458,6 +468,7 @@ function Overlay4() {
         
         </div>
       </Box>
+      </div>
     );
     //
 
@@ -471,12 +482,12 @@ function Overlay4() {
           open={state["left"]}
           onClose={toggleDrawer("left", false)}
         ></MenuIcon>
-        <img className="headerImage" src="./EmpireHomeCareLogo.png" />
+        <img className="headerImage" src="./EmpireHomeCareLogo.png" onClick={() =>navigate("/AdminHome")}/>
        
         <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
-        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+        <LogoutIcon className="LogoutIcon" onClick={signOut}></LogoutIcon>
       </div>
       <div style={{ display: "none" }}>
         {["left"].map((anchor) => (

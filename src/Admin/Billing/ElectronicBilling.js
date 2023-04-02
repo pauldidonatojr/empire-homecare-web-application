@@ -14,6 +14,8 @@ import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 import { DataGrid } from '@mui/x-data-grid';
 import Footer from "../../Footer";
+
+import { useNavigate } from "react-router-dom";
 //
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -23,6 +25,7 @@ import {AuthContext} from '../../components/context'
 
 function Visit() {
   const [age, setAge] = React.useState("");
+  const navigate = useNavigate();
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -335,6 +338,13 @@ function Visit() {
   };
 
   const list = (anchor) => (
+    <div  style={{
+      height: "100vh",
+      backgroundColor: "#2E0F59",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    }}>
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
@@ -373,6 +383,7 @@ function Visit() {
        
       </div>
     </Box>
+    </div>
   );
   //
   const { signOut } = React.useContext(AuthContext);
@@ -386,11 +397,11 @@ function Visit() {
           open={state["left"]}
           onClose={toggleDrawer("left", false)}
         ></MenuIcon>
-        <img className="headerImage" src="./EmpireHomeCareLogo.png" />
+        <img className="headerImage" src="./EmpireHomeCareLogo.png" onClick={() =>navigate("/AdminHome")}/>
         <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
-        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+        <LogoutIcon className="LogoutIcon" onClick={signOut}></LogoutIcon>
       </div>
       <div style={{ display: "none" }}>
         {["left"].map((anchor) => (

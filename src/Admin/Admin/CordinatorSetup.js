@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -17,12 +17,16 @@ import { DataGrid } from '@mui/x-data-grid';
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
-import {AuthContext} from '../../components/context'
+import { AuthContext } from '../../components/context'
+import { getCoordinators } from "../../API/coordinatorAPI";
+import { useNavigate } from "react-router-dom";
 
 
 function CareGiver() {
+  const [memberData, setMemberData] = useState([])
+  const [row, setRow] = useState([]);
   const { signOut } = React.useContext(AuthContext);
-
+  const navigate = useNavigate();
   const [age, setAge] = React.useState('');
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -39,75 +43,75 @@ function CareGiver() {
   };
 
 
-  function RenderSearchIcon(){
+  function RenderSearchIcon() {
     switch (ViewSelected) {
       case 1:
         return null;
       case 2:
-        return<SearchIcon className="searchIcon" onClick={handleClickIcon} />;
-      
+        return <SearchIcon className="searchIcon" onClick={handleClickIcon} />;
+
       default:
         break;
     }
   }
 
   function Overlay() {
-    
+
     return (
-      
+
       <div className="overlay">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
-        <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Search New Cordinator</p>
+        <h1 style={{ textAlign: "center" }}>Set Filter from here !</h1>
+        <p style={{ fontSize: 15, fontWeight: "bold", color: "#042940", textAlign: "center" }}>Search New Cordinator</p>
         <div className="searchFieldsDiv">
-    
-          
-        <Grid className="griditem">
-          <TextField
-           
-            id="outlined-basic"
-            label="Name"
-            variant="outlined"
-          />
-        </Grid>
-        <Grid className="griditem">
-        <TextField
-            id="outlined-basic"
-            label="Member"
-            variant="outlined"
-          />
-        </Grid>
-          
-        
-       
 
-        <Grid className="griditem2">
-        
-        <Box >
-      <FormControl fullWidth>
-        <InputLabel >Status</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Status"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>  
-        </Grid>
-      
-      
+
+          <Grid className="griditem">
+            <TextField
+
+              id="outlined-basic"
+              label="Name"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid className="griditem">
+            <TextField
+              id="outlined-basic"
+              label="Member"
+              variant="outlined"
+            />
+          </Grid>
+
+
+
+
+          <Grid className="griditem2">
+
+            <Box >
+              <FormControl fullWidth>
+                <InputLabel >Status</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+
+
         </div>
         <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay}>
           Search
         </Button>
       </div>
-      
+
     );
   }
 
@@ -138,7 +142,7 @@ function CareGiver() {
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date:"03/12/2023",
+      date: "03/12/2023",
     },
     {
       id: 2,
@@ -146,7 +150,7 @@ function CareGiver() {
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date:"03/12/2023",
+      date: "03/12/2023",
     },
     {
       id: 3,
@@ -154,7 +158,7 @@ function CareGiver() {
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date:"03/12/2023",
+      date: "03/12/2023",
     },
     {
       id: 4,
@@ -162,145 +166,167 @@ function CareGiver() {
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date:"03/12/2023",
+      date: "03/12/2023",
     },
   ];
 
   const NewCordinatorView = () => {
     return (
       <div className="Holder"  >
-        <div className="InputHolder"> 
-            <h1 className="Heading" >Add New Cordinator</h1>
-            <TextField className="input" label="Cordinator Number" variant="outlined" />
-            <TextField className="input" label="Cordinator Name" variant="outlined" />
-         
-         <FormControl className="FromControl" >
-        <InputLabel >Status</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Status"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
+        <div className="InputHolder">
+          <h1 className="Heading" >Add New Cordinator</h1>
+          <TextField className="input" label="Cordinator Number" variant="outlined" />
+          <TextField className="input" label="Cordinator Name" variant="outlined" />
+
+          <FormControl className="FromControl" >
+            <InputLabel >Status</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={age}
+              label="Status"
+              onChange={handleChange}
+            >
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+          </FormControl>
 
         </div>
-      
-        
+
+
         <Button className="Signup" variant="contained">Add</Button>
-     </div>
+      </div>
     );
   };
   const SearchCordinatorView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
-      <DataGrid
-        rows={rows2}
-        columns={columns2}
-        pageSize={5}
-        rowsPerPageOptions={[15]}
-        checkboxSelection
-      />
-    </div>
-      
+        <DataGrid
+          rows={row}
+          columns={columns2}
+          pageSize={5}
+          rowsPerPageOptions={[15]}
+          checkboxSelection
+        />
+      </div>
+
     )
   };
   //SearchCareGiverView
   const columns2 = [
     { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'FirstName', headerName: 'First Name', width: 200 },
-    { field: 'LastName', headerName: 'Last Name', width: 200 },
-    { field: 'status', headerName: 'Status', width: 200 },
-    { field: 'MemberTeam', headerName: 'Member Team', width: 200 },
-   
-  ];
-  
-  const rows2 = [
-    {id:1,FirstName:"4578",LastName:"Jenifer",status:"Awston",MemberTeam:"Awston"},
-    {id:2,FirstName:"4578",LastName:"Jenifer",status:"Awston",MemberTeam:"Awston"},
-    {id:3,FirstName:"4578",LastName:"Jenifer",status:"Awston",MemberTeam:"Awston"},
-    {id:4,FirstName:"4578",LastName:"Jenifer",status:"Awston",MemberTeam:"Awston"},
-    {id:5,FirstName:"4578",LastName:"Jenifer",status:"Awston",MemberTeam:"Awston"},
-    
-   
-    
-  ];
- //
- const [state, setState] = React.useState({
-  left: false,
-});
+    { field: 'name', headerName: 'Name', width: 200 },
 
-const toggleDrawer = (anchor, open) => (event) => {
-  if (
-    event.type === "keydown" &&
-    (event.key === "Tab" || event.key === "Shift")
-  ) {
-    return;
+  ];
+
+
+  function populateRows() {
+    var arr = [];
+    for (var key in memberData) {
+      var obj = {
+        id: memberData[key].id,
+        name: memberData[key].name,
+      }
+      arr.push(obj);
+      console.log(arr)
+    }
+    setRow(arr);
+    // console.log(row);
   }
 
-  setState({ ...state, [anchor]: open });
-};
 
-const list = (anchor) => (
-  <Box
-    sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
-    role="presentation"
-    onClick={toggleDrawer(anchor, false)}
-    onKeyDown={toggleDrawer(anchor, false)}
-  >
-    <div
-      style={{
-        backgroundColor: "#2E0F59",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        height: "680px",
-      }}
-    >
-      <p
-        className="Files"
-        style={{
-          fontSize: "20px",
-          color: "#F2B90F",
-          fontWeight: "bold",
-        }}
+  useEffect(() => {
+    getCoordinators().then(res => {
+      setMemberData(res.data);
+    })
+  }, [])
+
+  useEffect(() => {
+    populateRows();
+  }, [memberData]);
+
+
+
+  const [state, setState] = React.useState({
+    left: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <div style={{
+      height: "100vh",
+      backgroundColor: "#2E0F59",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    }}>
+      <Box
+        sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+        role="presentation"
+        onClick={toggleDrawer(anchor, false)}
+        onKeyDown={toggleDrawer(anchor, false)}
       >
-        Files
-      </p>
-      <hr
-        className="line"
-        style={{ width: "50%", fontSize: "10px", opacity: "0.2" }}
-      />
+        <div
+          style={{
+            backgroundColor: "#2E0F59",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            height: "680px",
+          }}
+        >
+          <p
+            className="Files"
+            style={{
+              fontSize: "20px",
+              color: "#F2B90F",
+              fontWeight: "bold",
+            }}
+          >
+            Files
+          </p>
+          <hr
+            className="line"
+            style={{ width: "50%", fontSize: "10px", opacity: "0.2" }}
+          />
 
-      <h3 onClick={NewCordinatorPressed} style={{ color: "#F2B90F" }}>New Cordinator</h3>
-      <h3 onClick={SearchCordinatorPressed} style={{ color: "#F2B90F" }}>Search Cordinator</h3>
-     
+          <h3 onClick={NewCordinatorPressed} style={{ color: "#F2B90F" }}>New Cordinator</h3>
+          <h3 onClick={SearchCordinatorPressed} style={{ color: "#F2B90F" }}>Search Cordinator</h3>
+
+        </div>
+      </Box>
     </div>
-  </Box>
-);
-//
+  );
+  //
 
   return (
     <Wrapper>
       <div className="Header">
-      <MenuIcon
+        <MenuIcon
           className="menuIcon"
           onClick={toggleDrawer("left", true)}
           anchor={"left"}
           open={state["left"]}
           onClose={toggleDrawer("left", false)}
         ></MenuIcon>
-        <img className="headerImage" src="./EmpireHomeCareLogo.png" />
-       
+        <img className="headerImage" src="./EmpireHomeCareLogo.png" onClick={() => navigate("/AdminHome")} />
+
         <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
-        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+        <LogoutIcon className="LogoutIcon" onClick={signOut}></LogoutIcon>
       </div>
       <div style={{ display: "none" }}>
         {["left"].map((anchor) => (
@@ -347,7 +373,7 @@ const list = (anchor) => (
           >
             Files
           </p>
-          <hr style={{width:"50%",fontSize:"10px",opacity:"0.2"}}/>
+          <hr style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
           <div className="buttonHolder">
             <Button
               className="navigationButton"
@@ -372,21 +398,21 @@ const list = (anchor) => (
                 Search Cordinator
               </p>
             </Button>
-           
+
           </div>
 
-          
+
         </Card>
 
         <Card className="dataDisplay">
-          
+
           {RenderSearchIcon()}
           {isOverlayOpen && <Overlay />}
           {RenderViews()}
         </Card>
       </div>
 
-     <Footer/>
+      <Footer />
     </Wrapper>
   );
 }
@@ -424,16 +450,7 @@ width: 100%;
   height:50px;
   margin-bottom:2%;
   background-color:#F26E22;
-color:white;
-shadowColor: "#000",
-shadowOffset: {
-	width: 0,
-	height: 6,
-},
-shadowOpacity: 0.39,
-shadowRadius: 8.30,
-
-elevation: 13,
+  color:white;
 }
 .Holder{
   height:100%;
@@ -747,30 +764,12 @@ color:black;
     padding:5px;
     height:10%;
     font-size:14px;
-    shadowColor: "#000",
-shadowOffset: {
-width: 0,
-height: 7,
-},
-shadowOpacity: 0.41,
-shadowRadius: 9.11,
-
-elevation: 14,
+   
   }
   .SystemNotification{
     padding:5px;
     height:10%;
     font-size:13.5px;
-    shadowColor: "#000",
-shadowOffset: {
-width: 0,
-height: 7,
-},
-shadowOpacity: 0.41,
-shadowRadius: 9.11,
-
-elevation: 14,
-    
   }
   .LogOutbutton {
     width: 20%;

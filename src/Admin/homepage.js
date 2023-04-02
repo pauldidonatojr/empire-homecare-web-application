@@ -52,6 +52,13 @@ function Homepage() {
 
 
   const list = (anchor) => (
+    <div  style={{
+      height: "100vh",
+      backgroundColor: "#2E0F59",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    }}>
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
       role="presentation"
@@ -82,10 +89,8 @@ function Homepage() {
         <h3 onClick={ReportPressed} style={{ color: "#F2B90F" }} >Report</h3>
         <h3 onClick={AdminPressed} style={{ color: "#F2B90F" }}>Admin</h3>
       </div>
-
-
-
     </Box>
+    </div>
   );
   //
 
@@ -329,35 +334,9 @@ function Homepage() {
     },
   ];
 
-
-  getMembers().then(res => {
-    setMemberData(res.data);
-  }
-  )
-
-
-
-  // var rows = {};
-    // { id: 1, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
-    // { id: 2, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
-
-    // { id: 3, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
-
-    // { id: 4, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
-
-    // { id: 5, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
-
-    // { id: 6, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
-
-    // { id: 7, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
-  //];
-
-
   function populateRows(){
-   
+      var arr = [];
       for (var key in memberData) {
-        //rows.push(memberData[key]);
-        //rows.push(obj);
         var obj = {
           id: memberData[key].MemberID,
           Name: memberData[key].FirstName,
@@ -371,13 +350,23 @@ function Homepage() {
           SSN: memberData[key].SSN,
           Phone: memberData[key].HomePhone
         }
-        console.log(obj)
+        arr.push(obj);
+        console.log(arr)
     }
+    setRow(arr);
+    // console.log(row);
   }
+
+
+  useEffect(()=>{
+    getMembers().then(res => {
+      setMemberData(res.data);
+    })
+  },[])
 
   useEffect(() => {
     populateRows();
-  }, []);
+  }, [memberData]);
 
 
   const MembersView = () => {
@@ -427,7 +416,7 @@ function Homepage() {
         <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
-        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+        <LogoutIcon onClick={signOut} className="LogoutIcon"></LogoutIcon>
       </div>
 
       <div className="NotificationHolder">

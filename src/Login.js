@@ -249,9 +249,7 @@ const Wrapper = styled.section`
       }
     .DesignCard{
         
-        width:90%;
-        margin-left:2%;
-        height:200px;
+        display:none;
     }
     .subText {
         margin-top: 10%;

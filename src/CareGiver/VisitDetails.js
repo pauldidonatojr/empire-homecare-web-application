@@ -318,6 +318,13 @@ const VisitDetails = () => {
     };
   
     const list = (anchor) => (
+      <div  style={{
+        height: "100vh",
+        backgroundColor: "#2E0F59",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+      }}>
       <Box
         sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
         role="presentation"
@@ -354,6 +361,7 @@ const VisitDetails = () => {
       
         </div>
       </Box>
+      </div>
     );
     //
   
@@ -370,10 +378,10 @@ const VisitDetails = () => {
         <img className="headerImage" src="/EmpireHomeCareLogo.png" 
         onClick={() =>navigate("/CareGiverHome")}/>
        
-        <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
+        <Button  className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
-        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+        <LogoutIcon onClick={signOut} className="LogoutIcon"></LogoutIcon>
       </div>
       <div style={{ display: "none" }}>
         {["left"].map((anchor) => (

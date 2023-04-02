@@ -16,12 +16,13 @@ import Footer from "../../Footer";
 import { DataGrid } from '@mui/x-data-grid';
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import {AuthContext} from '../../components/context'
 
 function Billing() {
   const { signOut } = React.useContext(AuthContext);
-    
+  const navigate = useNavigate();
   const [age, setAge] = React.useState("");
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -502,6 +503,13 @@ const toggleDrawer = (anchor, open) => (event) => {
 };
 
 const list = (anchor) => (
+  <div  style={{
+    height: "100vh",
+    backgroundColor: "#2E0F59",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  }}>
   <Box
     sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
     role="presentation"
@@ -537,6 +545,7 @@ const list = (anchor) => (
      
     </div>
   </Box>
+  </div>
 );
 //
   return (
@@ -549,12 +558,12 @@ const list = (anchor) => (
           open={state["left"]}
           onClose={toggleDrawer("left", false)}
         ></MenuIcon>
-        <img className="headerImage" src="./EmpireHomeCareLogo.png" />
+        <img className="headerImage" src="./EmpireHomeCareLogo.png" onClick={() =>navigate("/AdminHome")} />
        
         <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
-        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+        <LogoutIcon onClick={signOut} className="LogoutIcon"></LogoutIcon>
       </div>
       <div style={{ display: "none" }}>
         {["left"].map((anchor) => (

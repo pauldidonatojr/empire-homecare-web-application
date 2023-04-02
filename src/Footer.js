@@ -78,14 +78,14 @@ const Wrapper = styled.section`
     height: 100%;
   }
   .company {
-    margin-left: 5%;
+    margin-left: 0%;
     display:flex;
     align-items:center;
     justify-content:center;
   }
   .socials {
     margin-top:0;
-    margin-left: 5%;
+    margin-left: 0%;
     display:flex;
     align-items:center;
     justify-content:center;

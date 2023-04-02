@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import { useNavigate } from "react-router-dom";
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
@@ -21,12 +18,15 @@ import { DataGrid } from '@mui/x-data-grid';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
-import {AuthContext} from '../components/context'
+import { AuthContext } from '../components/context'
+import { getCareGiver } from "../API/careGiverAPI";
 
 function CareGiver() {
+  const [memberData, setMemberData] = useState([])
+  const [row, setRow] = useState([]);
   const { signOut } = React.useContext(AuthContext);
 
-
+  const navigate = useNavigate();
   const [age, setAge] = React.useState('');
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -41,32 +41,39 @@ function CareGiver() {
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
- //
-const [state, setState] = React.useState({
-  left: false,
-});
+  //
+  const [state, setState] = React.useState({
+    left: false,
+  });
 
-const toggleDrawer = (anchor, open) => (event) => {
-  if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-    return;
-  }
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
 
-  setState({ ...state, [anchor]: open });
-};
+    setState({ ...state, [anchor]: open });
+  };
 
-const list = (anchor) => (
-  <Box
-    sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-    role="presentation"
-    onClick={toggleDrawer(anchor, false)}
-    onKeyDown={toggleDrawer(anchor, false)}
-    
-  >
-    
-    <div style={{backgroundColor:"#2E0F59",display:"flex",flexDirection:"column",alignItems:"center",height:"680px"}}>
-    
-    <p
-           className="Files"
+  const list = (anchor) => (
+    <div style={{
+      height: "100vh",
+      backgroundColor: "#2E0F59",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    }}>
+      <Box
+        sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+        role="presentation"
+        onClick={toggleDrawer(anchor, false)}
+        onKeyDown={toggleDrawer(anchor, false)}
+
+      >
+
+        <div style={{ backgroundColor: "#2E0F59", display: "flex", flexDirection: "column", alignItems: "center", height: "680px" }}>
+
+          <p
+            className="Files"
             style={{
               fontSize: "20px",
               color: "#F2B90F",
@@ -76,168 +83,169 @@ const list = (anchor) => (
             Files
           </p>
           <hr className="line" style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
-        
-     <h3    onClick={() => {
-                NewCareGiverPressed();
-              }} style={{color:"#F2B90F"}}>New Care Givers</h3>
-     <h3   onClick={SearchCareGiverPressed} style={{color:"#F2B90F"}}>Search CareGiver</h3>
-   
-     </div>
-    
-    
-   
-  </Box>
-);
-//
+
+          <h3 onClick={() => {
+            NewCareGiverPressed();
+          }} style={{ color: "#F2B90F" }}>New Care Givers</h3>
+          <h3 onClick={SearchCareGiverPressed} style={{ color: "#F2B90F" }}>Search CareGiver</h3>
+
+        </div>
 
 
-  function RenderSearchIcon(){
+
+      </Box>
+    </div>
+  );
+  //
+
+
+  function RenderSearchIcon() {
     switch (ViewSelected) {
       case 1:
         return null;
       case 2:
-        return<SearchIcon className="searchIcon" onClick={handleClickIcon} />;
-      
+        return <SearchIcon className="searchIcon" onClick={handleClickIcon} />;
+
       default:
         break;
     }
   }
 
   function Overlay() {
-    
+
     return (
-      
+
       <div className="overlay">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{textAlign:"center"}}>Set Filter from here !</h1>
-        <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Search Care Giver</p>
+        <h1 style={{ textAlign: "center" }}>Set Filter from here !</h1>
+        <p style={{ fontSize: 15, fontWeight: "bold", color: "#042940", textAlign: "center" }}>Search Care Giver</p>
         <div className="searchFieldsDiv">
-       
-          
-        <Grid className="griditem">
-          <TextField
-           
-            id="outlined-basic"
-            label="First Name"
-            variant="outlined"
-          />
-        </Grid>
-        <Grid className="griditem">
-        <TextField
-            id="outlined-basic"
-            label="Last Name"
-            variant="outlined"
-          />
-        </Grid>
-          
-        <Grid className="griditem">
-        
-        <TextField
-           
-            id="outlined-basic"
-            label="Phone Number"
-            variant="outlined"
-          />
-        </Grid>
-        <Grid className="griditem">
-        
-        <TextField
-            id="outlined-basic"
-            label="Care Giver Code"
-            variant="outlined"
-          />
-          
-        </Grid>
 
-        <Grid className="griditem">
-        
-        <TextField
-           
-            id="outlined-basic"
-            label="Alt Caregiver Code"
-            variant="outlined"
-          />
-          
-        </Grid>
-        <Grid className="griditem">
-        
-        <TextField
-           
-            id="outlined-basic"
-            label="SSN"
-            variant="outlined"
-          />
-          
-        </Grid>
-          
 
-        <Grid className="griditem2">
-        
-        <Box >
-      <FormControl fullWidth>
-        <InputLabel >Status</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Status"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>  
-        </Grid>
-        <Grid className="griditem2">
-        
-        <Box>
-      <FormControl fullWidth>
-        <InputLabel >Provider</InputLabel>
-        <Select
-        
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Status"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-         </Grid>
-         <Grid className="griditem2">
-        
-        <Box >
-      <FormControl fullWidth>
-        <InputLabel >Discipline</InputLabel>
-        <Select
-        
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Status"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-         </Grid>
-         
-   
+          <Grid className="griditem">
+            <TextField
+
+              id="outlined-basic"
+              label="First Name"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid className="griditem">
+            <TextField
+              id="outlined-basic"
+              label="Last Name"
+              variant="outlined"
+            />
+          </Grid>
+
+          <Grid className="griditem">
+
+            <TextField
+
+              id="outlined-basic"
+              label="Phone Number"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid className="griditem">
+
+            <TextField
+              id="outlined-basic"
+              label="Care Giver Code"
+              variant="outlined"
+            />
+
+          </Grid>
+
+          <Grid className="griditem">
+
+            <TextField
+
+              id="outlined-basic"
+              label="Alt Caregiver Code"
+              variant="outlined"
+            />
+
+          </Grid>
+          <Grid className="griditem">
+
+            <TextField
+
+              id="outlined-basic"
+              label="SSN"
+              variant="outlined"
+            />
+
+          </Grid>
+
+
+          <Grid className="griditem2">
+
+            <Box >
+              <FormControl fullWidth>
+                <InputLabel >Status</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid className="griditem2">
+
+            <Box>
+              <FormControl fullWidth>
+                <InputLabel >Provider</InputLabel>
+                <Select
+
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid className="griditem2">
+
+            <Box >
+              <FormControl fullWidth>
+                <InputLabel >Discipline</InputLabel>
+                <Select
+
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+
+
         </div>
         <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay}>
           Search
         </Button>
       </div>
-      
+
     );
   }
 
@@ -268,7 +276,7 @@ const list = (anchor) => (
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date:"03/12/2023",
+      date: "03/12/2023",
     },
     {
       id: 2,
@@ -276,7 +284,7 @@ const list = (anchor) => (
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date:"03/12/2023",
+      date: "03/12/2023",
     },
     {
       id: 3,
@@ -284,7 +292,7 @@ const list = (anchor) => (
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date:"03/12/2023",
+      date: "03/12/2023",
     },
     {
       id: 4,
@@ -292,131 +300,157 @@ const list = (anchor) => (
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date:"03/12/2023",
+      date: "03/12/2023",
     },
   ];
 
   const NewCareGiverView = () => {
     return (
-     <div className="Holder"  >
-        <div > 
-            <h1 className="Heading" >Demographics</h1>
-            <TextField className="input" label="First Name" variant="outlined" />
-            <TextField className="input" label="Middle Name" variant="outlined" />
-            <TextField className="input" label="Last Name" variant="outlined" />
-            <TextField className="input" label="Intials" variant="outlined" />
-            <TextField className="input" label="Gender" variant="outlined" />
-            <TextField className="input" label="DOB" variant="outlined" />
-            <TextField className="input" label="Status" variant="outlined" />
-            <TextField className="input" label="Alt Caregiver Code" variant="outlined" />
-            <TextField className="input" label="SSN" variant="outlined" />
-            <TextField className="input" label="Mobile ID" variant="outlined" />
-            <TextField className="input" label="Primary Member Team" variant="outlined" />
-            <TextField className="input" label="NPI Number" variant="outlined" />
-            <TextField className="input" label="Rehire ?" variant="outlined" />
-            <TextField className="input" label="Rehire Date" variant="outlined" />
-            <TextField className="input" label="Employment Type" variant="outlined" />
-           
+      <div className="Holder"  >
+        <div >
+          <h1 className="Heading" >Demographics</h1>
+          <TextField className="input" label="First Name" variant="outlined" />
+          <TextField className="input" label="Middle Name" variant="outlined" />
+          <TextField className="input" label="Last Name" variant="outlined" />
+          <TextField className="input" label="Intials" variant="outlined" />
+          <TextField className="input" label="Gender" variant="outlined" />
+          <TextField className="input" label="DOB" variant="outlined" />
+          <TextField className="input" label="Status" variant="outlined" />
+          <TextField className="input" label="Alt Caregiver Code" variant="outlined" />
+          <TextField className="input" label="SSN" variant="outlined" />
+          <TextField className="input" label="Mobile ID" variant="outlined" />
+          <TextField className="input" label="Primary Member Team" variant="outlined" />
+          <TextField className="input" label="NPI Number" variant="outlined" />
+          <TextField className="input" label="Rehire ?" variant="outlined" />
+          <TextField className="input" label="Rehire Date" variant="outlined" />
+          <TextField className="input" label="Employment Type" variant="outlined" />
+
         </div>
         <div>
-        <h1 className="Heading">Address</h1>
-        <TextField className="input" label="Street 1" variant="outlined" />
-        <TextField className="input" label="Street 2" variant="outlined" />
-        <TextField className="input" label="City" variant="outlined" />
-        <TextField className="input" label="Zip" variant="outlined" />
-        <TextField className="input" label="State" variant="outlined" />
-        <TextField className="input" label="Phone" variant="outlined" />
-        <TextField className="input" label="Phone 2" variant="outlined" />
-        <TextField className="input" label="Home Phone" variant="outlined" />
+          <h1 className="Heading">Address</h1>
+          <TextField className="input" label="Street 1" variant="outlined" />
+          <TextField className="input" label="Street 2" variant="outlined" />
+          <TextField className="input" label="City" variant="outlined" />
+          <TextField className="input" label="Zip" variant="outlined" />
+          <TextField className="input" label="State" variant="outlined" />
+          <TextField className="input" label="Phone" variant="outlined" />
+          <TextField className="input" label="Phone 2" variant="outlined" />
+          <TextField className="input" label="Home Phone" variant="outlined" />
         </div>
         <div>
-        <h1 className="Heading">Emergency Contact 1</h1>
-        <TextField className="input" label="Name" variant="outlined" />
-        <TextField className="input" label="Relationship" variant="outlined" />
-        <TextField className="input" label="Address" variant="outlined" />
-        <TextField className="input" label="Phone 1" variant="outlined" />
-        <TextField className="input" label="Phone 2" variant="outlined" />
+          <h1 className="Heading">Emergency Contact 1</h1>
+          <TextField className="input" label="Name" variant="outlined" />
+          <TextField className="input" label="Relationship" variant="outlined" />
+          <TextField className="input" label="Address" variant="outlined" />
+          <TextField className="input" label="Phone 1" variant="outlined" />
+          <TextField className="input" label="Phone 2" variant="outlined" />
         </div>
         <div>
-        <h1 className="Heading">Emergency Contact 2</h1>
-        <TextField className="input" label="Name" variant="outlined" />
-        <TextField className="input" label="Relationship" variant="outlined" />
-        <TextField className="input" label="Address" variant="outlined" />
-        <TextField className="input" label="Phone 1" variant="outlined" />
-        <TextField className="input" label="Phone 2" variant="outlined" />
+          <h1 className="Heading">Emergency Contact 2</h1>
+          <TextField className="input" label="Name" variant="outlined" />
+          <TextField className="input" label="Relationship" variant="outlined" />
+          <TextField className="input" label="Address" variant="outlined" />
+          <TextField className="input" label="Phone 1" variant="outlined" />
+          <TextField className="input" label="Phone 2" variant="outlined" />
         </div>
         <Button className="Signup" variant="contained">Sign Up</Button>
-     </div>
+      </div>
     );
   };
   const SearchCareGiverView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[15]}
-        checkboxSelection
-      />
-    </div>
-      
+        <DataGrid
+          rows={row}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[15]}
+          checkboxSelection
+        />
+      </div>
+
     )
   };
   const columns = [
     { field: 'id', headerName: 'ID', width: 50 },
-    { field: 'firstName', headerName: 'First Name', width: 100 }, 
-    { field: 'firstName', headerName: 'First Name', width: 100 },
-    { field: 'lastName', headerName: 'Last Name', width: 100 },
-    { field: 'phoneNumber', headerName: 'Phone Number', width: 120 },
-    { field: 'caregiverCode', headerName: 'CareGiver Code', width: 120 },
-    { field: 'altCareCode', headerName: 'Alt Care Giver Code', width: 140 },
-    { field: 'ssn', headerName: 'SSN', width: 100 },
+    { field: 'name', headerName: 'Name', width: 200 },
+    { field: 'city', headerName: 'City', width: 100 },
+    { field: 'phone', headerName: 'Phone', width: 150 },
+    { field: 'CoCode', headerName: 'Care Giver Code', width: 120 },
+    { field: 'Ethnicity', headerName: 'Ethnicity', width: 140 },
+    { field: 'SSN', headerName: 'SSN', width: 150 },
     { field: 'status', headerName: 'Status', width: 100 },
-    { field: 'provider', headerName: 'Provider', width: 100 },
-    { field: 'discipline', headerName: 'Discipline', width: 100 },
-    
+    { field: 'EmployeeID', headerName: 'Employee ID', width: 200 },
+    { field: 'Discipline', headerName: 'Discipline', width: 100 },
+
   ];
-  //demo data to display
-  const rows = [
-    {id:1,firstName:"Justin",lastName:"Alo",phoneNumber:"02457894561",caregiverCode:"XOXO",altCareCode:"XZXZ",ssn:"1123456",status:"Active",provider:"Homecare",discipline:"51s"},
-    {id:2,firstName:"Justin",lastName:"Alo",phoneNumber:"02457894561",caregiverCode:"XOXO",altCareCode:"XZXZ",ssn:"1123456",status:"Active",provider:"Homecare",discipline:"51s"},
-    {id:3,firstName:"Justin",lastName:"Alo",phoneNumber:"02457894561",caregiverCode:"XOXO",altCareCode:"XZXZ",ssn:"1123456",status:"Active",provider:"Homecare",discipline:"51s"},
-    {id:4,firstName:"Justin",lastName:"Alo",phoneNumber:"02457894561",caregiverCode:"XOXO",altCareCode:"XZXZ",ssn:"1123456",status:"Active",provider:"Homecare",discipline:"51s"},
-   
-  ];
+
+
+  function populateRows() {
+    var arr = [];
+    for (var key in memberData) {
+      var obj = {
+        id: memberData[key].id,
+        name: memberData[key].FirstName + ' ' + memberData[key].LastName,
+        city: memberData[key].City,
+        phone: memberData[key].Phone,
+        CoCode: memberData[key].CoCode,
+        Ethnicity: memberData[key].Ethnicity,
+        SSN: memberData[key].SSN,
+        Status: memberData[key].Status,
+        EmployeeID: memberData[key].EmployeeID,
+        Discipline: memberData[key].Discipline,
+      }
+      arr.push(obj);
+      console.log(arr)
+    }
+    setRow(arr);
+    // console.log(row);
+  }
+
+
+  useEffect(() => {
+    getCareGiver().then(res => {
+      setMemberData(res.data);
+    })
+  }, [])
+
+  useEffect(() => {
+    populateRows();
+  }, [memberData]);
+
 
   return (
     <Wrapper>
       <div className="Header">
-      <MenuIcon
-    className="menuIcon"
-    onClick={toggleDrawer('left', true)}
-     anchor={'left'}
-     open={state['left']}
-     onClose={toggleDrawer('left', false)}>
-      
-    </MenuIcon>
-        <img className="headerImage" src="./EmpireHomeCareLogo.png" />
-       
+        <MenuIcon
+          className="menuIcon"
+          onClick={toggleDrawer('left', true)}
+          anchor={'left'}
+          open={state['left']}
+          onClose={toggleDrawer('left', false)}>
+
+        </MenuIcon>
+        <img className="headerImage" src="./EmpireHomeCareLogo.png" onClick={() => navigate("/AdminHome")} />
+
         <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
-        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+        <LogoutIcon onClick={signOut} className="LogoutIcon"></LogoutIcon>
       </div>
-      <div style={{display:"none"}}>
-{['left'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <Drawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {list(anchor)}
-          </Drawer>
-        </React.Fragment>
-      ))}
+      <div style={{ display: "none" }}>
+        {['left'].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {list(anchor)}
+            </Drawer>
+          </React.Fragment>
+        ))}
       </div>
 
       <div className="CardHolder">
@@ -449,7 +483,7 @@ const list = (anchor) => (
           >
             Files
           </p>
-          <hr style={{width:"50%",fontSize:"10px",opacity:"0.2"}}/>
+          <hr style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
           <div className="buttonHolder">
             <Button
               className="navigationButton"
@@ -474,21 +508,21 @@ const list = (anchor) => (
                 Search Care Giver
               </p>
             </Button>
-           
+
           </div>
 
-          
+
         </Card>
 
         <Card className="dataDisplay">
-          
+
           {RenderSearchIcon()}
           {isOverlayOpen && <Overlay />}
           {RenderViews()}
         </Card>
       </div>
 
-      <Footer/>
+      <Footer />
     </Wrapper>
   );
 }

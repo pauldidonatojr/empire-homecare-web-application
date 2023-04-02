@@ -303,6 +303,13 @@ function Action() {
   };
 
   const list = (anchor) => (
+    <div  style={{
+      height: "100vh",
+      backgroundColor: "#2E0F59",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    }}>
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
@@ -341,6 +348,7 @@ function Action() {
         </h3>
       </div>
     </Box>
+    </div>
   );
   //
   return (
@@ -353,12 +361,12 @@ function Action() {
           open={state["left"]}
           onClose={toggleDrawer("left", false)}
         ></MenuIcon>
-        <img className="headerImage" src="./EmpireHomeCareLogo.png" />
+        <img className="headerImage" src="./EmpireHomeCareLogo.png"  onClick={() =>navigate("/AdminHome")}/>
 
         <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
-        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+        <LogoutIcon onClick={signOut} className="LogoutIcon"></LogoutIcon>
       </div>
       <div style={{ display: "none" }}>
         {["left"].map((anchor) => (

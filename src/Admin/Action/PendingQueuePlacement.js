@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
-
+import { useNavigate } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
 //
 import Box from '@mui/material/Box';
@@ -22,13 +22,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import {AuthContext} from '../../components/context'
 import LogoutIcon from "@mui/icons-material/Logout";
 //
+
 const Link = require("react-router-dom").Link;
 
 function PendingQueuePlacement() {
   const { signOut } = React.useContext(AuthContext);
   const [ViewSelected, setViewSelected] = useState(1);
 
-  
+  const navigate = useNavigate();
 //
 
 const [age, setAge] = React.useState('');
@@ -394,6 +395,13 @@ function Overlay6() {
   };
 
   const list = (anchor) => (
+    <div  style={{
+      height: "100vh",
+      backgroundColor: "#2E0F59",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    }}>
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
@@ -433,6 +441,7 @@ function Overlay6() {
         </h3>
       </div>
     </Box>
+    </div>
   );
   //
   return (
@@ -445,12 +454,12 @@ function Overlay6() {
           open={state["left"]}
           onClose={toggleDrawer("left", false)}
         ></MenuIcon>
-        <img className="headerImage" src="./EmpireHomeCareLogo.png" />
+        <img className="headerImage" src="./EmpireHomeCareLogo.png" onClick={() =>navigate("/AdminHome")}/>
        
         <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
-        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+        <LogoutIcon onClick={signOut} className="LogoutIcon"></LogoutIcon>
       </div>
       <div style={{ display: "none" }}>
         {["left"].map((anchor) => (

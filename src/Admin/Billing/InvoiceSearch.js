@@ -19,11 +19,14 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import {AuthContext} from '../../components/context'
+
+import { useNavigate } from "react-router-dom";
 //
 
 function Visit() {
   const { signOut } = React.useContext(AuthContext);
   const [age, setAge] = React.useState("");
+  const navigate = useNavigate();
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -579,6 +582,13 @@ const toggleDrawer = (anchor, open) => (event) => {
 };
 
 const list = (anchor) => (
+  <div  style={{
+    height: "100vh",
+    backgroundColor: "#2E0F59",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  }}>
   <Box
     sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
     role="presentation"
@@ -614,6 +624,7 @@ const list = (anchor) => (
       <h3  onClick={VisitQuickSearchPressed}  style={{ color: "#F2B90F" }}>By Visit</h3>
     </div>
   </Box>
+  </div>
 );
 //
   return (
@@ -626,12 +637,12 @@ const list = (anchor) => (
           open={state["left"]}
           onClose={toggleDrawer("left", false)}
         ></MenuIcon>
-        <img className="headerImage" src="./EmpireHomeCareLogo.png" />
+        <img className="headerImage" src="./EmpireHomeCareLogo.png" onClick={() =>navigate("/AdminHome")}/>
        
         <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
-        <LogoutIcon className="LogoutIcon"></LogoutIcon>
+        <LogoutIcon className="LogoutIcon" onClick={signOut}></LogoutIcon>
       </div>
       <div style={{ display: "none" }}>
         {["left"].map((anchor) => (
