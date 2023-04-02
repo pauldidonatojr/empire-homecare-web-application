@@ -25,6 +25,7 @@ import { getMembers } from "../API/membersApi";
 function Homepage() {
   const [memberData, setMemberData] = useState([]);
   const { signOut } = React.useContext(AuthContext);
+  const [row, setRow] = useState([]);
 
   const [age, setAge] = React.useState('');
   const handleChange = (event) => {
@@ -46,6 +47,9 @@ function Homepage() {
 
     setState({ ...state, [anchor]: open });
   };
+
+
+
 
   const list = (anchor) => (
     <Box
@@ -324,12 +328,64 @@ function Homepage() {
       date: "03/12/2023",
     },
   ];
+
+
+  getMembers().then(res => {
+    setMemberData(res.data);
+  }
+  )
+
+
+
+  // var rows = {};
+    // { id: 1, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
+    // { id: 2, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
+
+    // { id: 3, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
+
+    // { id: 4, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
+
+    // { id: 5, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
+
+    // { id: 6, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
+
+    // { id: 7, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
+  //];
+
+
+  function populateRows(){
+   
+      for (var key in memberData) {
+        //rows.push(memberData[key]);
+        //rows.push(obj);
+        var obj = {
+          id: memberData[key].MemberID,
+          Name: memberData[key].FirstName,
+          Gender: memberData[key].Gender,
+          MCOName: memberData[key].MCOName,
+          Discipline: memberData[key].Discipline,
+          FirstDayofService: memberData[key].FirstDayofService,
+          Location: memberData[key].Location,
+          Status: memberData[key].Status,
+          AdmissionID: memberData[key].AdmissionID,
+          SSN: memberData[key].SSN,
+          Phone: memberData[key].HomePhone
+        }
+        console.log(obj)
+    }
+  }
+
+  useEffect(() => {
+    populateRows();
+  }, []);
+
+
   const MembersView = () => {
 
     return (
       <div style={{ height: "100%", width: '100%' }}>
         <DataGrid
-          rows={rows}
+          rows={row}
           columns={columns}
           pageSize={5}
           rowsPerPageOptions={[15]}
@@ -353,36 +409,6 @@ function Homepage() {
     { field: 'Phone', headerName: 'Phone', width: 100 },
 
   ];
-
-  const rows = [
-    // { id: 1, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
-    // { id: 2, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
-
-    // { id: 3, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
-
-    // { id: 4, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
-
-    // { id: 5, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
-
-    // { id: 6, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
-
-    // { id: 7, AdmissionId: "4578", firstName: "Jenifer", lastName: "Awston", phoneNumber: "02548965478", status: "Active", cordinator: "Adam Fernandez", mco: "Delta", office: "Homecare", vendorTax: "51s" },
-
-  ];
-
-
-  function populateRows(){
-    console.log("|Hey")
-    getMembers().then(res => {
-      setMemberData(res.data);
-    });
-  }
-
-  // useEffect(() => {
-    
-  // }, [memberData]);
-
-  populateRows();
 
   return (
     <Wrapper>
