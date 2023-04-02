@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { LoginContext } from '../components/context';
 
 
 export const loginUser = async (username, password) => {
@@ -29,7 +30,9 @@ export const loginUser = async (username, password) => {
             }
             )
         )
-        .catch(err => reject(err))
+        .catch(err => {
+          reject(err)
+        })
       })
 
   };

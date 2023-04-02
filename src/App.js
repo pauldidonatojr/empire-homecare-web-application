@@ -22,7 +22,7 @@ import UserManagement from "./Admin/Admin/UserManagement";
 import CordinatorSetup from "./Admin/Admin/CordinatorSetup";
 import FileProcessing from "./Admin/Admin/FileProcessing";
 import EDIImports from "./Admin/Admin/EDIImports"
-import { AuthContext } from './components/context';
+import { AuthContext, LoginContext } from './components/context';
 import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {

@@ -18,18 +18,29 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { AuthContext } from '../../components/context'
-import { getCoordinators } from "../../API/coordinatorAPI";
+import { getCoordinators, addCoordinator } from "../../API/coordinatorAPI";
 import { useNavigate } from "react-router-dom";
 
 
 function CareGiver() {
+
+  const [coordNumber, setCoordNumber] = useState(null);
+  const [coordName, setCoordName] = useState(null);
+  const [coordStatus, setCoordStatus] = useState(null);
+
+  const [filterCoordNumber, setFilterCoordNumber] = useState(null);
+  const [filterCoordName, setFilterCoordName] = useState(null);
+  const [filterCoordStatus, setFilterCoordStatus] = useState(null);
+
   const [memberData, setMemberData] = useState([])
   const [row, setRow] = useState([]);
+  var [initRow, setInitRow] = useState([]);
   const { signOut } = React.useContext(AuthContext);
   const navigate = useNavigate();
   const [age, setAge] = React.useState('');
   const handleChange = (event) => {
     setAge(event.target.value);
+    setFilterCoordStatus(event.target.value);
   };
   const [ViewSelected, setViewSelected] = useState(1);
 
@@ -37,6 +48,8 @@ function CareGiver() {
 
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
+    setRow(initRow);
+    setCoordStatus(null);
   };
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
@@ -55,6 +68,12 @@ function CareGiver() {
     }
   }
 
+
+  const handleFilterStatusChange = (event) => {
+    setAge(event.target.value);
+    setFilterCoordStatus(event.target.value);
+  };
+
   function Overlay() {
 
     return (
@@ -69,15 +88,15 @@ function CareGiver() {
           <Grid className="griditem">
             <TextField
 
-              id="outlined-basic"
+              id="name"
               label="Name"
               variant="outlined"
             />
           </Grid>
           <Grid className="griditem">
             <TextField
-              id="outlined-basic"
-              label="Member"
+              id="number"
+              label="Number"
               variant="outlined"
             />
           </Grid>
@@ -95,11 +114,10 @@ function CareGiver() {
                   id="demo-simple-select"
                   value={age}
                   label="Status"
-                  onChange={handleChange}
+                  onChange={handleFilterStatusChange}
                 >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={10}>Active</MenuItem>
+                  <MenuItem value={20}>Inactive</MenuItem>
                 </Select>
               </FormControl>
             </Box>
@@ -107,13 +125,59 @@ function CareGiver() {
 
 
         </div>
-        <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay}>
+        <Button className="searchButton" variant="outlined" onClick={() => {
+          handleCloseOverlay();
+          setFilterCoordName(document.getElementById('name').value);
+          setFilterCoordNumber(document.getElementById('number').value);
+          populateData();
+        }}>
           Search
         </Button>
       </div>
 
     );
   }
+
+  function populateData() {
+    for (var key in row) {
+      if(row[key].name == filterCoordName && filterCoordName != null){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.name == row[key].name;
+        });
+        setRow(myArray)
+      }
+      
+      
+      if(row[key].co_id == filterCoordNumber && filterCoordNumber != null){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.Phone == row[key].co_id;
+        });
+        setRow(myArray)
+      }
+
+      if(filterCoordStatus == 10){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.status == "Active";
+        });
+        setRow(myArray)
+      }
+
+      if(filterCoordStatus == 20){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.status == "Inactive";
+        });
+        setRow(myArray)
+      }
+
+      
+    }
+  }
+
+
 
   const NewCordinatorPressed = () => {
     setViewSelected(1);
@@ -170,13 +234,23 @@ function CareGiver() {
     },
   ];
 
+  const handleChangeAddStatus = (event) => {
+    setAge(event.target.value);
+      if(event.target.value == 10){
+          setCoordStatus('Active');
+    }
+    if(event.target.value == 20){
+      setCoordStatus('Inactive');
+  } 
+  };
+
   const NewCordinatorView = () => {
     return (
       <div className="Holder"  >
         <div className="InputHolder">
           <h1 className="Heading" >Add New Cordinator</h1>
-          <TextField className="input" label="Cordinator Number" variant="outlined" />
-          <TextField className="input" label="Cordinator Name" variant="outlined" />
+          <TextField className="input" label="Cordinator Number" variant="outlined" onChange={(username) => { setCoordNumber(username.target.value) }}/>
+          <TextField className="input" label="Cordinator Name" variant="outlined" onChange={(username) => { setCoordName(username.target.value)}}/>
 
           <FormControl className="FromControl" >
             <InputLabel >Status</InputLabel>
@@ -185,18 +259,25 @@ function CareGiver() {
               id="demo-simple-select"
               value={age}
               label="Status"
-              onChange={handleChange}
+              onChange={handleChangeAddStatus} 
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={10}>Active</MenuItem>
+              <MenuItem value={20}>Inactive</MenuItem>
             </Select>
           </FormControl>
 
         </div>
 
 
-        <Button className="Signup" variant="contained">Add</Button>
+        <Button className="Signup" variant="contained"
+        onClick={()=>{
+          addCoordinator(coordName, coordNumber, coordStatus).then(res => {
+            if (res.data.result == "success") {
+              //state = 1;
+            }
+          });
+        }}
+        >Add</Button>
       </div>
     );
   };
@@ -218,6 +299,7 @@ function CareGiver() {
   const columns2 = [
     { field: 'id', headerName: 'ID', width: 100 },
     { field: 'name', headerName: 'Name', width: 200 },
+    { field: 'status', headerName: 'Status', width: 200 }
 
   ];
 
@@ -226,14 +308,14 @@ function CareGiver() {
     var arr = [];
     for (var key in memberData) {
       var obj = {
-        id: memberData[key].id,
+        id: memberData[key].co_id,
         name: memberData[key].name,
+        status: memberData[key].status,
       }
       arr.push(obj);
-      console.log(arr)
     }
     setRow(arr);
-    // console.log(row);
+    setInitRow(arr);
   }
 
 

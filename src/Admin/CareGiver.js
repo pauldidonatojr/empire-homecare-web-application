@@ -19,12 +19,82 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { AuthContext } from '../components/context'
-import { getCareGiver } from "../API/careGiverAPI";
+import { addCareGiver, getCareGiver } from "../API/careGiverAPI";
+import { createCareGiverLogin } from "../API/authCareGiverAPI";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 function CareGiver() {
+
+  // Set Alert
+  const [alertState, setAlertState] = useState(false);
+
+
+
   const [memberData, setMemberData] = useState([])
-  const [row, setRow] = useState([]);
+  var [row, setRow] = useState([]);
+  var [initRow, setInitRow] = useState([]);
   const { signOut } = React.useContext(AuthContext);
+
+  // SearchFilter
+  const [filterName, setFilterName] = useState(null);
+  const [filterPhoneNumber, setFilterPhoneNumber] = useState(null);
+  const [filterCareGiverCode, setFilterCareGiverCode] = useState(null);
+  const [filterAltCareGiverCode, setFilterAltCareGiverCode] = useState(null);
+  const [filterSSN, setFilterSSN] = useState(null);
+  const [filterStatus, setFilterStatus] = useState(null);
+  const [filterProvider, setFilterProvider] = useState(null);
+  const [filterDiscipline, setFilterDiscipline] = useState(null);
+
+
+
+  // 
+
+
+
+  // 
+  const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
+  const [firstName, setFirstName] = useState('');
+  const [middleName, setMiddleName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [initials, setInitials] = useState('');
+  const [gender, setGender] = useState('');
+  const [dob, setDob] = useState('');
+  const [status, setStatus] = useState('');
+  const [careGiverCode, setCareGiverCode] = useState('');
+  const [ssn, setSSN] = useState('');
+  const [mobileID, setMobileID] = useState('');
+  const [mobileDeviceID, setMobileDeviceID] = useState('');
+  const [primaryMemberTeam, setPrimaryMemberTeam] = useState('');
+  const [NPINumber, setNPINumber] = useState('');
+  const [rehire, setRehire] = useState('');
+  const [rehireDate, setRehireDate] = useState('');
+  const [employmentType, setEmploymentType] = useState('');
+
+  const [addressStreet1, setAddressStreet1] = useState('');
+  const [addressStreet2, setAddressStreet2] = useState('');
+  const [addressCity, setAddressCity] = useState('');
+  const [addressZip, setAddressZip] = useState('');
+  const [addressPhone, setAddressPhone] = useState('');
+  const [addressPhone2, setAddressPhone2] = useState('');
+  const [addressHomePhone, setAddressHomePhone] = useState('');
+  const [addressState, setAddressState] = useState('');
+
+  const [emergencyContact1Name, setEmergencyContact1Name] = useState('');
+  const [emergencyContact1Relation, setEmergencyContact1Relation] = useState('');
+  const [emergencyContact1Address, setEmergencyContact1Address] = useState('');
+  const [emergencyContact1Phone1, setEmergencyContact1Phone1] = useState('');
+  const [emergencyContact1Phone2, setEmergencyContact1Phone2] = useState('');
+
+  const [emergencyContact2Name, setEmergencyContact2Name] = useState('');
+  const [emergencyContact2Relation, setEmergencyContact2Relation] = useState('');
+  const [emergencyContact2Address, setEmergencyContact2Address] = useState('');
+  const [emergencyContact2Phone1, setEmergencyContact2Phone1] = useState('');
+  const [emergencyContact2Phone2, setEmergencyContact2Phone2] = useState('');
+
+  // 
 
   const navigate = useNavigate();
   const [age, setAge] = React.useState('');
@@ -37,6 +107,7 @@ function CareGiver() {
 
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
+    setRow(initRow);
   };
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
@@ -110,6 +181,52 @@ function CareGiver() {
         break;
     }
   }
+  //Sylvia Acevedo
+  //David Alicea
+  //215-842-8107
+  //159-68-5232
+  function populateData() {
+    for (var key in row) {
+      if(row[key].name == filterName && filterName != null){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.name == row[key].name;
+        });
+        setRow(myArray)
+      }
+      
+      
+      if(row[key].phone == filterPhoneNumber && filterPhoneNumber != null){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.phone == row[key].phone;
+        });
+        setRow(myArray)
+      }
+
+      // if(row[key].CoCode == filterCareGiverCode && filterCareGiverCode != null){
+      //   var myArray = row;
+      //   myArray = myArray.filter(function( obj ) {
+      //     return obj.CoCode !== row[key].CoCode;
+      //   });
+      //   setRow(myArray)
+      // }
+
+      if(row[key].SSN == filterSSN && filterSSN != null){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.SSN == row[key].SSN;
+        });
+        setRow(myArray)
+      }
+    }
+  }
+
+  const handleFilterStatus = (event) => {
+    setAge(event.target.value);
+    setFilterDiscipline(event.target.value);
+    console.log(filterDiscipline)
+  };
 
   function Overlay() {
 
@@ -120,29 +237,23 @@ function CareGiver() {
         <h1 style={{ textAlign: "center" }}>Set Filter from here !</h1>
         <p style={{ fontSize: 15, fontWeight: "bold", color: "#042940", textAlign: "center" }}>Search Care Giver</p>
         <div className="searchFieldsDiv">
-
+          {/* //==================================================================================================== */}
 
           <Grid className="griditem">
             <TextField
 
-              id="outlined-basic"
-              label="First Name"
+              id="filterName"
+              label="Name"
               variant="outlined"
+
             />
           </Grid>
-          <Grid className="griditem">
-            <TextField
-              id="outlined-basic"
-              label="Last Name"
-              variant="outlined"
-            />
-          </Grid>
-
+          
           <Grid className="griditem">
 
             <TextField
 
-              id="outlined-basic"
+              id="filterPhone"
               label="Phone Number"
               variant="outlined"
             />
@@ -150,7 +261,7 @@ function CareGiver() {
           <Grid className="griditem">
 
             <TextField
-              id="outlined-basic"
+              id="filterCareGiverCode"
               label="Care Giver Code"
               variant="outlined"
             />
@@ -161,17 +272,7 @@ function CareGiver() {
 
             <TextField
 
-              id="outlined-basic"
-              label="Alt Caregiver Code"
-              variant="outlined"
-            />
-
-          </Grid>
-          <Grid className="griditem">
-
-            <TextField
-
-              id="outlined-basic"
+              id="filterSSN"
               label="SSN"
               variant="outlined"
             />
@@ -189,16 +290,15 @@ function CareGiver() {
                   id="demo-simple-select"
                   value={age}
                   label="Status"
-                  onChange={handleChange}
+                  onChange={handleFilterStatus}
                 >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={10}>Active</MenuItem>
+                  <MenuItem value={20}>Inactive</MenuItem>
                 </Select>
               </FormControl>
             </Box>
           </Grid>
-          <Grid className="griditem2">
+          {/* <Grid className="griditem2">
 
             <Box>
               <FormControl fullWidth>
@@ -237,11 +337,20 @@ function CareGiver() {
                 </Select>
               </FormControl>
             </Box>
-          </Grid>
+          </Grid> */}
 
 
         </div>
-        <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay}>
+        <Button className="searchButton" variant="outlined" onClick={() => {
+          handleCloseOverlay();
+          
+          setFilterName(document.getElementById('filterName').value);
+          setFilterPhoneNumber(document.getElementById('filterPhone').value);
+          //setFilterCareGiverCode(document.getElementById('filterCareGiverCode').value);
+          //setFilterAltCareGiverCode(document.getElementById('filterAltCareGiverCode').value);
+          setFilterSSN(document.getElementById('filterSSN').value);
+          populateData();
+        }}>
           Search
         </Button>
       </div>
@@ -307,53 +416,123 @@ function CareGiver() {
   const NewCareGiverView = () => {
     return (
       <div className="Holder"  >
+
+        <div >
+          <h1 className="Heading" >Account Credentials</h1>
+          <TextField className="input" label="Username" variant="outlined" onChange={(username) => { setUsername(username) }} />
+          <TextField className="input" label="Password" variant="outlined" onChange={(password) => { setPassword(password) }} />
+          <TextField className="input" label="Email" variant="outlined" onChange={(email) => { setUserEmail(email) }} />
+        </div>
+
         <div >
           <h1 className="Heading" >Demographics</h1>
-          <TextField className="input" label="First Name" variant="outlined" />
-          <TextField className="input" label="Middle Name" variant="outlined" />
-          <TextField className="input" label="Last Name" variant="outlined" />
-          <TextField className="input" label="Intials" variant="outlined" />
-          <TextField className="input" label="Gender" variant="outlined" />
-          <TextField className="input" label="DOB" variant="outlined" />
-          <TextField className="input" label="Status" variant="outlined" />
-          <TextField className="input" label="Alt Caregiver Code" variant="outlined" />
-          <TextField className="input" label="SSN" variant="outlined" />
-          <TextField className="input" label="Mobile ID" variant="outlined" />
-          <TextField className="input" label="Primary Member Team" variant="outlined" />
-          <TextField className="input" label="NPI Number" variant="outlined" />
-          <TextField className="input" label="Rehire ?" variant="outlined" />
-          <TextField className="input" label="Rehire Date" variant="outlined" />
-          <TextField className="input" label="Employment Type" variant="outlined" />
+          <TextField className="input" label="First Name" variant="outlined" onChange={(firstName) => { setFirstName(firstName) }} />
+          <TextField className="input" label="Middle Name" variant="outlined" onChange={(middleName) => { setMiddleName(middleName) }} />
+          <TextField className="input" label="Last Name" variant="outlined" onChange={(lastName) => { setLastName(lastName) }} />
+          <TextField className="input" label="Intials" variant="outlined" onChange={(initials) => { setInitials(initials) }} />
+          <TextField className="input" label="Gender" variant="outlined" onChange={(gender) => { setGender(gender) }} />
+          <TextField className="input" label="DOB" variant="outlined" onChange={(dob) => { setDob(dob) }} />
+          <TextField className="input" label="Status" variant="outlined" onChange={(status) => { setStatus(status) }} />
+          <TextField className="input" label="Alt Caregiver Code" variant="outlined" onChange={(careGiverCode) => { setCareGiverCode(careGiverCode) }} />
+          <TextField className="input" label="SSN" variant="outlined" onChange={(ssn) => { setSSN(ssn) }} />
+          <TextField className="input" label="Mobile ID" variant="outlined" onChange={(mobileID) => { setMobileID(mobileID) }} />
+          <TextField className="input" label="Primary Member Team" variant="outlined" onChange={(primaryMemberTeam) => { setPrimaryMemberTeam(primaryMemberTeam) }} />
+          <TextField className="input" label="NPI Number" variant="outlined" onChange={(npi) => { setNPINumber(npi) }} />
+          <TextField className="input" label="Rehire ?" variant="outlined" onChange={(rehire) => { setRehire(rehire) }} />
+          <TextField className="input" label="Rehire Date" variant="outlined" onChange={(rehireDate) => { setRehireDate(rehireDate) }} />
+          <TextField className="input" label="Employment Type" variant="outlined" onChange={(employmentType) => { setEmploymentType(employmentType) }} />
 
         </div>
         <div>
           <h1 className="Heading">Address</h1>
-          <TextField className="input" label="Street 1" variant="outlined" />
-          <TextField className="input" label="Street 2" variant="outlined" />
-          <TextField className="input" label="City" variant="outlined" />
-          <TextField className="input" label="Zip" variant="outlined" />
-          <TextField className="input" label="State" variant="outlined" />
-          <TextField className="input" label="Phone" variant="outlined" />
-          <TextField className="input" label="Phone 2" variant="outlined" />
-          <TextField className="input" label="Home Phone" variant="outlined" />
+          <TextField className="input" label="Street 1" variant="outlined" onChange={(street1) => { setAddressStreet1(street1) }} />
+          <TextField className="input" label="Street 2" variant="outlined" onChange={(street2) => { setAddressStreet2(street2) }} />
+          <TextField className="input" label="City" variant="outlined" onChange={(city) => { setAddressCity(city) }} />
+          <TextField className="input" label="Zip" variant="outlined" onChange={(zip) => { setAddressZip(zip) }} />
+          <TextField className="input" label="State" variant="outlined" onChange={(state) => { setAddressState(state) }} />
+          <TextField className="input" label="Phone" variant="outlined" onChange={(phone) => { setAddressPhone(phone) }} />
+          <TextField className="input" label="Phone 2" variant="outlined" onChange={(phone2) => { setAddressPhone2(phone2) }} />
+          <TextField className="input" label="Home Phone" variant="outlined" onChange={(homephone) => { setAddressHomePhone(homephone) }} />
         </div>
         <div>
           <h1 className="Heading">Emergency Contact 1</h1>
-          <TextField className="input" label="Name" variant="outlined" />
-          <TextField className="input" label="Relationship" variant="outlined" />
-          <TextField className="input" label="Address" variant="outlined" />
-          <TextField className="input" label="Phone 1" variant="outlined" />
-          <TextField className="input" label="Phone 2" variant="outlined" />
+          <TextField className="input" label="Name" variant="outlined" onChange={(name) => { setEmergencyContact1Name(name) }} />
+          <TextField className="input" label="Relationship" variant="outlined" onChange={(relation) => { setEmergencyContact1Relation(relation) }} />
+          <TextField className="input" label="Address" variant="outlined" onChange={(address) => { setEmergencyContact1Address(address) }} />
+          <TextField className="input" label="Phone 1" variant="outlined" onChange={(phone1) => { setEmergencyContact1Phone1(phone1) }} />
+          <TextField className="input" label="Phone 2" variant="outlined" onChange={(phone2) => { setEmergencyContact1Phone2(phone2) }} />
         </div>
         <div>
           <h1 className="Heading">Emergency Contact 2</h1>
-          <TextField className="input" label="Name" variant="outlined" />
-          <TextField className="input" label="Relationship" variant="outlined" />
-          <TextField className="input" label="Address" variant="outlined" />
-          <TextField className="input" label="Phone 1" variant="outlined" />
-          <TextField className="input" label="Phone 2" variant="outlined" />
+          <TextField className="input" label="Name" variant="outlined" onChange={(name) => { setEmergencyContact2Name(name) }} />
+          <TextField className="input" label="Relationship" variant="outlined" onChange={(relation) => { setEmergencyContact2Relation(relation) }} />
+          <TextField className="input" label="Address" variant="outlined" onChange={(address) => { setEmergencyContact2Address(address) }} />
+          <TextField className="input" label="Phone 1" variant="outlined" onChange={(phone1) => { setEmergencyContact2Phone1(phone1) }} />
+          <TextField className="input" label="Phone 2" variant="outlined" onChange={(phone2) => { setEmergencyContact2Phone2(phone2) }} />
         </div>
-        <Button className="Signup" variant="contained">Sign Up</Button>
+        <Button className="Signup" variant="contained"
+          onClick={
+            function () {
+              var state = 0;
+              addCareGiver(
+                firstName.target.value,
+                middleName.target.value,
+                lastName.target.value,
+                initials.target.value,
+                gender.target.value,
+                dob.target.value,
+                status.target.value,
+                careGiverCode.target.value,
+                ssn.target.value,
+                mobileID.target.value,
+                mobileDeviceID.target.value,
+                primaryMemberTeam.target.value,
+                NPINumber.target.value,
+                rehire.target.value,
+                rehireDate.target.value,
+                employmentType.target.value,
+                addressStreet1.target.value,
+                addressStreet2.target.value,
+                addressCity.target.value,
+                addressZip.target.value,
+                addressPhone.target.value,
+                addressState.target.value,
+                addressHomePhone.target.value,
+                addressPhone2.target.value,
+                emergencyContact1Name.target.value,
+                emergencyContact1Relation.target.value,
+                emergencyContact1Address.target.value,
+                emergencyContact1Phone1.target.value,
+                emergencyContact1Phone2.target.value,
+                emergencyContact2Name.target.value,
+                emergencyContact2Relation.target.value,
+                emergencyContact2Address.target.value,
+                emergencyContact2Phone1.target.value,
+                emergencyContact2Phone2.target.value,
+              ).then(res => {
+                if (res.data.result == "success") {
+                  state = 1;
+                }
+              });
+
+              createCareGiverLogin(
+                userEmail.target.value,
+                username.target.value,
+                password.target.value
+              ).then(res => {
+
+                if (res.data.result == "success") {
+                  // aler
+                  state = 2;
+                }
+              });
+
+              if (state == 2) {
+                setAlertState(true);
+              }
+            }
+          }
+        >Sign Up</Button>
       </div>
     );
   };
@@ -402,9 +581,9 @@ function CareGiver() {
         Discipline: memberData[key].Discipline,
       }
       arr.push(obj);
-      console.log(arr)
     }
     setRow(arr);
+    setInitRow(arr);
     // console.log(row);
   }
 
@@ -422,6 +601,14 @@ function CareGiver() {
 
   return (
     <Wrapper>
+
+      {alertState &&
+        <Alert severity="success">
+          <AlertTitle>Success</AlertTitle>
+          This is a success alert — <strong>check it out!</strong>
+        </Alert>
+      }
+
       <div className="Header">
         <MenuIcon
           className="menuIcon"

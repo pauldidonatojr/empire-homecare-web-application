@@ -5,13 +5,17 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from './components/context'
+import { AuthContext, LoginContext } from './components/context'
 import { loginUser } from './API/authAPI';
+import { loginCareGiver } from "./API/authCareGiverAPI";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 
 
 function Login() {
   const { signIn } = React.useContext(AuthContext);
+  const [loginStatus, setLoginStatus] = useState(null);
   const navigate = useNavigate();
   const [selectedRadio, setSelectedRadio] = useState("");
   const [username, setUsername] = useState('');
@@ -27,6 +31,7 @@ function Login() {
     signIn(username, usertype, password);
   }
 
+
   const handleSignIn = (selectedRadio) => {
     switch (selectedRadio) {
       case "Admin":
@@ -35,15 +40,19 @@ function Login() {
             if (res.data.result == "success") {
               loginHandle(username, password, 'admin');
               navigate("/AdminHome");
+              setLoginStatus('sucess');
             }
           });
         }
         break;
       case "CareGiver":
-        //NAVIGATE TO CAREGIVER HOMEPAGE
-        loginHandle(username, password, 'caregiver');
-        navigate("/CareGiverHome");
-
+        loginCareGiver(username, password).then(res => {
+          if (res.data.result == "success") {
+            loginHandle(username, password, 'caregiver');
+            navigate("/CareGiverHome");
+            setLoginStatus('sucess');
+          }
+        });
         break;
       case "Patient":
         //NAVIGATE TO PATIENT HOMEPAGE
@@ -66,6 +75,22 @@ function Login() {
 
   return (
     <Wrapper>
+
+      {loginStatus == 'sucess' &&
+        <Alert severity="success">
+          <AlertTitle>Success</AlertTitle>
+          This is a success alert — <strong>check it out!</strong>
+        </Alert>
+      }
+
+      {loginStatus == 'failed' &&
+        <Alert severity="success">
+          <AlertTitle>Success</AlertTitle>
+          This is a success alert — <strong>check it out!</strong>
+        </Alert>
+      }
+
+
       <Card className="ImageCard">
         <div className="LogoImageHolder">
           <img className="logo" src="./EmpireHomeCareLogo.png" alt="logoImageHere"></img>

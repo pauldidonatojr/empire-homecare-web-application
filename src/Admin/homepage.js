@@ -26,6 +26,24 @@ function Homepage() {
   const [memberData, setMemberData] = useState([]);
   const { signOut } = React.useContext(AuthContext);
   const [row, setRow] = useState([]);
+  var [initRow, setInitRow] = useState([]);
+
+
+
+  // Filter Data 
+
+  const [memberID, setMemberID] = React.useState(null);
+  const [admissionID, setAdmissionID] = React.useState(null);
+  const [name, setName] = React.useState(null);
+  const [phone, setPhone] = React.useState(null);
+  const [status, setStatus] = React.useState(null);
+  const [coordinator, setCoordinator] = React.useState(null);
+  const [mco, setMCO] = React.useState(null);
+  const [office, setOffice] = React.useState(null);
+  const [venderID, setVenderID] = React.useState(null);
+
+
+  // 
 
   const [age, setAge] = React.useState('');
   const handleChange = (event) => {
@@ -125,10 +143,72 @@ function Homepage() {
 
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
+    setRow(initRow);
   };
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
+
+  function populateData() {
+    for (var key in row) {
+      if(row[key].Name == name && name != null){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.Name == row[key].Name;
+        });
+        setRow(myArray)
+      }
+      
+      
+      if(row[key].Phone == phone && phone != null){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.Phone == row[key].Phone;
+        });
+        setRow(myArray)
+      }
+
+      if(row[key].id == memberID && memberID != null){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.id == row[key].id;
+        });
+        setRow(myArray)
+      }
+
+      if(row[key].AdmissionID == admissionID && admissionID != null){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.AdmissionID == row[key].AdmissionID;
+        });
+        setRow(myArray)
+      }
+
+      if(status != 10){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.Status == "Active";
+        });
+        setRow(myArray)
+      }
+
+      if(status == 20){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.Status == "Inactive";
+        });
+        setRow(myArray)
+      }
+
+      
+    }
+  }
+
+  const handleFilterStatus = (event) => {
+    setAge(event.target.value);
+    setStatus(event.target.value);
+  };
+
 
 
   function Overlay() {
@@ -145,14 +225,14 @@ function Homepage() {
           <Grid className="griditem">
             <TextField
 
-              id="outlined-basic"
+              id="memberID"
               label="Member ID"
               variant="outlined"
             />
           </Grid>
           <Grid className="griditem">
             <TextField
-              id="outlined-basic"
+              id="admissionID"
               label="Admission ID"
               variant="outlined"
             />
@@ -162,26 +242,17 @@ function Homepage() {
 
             <TextField
 
-              id="outlined-basic"
-              label="First Name"
+              id="name"
+              label="Name"
               variant="outlined"
             />
           </Grid>
-          <Grid className="griditem">
-
-            <TextField
-              id="outlined-basic"
-              label="Last Name"
-              variant="outlined"
-            />
-
-          </Grid>
-
+          
           <Grid className="griditem">
 
             <TextField
 
-              id="outlined-basic"
+              id="phone"
               label="Phone Number"
               variant="outlined"
             />
@@ -199,16 +270,15 @@ function Homepage() {
                   id="demo-simple-select"
                   value={age}
                   label="Status"
-                  onChange={handleChange}
+                  onChange={handleFilterStatus}
                 >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={10}>Active</MenuItem>
+                  <MenuItem value={20}>Inactive</MenuItem>
                 </Select>
               </FormControl>
             </Box>
           </Grid>
-          <Grid className="griditem2" >
+          {/* <Grid className="griditem2" >
 
             <Box>
               <FormControl fullWidth>
@@ -247,8 +317,8 @@ function Homepage() {
                 </Select>
               </FormControl>
             </Box>
-          </Grid>
-          <Grid className="griditem2">
+          </Grid> */}
+          {/* <Grid className="griditem2">
 
             <Box>
               <FormControl fullWidth>
@@ -267,18 +337,29 @@ function Homepage() {
                 </Select>
               </FormControl>
             </Box>
-          </Grid>
-          <Grid className="griditem2">
+          </Grid> */}
+          {/* <Grid className="griditem2">
             <TextField
 
-              id="outlined-basic"
+              id="venderID"
               label="Vender Tax ID"
               variant="outlined"
             />
-          </Grid>
+          </Grid> */}
 
         </div>
-        <Button className="searchButton" variant="outlined" onClick={handleCloseOverlay}>
+        <Button className="searchButton" variant="outlined" onClick={() => {
+          handleCloseOverlay();
+          
+          setMemberID(document.getElementById('memberID').value);
+          setAdmissionID(document.getElementById('admissionID').value);
+          setName(document.getElementById('name').value);
+          setPhone(document.getElementById('phone').value);
+          //setFilterCareGiverCode(document.getElementById('filterCareGiverCode').value);
+          //setFilterAltCareGiverCode(document.getElementById('filterAltCareGiverCode').value);
+          setVenderID(document.getElementById('venderID').value);
+          populateData();
+        }}>
           Search
         </Button>
       </div>
@@ -351,10 +432,9 @@ function Homepage() {
           Phone: memberData[key].HomePhone
         }
         arr.push(obj);
-        console.log(arr)
     }
     setRow(arr);
-    // console.log(row);
+    setInitRow(arr);
   }
 
 
@@ -386,16 +466,16 @@ function Homepage() {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'Name', headerName: 'Name', width: 100 },
+    { field: 'Name', headerName: 'Name', width: 200 },
     { field: 'Gender', headerName: 'Gender', width: 100 },
-    { field: 'MCOName', headerName: 'MCO Name', width: 100 },
-    { field: 'Discipline', headerName: 'discipline', width: 100 },
-    { field: 'FirstDayofService', headerName: 'Joining Date', width: 100 },
-    { field: 'Location', headerName: 'Location', width: 120 },
+    { field: 'MCOName', headerName: 'MCO Name', width: 200 },
+    { field: 'Discipline', headerName: 'discipline', width: 150 },
+    { field: 'FirstDayofService', headerName: 'Joining Date', width: 150 },
+    { field: 'Location', headerName: 'Location', width: 250 },
     { field: 'Status', headerName: 'Status', width: 100 },
-    { field: 'AdmissionID', headerName: 'Admission ID', width: 100 },
-    { field: 'SSN', headerName: 'SSN', width: 100 },
-    { field: 'Phone', headerName: 'Phone', width: 100 },
+    { field: 'AdmissionID', headerName: 'Admission ID', width: 150 },
+    { field: 'SSN', headerName: 'SSN', width: 150 },
+    { field: 'Phone', headerName: 'Phone', width: 150 },
 
   ];
 

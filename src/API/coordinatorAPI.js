@@ -7,13 +7,15 @@ export const addCoordinator = async (
     Number,
     Status
 ) => {
-
     var data = JSON.stringify({
+        // {"type":"addcordinator","co_id":"1002","name":"Default2","status":"Active"}
         "type":"addcordinator",
+        "co_id": Number,
         "name": Name,
-        "contactNumber": Number,
         "status": Status
     });
+
+    
 
     var config = {
         method: 'post',
@@ -48,7 +50,8 @@ export const getCoordinators = async () => {
     // myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-        "type": "getcordinator"
+        "type": "getcordinator",
+        "active":"1"
     });
 
     var requestOptions = {
