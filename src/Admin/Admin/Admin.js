@@ -22,9 +22,15 @@ import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { DataGrid } from '@mui/x-data-grid';
 import {AuthContext} from '../../components/context'
+import { resetPassword } from "../../API/resetPasswordApi";
 
 
 function Report() {
+
+  const [email, setEmail] = useState(null);
+  const [currPassword, setCurrPassword] = useState(null);
+  const [newPassword, setNewPassword] = useState(null);
+
   const { signOut } = React.useContext(AuthContext);
   const [ViewSelected, setViewSelected] = useState(1);
   const navigate = useNavigate();
@@ -303,14 +309,26 @@ function Report() {
       <div className="Holder"  >
         <div className="InputHolder"> 
             <h1 className="Heading" >Change Password</h1>
-            <TextField className="input" label="Current Password" variant="outlined" />
+            <TextField className="input" label="Email" variant="outlined" onChange={(username) => { setEmail(username.target.value) }}/>
+            <TextField className="input" label="Current Password" variant="outlined" onChange={(username) => { setCurrPassword(username.target.value) }}/>
             <TextField className="input" label="New Password" variant="outlined" />
-            <TextField className="input" label="Repeat New Password" variant="outlined" />
+            <TextField className="input" label="Repeat New Password" variant="outlined" onChange={(username) => { setNewPassword(username.target.value) }} />
 
         </div>
       
         
-        <Button className="Signup" variant="contained">Apply Changes</Button>
+        <Button className="Signup" variant="contained"
+        onClick={
+          function () {
+            var state = 0;
+            resetPassword(email, currPassword, newPassword).then(res => {
+              if (res.data.result == "success") {
+              }
+            }
+            )}
+          }
+
+        >Apply Changes</Button>
      </div>
     );
   };
