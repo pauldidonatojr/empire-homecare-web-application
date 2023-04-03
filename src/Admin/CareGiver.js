@@ -11,6 +11,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from "react-router-dom";
 import FormControl from '@mui/material/FormControl';
+
+import Backdrop from '@mui/material/Backdrop';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../Footer";
@@ -23,8 +25,13 @@ import { addCareGiver, getCareGiver } from "../API/careGiverAPI";
 import { createCareGiverLogin } from "../API/authCareGiverAPI";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function CareGiver() {
+  const notify = () => toast("Data Fetching for Care Givers!");
+  const notifyAdd = () => toast("Care Giver Added Sucessfuly!");
 
   // Set Alert
   const [alertState, setAlertState] = useState(false);
@@ -107,6 +114,7 @@ function CareGiver() {
 
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
+    setOpen(!open);
     setRow(initRow);
   };
   const handleCloseOverlay = () => {
@@ -187,18 +195,18 @@ function CareGiver() {
   //159-68-5232
   function populateData() {
     for (var key in row) {
-      if(row[key].name == filterName && filterName != null){
+      if (row[key].name == filterName && filterName != null) {
         var myArray = row;
-        myArray = myArray.filter(function( obj ) {
+        myArray = myArray.filter(function (obj) {
           return obj.name == row[key].name;
         });
         setRow(myArray)
       }
-      
-      
-      if(row[key].phone == filterPhoneNumber && filterPhoneNumber != null){
+
+
+      if (row[key].phone == filterPhoneNumber && filterPhoneNumber != null) {
         var myArray = row;
-        myArray = myArray.filter(function( obj ) {
+        myArray = myArray.filter(function (obj) {
           return obj.phone == row[key].phone;
         });
         setRow(myArray)
@@ -212,9 +220,9 @@ function CareGiver() {
       //   setRow(myArray)
       // }
 
-      if(row[key].SSN == filterSSN && filterSSN != null){
+      if (row[key].SSN == filterSSN && filterSSN != null) {
         var myArray = row;
-        myArray = myArray.filter(function( obj ) {
+        myArray = myArray.filter(function (obj) {
           return obj.SSN == row[key].SSN;
         });
         setRow(myArray)
@@ -227,78 +235,89 @@ function CareGiver() {
     setFilterDiscipline(event.target.value);
     console.log(filterDiscipline)
   };
+  //
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
+  //
   function Overlay() {
 
     return (
 
-      <div className="overlay">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ textAlign: "center" }}>Set Filter from here !</h1>
-        <p style={{ fontSize: 15, fontWeight: "bold", color: "#042940", textAlign: "center" }}>Search Care Giver</p>
-        <div className="searchFieldsDiv">
-          {/* //==================================================================================================== */}
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
 
-          <Grid className="griditem">
-            <TextField
+      >
+        <div className="overlay">
+          <CloseIcon className="crossIcon" onClick={handleClose} />
+          <h1 style={{ textAlign: "center", color: "black" }}>Set Filter from here !</h1>
+          <p style={{ fontSize: 15, fontWeight: "bold", color: "#042940", textAlign: "center" }}>Search Care Giver</p>
+          <div className="searchFieldsDiv">
+            {/* //==================================================================================================== */}
 
-              id="filterName"
-              label="Name"
-              variant="outlined"
+            <Grid className="griditem">
+              <TextField
 
-            />
-          </Grid>
-          
-          <Grid className="griditem">
+                id="filterName"
+                label="Name"
+                variant="outlined"
 
-            <TextField
+              />
+            </Grid>
 
-              id="filterPhone"
-              label="Phone Number"
-              variant="outlined"
-            />
-          </Grid>
-          <Grid className="griditem">
+            <Grid className="griditem">
 
-            <TextField
-              id="filterCareGiverCode"
-              label="Care Giver Code"
-              variant="outlined"
-            />
+              <TextField
 
-          </Grid>
+                id="filterPhone"
+                label="Phone Number"
+                variant="outlined"
+              />
+            </Grid>
+            <Grid className="griditem">
 
-          <Grid className="griditem">
+              <TextField
+                id="filterCareGiverCode"
+                label="Care Giver Code"
+                variant="outlined"
+              />
 
-            <TextField
+            </Grid>
 
-              id="filterSSN"
-              label="SSN"
-              variant="outlined"
-            />
+            <Grid className="griditem">
 
-          </Grid>
+              <TextField
+
+                id="filterSSN"
+                label="SSN"
+                variant="outlined"
+              />
+
+            </Grid>
 
 
-          <Grid className="griditem2">
+            <Grid className="griditem2">
 
-            <Box >
-              <FormControl fullWidth>
-                <InputLabel >Status</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={age}
-                  label="Status"
-                  onChange={handleFilterStatus}
-                >
-                  <MenuItem value={10}>Active</MenuItem>
-                  <MenuItem value={20}>Inactive</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </Grid>
-          {/* <Grid className="griditem2">
+              <Box >
+                <FormControl fullWidth>
+                  <InputLabel >Status</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={age}
+                    label="Status"
+                    onChange={handleFilterStatus}
+                  >
+                    <MenuItem value={10}>Active</MenuItem>
+                    <MenuItem value={20}>Inactive</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+            </Grid>
+            {/* <Grid className="griditem2">
 
             <Box>
               <FormControl fullWidth>
@@ -340,21 +359,21 @@ function CareGiver() {
           </Grid> */}
 
 
-        </div>
-        <Button className="searchButton" variant="outlined" onClick={() => {
-          handleCloseOverlay();
-          
-          setFilterName(document.getElementById('filterName').value);
-          setFilterPhoneNumber(document.getElementById('filterPhone').value);
-          //setFilterCareGiverCode(document.getElementById('filterCareGiverCode').value);
-          //setFilterAltCareGiverCode(document.getElementById('filterAltCareGiverCode').value);
-          setFilterSSN(document.getElementById('filterSSN').value);
-          populateData();
-        }}>
-          Search
-        </Button>
-      </div>
+          </div>
+          <Button className="searchButton" variant="outlined" onClick={() => {
+            handleCloseOverlay();
 
+            setFilterName(document.getElementById('filterName').value);
+            setFilterPhoneNumber(document.getElementById('filterPhone').value);
+            //setFilterCareGiverCode(document.getElementById('filterCareGiverCode').value);
+            //setFilterAltCareGiverCode(document.getElementById('filterAltCareGiverCode').value);
+            setFilterSSN(document.getElementById('filterSSN').value);
+            populateData();
+          }}>
+            Search
+          </Button>
+        </div>
+      </Backdrop>
     );
   }
 
@@ -524,6 +543,7 @@ function CareGiver() {
                 if (res.data.result == "success") {
                   // aler
                   state = 2;
+                  notifyAdd();
                 }
               });
 
@@ -589,6 +609,7 @@ function CareGiver() {
 
 
   useEffect(() => {
+    notify();
     getCareGiver().then(res => {
       setMemberData(res.data);
     })
@@ -601,6 +622,8 @@ function CareGiver() {
 
   return (
     <Wrapper>
+
+      <ToastContainer />
 
       {alertState &&
         <Alert severity="success">
@@ -824,6 +847,7 @@ width: 100%;
   .crossIcon {
     margin-left: 95%;
     margin-top: 2%;
+    color:black;
   }
   .searchFieldsDiv {
     display: grid;

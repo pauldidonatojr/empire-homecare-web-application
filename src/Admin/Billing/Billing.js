@@ -20,6 +20,8 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import {AuthContext} from '../../components/context'
+
+import Backdrop from '@mui/material/Backdrop';
 //
 const Link = require("react-router-dom").Link;
 
@@ -45,13 +47,16 @@ function Billing() {
     switch (ViewSelected) {
       case 1:
         setIsOverlayOpen(true);
+        setOpen(!open);
         break;
       case 2:
         setIsOverlayOpen2(true);
+        setOpen2(!open2);
         break;
 
       case 4:
         setIsOverlayOpen4(true);
+        setOpen4(!open4);
         break;
       default:
         break;
@@ -89,13 +94,38 @@ function Billing() {
   const handleCloseOverlay4 = () => {
     setIsOverlayOpen4(false);
   };
+ //
+ const [open, setOpen] = React.useState(false);
+ const handleClose = () => {
+   setOpen(false);
+ };
+ 
+ //
+  //
+const [open2, setOpen2] = React.useState(false);
+const handleClose2 = () => {
+  setOpen2(false);
+};
 
+//
+ //
+ const [open4, setOpen4] = React.useState(false);
+ const handleClose4 = () => {
+   setOpen4(false);
+ };
+ 
+ //
   //CallMaintance Search Overlay
   function Overlay() {
     return (
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open}
+     
+    >
       <div className="overlay">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ textAlign: "center" }}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon" onClick={handleClose} />
+        <h1 style={{ textAlign: "center",color:"black" }}>Set Filter from here !</h1>
         <p
           style={{
             fontSize: 15,
@@ -234,15 +264,21 @@ function Billing() {
           Search
         </Button>
       </div>
+      </Backdrop>
     );
   }
 
   //MissedIn
   function Overlay2() {
     return (
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open2}
+     
+    >
       <div className="overlay2">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay2} />
-        <h1 style={{ textAlign: "center" }}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon" onClick={handleClose2} />
+        <h1 style={{ textAlign: "center",color:"black" }}>Set Filter from here !</h1>
         <p
           style={{
             fontSize: 15,
@@ -439,15 +475,21 @@ function Billing() {
           Search
         </Button>
       </div>
+      </Backdrop>
     );
   }
 
   //Missed Call Overlay
   function Overlay4() {
     return (
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open4}
+     
+    >
       <div className="overlay4">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay4} />
-        <h1 style={{ textAlign: "center" }}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon" onClick={handleClose4} />
+        <h1 style={{ textAlign: "center",color:"black" }}>Set Filter from here !</h1>
         <p
           style={{
             fontSize: 15,
@@ -564,6 +606,7 @@ function Billing() {
           Search
         </Button>
       </div>
+      </Backdrop>
     );
   }
 
@@ -1043,6 +1086,7 @@ const Wrapper = styled.section`
   .crossIcon {
     margin-left: 95%;
     margin-top: 2%;
+    color:black;
   }
   .searchFieldsDiv {
     display: grid;

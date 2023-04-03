@@ -15,7 +15,7 @@ import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../../Footer";
 import { DataGrid } from '@mui/x-data-grid';
-
+import Backdrop from '@mui/material/Backdrop';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -58,21 +58,35 @@ function Visit() {
     switch (ViewSelected) {
       case 2:
         setIsOverlayOpen(true);
+        setOpen(!open);
         break;
       case 3:
         setIsOverlayOpen2(true);
+        setOpen2(!open2);
         break;
       default:
         break;
     }
 
   };
+  //
+const [open, setOpen] = React.useState(false);
+const handleClose = () => {
+  setOpen(false);
+};
+
+//
 
   function Overlay() {
     return (
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open}
+     
+    >
       <div className="overlay">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon" onClick={handleClose} />
+        <h1 style={{ textAlign:"center",color:"black" }}>Set Filter from here !</h1>
       <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Visit Search</p>
         <div className="searchFieldsDiv">
        
@@ -271,13 +285,27 @@ function Visit() {
           Search
         </Button>
       </div>
+      </Backdrop>
     );
   }
+
+  //
+const [open2, setOpen2] = React.useState(false);
+const handleClose2 = () => {
+  setOpen2(false);
+};
+
+//
   function Overlay2() {
     return (
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open2}
+     
+    >
       <div className="overlay2">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay2} />
-        <h1 style={{ textAlign:"center"}}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon"  onClick={handleClose2}/>
+        <h1 style={{ textAlign:"center",color:"black"}}>Set Filter from here !</h1>
       <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Quick Visit Search</p>
         <div className="searchFieldsDiv">
        
@@ -321,6 +349,7 @@ function Visit() {
           Search
         </Button>
       </div>
+      </Backdrop>
     );
   }
 
@@ -721,6 +750,7 @@ width: 100%;
 .crossIcon{
     margin-left:95%;
     margin-top:2%;
+    color:black;
 }
 .searchFieldsDiv {
   display: grid;

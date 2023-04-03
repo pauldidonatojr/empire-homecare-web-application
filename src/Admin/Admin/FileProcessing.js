@@ -8,6 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 //
 
+import Backdrop from '@mui/material/Backdrop';
 import { useNavigate } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
@@ -43,9 +44,11 @@ const handleChange = (event) => {
       
       case 3:
         setIsOverlayOpen3(true);
+        setOpen3(!open3);
         break;
       case 4:
         setIsOverlayOpen4(true);
+        setOpen4(!open4);
         break;
       
       default:
@@ -70,13 +73,30 @@ const RemitancePressed = () => {
   };
 
   
+//
+const [open3, setOpen3] = React.useState(false);
+  const handleClose3 = () => {
+    setOpen3(false);
+  };
 
+  //////
+const [open4, setOpen4] = React.useState(false);
+const handleClose4 = () => {
+  setOpen4(false);
+};
+
+////
 
 function Overlay3() {
   return (
+    <Backdrop
+    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    open={open3}
+   
+  >
     <div className="overlay">
-    <CloseIcon className="crossIcon" onClick={handleCloseOverlay3} />
-    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
+    <CloseIcon className="crossIcon" onClick={handleClose3} />
+    <h1 style={{ textAlign:"center" ,color:"black"}}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Claim Files</p>
     <div className="searchFieldsDiv">
     
@@ -178,13 +198,19 @@ function Overlay3() {
       Search
     </Button>
   </div>
+  </Backdrop>
   );
 }
 function Overlay4() {
   return (
+    <Backdrop
+    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    open={open4}
+   
+  >
     <div className="overlay">
-    <CloseIcon className="crossIcon" onClick={handleCloseOverlay4} />
-    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
+    <CloseIcon className="crossIcon" onClick={handleClose4} />
+    <h1 style={{ textAlign:"center",color:"black" }}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Remitances</p>
     <div className="searchFieldsDiv">
   
@@ -285,6 +311,7 @@ function Overlay4() {
       Search
     </Button>
   </div>
+  </Backdrop>
   );
 }
 
@@ -644,6 +671,7 @@ const Wrapper = styled.section`
  
   .crossIcon {
     margin-left: 95%;
+    color:black;
     margin-top: 2%;
   }
   .searchFieldsDiv {

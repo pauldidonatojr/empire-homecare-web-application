@@ -21,6 +21,7 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {AuthContext} from '../../components/context'
+import Backdrop from '@mui/material/Backdrop';
 //
 const Link = require("react-router-dom").Link;
 
@@ -51,21 +52,27 @@ const handleChange = (event) => {
     switch (ViewSelected) {
       case 1:
         setIsOverlayOpen(true);
+        setOpen(!open);
         break;
       case 2:
         setIsOverlayOpen2(true);
+        setOpen2(!open2);
         break;
       case 3:
         setIsOverlayOpen3(true);
+        setOpen3(!open3);
         break;
       case 4:
         setIsOverlayOpen4(true);
+        setOpen4(!open4);
         break;
       case 5:
         setIsOverlayOpen5(true);
+        setOpen5(!open5);
         break;
       case 6:
         setIsOverlayOpen6(true);
+        setOpen6(!open6);
         break;
       default:
         break;
@@ -113,12 +120,59 @@ const RejectedCallsPressed = () => {
     setIsOverlayOpen6(false);
   };
 
+    //
+const [open, setOpen] = React.useState(false);
+const handleClose = () => {
+  setOpen(false);
+};
+
+//
+ //
+ const [open2, setOpen2] = React.useState(false);
+ const handleClose2 = () => {
+   setOpen2(false);
+ };
+ 
+ //
+  //
+const [open3, setOpen3] = React.useState(false);
+const handleClose3 = () => {
+  setOpen3(false);
+};
+
+//
+ //
+ const [open4, setOpen4] = React.useState(false);
+ const handleClose4 = () => {
+   setOpen4(false);
+ };
+ 
+ //
+  //
+const [open5, setOpen5] = React.useState(false);
+const handleClose5 = () => {
+  setOpen5(false);
+};
+
+//
+ //
+ const [open6, setOpen6] = React.useState(false);
+ const handleClose6 = () => {
+   setOpen6(false);
+ };
+ 
+ //
   //CallMaintance Search Overlay
   function Overlay() {
     return (
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open}
+     
+    >
       <div className="overlay">
-      <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-      <h1 style={{ textAlign:"center"}}>Set Filter from here !</h1>
+      <CloseIcon className="crossIcon" onClick={handleClose} />
+      <h1 style={{ textAlign:"center",color:"black"}}>Set Filter from here !</h1>
       <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Call Maintaince</p>
       <div className="searchFieldsDiv">
       
@@ -317,15 +371,22 @@ const RejectedCallsPressed = () => {
         Search
       </Button>
     </div>
+    </Backdrop>
     );
   }
   
 //MissedIn
 function Overlay2() {
   return (
+    
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open2}
+     
+    >
     <div className="overlay2">
-    <CloseIcon className="crossIcon" onClick={handleCloseOverlay2} />
-    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
+    <CloseIcon className="crossIcon" onClick={handleClose2} />
+    <h1 style={{ textAlign:"center",color:"black" }}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Missed In</p>
     <div className="searchFieldsDiv">
     
@@ -431,15 +492,22 @@ function Overlay2() {
       Search
     </Button>
   </div>
+  </Backdrop>
   );
 }
 
 //Missed Out
 function Overlay3() {
-  return (
+  
+    return (
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open3}
+     
+    >
     <div className="overlay3">
-    <CloseIcon className="crossIcon" onClick={handleCloseOverlay3} />
-    <h1 style={{ textAlign:"center"}}>Set Filter from here !</h1>
+    <CloseIcon className="crossIcon" onClick={handleClose3} />
+    <h1 style={{ textAlign:"center",color:"black"}}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Missed Out</p>
     <div className="searchFieldsDiv">
     
@@ -548,14 +616,21 @@ function Overlay3() {
       Search
     </Button>
   </div>
+  </Backdrop>
   );
 }
 //Missed Call Overlay
 function Overlay4() {
-  return (
+ 
+    return (
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open4}
+     
+    >
     <div className="overlay4">
-    <CloseIcon className="crossIcon" onClick={handleCloseOverlay4} />
-    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
+    <CloseIcon className="crossIcon" onClick={handleClose4} />
+    <h1 style={{ textAlign:"center",color:"black" }}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Missed Call</p>
     <div className="searchFieldsDiv">
   
@@ -661,14 +736,20 @@ function Overlay4() {
       Search
     </Button>
   </div>
+  </Backdrop>
   );
 }
 //Visit Log
 function Overlay5() {
   return (
+    <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open5}
+     
+    >
     <div className="overlay5">
-    <CloseIcon className="crossIcon" onClick={handleCloseOverlay5} />
-    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
+    <CloseIcon className="crossIcon" onClick={handleClose5} />
+    <h1 style={{ textAlign:"center",color:"black" }}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Visit Log</p>
     <div className="searchFieldsDiv">
    
@@ -795,14 +876,21 @@ function Overlay5() {
       Search
     </Button>
   </div>
+  </Backdrop>
   );
 }
 //Rejected Calls
 function Overlay6() {
   return (
+    <Backdrop
+    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    open={open6}
+   
+  >
+    
     <div className="overlay6">
-    <CloseIcon className="crossIcon" onClick={handleCloseOverlay6} />
-    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
+    <CloseIcon className="crossIcon" onClick={handleClose6} />
+    <h1 style={{ textAlign:"center",color:"black" }}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Rejected Calls</p>
     <div className="searchFieldsDiv">
    
@@ -885,6 +973,7 @@ function Overlay6() {
       Search
     </Button>
   </div>
+  </Backdrop>
   );
 }
 
@@ -1516,6 +1605,7 @@ const Wrapper = styled.section`
   .crossIcon {
     margin-left: 95%;
     margin-top: 2%;
+    color:black;
   }
   .searchFieldsDiv {
     display: grid;

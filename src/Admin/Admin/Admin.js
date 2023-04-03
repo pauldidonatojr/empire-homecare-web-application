@@ -21,6 +21,8 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { DataGrid } from '@mui/x-data-grid';
+
+import Backdrop from '@mui/material/Backdrop';
 import {AuthContext} from '../../components/context'
 import { resetPassword } from "../../API/resetPasswordApi";
 
@@ -50,16 +52,14 @@ function Report() {
         break;
       case 2:
         setIsOverlayOpen2(true);
+        setOpen2(!open2);
         break;
-      case 3:
-        setIsOverlayOpen3(true);
-        break;
+      
       case 4:
         setIsOverlayOpen4(true);
+        setOpen4(!open4);
         break;
-      case 5:
-        setIsOverlayOpen5(true);
-        break;
+     
       default:
         break;
     }
@@ -114,11 +114,30 @@ function Report() {
       </div>
     );
   }
+  //
+const [open2, setOpen2] = React.useState(false);
+const handleClose2 = () => {
+  setOpen2(false);
+};
+
+//
+//
+const [open4, setOpen4] = React.useState(false);
+  const handleClose4 = () => {
+    setOpen4(false);
+  };
+
+  //
   function Overlay2() {
     return (
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open2}
+     
+    >
       <div className="overlay2">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay2} />
-        <h1 style={{textAlign:"center"}}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon" onClick={handleClose2} />
+        <h1 style={{textAlign:"center",color:"black"}}>Set Filter from here !</h1>
         <p
           style={{
             fontSize: 15,
@@ -156,13 +175,19 @@ function Report() {
           Search
         </Button>
       </div>
+      </Backdrop>
     );
   }
   function Overlay4() {
     return (
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open4}
+     
+    >
       <div className="overlay2">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay4} />
-        <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon" onClick={handleClose4} />
+        <h1 style={{ textAlign:"center",color:"black" }}>Set Filter from here !</h1>
         <p
           style={{
             fontSize: 15,
@@ -200,6 +225,7 @@ function Report() {
           Search
         </Button>
       </div>
+      </Backdrop>
     );
   }
   
@@ -839,6 +865,7 @@ elevation: 13,
   
   .crossIcon {
     margin-left: 95%;
+    color:black;
     margin-top: 2%;
   }
   .searchFieldsDiv {

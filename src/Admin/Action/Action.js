@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
 //
 import Box from "@mui/material/Box";
+import Backdrop from '@mui/material/Backdrop';
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -44,16 +45,28 @@ function Action() {
   //
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
+    setOpen(!open);
   };
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
+//
+const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
+  //
   function Overlay() {
     return (
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open}
+     
+    >
       <div className="overlay">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ textAlign: "center" }}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon" onClick={handleClose} />
+        <h1 style={{ textAlign: "center",color:"black" }}>Set Filter from here !</h1>
         <p
           style={{
             fontSize: 15,
@@ -161,6 +174,7 @@ function Action() {
           Search
         </Button>
       </div>
+      </Backdrop>
     );
   }
   function CommunicationMessageCenterPressed() {
@@ -531,6 +545,7 @@ padding: 1%;
 .crossIcon{
     margin-left:95%;
     margin-top:2%;
+    color:black;
 }
 .searchFieldsDiv{
   display: grid;

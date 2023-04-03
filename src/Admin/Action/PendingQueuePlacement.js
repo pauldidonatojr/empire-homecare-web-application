@@ -15,6 +15,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grid from '@mui/material/Grid';
 import Footer from "../../Footer";
+import Backdrop from '@mui/material/Backdrop';
 //
 //
 import Drawer from "@mui/material/Drawer";
@@ -47,15 +48,19 @@ const handleChange = (event) => {
       
       case 3:
         setIsOverlayOpen3(true);
+        setOpen3(!open3);
         break;
       case 4:
         setIsOverlayOpen4(true);
+        setOpen4(!open4);
         break;
       case 5:
         setIsOverlayOpen5(true);
+        setOpen5(!open5);
         break;
       case 6:
         setIsOverlayOpen6(true);
+        setOpen6(!open6);
         break;
       default:
         break;
@@ -90,13 +95,45 @@ const MasterworkPressed = () => {
   };
 
   
+//
+const [open3, setOpen3] = React.useState(false);
+  const handleClose3 = () => {
+    setOpen3(false);
+  };
 
+  //
+  //
+const [open4, setOpen4] = React.useState(false);
+const handleClose4 = () => {
+  setOpen4(false);
+};
+
+//
+//
+const [open5, setOpen5] = React.useState(false);
+  const handleClose5 = () => {
+    setOpen5(false);
+  };
+
+  //
+  //
+const [open6, setOpen6] = React.useState(false);
+const handleClose6 = () => {
+  setOpen6(false);
+};
+
+//
 
 function Overlay3() {
   return (
+    <Backdrop
+    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    open={open3}
+   
+  >
     <div className="overlay">
-    <CloseIcon className="crossIcon" onClick={handleCloseOverlay3} />
-    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
+    <CloseIcon className="crossIcon" onClick={handleClose3} />
+    <h1 style={{ textAlign:"center",color:"black" }}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Pending</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
@@ -126,13 +163,19 @@ function Overlay3() {
       Search
     </Button>
   </div>
+  </Backdrop>
   );
 }
 function Overlay4() {
   return (
+    <Backdrop
+    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    open={open4}
+   
+  >
     <div className="overlay">
-    <CloseIcon className="crossIcon" onClick={handleCloseOverlay4} />
-    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
+    <CloseIcon className="crossIcon" onClick={handleClose4} />
+    <h1 style={{ textAlign:"center",color:"black" }}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Total Accepted</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
@@ -162,14 +205,20 @@ function Overlay4() {
       Search
     </Button>
   </div>
+  </Backdrop>
   );
 }
 //Visit Log
 function Overlay5() {
   return (
+    <Backdrop
+    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    open={open5}
+   
+  >
     <div className="overlay">
-    <CloseIcon className="crossIcon" onClick={handleCloseOverlay5} />
-    <h1 style={{textAlign:"center"}}>Set Filter from here !</h1>
+    <CloseIcon className="crossIcon" onClick={handleClose5} />
+    <h1 style={{textAlign:"center",color:"black"}}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Staffed</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
@@ -200,14 +249,20 @@ function Overlay5() {
       Search
     </Button>
   </div>
+  </Backdrop>
   );
 }
 
 function Overlay6() {
   return (
+    <Backdrop
+    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    open={open6}
+   
+  >
     <div className="overlay">
-    <CloseIcon className="crossIcon" onClick={handleCloseOverlay6} />
-    <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
+    <CloseIcon className="crossIcon" onClick={handleClose6} />
+    <h1 style={{ textAlign:"center" ,color:"black"}}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Accepted Non Masterwork</p>
     <div className="searchFieldsDiv">
     <Grid container spacing={3}>
@@ -238,6 +293,7 @@ function Overlay6() {
       Search
     </Button>
   </div>
+  </Backdrop>
   );
 }
 
@@ -632,6 +688,7 @@ const Wrapper = styled.section`
   .crossIcon {
     margin-left: 95%;
     margin-top: 2%;
+    color:black;
   }
   .searchFieldsDiv {
     display: flex; 

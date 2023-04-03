@@ -13,6 +13,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import {AuthContext} from '../components/context'
+import Backdrop from '@mui/material/Backdrop';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -21,6 +22,18 @@ const Link = require("react-router-dom").Link;
 
 
 function Homepage() {
+  
+
+  //
+const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
+
+  //
   const { signOut } = React.useContext(AuthContext);
   const [ViewSelected, setViewSelected] = useState(1);
 
@@ -28,6 +41,7 @@ function Homepage() {
 
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
+    setOpen(!open);
   };
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
@@ -36,9 +50,14 @@ function Homepage() {
 
   function Overlay() {
     return (
+        <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+       
+      >
       <div className="overlay">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ textAlign:"center" }}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon"  onClick={handleClose} />
+        <h1 style={{ color:"black",textAlign:"center" }}>Set Filter from here !</h1>
         <div className="searchFieldsDiv">
         <Grid className="griditem">
         <TextField
@@ -86,6 +105,7 @@ function Homepage() {
           Search
         </Button>
       </div>
+      </Backdrop>
     );
   }
 
@@ -530,7 +550,7 @@ top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
 width: 75%;
-height: 75%;
+height: 55%;
 z-index: 1000;
 background-color: white;
 padding: 1%;
@@ -538,6 +558,7 @@ padding: 1%;
 .crossIcon{
     margin-left:95%;
     margin-top:2%;
+    color:black;
 }
 .searchFieldsDiv{
   display: grid;
@@ -545,7 +566,7 @@ padding: 1%;
   grid-gap: 10px; /* add some space between the columns */
   margin-top: 2.5%;
   width: 85%;
-  margin-left: 10%;
+  margin-left: 12%;
 }
 .Field{
     width:50%;
@@ -854,11 +875,12 @@ color:black;
   }
  
   .searchFieldsDiv {
+    margin-left:auto;
     grid-template-columns: repeat(1, 1fr); /* create 3 equal columns */
   }
   .overlay {
   width: 75%;
-  height: 80%;
+  height: 70%;
   overflow:auto;
   }
   .searchButton {

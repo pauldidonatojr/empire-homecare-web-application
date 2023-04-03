@@ -20,15 +20,33 @@ import List from '@mui/material/List';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {AuthContext} from '../components/context'
+import Backdrop from '@mui/material/Backdrop';
 import { getMembers } from "../API/membersApi";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function Homepage() {
+
+  const notify = () => toast("Data Fetching for Members!");
+  const notifyAdd = () => toast("Care Giver Added Sucessfuly!");
+
   const [memberData, setMemberData] = useState([]);
   const { signOut } = React.useContext(AuthContext);
   const [row, setRow] = useState([]);
   var [initRow, setInitRow] = useState([]);
 
+//
+const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
 
+  //
 
   // Filter Data 
 
@@ -143,6 +161,7 @@ function Homepage() {
 
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
+    setOpen(!open);
     setRow(initRow);
   };
   const handleCloseOverlay = () => {
@@ -214,10 +233,14 @@ function Homepage() {
   function Overlay() {
 
     return (
-
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open}
+     
+    >
       <div className="overlay">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ textAlign: "center" }}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon" onClick={handleClose} />
+        <h1 style={{ textAlign: "center",color:"black" }}>Set Filter from here !</h1>
         <p style={{ fontSize: 15, fontWeight: "bold", color: "#042940", textAlign: "center" }}>Members</p>
         <div className="searchFieldsDiv">
 
@@ -363,6 +386,7 @@ function Homepage() {
           Search
         </Button>
       </div>
+      </Backdrop>
 
     );
   }
@@ -439,6 +463,7 @@ function Homepage() {
 
 
   useEffect(()=>{
+    notify();
     getMembers().then(res => {
       setMemberData(res.data);
     })
@@ -481,7 +506,7 @@ function Homepage() {
 
   return (
     <Wrapper>
-
+      <ToastContainer />
       <div className="Header">
 
         <MenuIcon
@@ -752,6 +777,7 @@ const Wrapper = styled.section`
   .crossIcon {
     margin-left: 95%;
     margin-top: 2%;
+    color:black;
   }
   .searchFieldsDiv {
     display: grid;

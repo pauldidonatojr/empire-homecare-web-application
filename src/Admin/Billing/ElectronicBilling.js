@@ -17,6 +17,8 @@ import Footer from "../../Footer";
 
 import { useNavigate } from "react-router-dom";
 //
+
+import Backdrop from '@mui/material/Backdrop';
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -49,21 +51,41 @@ function Visit() {
     switch (ViewSelected) {
       case 2:
         setIsOverlayOpen(true);
+        setOpen(!open);
         break;
     
       case 4:
         setIsOverlayOpen2(true);
+        setOpen2(!open2);
         break;
       default:
         break;
     }
   };
+//
+const [open, setOpen] = React.useState(false);
+const handleClose = () => {
+  setOpen(false);
+};
 
+//
+//
+const [open2, setOpen2] = React.useState(false);
+const handleClose2 = () => {
+  setOpen2(false);
+};
+
+//
   function Overlay() {
     return (
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open}
+     
+    >
       <div className="overlay">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ textAlign: "center"}}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon" onClick={handleClose} />
+        <h1 style={{ textAlign: "center",color:"black"}}>Set Filter from here !</h1>
         <p
           style={{
             fontSize: 15,
@@ -142,13 +164,19 @@ function Visit() {
           Search
         </Button>
       </div>
+      </Backdrop>
     );
   }
   function Overlay2() {
     return (
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open2}
+     
+    >
       <div className="overlay2">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay2} />
-        <h1 style={{ textAlign: "center" }}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon" onClick={handleClose2} />
+        <h1 style={{ textAlign: "center",color:"black" }}>Set Filter from here !</h1>
         <p
           style={{
             fontSize: 15,
@@ -201,6 +229,7 @@ function Visit() {
           Search
         </Button>
       </div>
+      </Backdrop>
     );
   }
 
@@ -567,6 +596,7 @@ const Wrapper = styled.section`
   .crossIcon {
     margin-left: 95%;
     margin-top: 2%;
+    color:black;
   }
   .searchFieldsDiv {
     display: grid;

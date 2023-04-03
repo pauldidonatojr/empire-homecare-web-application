@@ -21,6 +21,8 @@ import { AuthContext } from '../../components/context'
 import { getCoordinators, addCoordinator } from "../../API/coordinatorAPI";
 import { useNavigate } from "react-router-dom";
 
+import Backdrop from '@mui/material/Backdrop';
+
 
 function CareGiver() {
 
@@ -49,6 +51,7 @@ function CareGiver() {
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
     setRow(initRow);
+    setOpen(!open);
     setCoordStatus(null);
   };
   const handleCloseOverlay = () => {
@@ -74,13 +77,24 @@ function CareGiver() {
     setFilterCoordStatus(event.target.value);
   };
 
+  //
+const [open, setOpen] = React.useState(false);
+const handleClose = () => {
+  setOpen(false);
+};
+
+////
   function Overlay() {
 
     return (
-
+<Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open}
+     
+    >
       <div className="overlay">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ textAlign: "center" }}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon" onClick={handleClose} />
+        <h1 style={{ textAlign: "center",color:"black"}}>Set Filter from here !</h1>
         <p style={{ fontSize: 15, fontWeight: "bold", color: "#042940", textAlign: "center" }}>Search New Cordinator</p>
         <div className="searchFieldsDiv">
 
@@ -134,6 +148,7 @@ function CareGiver() {
           Search
         </Button>
       </div>
+      </Backdrop>
 
     );
   }
@@ -614,6 +629,7 @@ width: 100%;
   .crossIcon {
     margin-left: 95%;
     margin-top: 2%;
+    color:black;
   }
   .searchFieldsDiv {
     display: grid;
