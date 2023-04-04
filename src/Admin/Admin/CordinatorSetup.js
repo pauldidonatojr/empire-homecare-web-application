@@ -20,6 +20,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { AuthContext } from '../../components/context'
 import { getCoordinators, addCoordinator } from "../../API/coordinatorAPI";
 import { useNavigate } from "react-router-dom";
+import OverlayCustom from "../Overlay";
 
 import Backdrop from '@mui/material/Backdrop';
 
@@ -296,6 +297,19 @@ const handleClose = () => {
       </div>
     );
   };
+  const handleRowClick= (params) => {
+    const rowId = params.row.id;
+    console.log("Member Clicked"+rowId+"Open 5 is"+open5);
+    
+    setOpen5(true);
+    
+    
+  };
+  const [open5, setOpen5] = React.useState(false);
+  const handleClose5 = () => {
+    setOpen5(false);
+    console.log("I am in handle close")
+  };
   const SearchCordinatorView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -305,6 +319,7 @@ const handleClose = () => {
           pageSize={5}
           rowsPerPageOptions={[15]}
           checkboxSelection
+          onRowClick={handleRowClick}
         />
       </div>
 
@@ -410,6 +425,7 @@ const handleClose = () => {
 
   return (
     <Wrapper>
+       {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
       <div className="Header">
         <MenuIcon
           className="menuIcon"

@@ -23,6 +23,7 @@ import {AuthContext} from '../components/context'
 import Backdrop from '@mui/material/Backdrop';
 import { getMembers } from "../API/membersApi";
 import { ToastContainer, toast } from 'react-toastify';
+import OverlayCustom from "./Overlay";
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -473,7 +474,19 @@ const [open, setOpen] = React.useState(false);
     populateRows();
   }, [memberData]);
 
-
+  const handleRowClick= (params) => {
+    const rowId = params.row.id;
+    console.log("Member Clicked"+rowId+"Open 5 is"+open5);
+    
+    setOpen5(true);
+    
+    
+  };
+  const [open5, setOpen5] = React.useState(false);
+  const handleClose5 = () => {
+    setOpen5(false);
+    console.log("I am in handle close")
+  };
   const MembersView = () => {
 
     return (
@@ -484,7 +497,9 @@ const [open, setOpen] = React.useState(false);
           pageSize={5}
           rowsPerPageOptions={[15]}
           checkboxSelection
+        onRowClick={handleRowClick}
         />
+        
       </div>
     );
   };
@@ -507,6 +522,15 @@ const [open, setOpen] = React.useState(false);
   return (
     <Wrapper>
       <ToastContainer />
+
+      
+      {console.log("Open 5 is" +open5)}
+      
+      {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
+    
+
+
+
       <div className="Header">
 
         <MenuIcon

@@ -26,6 +26,7 @@ import { createCareGiverLogin } from "../API/authCareGiverAPI";
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import { ToastContainer, toast } from 'react-toastify';
+import OverlayCustom from "./Overlay";
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -556,6 +557,20 @@ function CareGiver() {
       </div>
     );
   };
+
+  const handleRowClick= (params) => {
+    const rowId = params.row.id;
+    console.log("Member Clicked"+rowId+"Open 5 is"+open5);
+    
+    setOpen5(true);
+    
+    
+  };
+  const [open5, setOpen5] = React.useState(false);
+  const handleClose5 = () => {
+    setOpen5(false);
+    console.log("I am in handle close")
+  };
   const SearchCareGiverView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -565,6 +580,7 @@ function CareGiver() {
           pageSize={5}
           rowsPerPageOptions={[15]}
           checkboxSelection
+          onRowClick={handleRowClick}
         />
       </div>
 
@@ -624,7 +640,7 @@ function CareGiver() {
     <Wrapper>
 
       <ToastContainer />
-
+      {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
       {alertState &&
         <Alert severity="success">
           <AlertTitle>Success</AlertTitle>
