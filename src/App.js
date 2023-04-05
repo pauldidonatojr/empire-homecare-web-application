@@ -86,7 +86,6 @@ function App() {
 
         <Route element={<ProtectedRoute routeType={1} loggedIn={loggedIn} loginType={loginState.userType} />}>
           <Route path="/AdminHome" element={<AdminHomePage />}></Route>
-          <Route path="/PatientHome" element={<PatientHomePage />}></Route>
           <Route path="/CareGiver" element={<CareGiver />}></Route>
           <Route path="/Visit" element={<Visits />}></Route>
           <Route path="/Action" element={<Action />}></Route>
@@ -113,7 +112,8 @@ function App() {
         </Route>
 
         <Route element={<ProtectedRoute routeType={3} loggedIn={loggedIn} loginType={loginState.userType} />}>
-        <Route path="/PatientHome" element={<PatientHomePage />}></Route>
+          <Route path="/PatientHome" element={<PatientHomePage />}></Route>
+          <Route path="/visitdetails/:id" element={<VisitDetails />}></Route>
         </Route>
 
       </Routes>
