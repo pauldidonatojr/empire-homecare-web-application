@@ -24,21 +24,12 @@ import { DataGrid } from '@mui/x-data-grid';
 function Homepage() {
   
 
-  //
-const [open, setOpen] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
-
-  //
+  
   const { signOut } = React.useContext(AuthContext);
   const [ViewSelected, setViewSelected] = useState(1);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-  const [isRequestFormOpen, setIsRequestFormOpen] = useState(false);
+  
 
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
@@ -47,9 +38,14 @@ const [open, setOpen] = React.useState(false);
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
- const toggleRequestForm = () => {
-  setIsRequestFormOpen(true);
- }
+
+ 
+  //
+const [open, setOpen] = React.useState(false);
+const handleClose = () => {
+  setOpen(false);
+};
+//
 
   function Overlay() {
     return (
@@ -112,16 +108,32 @@ const [open, setOpen] = React.useState(false);
     );
   }
 
+   //
+const [open2, setOpen2] = React.useState(false);
+const handleClose2 = () => {
+  setOpen2(false);
+};
+//
+const [isRequestFormOpen, setIsRequestFormOpen] = useState(false);
+const handleCloseRequestForm = () => {
+  setIsRequestFormOpen(false);
+};
+
+const toggleRequestForm = () => {
+setIsRequestFormOpen(true);
+setOpen2(!open2);
+}
+
   function RequestForm() {
     return (
+
         <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
-       
-      >
-      <div className="overlay">
-        <CloseIcon className="crossIcon"  onClick={handleClose} />
-        <h1 style={{ color:"black",textAlign:"center" }}>Set Filter from here !</h1>
+        open={open2}
+        >
+      <div className="overlay2">
+        <CloseIcon className="crossIcon"  onClick={handleClose2} />
+        <h1 style={{ color:"black",textAlign:"center" }}>Submit Assistance Request</h1>
         <div className="searchFieldsDiv">
         <Grid className="griditem">
         <TextField
@@ -165,8 +177,8 @@ const [open, setOpen] = React.useState(false);
       </Grid>
         
         </div>
-        <Button className="searchButton" onClick={handleCloseOverlay}>
-          Search
+        <Button className="searchButton" onClick={handleCloseRequestForm}>
+          Submit Request
         </Button>
       </div>
       </Backdrop>
@@ -205,11 +217,9 @@ const [open, setOpen] = React.useState(false);
      
      </div>
      <h1 style={{color:"grey"}}>Tasks For Today</h1>
-     <DataGrid style={{width:"100%"}}
+     <DataGrid style={{width:"75%"}}
         rows={rows}
         columns={columns}
-        
-        onRowClick={handleRowClick}
       />
     </div>
       
@@ -217,8 +227,8 @@ const [open, setOpen] = React.useState(false);
   };
   //HistoryView
   const columns = [
-    { field: 'id', headerName: 'ID', width: 100,cellClassName: 'my-cell-class' },
-    { field: 'task', headerName: 'Task', width: 500,cellClassName: 'my-cell-class'  },
+    { field: 'id', headerName: 'ID', width: 100},
+    { field: 'task', headerName: 'Task', width: 500},
    
    
   ];
@@ -244,7 +254,6 @@ const [open, setOpen] = React.useState(false);
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
-        onRowClick={handleRowClick}
       />
     </div>
     );
@@ -269,46 +278,8 @@ const [open, setOpen] = React.useState(false);
 
   const navigate = useNavigate();
 
-  const handleRowClick = (params) => {
-    const rowId = params.row.id;
-    // Navigate to the /visitdetails/:id URL using the navigate function and the rowId as a URL parameter
-    navigate(`/visitdetails/${rowId}`);
-  };
-  const VisitView = () => {
-    return (
-      <div style={{ height: "100%", width: '100%' }}>
-      <DataGrid
-        rows={rows3}
-        columns={columns3}
-        pageSize={5}
-        rowsPerPageOptions={[15]}
-        checkboxSelection
-        onRowClick={handleRowClick}
-      />
-    </div>
-    );
-  };
-   //VisitView
-   const columns3 = [
-    { field: 'id', headerName: 'ID', width: 200 },
-    { field: 'name', headerName: 'Name', width: 200 },
-    { field: 'address', headerName: 'Address', width: 200 },
-    { field: 'clockOut', headerName: 'Expected Clock Out', width: 200 },
-    { field: 'clockIn', headerName: 'Expected Clock In', width: 200 },
-   
-  ];
   
-  const rows3 = [
-    {id:1,name:"Jacky",address:"Upper Tooting 262 A",clockOut:"01:05 AM",clockIn:"01:05 AM"},
-   
-    
-  ];
-
-  const handleRowClick2 = (params) => {
-    const rowId = params.row.id;
-    // Navigate to the /visitdetails/:id URL using the navigate function and the rowId as a URL parameter
-    navigate(`/patientdetails/${rowId}`);
-  };
+  
 
   //
   const [state, setState] = React.useState({
@@ -585,6 +556,18 @@ left: 50%;
 transform: translate(-50%, -50%);
 width: 75%;
 height: 55%;
+z-index: 1000;
+background-color: white;
+padding: 1%;
+}
+
+.overlay2{
+  position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 50%;
+height: 85%;
 z-index: 1000;
 background-color: white;
 padding: 1%;
@@ -932,6 +915,11 @@ color:black;
   height: 70%;
   overflow:auto;
   }
+  .overlay2 {
+    width: 75%;
+    height: 70%;
+    overflow:auto;
+    }
   .searchButton {
     margin-top: 5%;
     margin-bottom: 2%;
