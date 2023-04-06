@@ -18,7 +18,6 @@ import Backdrop from '@mui/material/Backdrop';
 import { useNavigate } from 'react-router-dom';
 
 import { DataGrid } from '@mui/x-data-grid';
-const Link = require("react-router-dom").Link;
 
 
 function Homepage() {
