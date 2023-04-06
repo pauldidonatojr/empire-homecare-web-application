@@ -217,7 +217,7 @@ setOpen2(!open2);
      
      </div>
      <h1 style={{color:"grey"}}>Tasks For Today</h1>
-     <DataGrid style={{width:"75%"}}
+     <DataGrid className="datagrid"
         rows={rows}
         columns={columns}
       />
@@ -472,6 +472,9 @@ width: 100%;
 .ClockinOutDiv{
   display:flex;
   justify-content:space-between;
+  width:75%;
+}
+.datagrid{
   width:75%;
 }
 
@@ -818,6 +821,9 @@ color:black;
   
 }
 //
+.datagrid{
+  width:100%;
+}
   
   .TaskBar {
     display:none;
