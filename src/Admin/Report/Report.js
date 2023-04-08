@@ -17,6 +17,7 @@ import Grid from "@mui/material/Grid";
 import Footer from "../../Footer";
 import { DataGrid } from '@mui/x-data-grid';
 //
+import OverlayCustom from "../Overlay";
 
 import Backdrop from '@mui/material/Backdrop';
 import Drawer from "@mui/material/Drawer";
@@ -108,9 +109,9 @@ const handleClose4 = () => {
 
 //
 //
-const [open5, setOpen5] = React.useState(false);
-const handleClose5 = () => {
-  setOpen5(false);
+const [open9, setOpen9] = React.useState(false);
+const handleClose9 = () => {
+  setOpen9(false);
 };
 
 //
@@ -859,7 +860,7 @@ const handleClose5 = () => {
     return (
       <Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      open={open5}
+      open={open9}
      
     >
       <div className="overlay3">
@@ -1128,6 +1129,17 @@ const handleClose5 = () => {
     },
   ];
   //
+   //
+   const handleRowClick= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
+  const [open5, setOpen5] = React.useState(false);
+  const handleClose5 = () => {
+    setOpen5(false);
+    console.log("I am in handle close")
+  };
+   
   const CareGiverView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -1137,6 +1149,7 @@ const handleClose5 = () => {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick}
       />
     </div>
     );
@@ -1179,6 +1192,10 @@ const handleClose5 = () => {
     
     
   ];
+  const handleRowClick2= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   const ComplianceView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -1188,6 +1205,7 @@ const handleClose5 = () => {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick2}
       />
     </div>
     );
@@ -1208,6 +1226,10 @@ const handleClose5 = () => {
     {id:4,provider:"4578",date:"Jenifer",team:"Awston"},
     
   ];
+  const handleRowClick3= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   const OtherReportsView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -1217,6 +1239,7 @@ const handleClose5 = () => {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick3}
       />
     </div>
     );
@@ -1240,6 +1263,10 @@ const handleClose5 = () => {
     {id:4,date:"4578",mco:"Jenifer",member:"Awston",LinkedNoteDate:"Awston",reason:"Awston",NotesType:"Awston"},
   
   ];
+  const handleRowClick4= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   const MembersView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -1249,6 +1276,8 @@ const handleClose5 = () => {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick4}
+
       />
     </div>
     );
@@ -1274,6 +1303,10 @@ const handleClose5 = () => {
     {id:4,FirstName:"4578",LastName:"Jenifer",CareGiverCode:"Awston",AltCareGiverCode:"Awston",ssn:"Awston",status:"Awston",provider:"Alpha",discipline:"Bravo"},
     
   ];
+  const handleRowClick5= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   const VisitsView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -1283,6 +1316,7 @@ const handleClose5 = () => {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick5}
       />
     </div>
     );
@@ -1377,6 +1411,7 @@ const handleClose5 = () => {
     //
   return (
     <Wrapper>
+       {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
       <div className="Header">
       <MenuIcon
           className="menuIcon"

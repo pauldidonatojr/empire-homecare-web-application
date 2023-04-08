@@ -18,6 +18,7 @@ import Footer from "../../Footer";
 import Backdrop from '@mui/material/Backdrop';
 //
 //
+import OverlayCustom from "../Overlay";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import {AuthContext} from '../../components/context'
@@ -39,7 +40,7 @@ const handleChange = (event) => {
 };
   const [isOverlayOpen3, setIsOverlayOpen3] = useState(false);
   const [isOverlayOpen4, setIsOverlayOpen4] = useState(false);
-  const [isOverlayOpen5, setIsOverlayOpen5] = useState(false);
+  const [isOverlayopen10, setIsOverlayopen10] = useState(false);
   const [isOverlayOpen6, setIsOverlayOpen6] = useState(false);
 
   const handleClickIcon = () => {
@@ -55,8 +56,8 @@ const handleChange = (event) => {
         setOpen4(!open4);
         break;
       case 5:
-        setIsOverlayOpen5(true);
-        setOpen5(!open5);
+        setIsOverlayopen10(true);
+        setopen10(!open10);
         break;
       case 6:
         setIsOverlayOpen6(true);
@@ -88,7 +89,7 @@ const MasterworkPressed = () => {
     setIsOverlayOpen4(false);
   };
   const handleCloseOverlay5 = () => {
-    setIsOverlayOpen5(false);
+    setIsOverlayopen10(false);
   };
   const handleCloseOverlay6 = () => {
     setIsOverlayOpen6(false);
@@ -110,9 +111,9 @@ const handleClose4 = () => {
 
 //
 //
-const [open5, setOpen5] = React.useState(false);
-  const handleClose5 = () => {
-    setOpen5(false);
+const [open10, setopen10] = React.useState(false);
+  const handleClose10 = () => {
+    setopen10(false);
   };
 
   //
@@ -213,11 +214,11 @@ function Overlay5() {
   return (
     <Backdrop
     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-    open={open5}
+    open={open10}
    
   >
     <div className="overlay">
-    <CloseIcon className="crossIcon" onClick={handleClose5} />
+    <CloseIcon className="crossIcon" onClick={handleClose10} />
     <h1 style={{textAlign:"center",color:"black"}}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Staffed</p>
     <div className="searchFieldsDiv">
@@ -350,7 +351,10 @@ function Overlay6() {
     },
   ];
 
-
+  const handleRowClick4= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   const AcceptedView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -360,11 +364,16 @@ function Overlay6() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick4}
       />
     </div>
     );
   };
 
+  const handleRowClick3= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   
   const StaffedView = () => {
     return (
@@ -375,9 +384,15 @@ function Overlay6() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick3}
       />
     </div>
     );
+  };
+
+  const handleRowClick2= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
   };
   
   const MasterworkView = () => {
@@ -388,12 +403,24 @@ function Overlay6() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[15]}
-        checkboxSelection
+        checkboxSelectio
+        onRowClick={handleRowClick2}
       />
     </div>
     );
   };
   
+  const handleRowClick= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
+  const [open5, setOpen5] = React.useState(false);
+  const handleClose5 = () => {
+    setOpen5(false);
+    console.log("I am in handle close")
+  };
+
+
   const PendingView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -403,6 +430,7 @@ function Overlay6() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick}
       />
     </div>
     );
@@ -502,6 +530,7 @@ function Overlay6() {
   //
   return (
     <Wrapper>
+      {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
       <div className="Header">
       <MenuIcon
           className="menuIcon"
@@ -601,7 +630,7 @@ function Overlay6() {
           <SearchIcon className="searchIcon" onClick={handleClickIcon} />
           {isOverlayOpen3 && <Overlay3 />}
           {isOverlayOpen4 && <Overlay4 />}
-          {isOverlayOpen5 && <Overlay5 />}
+          {isOverlayopen10 && <Overlay5 />}
           {isOverlayOpen6 && <Overlay6 />}
           {RenderViews()}
         </Card>

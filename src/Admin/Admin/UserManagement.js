@@ -20,6 +20,7 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import {AuthContext} from '../../components/context';
+import OverlayCustom from "../Overlay";
 
 import Backdrop from '@mui/material/Backdrop';
  
@@ -345,6 +346,16 @@ function CareGiver() {
   
     );
   };
+   //
+   const handleRowClick= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
+  const [open5, setOpen5] = React.useState(false);
+  const handleClose5 = () => {
+    setOpen5(false);
+    console.log("I am in handle close")
+  };
   const SearchCareGiverView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -354,6 +365,7 @@ function CareGiver() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick}
       />
     </div>
       
@@ -441,6 +453,7 @@ const list = (anchor) => (
 //
   return (
     <Wrapper>
+       {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
       <div className="Header">
       <MenuIcon
           className="menuIcon"

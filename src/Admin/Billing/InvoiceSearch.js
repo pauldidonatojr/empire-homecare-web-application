@@ -15,7 +15,7 @@ import Grid from "@mui/material/Grid";
 import Footer from "../../Footer";
 import { DataGrid } from '@mui/x-data-grid';
 //
-
+import OverlayCustom from "../Overlay";
 import Backdrop from '@mui/material/Backdrop';
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -506,6 +506,11 @@ const handleClose3 = () => {
   ];
 
   //
+   //
+   const handleRowClick3= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   const ByBatchView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -515,6 +520,7 @@ const handleClose3 = () => {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick3}
       />
     </div>
     );
@@ -541,6 +547,17 @@ const handleClose3 = () => {
     {id:5,batchNumber:"4578",status:"Jenifer",fromDate:"Awston",toDate:"02548965478",aRExportFromDate:"Active",aRExportToDate:"Adam Fernandez",billingExport:"Delta",mco:"Delta"},
    
   ];
+  //
+  const handleRowClick= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
+  const [open5, setOpen5] = React.useState(false);
+  const handleClose5 = () => {
+    setOpen5(false);
+    console.log("I am in handle close")
+  };
+
   const ByInvoiceView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -550,6 +567,7 @@ const handleClose3 = () => {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick}
       />
     </div>
     );
@@ -575,6 +593,11 @@ const handleClose3 = () => {
     {id:4,mco:"4578",memberName:"Jenifer",admissionID:"Awston",invoiceNumber:"02548965478",fromDate:"Active",toDate:"Adam Fernandez",batchNumber:"Delta",office:"Delta"},
   
   ];
+  //
+  const handleRowClick2= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   const ByVisitView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -584,6 +607,7 @@ const handleClose3 = () => {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick2}
       />
     </div>
     );
@@ -673,6 +697,7 @@ const list = (anchor) => (
 //
   return (
     <Wrapper>
+       {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
       <div className="Header">
       <MenuIcon
           className="menuIcon"

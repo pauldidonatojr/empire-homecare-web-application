@@ -16,7 +16,6 @@ import Grid from '@mui/material/Grid';
 import Footer from "../Footer";
 import { DataGrid } from '@mui/x-data-grid';
 import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {AuthContext} from '../components/context'
@@ -487,6 +486,8 @@ const [open, setOpen] = React.useState(false);
     setOpen5(false);
     console.log("I am in handle close")
   };
+
+ 
   const MembersView = () => {
 
     return (
@@ -519,17 +520,13 @@ const [open, setOpen] = React.useState(false);
 
   ];
 
+ 
   return (
     <Wrapper>
       <ToastContainer />
-
-      
-      {console.log("Open 5 is" +open5)}
       
       {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
     
-
-
 
       <div className="Header">
 

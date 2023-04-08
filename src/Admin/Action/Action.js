@@ -18,6 +18,7 @@ import Grid from "@mui/material/Grid";
 import Footer from "../../Footer";
 import { DataGrid } from "@mui/x-data-grid";
 //
+import OverlayCustom from "../Overlay";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -224,6 +225,16 @@ const [open, setOpen] = React.useState(false);
     },
   ];
 
+  const handleRowClick= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
+
+  const [open5, setOpen5] = React.useState(false);
+  const handleClose5 = () => {
+    setOpen5(false);
+    console.log("I am in handle close")
+  };
   const CommunicationMessageCenterView = () => {
     return (
       <div style={{ height: "100%", width: "100%" }}>
@@ -233,6 +244,7 @@ const [open, setOpen] = React.useState(false);
           pageSize={5}
           rowsPerPageOptions={[15]}
           checkboxSelection
+          onRowClick={handleRowClick}
         />
       </div>
     );
@@ -367,6 +379,7 @@ const [open, setOpen] = React.useState(false);
   //
   return (
     <Wrapper>
+        {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
       <div className="Header">
         <MenuIcon
           className="menuIcon"

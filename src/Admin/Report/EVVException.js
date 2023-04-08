@@ -17,7 +17,7 @@ import Grid from '@mui/material/Grid';
 import Footer from "../../Footer";
 import { DataGrid } from '@mui/x-data-grid';
 //
-
+import OverlayCustom from "../Overlay";
 import Backdrop from '@mui/material/Backdrop';
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -65,7 +65,7 @@ const handleChange = (event) => {
         break;
       case 5:
         setIsOverlayOpen5(true);
-        setOpen5(!open5);
+        setOpen10(!open10);
         break;
       case 6:
         setIsOverlayOpen6(true);
@@ -145,9 +145,9 @@ const handleClose4 = () => {
 
 //
 //
-const [open5, setOpen5] = React.useState(false);
-  const handleClose5 = () => {
-    setOpen5(false);
+const [open10, setOpen10] = React.useState(false);
+  const handleClose10 = () => {
+    setOpen10(false);
   };
 
   //
@@ -796,11 +796,11 @@ function Overlay5() {
   return (
     <Backdrop
     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-    open={open5}
+    open={open10}
    
   >
     <div className="overlay5">
-    <CloseIcon className="crossIcon" onClick={handleClose5} />
+    <CloseIcon className="crossIcon" onClick={handleClose10} />
     <h1 style={{ textAlign:"center",color:"black"}}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Exception Summary By Provider</p>
     <div className="searchFieldsDiv">
@@ -1119,7 +1119,10 @@ function Overlay6() {
     },
   ];
 
-
+  const handleRowClick6= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   const ByAggregationView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -1129,6 +1132,7 @@ function Overlay6() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick6}
       />
     </div>   
     );
@@ -1157,7 +1161,10 @@ function Overlay6() {
       {id:5,ReportSection:"4578",VisitDate:"Jenifer",mco:"Member",LastExportDate:"Member",Member:"Member",MedicalID:"AS4587",CareGiver:"Danny",ProcedureCode:"87D54D",RecordStatus:"Active"},
     ];
 
-  
+    const handleRowClick5= (params) => {
+      const rowId = params.row.id;
+      setOpen5(true);
+    };
   const ByProviderView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -1167,6 +1174,7 @@ function Overlay6() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick5}
       />
     </div>    
     );
@@ -1191,7 +1199,10 @@ function Overlay6() {
     
    
   ];
-  
+  const handleRowClick4= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   const ByStatisticsView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -1201,6 +1212,7 @@ function Overlay6() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick4}
       />
     </div>    
     );
@@ -1227,7 +1239,10 @@ function Overlay6() {
     
    
   ];
-  
+  const handleRowClick3= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   const ByDetailView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -1237,6 +1252,7 @@ function Overlay6() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick3}
       />
     </div>    
     );
@@ -1271,6 +1287,16 @@ function Overlay6() {
    
   ];
   
+  //
+  const handleRowClick= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
+  const [open5, setOpen5] = React.useState(false);
+  const handleClose5 = () => {
+    setOpen5(false);
+    console.log("I am in handle close")
+  };
   const ByCareGiverView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -1280,6 +1306,7 @@ function Overlay6() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick}
       />
     </div>     
     );
@@ -1309,6 +1336,10 @@ function Overlay6() {
    
     
   ];
+  const handleRowClick2= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   const ByReasonView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -1318,6 +1349,7 @@ function Overlay6() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick2}
       />
     </div>     
     );
@@ -1409,6 +1441,7 @@ function Overlay6() {
   //
   return (
     <Wrapper>
+       {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
       <div className="Header">
       <MenuIcon
           className="menuIcon"

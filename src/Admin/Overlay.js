@@ -15,11 +15,12 @@ function Overlay(props) {
     handleClose5();
   };
   return (
+    <Wrapper>
     <Backdrop
       sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
       open={open}
     >
-      <div className="overlay">
+      <div className="CustomOverlay">
         <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
         <h1 style={{ textAlign: "center", color: "black" }}>
           Set Filter from here !
@@ -34,7 +35,7 @@ function Overlay(props) {
         >
           Custom Overlay
         </p>
-        <div className="searchFieldsDiv">
+        <div className="searchFieldsDivCustom">
           <Grid className="griditem">
             <TextField id="memberID" label="Member ID" variant="outlined" />
           </Grid>
@@ -63,20 +64,38 @@ function Overlay(props) {
         </Button>
       </div>
     </Backdrop>
+    </Wrapper>
   );
 }
 export default Overlay;
 const Wrapper = styled.section`
   
-  .overlay {
+  .CustomOverlay {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 75%;
     height: 70%;
-    z-index: 1000;
+
     background-color: white;
+    background-color:white;
     padding: 1%;
+   
   }
+  .searchFieldsDivCustom {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* create 3 equal columns */
+    grid-gap: 10px; /* add some space between the columns */
+    margin-top: 2.5%;
+    width: 85%;
+    margin-left: 10%;
+  }
+  @media only screen and (max-width: 600px) {
+      
+    .searchFieldsDivCustom {
+      grid-template-columns: repeat(1, 1fr); /* create 3 equal columns */
+    }
+   
+   
 `;

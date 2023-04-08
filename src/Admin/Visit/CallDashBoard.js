@@ -22,6 +22,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {AuthContext} from '../../components/context'
 import Backdrop from '@mui/material/Backdrop';
+import OverlayCustom from "../Overlay";
 //
 const Link = require("react-router-dom").Link;
 
@@ -44,7 +45,7 @@ const handleChange = (event) => {
   const [isOverlayOpen2, setIsOverlayOpen2] = useState(false);
   const [isOverlayOpen3, setIsOverlayOpen3] = useState(false);
   const [isOverlayOpen4, setIsOverlayOpen4] = useState(false);
-  const [isOverlayOpen5, setIsOverlayOpen5] = useState(false);
+  const [isOverlayopen9, setIsOverlayopen9] = useState(false);
   const [isOverlayOpen6, setIsOverlayOpen6] = useState(false);
 
   const handleClickIcon = () => {
@@ -67,8 +68,8 @@ const handleChange = (event) => {
         setOpen4(!open4);
         break;
       case 5:
-        setIsOverlayOpen5(true);
-        setOpen5(!open5);
+        setIsOverlayopen9(true);
+        setopen9(!open9);
         break;
       case 6:
         setIsOverlayOpen6(true);
@@ -114,7 +115,7 @@ const RejectedCallsPressed = () => {
     setIsOverlayOpen4(false);
   };
   const handleCloseOverlay5 = () => {
-    setIsOverlayOpen5(false);
+    setIsOverlayopen9(false);
   };
   const handleCloseOverlay6 = () => {
     setIsOverlayOpen6(false);
@@ -149,9 +150,9 @@ const handleClose3 = () => {
  
  //
   //
-const [open5, setOpen5] = React.useState(false);
-const handleClose5 = () => {
-  setOpen5(false);
+const [open9, setopen9] = React.useState(false);
+const handleClose9 = () => {
+  setopen9(false);
 };
 
 //
@@ -744,11 +745,11 @@ function Overlay5() {
   return (
     <Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      open={open5}
+      open={open9}
      
     >
     <div className="overlay5">
-    <CloseIcon className="crossIcon" onClick={handleClose5} />
+    <CloseIcon className="crossIcon" onClick={handleClose9} />
     <h1 style={{ textAlign:"center",color:"black" }}>Set Filter from here !</h1>
     <p style={{fontSize:15,fontWeight:"bold",color:"#042940",textAlign:"center"}}>Visit Log</p>
     <div className="searchFieldsDiv">
@@ -1034,7 +1035,14 @@ function Overlay6() {
     },
   ];
 
-
+  const handleRowClick6= (params) => {
+    const rowId = params.row.id;
+    console.log("Member Clicked"+rowId+"Open 5 is"+open5);
+    
+    setOpen5(true);
+    
+    
+  };
   const RejectedCallsView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -1044,6 +1052,7 @@ function Overlay6() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick6}
       />
     </div>
     );
@@ -1070,7 +1079,14 @@ function Overlay6() {
    
   ];
   //
-
+  const handleRowClick5= (params) => {
+    const rowId = params.row.id;
+    console.log("Member Clicked"+rowId+"Open 5 is"+open5);
+    
+    setOpen5(true);
+    
+    
+  };
   
   const VisitLogView = () => {
     return (
@@ -1081,6 +1097,7 @@ function Overlay6() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick5}
       />
     </div>
     );
@@ -1110,6 +1127,10 @@ function Overlay6() {
    
   ];
   //
+  const handleRowClick4= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   
   const MissedCallView = () => {
     return (
@@ -1120,6 +1141,7 @@ function Overlay6() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick4}
       />
     </div>
     
@@ -1148,7 +1170,10 @@ function Overlay6() {
    
   ];
   //
-  
+  const handleRowClick3= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   const MissedOutView = () => {
     return (
       
@@ -1159,6 +1184,7 @@ function Overlay6() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick3}
       />
     </div>
     
@@ -1186,8 +1212,18 @@ function Overlay6() {
     {id:6,careGiverName:"Justin",admissionID:"Alo",memberName:"02457894561",mco:"XOXO",cordinator:"XZXZ",teamMember:"1123456",assigmentID:"Active"},
    
   ];
+ 
   //
-  
+  const handleRowClick= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
+  const [open5, setOpen5] = React.useState(false);
+  const handleClose5 = () => {
+    setOpen5(false);
+    console.log("I am in handle close")
+  };
+
   const CallMaintanceView = () => {
     return (
 
@@ -1198,6 +1234,8 @@ function Overlay6() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick}
+        
       />
     </div>
      
@@ -1237,6 +1275,11 @@ function Overlay6() {
     
   ];
   //
+  //
+  const handleRowClick2= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   const MissedInView = () => {
     return (
     
@@ -1247,6 +1290,7 @@ function Overlay6() {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick2}
       />
     </div>
     ///
@@ -1339,6 +1383,8 @@ const list = (anchor) => (
 //
   return (
     <Wrapper>
+      {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
+
       <div className="Header">
       <MenuIcon
     className="menuIcon"
@@ -1464,7 +1510,7 @@ const list = (anchor) => (
           {isOverlayOpen2 && <Overlay2 />}
           {isOverlayOpen3 && <Overlay3 />}
           {isOverlayOpen4 && <Overlay4 />}
-          {isOverlayOpen5 && <Overlay5 />}
+          {isOverlayopen9 && <Overlay5 />}
           {isOverlayOpen6 && <Overlay6 />}
           {RenderViews()}
         </Card>

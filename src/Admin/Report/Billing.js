@@ -19,6 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import {AuthContext} from '../../components/context'
+import OverlayCustom from "../Overlay";
 
 import Backdrop from '@mui/material/Backdrop';
 
@@ -441,6 +442,16 @@ const handleClose2 = () => {
       date: "03/12/2023",
     },
   ];
+    //
+    const handleRowClick= (params) => {
+      const rowId = params.row.id;
+      setOpen5(true);
+    };
+    const [open5, setOpen5] = React.useState(false);
+    const handleClose5 = () => {
+      setOpen5(false);
+      console.log("I am in handle close")
+    };
 
   const BankDetailReportView = () => {
     return (
@@ -451,6 +462,7 @@ const handleClose2 = () => {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick}
       />
     </div>
     );
@@ -474,6 +486,11 @@ const handleClose2 = () => {
     {id:5,mco:"4578",BatchNumber:"Jenifer",BatchDate:"Awston",PaymentStatus:"Awston",team:"Awston"},
     
   ];
+  //
+  const handleRowClick2= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   const BillingView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -483,6 +500,7 @@ const handleClose2 = () => {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick2}
       />
     </div>
     );
@@ -578,6 +596,7 @@ const list = (anchor) => (
 //
   return (
     <Wrapper>
+      {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
       <div className="Header">
       <MenuIcon
           className="menuIcon"

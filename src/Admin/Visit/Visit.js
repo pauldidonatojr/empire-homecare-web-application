@@ -21,6 +21,7 @@ import List from '@mui/material/List';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {AuthContext} from '../../components/context'
+import OverlayCustom  from "../Overlay";
 const Link = require("react-router-dom").Link;
 
 function Visit() {
@@ -467,6 +468,20 @@ const list = (anchor) => (
   ];
   
   //
+  const handleRowClick= (params) => {
+    const rowId = params.row.id;
+    console.log("Member Clicked"+rowId+"Open 5 is"+open5);
+    
+    setOpen5(true);
+    
+    
+  };
+  const [open5, setOpen5] = React.useState(false);
+  const handleClose5 = () => {
+    setOpen5(false);
+    console.log("I am in handle close")
+  };
+  
   const VisitSearchView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -476,6 +491,7 @@ const list = (anchor) => (
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick}
       />
     </div>
 
@@ -516,7 +532,14 @@ const list = (anchor) => (
     memberLocation:"China",memberBranch:"Depot",fromDate:"10 Jul 2020",tillDate:"10 Jul 2021"},
     
   ];
+
+
   //
+  const handleRowClick6= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
+
   const VisitQuickSearchView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -526,6 +549,7 @@ const list = (anchor) => (
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick6}
       />
     </div>
     );
@@ -552,6 +576,10 @@ const list = (anchor) => (
   const { signOut } = React.useContext(AuthContext);
   return (
     <Wrapper>
+      {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
+      
+
+
       <div className="Header">
       <MenuIcon
     className="menuIcon"

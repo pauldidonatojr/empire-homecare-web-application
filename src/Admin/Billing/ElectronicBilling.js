@@ -14,6 +14,7 @@ import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 import { DataGrid } from '@mui/x-data-grid';
 import Footer from "../../Footer";
+import OverlayCustom from "../Overlay";
 
 import { useNavigate } from "react-router-dom";
 //
@@ -290,6 +291,10 @@ const handleClose2 = () => {
   ];
 
   //
+  const handleRowClick2= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
   const SubmitView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -299,6 +304,7 @@ const handleClose2 = () => {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick2}
       />
     </div>
     );
@@ -319,6 +325,16 @@ const handleClose2 = () => {
     
     
   ];
+  //
+  const handleRowClick= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
+  const [open5, setOpen5] = React.useState(false);
+  const handleClose5 = () => {
+    setOpen5(false);
+    console.log("I am in handle close")
+  };
   const BatchSearchView = () => {
     return (
       <div style={{ height: "100%", width: '100%' }}>
@@ -328,6 +344,7 @@ const handleClose2 = () => {
         pageSize={5}
         rowsPerPageOptions={[15]}
         checkboxSelection
+        onRowClick={handleRowClick}
       />
     </div>
     );
@@ -418,6 +435,7 @@ const handleClose2 = () => {
   const { signOut } = React.useContext(AuthContext);
   return (
     <Wrapper>
+       {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
       <div className="Header">
       <MenuIcon
           className="menuIcon"
