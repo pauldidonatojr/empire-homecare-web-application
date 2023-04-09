@@ -24,7 +24,7 @@ import { getMembers } from "../API/membersApi";
 import { ToastContainer, toast } from 'react-toastify';
 import OverlayCustom from "./Overlay";
 import 'react-toastify/dist/ReactToastify.css';
-
+import { Link } from 'react-router-dom';
 
 
 function Homepage() {
@@ -473,21 +473,8 @@ const [open, setOpen] = React.useState(false);
     populateRows();
   }, [memberData]);
 
-  const handleRowClick= (params) => {
-    const rowId = params.row.id;
-    console.log("Member Clicked"+rowId+"Open 5 is"+open5);
-    
-    setOpen5(true);
-    
-    
-  };
-  const [open5, setOpen5] = React.useState(false);
-  const handleClose5 = () => {
-    setOpen5(false);
-    console.log("I am in handle close")
-  };
-
  
+
   const MembersView = () => {
 
     return (
@@ -498,16 +485,30 @@ const [open, setOpen] = React.useState(false);
           pageSize={5}
           rowsPerPageOptions={[15]}
           checkboxSelection
-        onRowClick={handleRowClick}
+       
         />
         
       </div>
     );
   };
-
+ 
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'Name', headerName: 'Name', width: 200 },
+    { 
+      field: 'Name', 
+      headerName: 'Name', 
+      width: 130, 
+      renderCell: (params) => (
+        <Link to={{
+          pathname: "/MemberDetails",
+          state: {
+            name: params.value
+          }
+        }}>
+          {params.value}
+        </Link>
+      )
+    },
     { field: 'Gender', headerName: 'Gender', width: 100 },
     { field: 'MCOName', headerName: 'MCO Name', width: 200 },
     { field: 'Discipline', headerName: 'discipline', width: 150 },
@@ -525,7 +526,7 @@ const [open, setOpen] = React.useState(false);
     <Wrapper>
       <ToastContainer />
       
-      {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
+      
     
 
       <div className="Header">
