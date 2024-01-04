@@ -98,7 +98,7 @@ function Login() {
       </Card>
       <div className="cardHolder">
         <Card className={`DesignCard ${showCard ? 'show' : ''}`}>
-          <h1 style={{ color: "white", fontSize: "35px" }}>
+          <h1 style={{ color: "white", fontSize: "25px" }}>
             Welcome to
             Empire Homecare
             Agency LLC
@@ -107,6 +107,8 @@ function Login() {
             <h4 style={{ color: "white" }}>
               Empire Homecare Agency LLC is a living legacy that reflects our commitment to improving the quality of life of our clients. As a provider of in-home care in Pennsylvania, we treat our clients as members of our own family.
             </h4>
+
+          
           </div>
         </Card>
         <Card className={`loginCard ${showCard ? 'show' : ''}`}>

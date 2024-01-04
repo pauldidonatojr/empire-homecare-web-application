@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from './Login';
 import React, { useState } from "react";
 import AdminHomePage from './Admin/homepage'
-import CareGiverHomePage from './CareGiver/Homepage'
+import CareGiverHomePage from './CareGiver/homepage'
 import PatientHomePage from './Patient/homepage'
 import VisitDetails from './CareGiver/VisitDetails'
 import PatientDetails from "./CareGiver/PatientDetails";
