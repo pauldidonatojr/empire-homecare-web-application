@@ -6,38 +6,44 @@ import Avatar from "@mui/material/Avatar";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
-import Footer from "../Footer";
+import { useNavigate } from "react-router-dom";
+//
+import Box from "@mui/material/Box";
+import Backdrop from '@mui/material/Backdrop';
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Grid from "@mui/material/Grid";
+import Footer from "../../Footer";
+import { DataGrid } from "@mui/x-data-grid";
+//
+import OverlayCustom from "../Overlay";
 import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import {AuthContext} from '../components/context'
-import Backdrop from '@mui/material/Backdrop';
+import {AuthContext} from '../../components/context'
+//
+const Link = require("react-router-dom").Link;
 
-import { useNavigate } from 'react-router-dom';
-
-import { DataGrid } from '@mui/x-data-grid';
-
-
-function Homepage() {
-  
-
-  //
-const [open, setOpen] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
-
-  //
+function Action() {
   const { signOut } = React.useContext(AuthContext);
   const [ViewSelected, setViewSelected] = useState(1);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const navigate = useNavigate();
+  function PendingQueuePressed() {
+    navigate("/PendingQueuePlacement");
+  }
 
+  //
+
+  const [age, setAge] = React.useState("");
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
+  //
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
     setOpen(!open);
@@ -45,95 +51,140 @@ const [open, setOpen] = React.useState(false);
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
- 
+//
+const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
+  //
   function Overlay() {
     return (
-        <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
-       
-      >
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open}
+     
+    >
       <div className="overlay">
-        <CloseIcon className="crossIcon"  onClick={handleClose} />
-        <h1 style={{ color:"black",textAlign:"center" }}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon" onClick={handleClose} />
+        <h1 style={{ textAlign: "center",color:"black" }}>Set Filter from here !</h1>
+        <p
+          style={{
+            fontSize: 15,
+            fontWeight: "bold",
+            color: "#042940",
+            textAlign: "center",
+          }}
+        >
+          Communication Message Center
+        </p>
         <div className="searchFieldsDiv">
-        <Grid className="griditem">
-        <TextField
-         
-          id="outlined-basic"
-          label="Name"
-          variant="outlined"
-        />
-      </Grid>
-      <Grid className="griditem">
-        <TextField
-         
-          id="outlined-basic"
-          label="Address"
-          variant="outlined"
-        />
-      </Grid>
-      <Grid className="griditem">
-        <TextField
-         
-          id="outlined-basic"
-          label="Address"
-          variant="outlined"
-        />
-      </Grid>
-      <Grid className="griditem">
-        <TextField
-         
-          id="outlined-basic"
-          label="Expected Time Out"
-          variant="outlined"
-        />
-      </Grid>
-      <Grid className="griditem">
-        <TextField
-         
-          id="outlined-basic"
-          label="Expected Time In"
-          variant="outlined"
-        />
-      </Grid>
-        
+          <Grid className="griditem2">
+            <Box>
+              <FormControl fullWidth>
+                <InputLabel>MCO</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid className="griditem2">
+            <Box>
+              <FormControl fullWidth>
+                <InputLabel>Message Type</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid className="griditem2">
+            <Box>
+              <FormControl fullWidth>
+                <InputLabel>Status</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid className="griditem2">
+            <Box>
+              <FormControl fullWidth>
+                <InputLabel>Reason</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+
+          <Grid className="griditem">
+            <TextField
+              id="outlined-basic"
+              label="From Date DD/MM/YYYY"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid className="griditem">
+            <TextField
+              id="outlined-basic"
+              label="Till Date DD//MM/YYYY"
+              variant="outlined"
+            />
+          </Grid>
         </div>
-        <Button className="searchButton" onClick={handleCloseOverlay}>
+        <Button
+          className="searchButton"
+          variant="outlined"
+          onClick={handleCloseOverlay}
+        >
           Search
         </Button>
       </div>
       </Backdrop>
     );
   }
-
-  const TodaySchedulePressed = () => {
+  function CommunicationMessageCenterPressed() {
     setViewSelected(1);
-  };
-  const unScheduledPressed = () => {
-    setViewSelected(2);
-  };
-  const AllVisitsPressed = () => {
-    setViewSelected(3);
-  };
-  const PatientListPressed = () => {
-    setViewSelected(4);
-  };
-
+  }
   function RenderViews() {
     switch (ViewSelected) {
       case 1:
-        return TodayScheduleView();
-
-      case 2:
-        return UnScheduleView();
-
-      case 3:
-        return VisitView();
-
-      case 4:
-        return PatientView();
+        return CommunicationMessageCenterView();
       default:
         break;
     }
@@ -146,7 +197,7 @@ const [open, setOpen] = React.useState(false);
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date:"03/12/2023",
+      date: "03/12/2023",
     },
     {
       id: 2,
@@ -154,7 +205,7 @@ const [open, setOpen] = React.useState(false);
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date:"03/12/2023",
+      date: "03/12/2023",
     },
     {
       id: 3,
@@ -162,7 +213,7 @@ const [open, setOpen] = React.useState(false);
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date:"03/12/2023",
+      date: "03/12/2023",
     },
     {
       id: 4,
@@ -170,161 +221,97 @@ const [open, setOpen] = React.useState(false);
       address: "Upper tooting Road, SW14SW",
       expectedClockOn: "07:11 AM",
       expectedClockOut: "11:30 AM",
-      date:"03/12/2023",
+      date: "03/12/2023",
     },
   ];
-  const jsonData2 = [
+
+  const handleRowClick= (params) => {
+    const rowId = params.row.id;
+    setOpen5(true);
+  };
+
+  const [open5, setOpen5] = React.useState(false);
+  const handleClose5 = () => {
+    setOpen5(false);
+    console.log("I am in handle close")
+  };
+  const CommunicationMessageCenterView = () => {
+    return (
+      <div style={{ height: "100%", width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[15]}
+          checkboxSelection
+          onRowClick={handleRowClick}
+        />
+      </div>
+    );
+  };
+  // CommunicationMessageCenterView
+  const columns = [
+    { field: "id", headerName: "ID", width: 50 },
+    { field: "mco", headerName: "MCO", width: 150 },
+    { field: "messageType", headerName: "Message Type", width: 200 },
+    { field: "status", headerName: "Status", width: 150 },
+    { field: "reason", headerName: "Reason", width: 150 },
+    { field: "fromDate", headerName: "From Date", width: 150 },
+    { field: "tillDate", headerName: "Till Date", width: 150 },
+  ];
+  //demo data to display
+  const rows = [
     {
       id: 1,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
+      mco: "Justin",
+      messageType: "Alo",
+      status: "02457894561",
+      reason: "XOXO",
+      fromDate: "XZXZ",
+      tillDate: "1123456",
     },
+
     {
       id: 2,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
+      mco: "Justin",
+      messageType: "Alo",
+      status: "02457894561",
+      reason: "XOXO",
+      fromDate: "XZXZ",
+      tillDate: "1123456",
     },
+
     {
       id: 3,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
+      mco: "Justin",
+      messageType: "Alo",
+      status: "02457894561",
+      reason: "XOXO",
+      fromDate: "XZXZ",
+      tillDate: "1123456",
+    },
+
+    {
+      id: 4,
+      mco: "Justin",
+      messageType: "Alo",
+      status: "02457894561",
+      reason: "XOXO",
+      fromDate: "XZXZ",
+      tillDate: "1123456",
+    },
+
+    {
+      id: 5,
+      mco: "Justin",
+      messageType: "Alo",
+      status: "02457894561",
+      reason: "XOXO",
+      fromDate: "XZXZ",
+      tillDate: "1123456",
     },
   ];
   //
-  const TodayScheduleView = () => {
-    return (
-      <div style={{ height: "100%", width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[15]}
-        checkboxSelection
-        onRowClick={handleRowClick}
-      />
-    </div>
-      
-    );
-  };
-   //TodayScheduleView
-   const columns = [
-    { field: 'id', headerName: 'ID', width: 200 },
-    { field: 'name', headerName: 'Name', width: 200 },
-    { field: 'address', headerName: 'Address', width: 200 },
-    { field: 'clockOut', headerName: 'Expected Clock Out', width: 200 },
-    { field: 'clockIn', headerName: 'Expected Clock In', width: 200 },
-   
-  ];
-  
-  const rows = [
-    {id:1,name:"Hec tor",address:"Upper Tooting 262 A",clockOut:"01:05 AM",clockIn:"01:05 AM"},
-   
-    
-  ];
-  const UnScheduleView = () => {
-    return (
-      <div style={{ height: "100%", width: '100%' }}>
-      <DataGrid
-        rows={rows2}
-        columns={columns2}
-        pageSize={5}
-        rowsPerPageOptions={[15]}
-        checkboxSelection
-        onRowClick={handleRowClick}
-      />
-    </div>
-    );
-  };
-   //UnScheduleView
-   const columns2 = [
-    { field: 'id', headerName: 'ID', width: 200 },
-    { field: 'name', headerName: 'Name', width: 200 },
-    { field: 'address', headerName: 'Address', width: 200 },
-    { field: 'clockOut', headerName: 'Expected Clock Out', width: 200 },
-    { field: 'clockIn', headerName: 'Expected Clock In', width: 200 },
-   
-  ];
-  
-  const rows2 = [
-    {id:1,name:"Nelson",address:"Upper Tooting 262 A",clockOut:"01:05 AM",clockIn:"01:05 AM"},
-   
-    
-  ];
-
-  
-
-  const navigate = useNavigate();
-
-  const handleRowClick = (params) => {
-    const rowId = params.row.id;
-    // Navigate to the /visitdetails/:id URL using the navigate function and the rowId as a URL parameter
-    navigate(`/visitdetails/${rowId}`);
-  };
-  const VisitView = () => {
-    return (
-      <div style={{ height: "100%", width: '100%' }}>
-      <DataGrid
-        rows={rows3}
-        columns={columns3}
-        pageSize={5}
-        rowsPerPageOptions={[15]}
-        checkboxSelection
-        onRowClick={handleRowClick}
-      />
-    </div>
-    );
-  };
-   //VisitView
-   const columns3 = [
-    { field: 'id', headerName: 'ID', width: 200 },
-    { field: 'name', headerName: 'Name', width: 200 },
-    { field: 'address', headerName: 'Address', width: 200 },
-    { field: 'clockOut', headerName: 'Expected Clock Out', width: 200 },
-    { field: 'clockIn', headerName: 'Expected Clock In', width: 200 },
-   
-  ];
-  
-  const rows3 = [
-    {id:1,name:"Jacky",address:"Upper Tooting 262 A",clockOut:"01:05 AM",clockIn:"01:05 AM"},
-   
-    
-  ];
-
-  const handleRowClick2 = (params) => {
-    const rowId = params.row.id;
-    // Navigate to the /visitdetails/:id URL using the navigate function and the rowId as a URL parameter
-    navigate(`/patientdetails/${rowId}`);
-  };
-  
-  const PatientView = () => {
-    return (
-     
-         <div style={{ height: "100%", width: '100%' }}>
-         <DataGrid
-           rows={rows5}
-           columns={columns5}
-           pageSize={5}
-           rowsPerPageOptions={[15]}
-           checkboxSelection
-           onRowClick={handleRowClick2}
-         />
-       </div>
-    );
-  };
-  //VisitView
-  const columns5 = [
-    { field: 'id', headerName: 'ID', width: 200 },
-    { field: 'name', headerName: 'Name', width: 300 },
-    { field: 'address', headerName: 'Address', width: 300 },
-   
-  ];
-  
-  const rows5 = [
-    {id:1,name:"Helen",address:"Upper Tooting 262 A"},
-   
-    
-  ];
-
   //
   const [state, setState] = React.useState({
     left: false,
@@ -350,8 +337,7 @@ const [open, setOpen] = React.useState(false);
       alignItems: "center"
     }}>
     <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
-      backgroundColor: "red" }}
+      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
@@ -362,7 +348,7 @@ const [open, setOpen] = React.useState(false);
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          height: "100hv",
+          height: "680px",
         }}
       >
         <p
@@ -380,29 +366,30 @@ const [open, setOpen] = React.useState(false);
           style={{ width: "50%", fontSize: "10px", opacity: "0.2" }}
         />
 
-        <h3  onClick={TodaySchedulePressed} style={{ color: "#F2B90F" }}>Today's Schedule Visits</h3>
-        <h3  onClick={unScheduledPressed} style={{ color: "#F2B90F" }}>Un-Scheduled Visits</h3>
-        <h3  onClick={AllVisitsPressed} style={{ color: "#F2B90F" }}>All Visits</h3>
-        <h3  onClick={PatientListPressed} style={{ color: "#F2B90F" }}>Patient List</h3>
-      
+        <h3  onClick={() => {
+                PendingQueuePressed();
+              }} style={{ color: "#F2B90F" }}>Pending Queue Placement</h3>
+        <h3  onClick={CommunicationMessageCenterPressed} style={{ color: "#F2B90F", textAlign: "center" }}>
+          Communication Message Center
+        </h3>
       </div>
     </Box>
     </div>
   );
   //
-
   return (
     <Wrapper>
+        {open5 && <OverlayCustom  handleClose5={handleClose5}/>}
       <div className="Header">
-      <MenuIcon
+        <MenuIcon
           className="menuIcon"
           onClick={toggleDrawer("left", true)}
           anchor={"left"}
           open={state["left"]}
           onClose={toggleDrawer("left", false)}
         ></MenuIcon>
-        <img className="headerImage" src="./EmpireHomeCareLogo.png" />
-       
+        <img className="headerImage" src="./EmpireHomeCareLogo.png"  onClick={() =>navigate("/AdminHome")}/>
+
         <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
@@ -453,12 +440,11 @@ const [open, setOpen] = React.useState(false);
           >
             Files
           </p>
-          <hr style={{width:"50%",fontSize:"10px",opacity:"0.2"}}/>
+          <hr style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
           <div className="buttonHolder">
             <Button
-              className="navigationButton"
               onClick={() => {
-                TodaySchedulePressed();
+                PendingQueuePressed();
               }}
             >
               <p
@@ -468,53 +454,34 @@ const [open, setOpen] = React.useState(false);
                   fontWeight: "bold",
                 }}
               >
-                Today's Scheduled Visits
+                Pending Placement Queue
               </p>
             </Button>
-            <Button onClick={unScheduledPressed} className="navigationButton">
+            <Button
+              onClick={CommunicationMessageCenterPressed}
+              className="navigationButton"
+            >
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-                Un-Schedules Visits
+                Communication Message Center
               </p>
             </Button>
-            <Button onClick={AllVisitsPressed}>
-              <p
-                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
-              >
-                All Visits
-              </p>
-            </Button>
-            <Button onClick={PatientListPressed} className="navigationButton">
-              <p
-                style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
-              >
-                Patient List
-              </p>
-            </Button>
-          </div>
-
-          <div className="NeedHelpDiv">
-            <p className="needHelpText">Need Help ?</p>
-            <a className="NeedHelpTele" href="tel:+1234567890">
-              Call us now
-            </a>
           </div>
         </Card>
 
         <Card className="dataDisplay">
-        
           <SearchIcon className="searchIcon" onClick={handleClickIcon} />
           {isOverlayOpen && <Overlay />}
           {RenderViews()}
         </Card>
       </div>
 
-      <Footer/>
+      <Footer />
     </Wrapper>
   );
 }
-export default Homepage;
+export default Action;
 
 const Wrapper = styled.section`
 height: 100%;
@@ -524,6 +491,30 @@ width: 100%;
     display:flex;
     flex-direction:row;
 }
+//
+
+  .table {
+    border-collapse: collapse;
+    padding:1%;
+    width:100%;
+    background-color: #0b2b40;
+  }
+  
+  .th {
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    font-size:17px;
+    color:white;
+  }
+  .td {
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    color:white;
+    font-size:16px;
+    
+  }
+
+  //
 .ListItem{
     margin-top:1%;
     margin-left:2%;
@@ -541,18 +532,28 @@ width: 100%;
   color:black;
   font-weight:bold;
 }
-
-// overlay css end
-.overlay{
+.overlay {
   position: fixed;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
 width: 75%;
-height: 55%;
+height: 75%;
 z-index: 1000;
 background-color: white;
 padding: 1%;
+}
+// overlay css end
+.overlay{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  height: 60%;
+  z-index: 1000;
+  background-color: white;
+  padding: 1%;
 }
 .crossIcon{
     margin-left:95%;
@@ -561,21 +562,16 @@ padding: 1%;
 }
 .searchFieldsDiv{
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* create 3 equal columns */
-  grid-gap: 10px; /* add some space between the columns */
-  margin-top: 2.5%;
-  width: 85%;
-  margin-left: 12%;
+    grid-template-columns: repeat(3, 1fr); /* create 3 equal columns */
+    grid-gap: 10px; /* add some space between the columns */
+    margin-top: 2.5%;
+    width: 85%;
+    margin-left: 10%;
 }
-.Field{
-    width:50%;
-    margin:2%;
-}
-.searchButton{
+.searchButton {
   margin-left: 35%;
   margin-top: 5%;
   width:30%;
-  height:08%;
   background-color:#f26e22;
   color:white;
   font-weight:bold;
@@ -584,6 +580,15 @@ padding: 1%;
   background-color:#2E0F59;
   color:white;
 }
+.Field{
+    width:50%;
+    margin:2%;
+}
+.searchButton{
+    margin-left:40%;
+    margin-top:5%;
+}
+
 //overlay css end
 
 
@@ -605,7 +610,7 @@ padding: 1%;
 
 //data display card
 .dataDisplay{
-    height:595px;
+    height:600px;
     width:70%;
     margin-left:2%;
     margin-top:3%;
@@ -710,18 +715,16 @@ padding: 1%;
 //UserInfo Ending
 
 
-//Footer CSS Files end
-
 //Header CSS FILES
 .Header{
-display:flex;
-flex-direction:row;
-margin-left:5.9%;
-margin-top:0.5%;
-width:93%;
-background-color:white;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content:center;
+  margin-top: 0.5%;
+  width: 100%;
+  background-color: white;
 }
-
 .headerImage:hover{
 animation: wave 1s infinite;
 
@@ -819,11 +822,29 @@ color:black;
     padding:5px;
     height:10%;
     font-size:14px;
+    shadowColor: "#000",
+shadowOffset: {
+width: 0,
+height: 7,
+},
+shadowOpacity: 0.41,
+shadowRadius: 9.11,
+
+elevation: 14,
   }
   .SystemNotification{
     padding:5px;
     height:10%;
     font-size:13.5px;
+    shadowColor: "#000",
+shadowOffset: {
+width: 0,
+height: 7,
+},
+shadowOpacity: 0.41,
+shadowRadius: 9.11,
+
+elevation: 14,
     
   }
   .LogOutbutton {
@@ -847,15 +868,12 @@ color:black;
     background-color:grey;
     border-radius:10px;
     
-    margin-top:10%;
-    
   }
   .LogoutIcon{
     font-size:40px;
     color:grey;
     margin-left:20%;
     display:inline;
-    margin-top:10%;
 
   }
   .searchIcon {
@@ -874,12 +892,11 @@ color:black;
   }
  
   .searchFieldsDiv {
-    margin-left:auto;
     grid-template-columns: repeat(1, 1fr); /* create 3 equal columns */
   }
   .overlay {
   width: 75%;
-  height: 70%;
+  height: 80%;
   overflow:auto;
   }
   .searchButton {

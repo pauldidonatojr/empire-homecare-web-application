@@ -1,163 +1,410 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Fade from "@mui/material/Fade";
 import { useNavigate } from "react-router-dom";
-const Link = require("react-router-dom").Link;
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Grid from '@mui/material/Grid';
+import Footer from "../Footer";
+import { DataGrid } from '@mui/x-data-grid';
+import Drawer from '@mui/material/Drawer';
+import MenuIcon from '@mui/icons-material/Menu';
+import LogoutIcon from '@mui/icons-material/Logout';
+import {AuthContext} from '../components/context'
+import Backdrop from '@mui/material/Backdrop';
+import { getMembers } from "../API/membersApi";
+import { ToastContainer, toast } from 'react-toastify';
+import OverlayCustom from "./Overlay";
+import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
+
 
 function Homepage() {
+
+  const notify = () => toast("Data Fetching for Members!");
+  const notifyAdd = () => toast("Care Giver Added Sucessfuly!");
+
+  const [memberData, setMemberData] = useState([]);
+  const { signOut } = React.useContext(AuthContext);
+  const [row, setRow] = useState([]);
+  var [initRow, setInitRow] = useState([]);
+
+//
+const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
+
+  //
+
+  // Filter Data 
+
+  const [memberID, setMemberID] = React.useState(null);
+  const [admissionID, setAdmissionID] = React.useState(null);
+  const [name, setName] = React.useState(null);
+  const [phone, setPhone] = React.useState(null);
+  const [status, setStatus] = React.useState(null);
+  const [coordinator, setCoordinator] = React.useState(null);
+  const [mco, setMCO] = React.useState(null);
+  const [office, setOffice] = React.useState(null);
+  const [venderID, setVenderID] = React.useState(null);
+
+
+  // 
+
+  const [age, setAge] = React.useState('');
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
   const [ViewSelected, setViewSelected] = useState(1);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const navigate = useNavigate();
+  //
+  const [state, setState] = React.useState({
+    left: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
 
 
- function CareGiverPressed (){
 
-  navigate("/CareGiver");
- }
 
- function VisitPressed(){
-  navigate("/Visit");
-  
- }
- function ActionPressed (){
-  navigate("/Action");
-  
- }
- function BillingPressed (){
-  navigate("/Billing");
-  
- }
- function ReportPressed(){
-  navigate("/Report");
-  
- }
- function  AdminPressed(){
-  navigate("/Admin");
-  
- }
+  const list = (anchor) => (
+    <div  style={{
+      height: "100vh",
+      backgroundColor: "#2E0F59",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    }}>
+    <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+
+    >
+
+      <div style={{ backgroundColor: "#2E0F59", display: "flex", flexDirection: "column", alignItems: "center", height: "680px" }}>
+
+        <p
+          className="Files"
+          style={{
+            fontSize: "20px",
+            color: "#F2B90F",
+            fontWeight: "bold",
+          }}
+        >
+          Files
+        </p>
+        <hr className="line" style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
+
+        <h3 onClick={MemberPressed} style={{ color: "#F2B90F" }}>Members</h3>
+        <h3 onClick={CareGiverPressed} style={{ color: "#F2B90F" }}>Care Givers</h3>
+        <h3 onClick={VisitPressed} style={{ color: "#F2B90F" }}> Visits</h3>
+        <h3 onClick={ActionPressed} style={{ color: "#F2B90F" }}>Action</h3>
+        <h3 onClick={BillingPressed} style={{ color: "#F2B90F" }} >Billings</h3>
+        <h3 onClick={ReportPressed} style={{ color: "#F2B90F" }} >Report</h3>
+        <h3 onClick={AdminPressed} style={{ color: "#F2B90F" }}>Admin</h3>
+      </div>
+    </Box>
+    </div>
+  );
+  //
+
+  function CareGiverPressed() {
+
+    navigate("/CareGiver");
+  }
+
+  function VisitPressed() {
+    navigate("/Visit");
+
+  }
+  function ActionPressed() {
+    navigate("/Action");
+
+  }
+  function BillingPressed() {
+    navigate("/Billing");
+
+  }
+  function ReportPressed() {
+    navigate("/Report");
+
+  }
+  function AdminPressed() {
+    navigate("/Admin");
+
+  }
+  function MemberPressed() {
+    setViewSelected(1);
+  }
 
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
+    setOpen(!open);
+    setRow(initRow);
   };
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
-  const ColumnDiv = () => {
-    return (
-      <div className="columnName">
-        <p className="colume1">Name</p>
-        <p className="colume2">Address</p>
-        <p className="colume3">Clock In</p>
-        <p className="colume4">Clock Out</p>
-      </div>
-    );
-  };
-  const PatientViewColumDiv = () => {
-    return (
-      <div className="columnName">
-        <p className="colume5">Name</p>
-        <p className="colume6">Address</p>
-      </div>
-    );
-  };
-  function renderColumeName() {
-    switch (ViewSelected) {
-      case 1:
-        return <ColumnDiv />;
-      case 2:
-        return <ColumnDiv />;
-      case 3:
-        return <ColumnDiv />;
-      case 4:
-        return <PatientViewColumDiv />;
-      default:
-        break;
+
+  function populateData() {
+    for (var key in row) {
+      if(row[key].Name == name && name != null){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.Name == row[key].Name;
+        });
+        setRow(myArray)
+      }
+      
+      
+      if(row[key].Phone == phone && phone != null){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.Phone == row[key].Phone;
+        });
+        setRow(myArray)
+      }
+
+      if(row[key].id == memberID && memberID != null){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.id == row[key].id;
+        });
+        setRow(myArray)
+      }
+
+      if(row[key].AdmissionID == admissionID && admissionID != null){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.AdmissionID == row[key].AdmissionID;
+        });
+        setRow(myArray)
+      }
+
+      if(status != 10){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.Status == "Active";
+        });
+        setRow(myArray)
+      }
+
+      if(status == 20){
+        var myArray = row;
+        myArray = myArray.filter(function( obj ) {
+          return obj.Status == "Inactive";
+        });
+        setRow(myArray)
+      }
+
+      
     }
   }
 
+  const handleFilterStatus = (event) => {
+    setAge(event.target.value);
+    setStatus(event.target.value);
+  };
+
+
+
   function Overlay() {
+
     return (
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={open}
+     
+    >
       <div className="overlay">
-        <CloseIcon className="crossIcon" onClick={handleCloseOverlay} />
-        <h1 style={{ marginLeft: "30%" }}>Set Filter from here !</h1>
+        <CloseIcon className="crossIcon" onClick={handleClose} />
+        <h1 style={{ textAlign: "center",color:"black" }}>Set Filter from here !</h1>
+        <p style={{ fontSize: 15, fontWeight: "bold", color: "#042940", textAlign: "center" }}>Members</p>
         <div className="searchFieldsDiv">
-          <TextField
-            className="Field"
-            id="outlined-basic"
-            label="Name"
-            variant="outlined"
-          />
-          <TextField
-            className="Field"
-            id="outlined-basic"
-            label="Address"
-            variant="outlined"
-          />
-          <TextField
-            className="Field"
-            id="outlined-basic"
-            label="Expected Time Out"
-            variant="outlined"
-          />
-          <TextField
-            className="Field"
-            id="outlined-basic"
-            label="Expected Time In"
-            variant="outlined"
-          />
+
+
+          <Grid className="griditem">
+            <TextField
+
+              id="memberID"
+              label="Member ID"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid className="griditem">
+            <TextField
+              id="admissionID"
+              label="Admission ID"
+              variant="outlined"
+            />
+          </Grid>
+
+          <Grid className="griditem">
+
+            <TextField
+
+              id="name"
+              label="Name"
+              variant="outlined"
+            />
+          </Grid>
+          
+          <Grid className="griditem">
+
+            <TextField
+
+              id="phone"
+              label="Phone Number"
+              variant="outlined"
+            />
+
+          </Grid>
+
+
+          <Grid className="griditem2">
+
+            <Box >
+              <FormControl fullWidth>
+                <InputLabel >Status</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleFilterStatus}
+                >
+                  <MenuItem value={10}>Active</MenuItem>
+                  <MenuItem value={20}>Inactive</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          {/* <Grid className="griditem2" >
+
+            <Box>
+              <FormControl fullWidth>
+                <InputLabel >Cordinator</InputLabel>
+                <Select
+
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid className="griditem2">
+
+            <Box >
+              <FormControl fullWidth>
+                <InputLabel >MCO</InputLabel>
+                <Select
+
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid> */}
+          {/* <Grid className="griditem2">
+
+            <Box>
+              <FormControl fullWidth>
+                <InputLabel >Office</InputLabel>
+                <Select
+
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Status"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid> */}
+          {/* <Grid className="griditem2">
+            <TextField
+
+              id="venderID"
+              label="Vender Tax ID"
+              variant="outlined"
+            />
+          </Grid> */}
+
         </div>
-        <Button className="searchButton" onClick={handleCloseOverlay}>
+        <Button className="searchButton" variant="outlined" onClick={() => {
+          handleCloseOverlay();
+          
+          setMemberID(document.getElementById('memberID').value);
+          setAdmissionID(document.getElementById('admissionID').value);
+          setName(document.getElementById('name').value);
+          setPhone(document.getElementById('phone').value);
+          //setFilterCareGiverCode(document.getElementById('filterCareGiverCode').value);
+          //setFilterAltCareGiverCode(document.getElementById('filterAltCareGiverCode').value);
+          setVenderID(document.getElementById('venderID').value);
+          populateData();
+        }}>
           Search
         </Button>
       </div>
+      </Backdrop>
+
     );
   }
 
-  const MembersPressed = () => {
-    setViewSelected(1);
-  };
-  const unScheduledPressed = () => {
-    setViewSelected(2);
-  };
-  const AllVisitsPressed = () => {
-    setViewSelected(3);
-  };
-  const PatientListPressed = () => {
-    setViewSelected(4);
-  };
+
 
   function RenderViews() {
     switch (ViewSelected) {
       case 1:
         return MembersView();
 
-      case 2:
-        return UnScheduleView();
-
-      case 3:
-        return VisitView();
-
-      case 4:
-        return PatientView();
       default:
         break;
     }
   }
   //
   const jsonData = [
+
     {
       id: 1,
       name: "Wanda De Martinez",
@@ -191,173 +438,131 @@ function Homepage() {
       date: "03/12/2023",
     },
   ];
-  const jsonData2 = [
-    {
-      id: 1,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
-    },
-    {
-      id: 2,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
-    },
-    {
-      id: 3,
-      name: "Hector Salamanca",
-      address: "Downtown Lipsy London, SDWEI15",
-    },
-  ];
-  //
-  const MembersView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
-  const UnScheduleView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
-  const VisitView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/visitdetails/${item.id}`}
-          >
-            <ListItemText
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOn}</p>
-              }
-              className="ListText"
-            />
-            <ListItemText
-              primary={
-                <p style={{ fontSize: "20px" }}>{item.expectedClockOut}</p>
-              }
-              className="ListText"
-            />
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
-  const PatientView = () => {
-    return (
-      <List style={{ maxHeight: "100%", overflow: "auto" }}>
-        {jsonData2.map((item) => (
-          <ListItem
-            className="ListItem"
-            key={item.id}
-            button
-            component={Link}
-            to={`/patientdetails/${item.id}`}
-          >
-            <ListItemText
-              className="ListText"
-              primary={<p style={{ fontSize: "25px" }}>{item.name}</p>}
-            />
-            <ListItemText
-              className="ListText"
-              primary={<p style={{ fontSize: "20px" }}>{item.address}</p>}
-            />
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
 
+  function populateRows(){
+      var arr = [];
+      for (var key in memberData) {
+        var obj = {
+          id: memberData[key].MemberID,
+          Name: memberData[key].FirstName,
+          Gender: memberData[key].Gender,
+          MCOName: memberData[key].MCOName,
+          Discipline: memberData[key].Discipline,
+          FirstDayofService: memberData[key].FirstDayofService,
+          Location: memberData[key].Location,
+          Status: memberData[key].Status,
+          AdmissionID: memberData[key].AdmissionID,
+          SSN: memberData[key].SSN,
+          Phone: memberData[key].HomePhone
+        }
+        arr.push(obj);
+    }
+    setRow(arr);
+    setInitRow(arr);
+  }
+
+
+  useEffect(()=>{
+    notify();
+    getMembers().then(res => {
+      setMemberData(res.data);
+    })
+  },[])
+
+  useEffect(() => {
+    populateRows();
+  }, [memberData]);
+
+ 
+
+  const MembersView = () => {
+
+    return (
+      <div style={{ height: "100%", width: '100%' }}>
+        <DataGrid
+          rows={row}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[15]}
+          checkboxSelection
+       
+        />
+        
+      </div>
+    );
+  };
+ 
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { 
+      field: 'Name', 
+      headerName: 'Name', 
+      width: 130, 
+      renderCell: (params) => (
+        <Link to={{
+          pathname: "/MemberDetails",
+          state: {
+            name: params.value
+          }
+        }}>
+          {params.value}
+        </Link>
+      )
+    },
+    { field: 'Gender', headerName: 'Gender', width: 100 },
+    { field: 'MCOName', headerName: 'MCO Name', width: 200 },
+    { field: 'Discipline', headerName: 'discipline', width: 150 },
+    { field: 'FirstDayofService', headerName: 'Joining Date', width: 150 },
+    { field: 'Location', headerName: 'Location', width: 250 },
+    { field: 'Status', headerName: 'Status', width: 100 },
+    { field: 'AdmissionID', headerName: 'Admission ID', width: 150 },
+    { field: 'SSN', headerName: 'SSN', width: 150 },
+    { field: 'Phone', headerName: 'Phone', width: 150 },
+
+  ];
+
+ 
   return (
     <Wrapper>
+      <ToastContainer />
+      
+      
+    
+
       <div className="Header">
+
+        <MenuIcon
+          className="menuIcon"
+          onClick={toggleDrawer('left', true)}
+          anchor={'left'}
+          open={state['left']}
+          onClose={toggleDrawer('left', false)}>
+
+        </MenuIcon>
         <img className="headerImage" src="./EmpireHomeCareLogo.png" />
-        <button className="button">Page 1</button>
-        <button className="button">Page 2</button>
-        <button className="button"> Page 3</button>
-        <button className="button"> Page 4</button>
-        <Button className="LogOutbutton" variant="outlined">
+        <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
+        <LogoutIcon onClick={signOut} className="LogoutIcon"></LogoutIcon>
       </div>
 
       <div className="NotificationHolder">
         <Button className="LinkNotification"> Link Notification </Button>
         <Button className="SystemNotification"> System Notification </Button>
+      </div>
+      <div style={{ display: "none" }}>
+        {['left'].map((anchor) => (
+          <React.Fragment key={anchor}>
+            <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {list(anchor)}
+            </Drawer>
+          </React.Fragment>
+        ))}
       </div>
 
       <div className="CardHolder">
@@ -381,6 +586,7 @@ function Homepage() {
           </div>
           <hr />
           <p
+            className="Files"
             style={{
               marginLeft: "45%",
               fontSize: "20px",
@@ -390,10 +596,12 @@ function Homepage() {
           >
             Files
           </p>
-          <hr style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
+          <hr className="line" style={{ width: "50%", fontSize: "10px", opacity: "0.2" }} />
           <div className="buttonHolder">
             <Button
-              className="navigationButton">
+              className="navigationButton"
+              onClick={MemberPressed}>
+
               <p
                 style={{
                   fontSize: "15px",
@@ -406,7 +614,7 @@ function Homepage() {
             </Button>
 
             <Button
-            onClick={CareGiverPressed}
+              onClick={CareGiverPressed}
               className="navigationButton"
             >
               <p
@@ -416,9 +624,9 @@ function Homepage() {
               </p>
             </Button>
 
-            <Button  
-             onClick={VisitPressed}  
-             >
+            <Button
+              onClick={VisitPressed}
+            >
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
@@ -430,7 +638,7 @@ function Homepage() {
               <p
                 style={{ fontSize: "15px", color: "white", fontWeight: "bold" }}
               >
-               Action
+                Action
               </p>
             </Button>
             <Button onClick={BillingPressed} className="navigationButton">
@@ -458,40 +666,17 @@ function Homepage() {
         </Card>
 
         <Card className="dataDisplay">
-          {renderColumeName()}
-          <SearchIcon className="searchIcon" onClick={handleClickIcon} />
+
+
           {isOverlayOpen && <Overlay />}
-          {RenderViews()}
+          <SearchIcon className="searchIcon" onClick={handleClickIcon} />
+          {
+          RenderViews()
+          }
         </Card>
       </div>
 
-      <div className="footer">
-        <div className="LogoHolder">
-          <img src="/LogoBK.png"></img>
-        </div>
-        <div className="company">
-          <h6 style={{ color: "grey" }}>COMPANY</h6>
-          <h5 style={{ color: "white" }}>About Us</h5>
-          <h5 style={{ color: "white" }}>Contact Us</h5>
-          <h5 style={{ color: "white" }}>Careers</h5>
-          <h5 style={{ color: "white" }}>Press</h5>
-        </div>
-        <div className="socials">
-          <h6 style={{ color: "grey" }}>SOCIAL MEDIA</h6>
-          <h5 style={{ color: "white" }}>
-            <FacebookIcon fontSize="small" />
-            Facebook
-          </h5>
-          <h5 style={{ color: "white" }}>
-            <TwitterIcon fontSize="small" />
-            Twitter
-          </h5>
-          <h5 style={{ color: "white" }}>
-            <LinkedInIcon fontSize="small" />
-            Linkdin
-          </h5>
-        </div>
-      </div>
+      <Footer />
     </Wrapper>
   );
 }
@@ -505,45 +690,78 @@ const Wrapper = styled.section`
     display: flex;
     flex-direction: row;
   }
+
+  //
+  .griditem{
+    width:100%;
+  }
+  .griditem2{
+    width:68%;
+  }
+  .menuIcon{
+    display:none;
+  }
+
+  .table {
+    border-collapse: collapse;
+    padding:1%;
+    width:100%;
+    background-color: #0b2b40;
+  }
+  
+  .th {
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    font-size:20px;
+    color:white;
+  }
+  .td {
+    border: 1px solid #aaaaaa;
+    text-align: center;
+    color:white;
+    font-size:17px;
+    
+  }
+
+  //
   .ListItem {
     margin-top: 1%;
-    margin-left: 2%;
     background-color: #0b2b40;
     color: white;
     border-radius: 10px;
-    width: 95%;
+    width: 100%;
   }
   .ListText {
-    width: 300px;
+    width: 100px;
     text-align: center;
   }
   .ListItem:hover .ListText {
     color: black;
     font-weight: bold;
+    background-color: white;
   }
+  .item1 {
+    
 
-  //
-
-  .menu {
-    background-color: #0a3a40;
+    font-size: 15px;
+    color: white;
+    font-weight: bold;
+    text-align:center;
+    margin:0.5%;
   }
-  .MenuItem {
-    width: 400px;
-  }
-
-  //
+  //List Items
 
   //Notification Start
 
   .NotificationHolder {
     padding: 15px;
     display: flex;
-    flex-direction: row-reverse;
+    
   }
   .LinkNotification {
-    background-color: #0a3a40;
-    color: white;
-    padding: 15px;
+    background-color:#2E0F59;
+    color: #F2B90F;
+    padding: 20px;
     font-weight: bold;
     margin-left: 2%;
     margin-right: 6%;
@@ -554,9 +772,9 @@ const Wrapper = styled.section`
     background-color: #f26e22;
   }
   .SystemNotification {
-    background-color: #0a3a40;
-    color: white;
-    padding: 15px;
+    background-color:#2E0F59;
+    color: #F2B90F;
+    padding: 19px;
     font-weight: bold;
     border-radius: 10px;
   }
@@ -569,31 +787,40 @@ const Wrapper = styled.section`
   // overlay css end
   .overlay {
     position: fixed;
-    margin-left: 09%;
-    width: 40%;
-    height: 70%;
-    z-index: 1000;
-    background-color: white;
-    padding: 1%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  height: 70%;
+  z-index: 1000;
+  background-color: white;
+  padding: 1%;
   }
   .crossIcon {
     margin-left: 95%;
     margin-top: 2%;
+    color:black;
   }
   .searchFieldsDiv {
-    justify-content: center;
-    align-item: center;
-    display: flex;
-    flex-direction: column;
-    margin-left: 30%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* create 3 equal columns */
+    grid-gap: 10px; /* add some space between the columns */
+    margin-top: 2.5%;
+    width: 85%;
+    margin-left: 10%;
   }
-  .Field {
-    width: 50%;
-    margin: 2%;
-  }
+
   .searchButton {
-    margin-left: 40%;
+    margin-left: 35%;
     margin-top: 5%;
+    width:30%;
+    background-color:#f26e22;
+    color:white;
+    font-weight:bold;
+  }
+  .searchButton:hover {
+    background-color:#2E0F59;
+    color:white;
   }
 
   //overlay css end
@@ -616,7 +843,7 @@ const Wrapper = styled.section`
 
   //data display card
   .dataDisplay {
-    height: 700px;
+    height: 668px;
     width: 70%;
     margin-left: 2%;
     margin-top: 0.5%;
@@ -628,56 +855,23 @@ const Wrapper = styled.section`
     flex-direction: row;
     height: 5.8%;
     border-radius: 15px;
+    padding:1%;
   }
   .colume1 {
-    margin-left: 12%;
     font-size: 15px;
     color: grey;
     font-weight: bold;
-    margin-top: 0.5%;
+    text-align:center;
+    margin:0.5%;
   }
-  .colume2 {
-    margin-left: 19%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
-  .colume3 {
-    margin-left: 17.5%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
-  .colume4 {
-    margin-left: 17%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
-  .colume5 {
-    margin-left: 20%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
-  .colume6 {
-    margin-left: 45%;
-    font-size: 15px;
-    color: grey;
-    font-weight: bold;
-    margin-top: 0.5%;
-  }
+  
   .searchIcon {
     position: absolute;
     z-index: 999;
     padding: 1%;
-    font-size: 50px;
+    font-size: 25px;
     color: white;
-    margin-left: 65%;
+    margin-left: 69.2%;
     cursor: pointer;
     background-color: grey;
     border-radius: 500px;
@@ -689,8 +883,8 @@ const Wrapper = styled.section`
   //UserInfo(TaskBar)
   .TaskBar {
     width: 20%;
-    height: 755px;
-    background-color: #2a558c;
+    height: 725px;
+    background-color:#564873;
     margin-top: 0.5%;
     margin-bottom: 10%;
     margin-left: 2%;
@@ -716,46 +910,26 @@ const Wrapper = styled.section`
 
   //UserInfo Ending
 
-  //Footer CSS Files
-  .footer {
-    display: flex;
-    flex-direction: row;
-    bottom: 0;
-    width: 100%;
-    height: 250px;
-    background-color: #0a2740;
-    margin-top: 0%;
-  }
-  .company {
-    margin-left: 50%;
-    margin-top: 2%;
-  }
-  .socials {
-    margin-left: 5%;
-    margin-top: 2%;
-  }
-  .LogoHolder {
-    margin-top: 3%;
-    margin-left: 15%;
-  }
-  //Footer CSS Files end
+ 
 
   //Header CSS FILES
   .Header {
     display: flex;
     flex-direction: row;
-    margin-left: 5.9%;
+    align-items:center;
+    justify-content:center;
     margin-top: 0.5%;
-    width: 93%;
+    width: 100%;
     background-color: white;
   }
   .headerImage {
     width: 7%;
     height: 1%;
     border-radius: 15px;
+    margin-right:55%;
   }
   .headerImage:hover {
-    animation: wave 1s infinite;
+    /* animation: wave 1s infinite; */
   }
   @keyframes wave {
     0% {
@@ -796,4 +970,122 @@ const Wrapper = styled.section`
     color: black;
   }
   //Header CSS FILES ENDING
+  .LogoutIcon{
+    display:none;
+  }
+  @media only screen and (max-width: 600px) {
+    
+    .TaskBar {
+      display:none;
+     
+    }
+    .UserInfo{
+      display:none;
+    }
+    .hr{
+      display:none;
+    }
+    .Files{
+      display:none;
+    }
+    .CardHolder {
+      flex-direction: column;
+      margin-top: 0%;
+    }
+    .buttonHolder {
+      flex-direction: row;
+    }
+    .dataDisplay {
+      height: 668px;
+      width: 97%;
+      margin-top: 0%;
+      margin-left:0%;
+    }
+    .line{
+      display:none;
+    }
+    .LinkNotification{
+      padding:5px;
+      height:10%;
+      font-size:14px;
+      /* shadow-color: #000;
+     .shadowOffset {
+      width: 0;
+      height: 7;
+     }; */
+    /* shadowOpacity: 0.41;
+    shadowRadius: 9.11; */
+
+    /* elevation: 14; */
+    }
+    .SystemNotification{
+      padding:5px;
+      height:10%;
+      font-size:13.5px;
+      /* shadow-color: "#000",
+      shadow-offset: {
+      width: 0;
+      height: 7;
+    }; */
+    /* shadow-opacity: 0.41;
+    shadow-radius: 9.11; */
+
+    elevation: 14;
+      
+    }
+    .LogOutbutton {
+      width: 20%;
+      height: 50%;
+      display:none;
+    
+    }
+    .headerImage {
+      width: 30%;
+      height: 15%;
+      border-radius: 15px;
+      margin-right:0;
+    }
+    .menuIcon{
+      margin-right:20%;
+      font-size:50px;
+      display:inline;
+      color:white;
+      background-color:grey;
+      border-radius:10px;
+      
+    }
+    .LogoutIcon{
+      font-size:40px;
+      color:grey;
+      margin-left:20%;
+      display:inline;
+
+    }
+    .searchIcon {
+      margin-left: 90.2%;
+     
+    }
+    
+    .crossIcon{
+      margin-left:90%;
+    }
+    .griditem{
+      width:100%;
+    }
+    .griditem2{
+      width:92%;
+    }
+    .searchFieldsDiv {
+      grid-template-columns: repeat(1, 1fr); /* create 3 equal columns */
+    }
+    .overlay {
+    width: 75%;
+    height: 80%;
+    overflow:auto;
+    }
+    .searchButton {
+      margin-top: 5%;
+      margin-bottom: 2%;
+    }
+  }
 `;

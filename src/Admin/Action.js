@@ -8,15 +8,19 @@ import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
 import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
+
+import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 const Link = require("react-router-dom").Link;
+import {AuthContext} from '../components/context'
 
 function Action() {
+  const { signOut } = React.useContext(AuthContext);
   const [ViewSelected, setViewSelected] = useState(1);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-
+  const navigate = useNavigate();
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
   };
@@ -312,7 +316,7 @@ function Action() {
         <button className="button">Page 2</button>
         <button className="button"> Page 3</button>
         <button className="button"> Page 4</button>
-        <Button className="LogOutbutton" variant="outlined">
+        <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
       </div>

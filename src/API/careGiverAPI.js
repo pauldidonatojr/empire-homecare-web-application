@@ -1,4 +1,4 @@
-var axios = require('axios');
+import axios from 'axios'
 
 
 export const addCareGiver = async (
@@ -20,8 +20,8 @@ export const addCareGiver = async (
     EmploymentType,
     Street1,
     Street2,
-    City, 
-    Zip, 
+    City,
+    Zip,
     Phone,
     State,
     HomePhone,
@@ -57,13 +57,13 @@ export const addCareGiver = async (
         "rehire": Rehire,
         "rehire_date": RehireDate,
         "employee_type": EmploymentType,
-        
+
         "street_1": Street1,
         "street_2": Street2,
         "city": City,
         "zip": Zip,
         "phone": Phone,
-        "state":State,
+        "state": State,
         "home_phone": HomePhone,
         "phone_2": Phone2,
 
@@ -78,12 +78,12 @@ export const addCareGiver = async (
         "emergency_contact_2_address": EmergencyContact2Address,
         "emergency_contact_2_phone_1": EmergencyContact2Phone1,
         "emergency_contact_2_phone_2": EmergencyContact2Phone2,
-        });
+    });
 
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://secure.penntelco.com/empire/addcaregivers',
+        url: 'https://api.empirehomecareagency/empire/addcaregivers',
         // headers: {
         //     'Authorization': 'Bearer sIW4iLCJJta2w_PEc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybF0IjoxNjc2NjYmFtZSI6Ib7c32gxMFYzKvSHeyJhZSIfNmbGciOiJIUzI1NiJ9.eyJSb2kphdmFJblVzmV4cCI6MTY3NjY2NjQzOCwiaW2NDM4fQ.nuvs4fzaaeYFhiE4sx2oxlIjoiQWR', 
         //     'Content-Type': 'application/json',
@@ -104,6 +104,29 @@ export const addCareGiver = async (
             .catch(err => reject(err))
 
     })
+}
+
+
+export const getCareGiver = async () => {
+    var myHeaders = new Headers();
+    // myHeaders.append("Authorization", "Bearer sIW4iLCJJta2w_PEc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybF0IjoxNjc2NjYmFtZSI6Ib7c32gxMFYzKvSHeyJhZSIfNmbGciOiJIUzI1NiJ9.eyJSb2kphdmFJblVzmV4cCI6MTY3NjY2NjQzOCwiaW2NDM4fQ.nuvs4fzaaeYFhiE4sx2oxlIjoiQWR");
+    // myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+        "type": "getcaregivers"
+    });
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    return fetch("https://projects.penntelco.com/empire/caregivers", requestOptions)
+        .then(response => response.json())
+        .then(result => result)
+        .catch(error => console.log('error', error));
 }
 
 

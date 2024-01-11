@@ -13,9 +13,11 @@ import TextField from "@mui/material/TextField";
 import CallDashBoard from "./CallDashBoard";
 import { useNavigate } from "react-router-dom";
 const Link = require("react-router-dom").Link;
+import {AuthContext} from '../components/context'
 
 
 function Visit() {
+  const { signOut } = React.useContext(AuthContext);
   const navigate = useNavigate();
   function  CallDashBoardPressed(){
     navigate("/CallDashBoard");
@@ -28,7 +30,7 @@ function Visit() {
 
   const handleClickIcon = () => {
     setIsOverlayOpen(true);
-  };
+  }
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
   };
@@ -321,7 +323,7 @@ function Visit() {
         <button className="button">Page 2</button>
         <button className="button"> Page 3</button>
         <button className="button"> Page 4</button>
-        <Button className="LogOutbutton" variant="outlined">
+        <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
       </div>

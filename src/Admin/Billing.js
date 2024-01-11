@@ -10,10 +10,12 @@ import { List, ListItem, ListItemText } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
+import {AuthContext} from '../components/context'
 
 const Link = require("react-router-dom").Link;
 
 function Billing() {
+  const { signOut } = React.useContext(AuthContext);
   const [ViewSelected, setViewSelected] = useState(1);
 
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
@@ -313,7 +315,7 @@ function Billing() {
         <button className="button">Page 2</button>
         <button className="button"> Page 3</button>
         <button className="button"> Page 4</button>
-        <Button className="LogOutbutton" variant="outlined">
+        <Button className="LogOutbutton" variant="outlined" onClick={signOut}>
           Log Out
         </Button>
       </div>
