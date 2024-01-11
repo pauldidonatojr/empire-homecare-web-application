@@ -17,7 +17,7 @@ export const getMembers = async () => {
         redirect: 'follow'
     };
 
-    return fetch("https://projects.penntelco.com/empire/members", requestOptions)
+    return fetch("https://api.empirehomecareagency/empire/members", requestOptions)
         .then(response => response.json())
         .then(result => result)
         .catch(error => console.log('error', error));
